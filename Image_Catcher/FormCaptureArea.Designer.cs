@@ -66,7 +66,8 @@
             this.Text = "FormCaptureArea";
             this.TransparencyKey = System.Drawing.Color.Turquoise;
             this.Load += new System.EventHandler(this.FormCaptureArea_Load);
-            this.LocationChanged += new System.EventHandler(this.FormCaptureArea_LocationChanged);
+            //this.LocationChanged += new System.EventHandler(this.FormCaptureArea_LocationChanged);
+            this.Move += new System.EventHandler(this.FormCaptureArea_Move);
             this.Resize += new System.EventHandler(this.FormCaptureArea_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.imgBackground)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCaptureScreen)).EndInit();

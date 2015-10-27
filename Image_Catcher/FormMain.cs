@@ -8,17 +8,13 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;//dll 임포트를 위한 녀석.
 using System.Diagnostics;//debug용
-
+using System.Drawing.Imaging;
 
 
 namespace Image_Capture
 {
     public partial class FormMain : Form
     {
-
-        //프로그램 타이틀 지정.
-        public static string cfgTitle = "Image Catcher - by e2xist";
-        
         //=============================================================
         //스크린샷을 찍기 위한 임포트
         [DllImport("user32.dll", EntryPoint = "GetDesktopWindow")]
@@ -31,13 +27,37 @@ namespace Image_Capture
         public const int SM_CYSCREEN = 1;
         //스크린샷을 찍기 위한 임포트 END
         //=============================================================
-        string strFilePath="";
+
+        /// <summary>
+        /// 프로그램 타이틀 지정.
+        /// </summary>
+        public static string cfgTitle = "Image Capture - by e2xist";
+
+        /// <summary>
+        /// 그래픽 공간으로 사용할 곳. 임시적으로 사용하고, 메서드 내에서는 반드시 dispose 할 것.
+        /// </summary>
+        Graphics graphics;
+
+
+        string strFilePath = "";
+
+        /// <summary>
+        /// 캡쳐된 결과 이미지. 이 이미지 객체를 저장한다.
+        /// </summary>
         public Image imgCaptureResult;
-        Bitmap bitmapPreview;
 
+        Bitmap bitmapPreview;//! deprecate
 
-        Graphics graphics;//그래픽 공간으로 사용할 곳. 임시적으로 사용하고, 메서드 내에서는 반드시 dispose 할 것.
-        Bitmap bitmapPreviewImage;//미리보기 이미지 개체
+        /// <summary>
+        /// 캡쳐된 결과 이미지. 이 이미지 객체를 저장한다.
+        /// </summary>
+        Bitmap bitmapResult;
+
+        /// <summary>
+        /// 미리보기 이미지 개체.
+        /// </summary>
+        Bitmap bitmapPreviewImage;//미리보기 이미지 개체. 인스턴스로 사용되는 개체.
+
 
         /// <summary>
         /// 생성자 메서드
@@ -46,8 +66,12 @@ namespace Image_Capture
         {
             InitializeComponent();//컴포넌트 초기화 메서드(기본적으로 들어감)
             this.Text = cfgTitle;
+
+            //미리보기 이미지 객체 생성
+            bitmapPreviewImage = new Bitmap(imgPreview.Size.Width, imgPreview.Size.Height);
+            bitmapResult = new Bitmap(imgPreview.Size.Width, imgPreview.Size.Height);
         }
-        
+
         //=============================================================
         //이벤트 메서드들.
         /// <summary>
@@ -122,58 +146,8 @@ namespace Image_Capture
                 System.Diagnostics.Process.Start("explorer.exe", HFilePath.Auto_Dir());
 
         }
+        //close of 이벤트 메서드들
         //=============================================================
-
-
-        public void imgCapture_Save()
-        {
-            //해당 파일을 저장.
-            SaveScreenShotFile(imgCaptureResult);
-
-        }
-
-
-
-
-
-
-        /**
-         * @method 사진파일을 저장하는 메서드
-         * @remark Messagebox 호출 후 저장위치 선택해서 저장
-         * @arguments Image Type
-         */
-        public void SaveScreenShotFile(Image _image)
-        {
-            if (MessageBox.Show("저장하시겠습니까?", "스크린샷 파일저장",
-                MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                strFilePath = HFilePath.PathDialog();//저장위치 선택/
-                HFilePath.Save(strFilePath, _image);//파일저장
-            }
-        }
-
- 
-        
-
-
-        //
-        /// <summary>
-        /// SH.메서드.스크린샷 이미지를 가져오기 위한 메서드
-        /// </summary>
-        /// <returns></returns>
-        public Bitmap GetDesktopImage2()
-        {
-            Size screen = Screen.PrimaryScreen.Bounds.Size;
-            //------------------------------------------------------
-            // 설명 : 이미지 가져오기. 정의한 메서드(private) 
-            // 인수 : 전체스크린에서의 시작점좌표, 이미지에 넣을 좌표, 이미지에 넣을 크기
-            return getImageCopyFromScreen(new Point(0, 0),new Point(0, 0),screen);//그려진 비트맵을 객체에 넣는다.
-            //------------------------------------------------------
-        }
-
-
-        //-------------------------------------------------------
- 
 
         /// <summary>
         /// 마우스 커서를 기점으로 스크린샷을 찍는다.
@@ -189,6 +163,123 @@ namespace Image_Capture
             graphics.Dispose();//리소스 해제
             return;
         }
+
+        /// <summary>
+        /// 마우스 커서를 기점으로 스크린샷을 찍는다.
+        /// 스크린샷 찍은 결과를 imgCaptureResult 에 저장한다.(이미지 타입으로)
+        /// 기존의 getImageCopyFromScreen 메서드를 대체한다.
+        /// 이미지 사이즈가 계속 바뀌기 때문에... new Bitmap 을 안 할 방법이 없네..
+        /// 영역캡처 에서 호출.
+        /// </summary>
+        /// <param name="_pointStart">시작점좌표</param>
+        /// <param name="_sizeImage">이미지크기</param>
+        public void drawResultImageFromScreen(Point _pointStart, Size _sizeImage)
+        {
+            bitmapResult = new Bitmap(_sizeImage.Width,_sizeImage.Height);
+            graphics = Graphics.FromImage(bitmapResult);//임시 비트맵으로 그래픽도구를 생성. 그리기 시작한다.
+            graphics.CopyFromScreen(_pointStart, new Point(0, 0), _sizeImage);// 인수:스크린좌표,그리기시작좌표,그리는사이즈.
+            graphics.Dispose();//리소스 해제
+            return;
+        }
+
+        /// <summary>
+        /// 미리보기 이미지를 그린다.
+        /// bitmapResult(Bitmap) 을 가져와서, 미리보기 사이즈에 맞춰서 bitmapPreviewImage 를 그린다.
+        /// 영역캡처 에서 호출.
+        /// </summary>
+        public void drawPreviewImage()
+        {
+            //비트맵으로 그래픽도구를 생성. 그리기 시작한다.
+            graphics = Graphics.FromImage(bitmapPreviewImage);
+
+            //결과 이미지와 미리보기 이미지의 사이즈가 다르므로 이것을 리사이징 하는 부분이다.
+            graphics.DrawImage(bitmapResult, 0, 0, bitmapPreviewImage.Width, bitmapPreviewImage.Height);
+
+            //리사이징 하면서 이미지가 지저분하므로, 렌더링 처리를 한다.
+            graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+
+            //리소스 해제
+            graphics.Dispose();
+
+            //미리보기 화면상에 지정
+            setPreviewImage();
+        }
+
+        /// <summary>
+        /// 미리보기 이미지 에 이미지를 지정.
+        /// bitmapPreviewImage 를 화면상의 미리보기 이미지에 지정.
+        /// 영역캡처에서 호출.
+        /// </summary>
+        public void setPreviewImage()
+        {
+            imgPreview.Image = bitmapPreviewImage;
+        }
+
+        public void setPreviewImage(Image _image)
+        {
+            imgPreview.Image = _image;
+        }
+
+        public void imgCapture_Save()
+        {
+            //해당 파일을 저장.
+            SaveScreenShotFile(imgCaptureResult);
+
+        }
+
+
+
+        /// <summary>
+        /// SaveScreenShotFile 메서드를 대체하기 위해 만듦.
+        /// </summary>
+        public void saveResultImage()
+        {
+            if (MessageBox.Show("저장하시겠습니까?", "스크린샷 파일저장",
+                MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                strFilePath = HFilePath.PathDialog();//저장위치 선택/
+                //HFilePath.Save(strFilePath, _image);//파일저장
+                HFilePath.Save(strFilePath, bitmapResult);//확장자도 선택할 수 있게 바꿔야겠다..
+                //bitmapResult.Save(strFilePath,ImageFormat.Jpeg);//확장자도 선택할 수 있게 바꿔야겠다..
+            }
+        }
+
+        /**
+         * @method 사진파일을 저장하는 메서드
+         * @remark Messagebox 호출 후 저장위치 선택해서 저장
+         * @arguments Image Type
+         */
+        public void SaveScreenShotFile(Image _image)
+        {
+            if (MessageBox.Show("저장하시겠습니까?", "스크린샷 파일저장",
+                MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                strFilePath = HFilePath.PathDialog();//저장위치 선택/
+                HFilePath.Save(strFilePath, _image);//파일저장
+
+            }
+        }
+
+        //
+        /// <summary>
+        /// SH.메서드.스크린샷 이미지를 가져오기 위한 메서드
+        /// </summary>
+        /// <returns></returns>
+        public Bitmap GetDesktopImage2()
+        {
+            Size screen = Screen.PrimaryScreen.Bounds.Size;
+            //------------------------------------------------------
+            // 설명 : 이미지 가져오기. 정의한 메서드(private) 
+            // 인수 : 전체스크린에서의 시작점좌표, 이미지에 넣을 좌표, 이미지에 넣을 크기
+            return getImageCopyFromScreen(new Point(0, 0), new Point(0, 0), screen);//그려진 비트맵을 객체에 넣는다.
+            //------------------------------------------------------
+        }
+
+
+        //-------------------------------------------------------
+
+
+
 
 
         public void ImgPreview_Spoid_Draw()
@@ -236,7 +327,7 @@ namespace Image_Capture
             Graphics grp = Graphics.FromImage(bit);//임시 비트맵으로 그래픽도구를 생성. 그리기 시작한다.
             grp.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
 
-            grp.DrawImage(_image,0,0,_szImage.Width,_szImage.Height);
+            grp.DrawImage(_image, 0, 0, _szImage.Width, _szImage.Height);
             grp.Dispose();
             return bit;
         }
@@ -262,10 +353,11 @@ namespace Image_Capture
             //debug("[]MainForm_activated");
             //Cursor.Show();
         }
-
+        
         /**
         * --------------------------------------------
         * 폐기예정인 것들은 젤 아래로 모아두기.
+        * --------------------------------------------
         */
         /// <summary>
         /// ! Deprecated. 폐기 될 듯
