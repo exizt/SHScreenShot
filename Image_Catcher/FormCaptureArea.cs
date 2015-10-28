@@ -21,6 +21,8 @@ namespace Image_Capture
         FormMain mParentForm;//부모폼을 담아올 용도.
         Point ptScreenXY;
         Size szScreenWH;
+        Bitmap bitmapScreen;
+
 
         /// <summary>
         /// 생성자
@@ -94,18 +96,15 @@ namespace Image_Capture
         /// </summary>
         private void setCaptureScreenSize()
         {
-            //int w = this.Size.Width - 18;
-            //int h = this.Size.Height - 39;
-
-            //imgCaptureScreen.Size = new Size(w,h);
             //선택 창의 사이즈 조절에 맞춰서, 투명영역의 사이즈를 조절한다.
-            imgCaptureScreen.Width = this.Size.Width - 18;
-            imgCaptureScreen.Height = this.Size.Height - 39;
+            imgCaptureScreen.Width = Size.Width - 18;
+            imgCaptureScreen.Height = Size.Height - 39;
 
         }
 
         /// <summary>
         /// 스크린샷 이미지 생성
+        /// TODO 메모리 누수 가 있는 듯
         /// </summary>
         private void getCapture()
         {
@@ -124,15 +123,13 @@ namespace Image_Capture
             * 1. 결과값에 좌표 기준으로 image 타입 생성
             * 2. 미리보기 이미지에 결과값을 resize 한 것을 보여줌
             */
-
             // 스크린 화면에서 좌표와 크기에 따른 이미지 객체를 생성합니다.
             // 해당 이미지는 부모창에서 imgCaptureResult 에 기록이 됩니다.
-            mParentForm.drawResultImageFromScreen(ptScreenXY, szScreenWH);
-
+            mParentForm.getByteFromScreen(ptScreenXY, szScreenWH);
 
             //미리보기 생성
-            mParentForm.drawPreviewImage();
-            //parentForm.imgPreview.Image = parentForm.getImageResizeFromImage(parentForm.imgCaptureResult, parentForm.imgPreview.Size);
+            mParentForm.drawPreviewImageFromBytes();
+
         }
 
         /// <summary>
@@ -143,7 +140,7 @@ namespace Image_Capture
         {
             //들어있는 imgCapture 의 내역을 파일로 저장시키는 메서드.
             //mParentForm.imgCapture_Save();
-            mParentForm.saveResultImage();
+            mParentForm.saveFile_ResultImageFromBytes();
         }
 
         /// <summary>
