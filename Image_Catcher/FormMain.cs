@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;//debug용
 using System.Drawing;
-using System.Runtime.InteropServices;//dll 임포트를 위한 녀석.
 using System.Windows.Forms;
 
 
@@ -11,14 +10,16 @@ namespace Image_Capture
     {
         //=============================================================
         //스크린샷을 찍기 위한 임포트
+        /*
         [DllImport("user32.dll", EntryPoint = "GetDesktopWindow")]
-        public static extern IntPtr GetDesktopWindow();
+        private static extern IntPtr GetDesktopWindow();
 
         [DllImport("user32.dll", EntryPoint = "GetSystemMetrics")]
-        public static extern int GetSystemMetrics(int abc);
+        private static extern int GetSystemMetrics(int abc);
 
-        public const int SM_CXSCREEN = 0;
-        public const int SM_CYSCREEN = 1;
+        private const int SM_CXSCREEN = 0;
+        private const int SM_CYSCREEN = 1;
+        */
         //스크린샷을 찍기 위한 임포트 END
         //=============================================================
 
@@ -28,36 +29,53 @@ namespace Image_Capture
         public static string cfgTitle = "Image Capture - by e2xist";
 
         /// <summary>
-        /// 그래픽 공간으로 사용할 곳. 임시적으로 사용하고, 메서드 내에서는 반드시 dispose 할 것.
-        /// </summary>
-        Graphics graphics;
-
-        /// <summary>
         /// point 0, 0
         /// </summary>
         Point ptZero = new Point(0, 0);
+
+        /// <summary>
+        /// 컨버팅 하는 용도
+        /// </summary>
         ImageConverter converter = new ImageConverter();
+
+        /// <summary>
+        /// 
+        /// </summary>
         string strFilePath = "";
+
+
+        /// <summary>
+        /// 캡처 와 저장 사이의 데이터이다.
+        /// </summary>
+        byte[] byteData;
 
         /// <summary>
         /// 캡쳐된 결과 이미지. 이 이미지 객체를 저장한다.
         /// </summary>
         public Image imgCaptureResult;
-        byte[] byteData;
-
-        Bitmap bitmapPreview;//! deprecate
 
         /// <summary>
-        /// 캡쳐된 결과 이미지. 이 이미지 객체를 저장한다.
+        /// 결과 이미지의 사이즈 개체
         /// </summary>
-        Bitmap bitmapResult;
         Size szResultImage = new Size(0,0);
 
         /// <summary>
-        /// 미리보기 이미지 개체.
+        /// 결과 이미지 비트맵 개체
         /// </summary>
-        Bitmap bitmapPreviewImage;//미리보기 이미지 개체. 인스턴스로 사용되는 개체.
+        Bitmap bitmapResult;
 
+
+        /// <summary>
+        /// 화면상의 미리보기 비트맵 개체
+        /// 주로 인스턴스로 사용되어서, picturebox.image 에 넣어지기 전까지 존재한다.
+        /// </summary>
+        Bitmap bitmapPreviewImage;
+
+        /// <summary>
+        /// 미리보기 이미지의 사이즈 값.
+        /// 윈도우 설정에 따라 변경 될 수 있으므로, Load 된 이후에 실제 크기(픽셀) 을 알아온다.
+        /// </summary>
+        public Size szPreviewImage;
 
         /// <summary>
         /// 생성자 메서드
@@ -67,9 +85,7 @@ namespace Image_Capture
             InitializeComponent();//컴포넌트 초기화 메서드(기본적으로 들어감)
             this.Text = cfgTitle;
 
-            //미리보기 이미지 객체 생성
-            bitmapPreviewImage = new Bitmap(imgPreview.Size.Width, imgPreview.Size.Height);
-            bitmapResult = new Bitmap(imgPreview.Size.Width, imgPreview.Size.Height);
+
         }
 
         //=============================================================
@@ -81,16 +97,28 @@ namespace Image_Capture
         /// <param name="e"></param>
         private void FormMain_Load(object sender, EventArgs e)
         {
+            //debug("FormMain Load 이벤트 발생!");
+            //debug("imgPreview.Width : " + imgPreview.Width+","+imgPreview.Height);
+            //debug("imgPreview.Size.Width" + imgPreview.Size.Width + "," + imgPreview.Size.Height);
+
             //커서가 안 보이는 환경일 때, 커서를 복귀.
             Cursor current = Cursor.Current;
             if (current == null)
             {
                 Cursor.Show();
             }
+
+            //미리보기 이미지의 사이즈 를 가져온다.
+            //폼 컨트롤의 크기를 처리 할 때에는 최소 Load 이후에 하도록 한다.(생성자에 넣으면 버그 발생 가능성 있음)
+            szPreviewImage = imgPreview.Size;
+
+            //미리보기 이미지 객체 생성
+            bitmapPreviewImage = new Bitmap(szPreviewImage.Width, szPreviewImage.Height);
+            bitmapResult = new Bitmap(szPreviewImage.Width, szPreviewImage.Height);
         }
 
         /// <summary>
-        /// 스크린샷 메서드. 클릭 이벤트
+        /// 전체 스크린샷 메서드. 클릭 이벤트
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -314,7 +342,6 @@ namespace Image_Capture
         {
             //해당 파일을 저장.
             SaveFile_ResultImage(imgCaptureResult);
-
         }
 
         /// <summary>
@@ -359,19 +386,6 @@ namespace Image_Capture
             }
         }
 
-
- 
-        
-        public void ImgPreview_Spoid_Draw()
-        {
-            imgPreview.Image = global::Image_Capture.Properties.Resources.Image3;
-
-        }
-        public void ImgPreview_Spoid_Remove()
-        {
-
-        }
-
         /// <summary>
         /// 미리보기 이미지 에 이미지를 지정
         /// </summary>
@@ -389,13 +403,16 @@ namespace Image_Capture
 
 
         /// <summary>
-        /// 색상을 추출하는 메서드
+        /// 색상을 추출하는 메서드.
+        /// 미리보기 이미지에서 중간에 있는 픽셀의 값을 가져온다.
         /// </summary>
         /// <returns></returns>
         public Color getColorPixelPickup()
         {
-            bitmapPreview = new Bitmap(imgPreview.Image);
-            return bitmapPreview.GetPixel(imgPreview.Width / 2, imgPreview.Height / 2);
+            using (Bitmap b = new Bitmap(imgPreview.Image))
+            {
+                return b.GetPixel((int)(imgPreview.Width / 2), (int)(imgPreview.Height / 2));
+            }
         }
 
 
@@ -410,133 +427,5 @@ namespace Image_Capture
         * 폐기예정인 것들은 젤 아래로 모아두기.
         * --------------------------------------------
         */
-        /// <summary>
-        /// ! Deprecated.
-        /// 폐기 될 듯
-        /// </summary>
-        /// <returns></returns>
-        public Color GetPixelColor_ImgPreview()
-        {
-            //Image _image = imgPreview.Image;
-            Point _point = new Point(imgPreview.Width / 2, imgPreview.Height / 2);
-            return GetPixelColor(imgPreview.Image, _point);
-        }
-
-        /// <summary>
-        /// ! Deprecated.
-        /// 폐기될 듯
-        /// </summary>
-        /// <param name="_image"></param>
-        /// <param name="pt"></param>
-        /// <returns></returns>
-        public Color GetPixelColor(Image _image, Point pt)
-        {
-            Bitmap bit = new Bitmap(_image);
-            return bit.GetPixel(pt.X, pt.Y);
-        }
-
-        /// <summary>
-        /// ! Deprecated.
-        /// 지정한 크기 만큼 스크린샷 메서드.
-        /// </summary>
-        /// <param name="ptScreen">시작할좌표</param>
-        /// <param name="ptDraw">이미지에 넣을 좌표</param>
-        /// <param name="szImage">이미지에 넣을 크기</param>
-        /// <returns></returns>
-        public Bitmap getImageCopyFromScreen(Point ptScreen, Point ptDraw, Size szImage)
-        {
-            Bitmap bit = new Bitmap(szImage.Width, szImage.Height);//임시 비트맵 생성
-            Graphics grp = Graphics.FromImage(bit);//임시 비트맵으로 그래픽도구를 생성. 그리기 시작한다.
-            grp.CopyFromScreen(ptScreen, ptDraw, szImage);// 인수:스크린좌표,그리기시작좌표,그리는사이즈.
-
-            grp.Dispose();
-            return bit;
-        }
-
-        /// <summary>
-        /// ! Deprecated.
-        /// 마우스 커서를 기점으로 스크린샷을 찍는다.
-        /// 스크린샷을 기준으로 미리보기 이미지를 만든다.
-        /// 기존의 getImageCopyFromScreen 메서드를 대체한다.
-        /// </summary>
-        /// <param name="_pointStart">시작점좌표</param>
-        /// <param name="_sizeImage">이미지크기</param>
-        public void drawImageFromScreenPoint(Point _pointStart, Size _sizeImage)
-        {
-            graphics = Graphics.FromImage(bitmapPreviewImage);//임시 비트맵으로 그래픽도구를 생성. 그리기 시작한다.
-            graphics.CopyFromScreen(_pointStart, ptZero, _sizeImage);// 인수:스크린좌표,그리기시작좌표,그리는사이즈.
-            graphics.Dispose();//리소스 해제
-            return;
-        }
-
-
-        /// <summary>
-        /// ! Deprecated. 메모리 누수가 있습니다.
-        /// </summary>
-        /// <param name="_pointStart">시작점좌표</param>
-        /// <param name="_sizeImage">이미지크기</param>
-        /// <returns></returns>
-        public Bitmap getBitmapFromScreen(Point _pointStart, Size _sizeImage)
-        {
-            Bitmap bmp = new Bitmap(_sizeImage.Width, _sizeImage.Height);
-
-            //임시 비트맵으로 그래픽도구를 생성. 그리기 시작한다.
-            using (Graphics g = Graphics.FromImage(bmp))
-            {
-                g.CopyFromScreen(_pointStart, ptZero, _sizeImage);// 인수:스크린좌표,그리기시작좌표,그리는사이즈.
-                g.Dispose();//리소스 해제
-            }
-            return bmp;
-        }
-
-        //
-        /// <summary>
-        /// ! deprecated
-        /// SH.메서드.스크린샷 이미지를 가져오기 위한 메서드
-        /// </summary>
-        /// <returns></returns>
-        public Bitmap GetDesktopImage2()
-        {
-            Size screen = Screen.PrimaryScreen.Bounds.Size;
-            //------------------------------------------------------
-            // 설명 : 이미지 가져오기. 정의한 메서드(private) 
-            // 인수 : 전체스크린에서의 시작점좌표, 이미지에 넣을 좌표, 이미지에 넣을 크기
-            return getImageCopyFromScreen(ptZero, ptZero, screen);//그려진 비트맵을 객체에 넣는다.
-            //------------------------------------------------------
-        }
-
-        /// <summary>
-        /// ! Deprecated
-        /// </summary>
-        /// <param name="_image"></param>
-        /// <param name="_szImage"></param>
-        /// <returns></returns>
-        public Bitmap getImageResizeFromImage(Image _image, Size _szImage)
-        {
-            Bitmap bit = new Bitmap(_szImage.Width, _szImage.Height);//임시 비트맵 생성
-            Graphics grp = Graphics.FromImage(bit);//임시 비트맵으로 그래픽도구를 생성. 그리기 시작한다.
-            grp.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-
-            grp.DrawImage(_image, 0, 0, _szImage.Width, _szImage.Height);
-            grp.Dispose();
-            return bit;
-        }
-
-        /// <summary>
-        /// ! Deprecated
-        /// </summary>
-        /// <param name="_image"></param>
-        /// <param name="_szImage"></param>
-        /// <returns></returns>
-        public Bitmap getImageResizeFromImage2(Image _image, Size _szImage)
-        {
-            Bitmap bit = new Bitmap(_szImage.Width, _szImage.Height);//임시 비트맵 생성
-            Graphics grp = Graphics.FromImage(bit);//임시 비트맵으로 그래픽도구를 생성. 그리기 시작한다.
-            //grp.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-
-            grp.DrawImage(_image, 0, 0, _szImage.Width, _szImage.Height);
-            grp.Dispose();
-            return bit;
-        }
     }
 }

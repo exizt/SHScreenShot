@@ -21,8 +21,12 @@ namespace Image_Capture
         FormMain mParentForm;//부모폼을 담아올 용도.
         Point ptScreenXY;
         Size szScreenWH;
-        Bitmap bitmapScreen;
+        //Bitmap bitmapScreen;
 
+        /// <summary>
+        /// 로드가 완료되었는지 여부.
+        /// </summary>
+        bool loaded = false;
 
         /// <summary>
         /// 생성자
@@ -46,22 +50,39 @@ namespace Image_Capture
         /// <param name="e"></param>
         private void FormCaptureArea_Load(object sender, EventArgs e)
         {
+            //debug("FormCaptureArea_Load 호출");
+            
             //투명영역의 크기 조절
             setCaptureScreenSize();
+            //캡처 이미지 생성
+            getCapture();
+
+            //로드여부 활성화
+            loaded = true;
         }
 
         /// <summary>
         /// 창 리사이즈 시 발생 이벤트
+        /// 처음 로드 될 때에도 불려지는 것으로 보인다.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void FormCaptureArea_Resize(object sender, EventArgs e)
         {
-            //투명영역의 크기 조절
-            setCaptureScreenSize();
+            //debug("FormCaptureArea_Resize 호출");
 
-            //캡처 이미지 생성
-            getCapture();
+            if(loaded)
+            {
+                //투명영역의 크기 조절
+                setCaptureScreenSize();
+
+                //debug("this.Size " + this.Size.Width + "," + this.Size.Height);
+                //debug("this.Location " + this.Location.X + "," + this.Location.Y);
+                //debug("imgCaptureScreenWH " + imgCaptureScreen.Width + "," + imgCaptureScreen.Height);
+                
+                //캡처 이미지 생성
+                getCapture();
+            }
         }
 
         /// <summary>
@@ -72,8 +93,13 @@ namespace Image_Capture
         /// <param name="e"></param>
         private void FormCaptureArea_Move(object sender, EventArgs e)
         {
-            //캡처 이미지 생성
-            getCapture();
+            //debug("FormCaptureArea_Move 호출");
+
+            if (loaded)
+            {
+                //캡처 이미지 생성
+                getCapture();
+            }
         }
 
         /// <summary>
@@ -86,9 +112,14 @@ namespace Image_Capture
             //이미지 파일 저장
             save();
         }
+
         //close of 이벤트 메서드들
         //=============================================================
-
+        //debug method
+        private void debug(string msg)
+        {
+            Debug.WriteLine(msg);
+        }
 
         /// <summary>
         /// 스크린의 사이즈를 셋팅.
@@ -97,9 +128,10 @@ namespace Image_Capture
         private void setCaptureScreenSize()
         {
             //선택 창의 사이즈 조절에 맞춰서, 투명영역의 사이즈를 조절한다.
-            imgCaptureScreen.Width = Size.Width - 18;
-            imgCaptureScreen.Height = Size.Height - 39;
-
+            //imgCaptureScreen.Width = Size.Width - 18;
+            //imgCaptureScreen.Height = Size.Height - 39;
+            imgCaptureScreen.Width = ClientSize.Width;
+            imgCaptureScreen.Height = ClientSize.Height;
         }
 
         /// <summary>
@@ -108,17 +140,26 @@ namespace Image_Capture
         /// </summary>
         private void getCapture()
         {
-            //이미지 반영 시키기
-            //int ScreenX = this.Location.X+9;//찍기 시작하는 좌표
-            //int ScreenY = this.Location.Y+30;
-            ptScreenXY.X = this.Location.X + 9;//선택 창의 X 좌표
-            ptScreenXY.Y = this.Location.Y + 30;//선택 창의 Y 좌표
 
-            //int ScreenW = imgCaptureScreen.Width;
-            //int ScreenH = imgCaptureScreen.Height;
+
+            /**
+            * 선택영역의 좌표를 구하기. (좌표는 상단 좌측 기준으로 0,0 으로 시작한다)
+            * 그러므로, 해당 창 의 좌표를 구하고, 거기서 헤더부분과 좌측 border 를 추가한 좌표를 구해야한다.
+            */
+            ptScreenXY.X = this.Location.X + (Width-ClientSize.Width)/2;//선택 창의 X 좌표
+            ptScreenXY.Y = this.Location.Y + (Height - ClientSize.Height - (Width - ClientSize.Width) / 2);//선택 창의 Y 좌표
+
+
+
+            //선택영역의 가로 세로 크기 구하기.
             szScreenWH.Width = imgCaptureScreen.Width;
             szScreenWH.Height = imgCaptureScreen.Height;
 
+
+
+
+            debug("ptScreenXY " + ptScreenXY.X + "," + ptScreenXY.Y);
+            debug("szScreenWH " + szScreenWH.Width + "," + szScreenWH.Height);
             /**
             * 1. 결과값에 좌표 기준으로 image 타입 생성
             * 2. 미리보기 이미지에 결과값을 resize 한 것을 보여줌
@@ -163,25 +204,12 @@ namespace Image_Capture
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
+
+
         /**
         * --------------------------------------------
         * 폐기예정인 것들은 젤 아래로 모아두기.
         * --------------------------------------------
         */
-        /// <summary>
-        /// ! Deprecated.
-        /// 지정한 크기 만큼 스크린샷 메서드.
-        /// 형식인수 : 시작할좌표, 이미지에 넣을 좌표, 이미지에 넣을 크기
-        /// </summary>
-        /// <param name="ptScreen"></param>
-        /// <param name="ptDraw"></param>
-        /// <param name="szImage"></param>
-        /// <returns></returns>
-        private Bitmap getImageCopyFromScreen(Point ptScreen, Point ptDraw, Size szImage)
-        {
-            return mParentForm.getImageCopyFromScreen(ptScreen, ptDraw, szImage);
-        }
-
-
     }//class
 }//namespace

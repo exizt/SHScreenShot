@@ -37,8 +37,9 @@
             // imgBackground
             // 
             this.imgBackground.Location = new System.Drawing.Point(0, 0);
+            this.imgBackground.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.imgBackground.Name = "imgBackground";
-            this.imgBackground.Size = new System.Drawing.Size(282, 263);
+            this.imgBackground.Size = new System.Drawing.Size(322, 329);
             this.imgBackground.TabIndex = 0;
             this.imgBackground.TabStop = false;
             // 
@@ -46,19 +47,21 @@
             // 
             this.imgCaptureScreen.BackColor = System.Drawing.Color.Turquoise;
             this.imgCaptureScreen.Location = new System.Drawing.Point(0, 0);
+            this.imgCaptureScreen.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.imgCaptureScreen.Name = "imgCaptureScreen";
-            this.imgCaptureScreen.Size = new System.Drawing.Size(207, 194);
+            this.imgCaptureScreen.Size = new System.Drawing.Size(237, 242);
             this.imgCaptureScreen.TabIndex = 1;
             this.imgCaptureScreen.TabStop = false;
             this.imgCaptureScreen.Click += new System.EventHandler(this.imgCaptureScreen_Click);
             // 
             // FormCaptureArea
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(325, 328);
             this.Controls.Add(this.imgCaptureScreen);
             this.Controls.Add(this.imgBackground);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormCaptureArea";
@@ -66,7 +69,6 @@
             this.Text = "FormCaptureArea";
             this.TransparencyKey = System.Drawing.Color.Turquoise;
             this.Load += new System.EventHandler(this.FormCaptureArea_Load);
-            //this.LocationChanged += new System.EventHandler(this.FormCaptureArea_LocationChanged);
             this.Move += new System.EventHandler(this.FormCaptureArea_Move);
             this.Resize += new System.EventHandler(this.FormCaptureArea_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.imgBackground)).EndInit();

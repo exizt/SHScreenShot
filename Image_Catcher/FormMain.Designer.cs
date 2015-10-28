@@ -16,6 +16,8 @@
             if (disposing && (components != null))
             {
                 components.Dispose();
+                bitmapPreviewImage.Dispose();
+                bitmapResult.Dispose();
             }
             base.Dispose(disposing);
         }
