@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Deployment.Application;
 using System.Diagnostics;//debug용
 using System.Drawing;
+using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 
@@ -57,7 +60,7 @@ namespace Image_Capture
         /// <summary>
         /// 결과 이미지의 사이즈 개체
         /// </summary>
-        Size szResultImage = new Size(0,0);
+        Size szResultImage = new Size(0, 0);
 
         /// <summary>
         /// 결과 이미지 비트맵 개체
@@ -82,12 +85,28 @@ namespace Image_Capture
         /// </summary>
         public FormMain()
         {
+            //SetAddRemoveProgramsIcon();
             InitializeComponent();//컴포넌트 초기화 메서드(기본적으로 들어감)
             this.Text = cfgTitle;
 
-
+            //tester();
         }
 
+        private void tester()
+        {
+            if (ApplicationDeployment.IsNetworkDeployed
+                 && ApplicationDeployment.CurrentDeployment.IsFirstRun)
+            {
+                string result = "";
+                result += "ActivationUri[" + ApplicationDeployment.CurrentDeployment.ActivationUri + "]";
+                result += "CurrentVersion[" + ApplicationDeployment.CurrentDeployment.CurrentVersion + "]";
+                result += "UpdatedVersion[" + ApplicationDeployment.CurrentDeployment.UpdatedVersion + "]";
+                result += "UpdateLocation[" + ApplicationDeployment.CurrentDeployment.UpdateLocation + "]";
+
+
+                MessageBox.Show(result);
+            }
+        }
         //=============================================================
         //이벤트 메서드들.
         /// <summary>
@@ -124,6 +143,9 @@ namespace Image_Capture
         /// <param name="e"></param>
         private void btnCapture_Click(object sender, EventArgs e)
         {
+            //기본창을 최소화.
+            this.hide();
+
             //전체 스크린샷 이미지를 가져옴.
             //Image _image = GetDesktopImage2();//스크린샷 이미지를 가져와서 저장시킬 곳에 넣어둠.
             screenshotFullScreen();
@@ -132,11 +154,17 @@ namespace Image_Capture
             //imgPreview.Image = getImageResizeFromImage(_image, imgPreview.Size);//스크린샷 이미지를 미리보기로.
             drawPreviewImageFromBytes();
 
+            //기본창을 다시 활성화.
+            this.show();
+
             //스크린샷 이미지를 저장함.
-           // SaveScreenShotFile(_image);//해당 파일을 저장.
+            // SaveScreenShotFile(_image);//해당 파일을 저장.
             saveFile_ResultImageFromBytes();
 
-
+            /*
+            복수개의 모니터는 Screen.AllScreens 컬렉션 속성을 참조하여 엑세스할 수 있다.
+            즉, 첫번째 모니터는 Screen.AllScreens[0], 두번째 모니터는 Screen.AllScreens[1] 등과 같이 엑세스한다.
+            */
 
         }
 
@@ -204,14 +232,29 @@ namespace Image_Capture
         /// <param name="_sizeImage">이미지크기</param>
         public void getByteFromScreen(Point _pointStart, Size _sizeImage)
         {
-            using (Bitmap b = new Bitmap(_sizeImage.Width, _sizeImage.Height))
+            //MessageBox.Show("dd");
+            //using (Bitmap b = new Bitmap(_sizeImage.Width, _sizeImage.Height))
+            using (Bitmap b = new Bitmap(_sizeImage.Width, _sizeImage.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb))
             {
                 //임시 비트맵으로 그래픽도구를 생성. 그리기 시작한다.
                 using (Graphics g = Graphics.FromImage(b))
                 {
-                    g.CopyFromScreen(_pointStart, ptZero, _sizeImage);// 인수:스크린좌표,그리기시작좌표,그리는사이즈.
-                    g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                    //그래픽 옵션 주기
+                    g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                    g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;//이것이 가장 퀄리티가 높다고 함.
+                    //g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;//샘플로 추가
+                    g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+                    g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+
+
+                    //스크린 캡쳐 시작                    
+                    // 인수:스크린좌표,그리기시작좌표,그리는사이즈.
+                    //g.CopyFromScreen(_pointStart, ptZero, _sizeImage);
+                    //copypixeloperation 옵션을 줄 수도 있다.
+                    g.CopyFromScreen(_pointStart, ptZero, _sizeImage, CopyPixelOperation.SourceCopy );// 인수:스크린좌표,그리기시작좌표,그리는사이즈.
+
                 }
+
                 //imgCaptureResult = (Image)b;
                 byteData = (byte[])converter.ConvertTo(b, typeof(byte[]));
             }
@@ -236,6 +279,7 @@ namespace Image_Capture
 
             //미리보기 화면상에 지정
             imgPreview.Image = bitmapPreviewImage;
+
         }
 
 
@@ -250,7 +294,7 @@ namespace Image_Capture
         public void drawBitmapFromScreen(Point _pointStart, Size _sizeImage)
         {
             //사이즈 변동이 없을 경우
-            if(szResultImage.Equals(_sizeImage))
+            if (szResultImage.Equals(_sizeImage))
             {
                 //bitmapResult = new Bitmap(_sizeImage.Width,_sizeImage.Height);
 
@@ -280,7 +324,7 @@ namespace Image_Capture
             }
         }
 
- 
+
 
 
 
@@ -367,7 +411,7 @@ namespace Image_Capture
                 MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 strFilePath = HFilePath.PathDialog();//저장위치 선택/
-                HFilePath.Save(strFilePath, (Image)converter.ConvertFrom(byteData));//확장자도 선택할 수 있게 바꿔야겠다..
+                HFilePath.Save(strFilePath, (Bitmap)converter.ConvertFrom(byteData));//확장자도 선택할 수 있게 바꿔야겠다..
             }
         }
 
@@ -382,7 +426,7 @@ namespace Image_Capture
                 MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 strFilePath = HFilePath.PathDialog();//저장위치 선택/
-                HFilePath.Save(strFilePath, _image);//파일저장
+                HFilePath.Save(strFilePath, (Bitmap)_image);//파일저장
             }
         }
 
@@ -421,11 +465,118 @@ namespace Image_Capture
             //debug("[]MainForm_activated");
             //Cursor.Show();
         }
-        
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            this.show();
+        }
+
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //e.Cancel = true;
+            //this.Visible = false;
+            //this.hide(sender, e);
+        }
+
+        private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.show();
+        }
+
+        private void show()
+        {
+            this.Visible = true;//활성화
+            this.WindowState = FormWindowState.Normal;//폼의 상태를 일반 상태로 되돌림.
+        }
+        private void hide(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            this.hide();
+        }
+        private void hide()
+        {
+            this.Visible = false;
+        }
+
+        private void FormMain_Resize(object sender, EventArgs e)
+        {
+            //최소화 버튼 클릭시 이벤트
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                //MessageBox.Show("창이 최소화되었습니다.");
+                //창을 숨김 처리 한다.
+                this.hide();
+            }
+            else if (this.WindowState == FormWindowState.Maximized)
+            {
+                //MessageBox.Show("창이 최대화되었습니다.");
+            }
+        }
+        /// <summary>
+        /// 트레이 -> 종료 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private static void SetAddRemoveProgramsIcon()
+        {
+            //only run if deployed
+            //clickonce 의 경우에만, currentdeployment 값을 가진다고 한다.
+            //clickOnce 여부는 isNetworkDeployed 값으로 판단한다.
+            if (ApplicationDeployment.IsNetworkDeployed
+                 && ApplicationDeployment.CurrentDeployment.IsFirstRun)
+            {
+                MessageBox.Show("icon 변경");
+                try
+                {
+                    //Assembly code = Assembly.GetExecutingAssembly();
+                    //AssemblyDescriptionAttribute asdescription =
+                    //    (AssemblyDescriptionAttribute)Attribute.GetCustomAttribute(code, typeof(AssemblyDescriptionAttribute));
+                    //string assemblyDescription = asdescription.Description;
+
+                    //the icon is included in this program
+                    string iconSourcePath = Path.Combine(System.Windows.Forms.Application.StartupPath, "MainIcon.ico");
+
+                    if (!File.Exists(iconSourcePath))
+                        return;
+
+                    Microsoft.Win32.RegistryKey myUninstallKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Uninstall");
+                    string[] mySubKeyNames = myUninstallKey.GetSubKeyNames();
+                    for (int i = 0; i < mySubKeyNames.Length; i++)
+                    {
+                        Microsoft.Win32.RegistryKey myKey = myUninstallKey.OpenSubKey(mySubKeyNames[i], true);
+                        //object myValue = myKey.GetValue("DisplayName");
+                        //if (myValue != null && myValue.ToString() == "admin")
+                        object myValue = myKey.GetValue("UrlUpdateInfo");
+                        if(myValue != null)
+                        {
+                            string updateinfo = myValue.ToString();
+                            
+
+                            myKey.SetValue("DisplayIcon", iconSourcePath);
+                            break;
+                        }
+                        if (myValue != null && myValue.ToString() == ApplicationDeployment.CurrentDeployment.UpdateLocation.ToString())
+                        {
+                            myKey.SetValue("DisplayIcon", iconSourcePath);
+                            break;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+            }
+        }
         /**
-        * --------------------------------------------
-        * 폐기예정인 것들은 젤 아래로 모아두기.
-        * --------------------------------------------
-        */
+* --------------------------------------------
+* 폐기예정인 것들은 젤 아래로 모아두기.
+* --------------------------------------------
+*/
     }
 }
