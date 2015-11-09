@@ -85,7 +85,7 @@ namespace Image_Capture
         /// </summary>
         public FormMain()
         {
-            //SetAddRemoveProgramsIcon();
+            SetAddRemoveProgramsIcon();
             InitializeComponent();//컴포넌트 초기화 메서드(기본적으로 들어감)
             this.Text = cfgTitle;
 
@@ -521,7 +521,9 @@ namespace Image_Capture
         {
             Application.Exit();
         }
-
+        /// <summary>
+        /// ClickOnce 설치 의 경우, 제어판-프로그램추가/삭제 에서 아이콘 표시가 안 나온다. 그 부분을 보정하는 소스.
+        /// </summary>
         private static void SetAddRemoveProgramsIcon()
         {
             //only run if deployed
@@ -530,14 +532,8 @@ namespace Image_Capture
             if (ApplicationDeployment.IsNetworkDeployed
                  && ApplicationDeployment.CurrentDeployment.IsFirstRun)
             {
-                MessageBox.Show("icon 변경");
                 try
                 {
-                    //Assembly code = Assembly.GetExecutingAssembly();
-                    //AssemblyDescriptionAttribute asdescription =
-                    //    (AssemblyDescriptionAttribute)Attribute.GetCustomAttribute(code, typeof(AssemblyDescriptionAttribute));
-                    //string assemblyDescription = asdescription.Description;
-
                     //the icon is included in this program
                     string iconSourcePath = Path.Combine(System.Windows.Forms.Application.StartupPath, "MainIcon.ico");
 
@@ -549,21 +545,16 @@ namespace Image_Capture
                     for (int i = 0; i < mySubKeyNames.Length; i++)
                     {
                         Microsoft.Win32.RegistryKey myKey = myUninstallKey.OpenSubKey(mySubKeyNames[i], true);
-                        //object myValue = myKey.GetValue("DisplayName");
-                        //if (myValue != null && myValue.ToString() == "admin")
                         object myValue = myKey.GetValue("UrlUpdateInfo");
                         if(myValue != null)
                         {
                             string updateinfo = myValue.ToString();
-                            
-
-                            myKey.SetValue("DisplayIcon", iconSourcePath);
-                            break;
-                        }
-                        if (myValue != null && myValue.ToString() == ApplicationDeployment.CurrentDeployment.UpdateLocation.ToString())
-                        {
-                            myKey.SetValue("DisplayIcon", iconSourcePath);
-                            break;
+                            string updateLocation = ApplicationDeployment.CurrentDeployment.UpdateLocation.ToString();
+                            if (updateinfo==updateLocation)
+                            {
+                                myKey.SetValue("DisplayIcon", iconSourcePath);
+                                break;
+                            }
                         }
                     }
                 }
