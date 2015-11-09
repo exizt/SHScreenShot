@@ -20,11 +20,6 @@ namespace CustomClickOnceInstaller
             InitializeComponent();
 
             label1.Text = "정보를 조회중입니다...";
-            //string s = ApplicationDeployment.CurrentDeployment.ActivationUri.ToString();
-            string s = ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
-            label1.Text = s;
-
-            return;
             progressBar1.Step = 10;
             progressBar1.Style = ProgressBarStyle.Marquee;
             progressBar1.MarqueeAnimationSpeed = 30;
