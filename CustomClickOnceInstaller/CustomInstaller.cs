@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 /// <summary>
@@ -207,8 +206,10 @@ namespace CustomClickOnceInstaller
             //프로세스 실행
             processRun();
 
+
             //설치관리자 종료
-            Application.Exit();
+            //Application.Exit();
+            Environment.Exit(Environment.ExitCode);
         }
 
         void processRun()
@@ -239,7 +240,8 @@ namespace CustomClickOnceInstaller
 
                 //C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\E2X Software
                 string startupPath = Environment.GetFolderPath(Environment.SpecialFolder.Programs);
-                startupPath = Path.Combine(startupPath, ShortcutFolderName, ShortcutFileName) + ".appref-ms";
+                startupPath = Path.Combine(startupPath, ShortcutFolderName);
+                startupPath = Path.Combine(startupPath, ShortcutFileName) + ".appref-ms";
                 if (File.Exists(startupPath))
                 {
                     Process.Start(startupPath);

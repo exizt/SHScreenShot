@@ -1,0 +1,9 @@
+D:\WORKSPACES\application\1.이미지캡처프로그램\ImageCapture\Tester_Images\bin\Release\Tester_Images.exe.config
+D:\WORKSPACES\application\1.이미지캡처프로그램\ImageCapture\Tester_Images\bin\Release\Tester_Images.exe
+D:\WORKSPACES\application\1.이미지캡처프로그램\ImageCapture\Tester_Images\bin\Release\Tester_Images.pdb
+D:\WORKSPACES\application\1.이미지캡처프로그램\ImageCapture\Tester_Images\obj\Release\Tester_Images.csprojResolveAssemblyReference.cache
+D:\WORKSPACES\application\1.이미지캡처프로그램\ImageCapture\Tester_Images\obj\Release\Tester_Images.Form1.resources
+D:\WORKSPACES\application\1.이미지캡처프로그램\ImageCapture\Tester_Images\obj\Release\Tester_Images.Properties.Resources.resources
+D:\WORKSPACES\application\1.이미지캡처프로그램\ImageCapture\Tester_Images\obj\Release\Tester_Images.csproj.GenerateResource.Cache
+D:\WORKSPACES\application\1.이미지캡처프로그램\ImageCapture\Tester_Images\obj\Release\Tester_Images.exe
+D:\WORKSPACES\application\1.이미지캡처프로그램\ImageCapture\Tester_Images\obj\Release\Tester_Images.pdb

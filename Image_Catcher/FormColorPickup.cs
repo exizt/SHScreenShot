@@ -219,9 +219,8 @@ namespace Image_Capture
                                             */
             //특정 영역의 이미지를 그리기.
             //drawPreviewImage(ptPreviewImage, szPreviewImage);
-            mParentForm.getByteFromScreen(ptPreviewImage, szPickupArea);
+            //mParentForm.getByteFromScreen(ptPreviewImage, szPickupArea);
             //------------------------------------------------------
-
 
             //------------------------------------------------------
             // 설명 : 이미지 가져오기. 정의한 메서드(private) 
@@ -230,8 +229,10 @@ namespace Image_Capture
             //------------------------------------------------------
             //drawPreviewImageParent();//미리보기 이미지(부모창에 사용할)를 생성
             //parentForm.setImgPreview_Image(bitmapPreviewImageParent);
-            mParentForm.drawPreviewImageFromBytes();//미리보기 이미지(부모창에 사용할)를 생성
+            //mParentForm.drawPreviewImageFromBytes();//미리보기 이미지(부모창에 사용할)를 생성
 
+
+            mParentForm.drawPreviewImage_ColorSpoid(ptPreviewImage, szPickupArea);
 
             //------------------------------------------------------
             // 설명 : 색상 코드 추출. 정의한 메서드(private)

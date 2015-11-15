@@ -2,10 +2,10 @@
 using System.Deployment.Application;
 using System.Diagnostics;//debug용
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
-using System.Reflection;
+using System.Threading;
 using System.Windows.Forms;
-
 
 namespace Image_Capture
 {
@@ -144,18 +144,20 @@ namespace Image_Capture
         private void btnCapture_Click(object sender, EventArgs e)
         {
             //기본창을 최소화.
-            this.hide();
+            this.hideForm();
 
             //전체 스크린샷 이미지를 가져옴.
             //Image _image = GetDesktopImage2();//스크린샷 이미지를 가져와서 저장시킬 곳에 넣어둠.
             screenshotFullScreen();
 
+            Thread.Sleep(50);
+            //기본창을 다시 활성화.
+            this.showForm();
+
             //미리보기 이미지 지정
             //imgPreview.Image = getImageResizeFromImage(_image, imgPreview.Size);//스크린샷 이미지를 미리보기로.
             drawPreviewImageFromBytes();
 
-            //기본창을 다시 활성화.
-            this.show();
 
             //스크린샷 이미지를 저장함.
             // SaveScreenShotFile(_image);//해당 파일을 저장.
@@ -258,6 +260,54 @@ namespace Image_Capture
                 //imgCaptureResult = (Image)b;
                 byteData = (byte[])converter.ConvertTo(b, typeof(byte[]));
             }
+        }
+        /// <summary>
+        /// 색상 추출에서 사용될 메서드. 
+        /// 픽셀 처리에서 각지게 표현해야 되서, 메서드를 분리함.
+        /// </summary>
+        /// <param name="_pointStart"></param>
+        /// <param name="_sizeImage"></param>
+        public void drawPreviewImage_ColorSpoid(Point _pointStart, Size _sizeImage)
+        {
+
+            Bitmap bitmapPreviewSpoid = new Bitmap(bitmapPreviewImage.Width, bitmapPreviewImage.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+
+            using (Bitmap b = new Bitmap(_sizeImage.Width, _sizeImage.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb))
+            {
+                //임시 비트맵으로 그래픽도구를 생성. 그리기 시작한다.
+                using (Graphics g = Graphics.FromImage(b))
+                {
+                    //그래픽 옵션 주기
+                    //g.SmoothingMode = SmoothingMode.AntiAlias;
+                    //g.InterpolationMode = InterpolationMode.HighQualityBicubic;//이것이 가장 퀄리티가 높다고 함.
+                    //g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;//샘플로 추가
+                    //g.CompositingQuality = CompositingQuality.HighQuality;
+                    //g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+
+
+                    //스크린 캡쳐 시작                    
+                    // 인수:스크린좌표,그리기시작좌표,그리는사이즈.
+                    //g.CopyFromScreen(_pointStart, ptZero, _sizeImage);
+                    //copypixeloperation 옵션을 줄 수도 있다.
+                    g.CopyFromScreen(_pointStart, ptZero, _sizeImage);// 인수:스크린좌표,그리기시작좌표,그리는사이즈.
+
+                }
+
+                using (Graphics g = Graphics.FromImage(bitmapPreviewSpoid))
+                {
+                    //g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                    //g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+
+                    //이 항목이 있어야 선명하게 확대가 된다.
+                    g.InterpolationMode = InterpolationMode.NearestNeighbor;
+                    
+                    //g.DrawImage(b, 0, 0, _sizeImage.Width, _sizeImage.Height);
+                    g.DrawImage(b, 0, 0, bitmapPreviewImage.Width, bitmapPreviewImage.Height);
+                }
+
+            }
+            imgPreview.Image = bitmapPreviewSpoid;
         }
 
         /// <summary>
@@ -468,7 +518,7 @@ namespace Image_Capture
 
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            this.show();
+            this.showForm();
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -480,24 +530,37 @@ namespace Image_Capture
 
         private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
         {
-            this.show();
+            this.showForm();
         }
 
-        private void show()
-        {
-            this.Visible = true;//활성화
-            this.WindowState = FormWindowState.Normal;//폼의 상태를 일반 상태로 되돌림.
-        }
         private void hide(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;
-            this.hide();
+            this.hideForm();
         }
-        private void hide()
+        /// <summary>
+        /// 
+        /// </summary>
+        private void showForm()
         {
-            this.Visible = false;
+            this.Visible = true;//활성화
+            this.Opacity = 100;
+            this.WindowState = FormWindowState.Normal;//폼의 상태를 일반 상태로 되돌림.
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        private void hideForm()
+        {
+            this.Opacity = 0;
+            this.Visible = false;
+            //this.WindowState = FormWindowState.Minimized;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FormMain_Resize(object sender, EventArgs e)
         {
             //최소화 버튼 클릭시 이벤트
@@ -505,7 +568,7 @@ namespace Image_Capture
             {
                 //MessageBox.Show("창이 최소화되었습니다.");
                 //창을 숨김 처리 한다.
-                this.hide();
+                this.hideForm();
             }
             else if (this.WindowState == FormWindowState.Maximized)
             {
