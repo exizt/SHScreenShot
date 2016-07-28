@@ -1,0 +1,12 @@
+D:\WorkSpaces\application\Image Capture\Imagecapture\application\bin\Debug\Image_Capture.exe.config
+D:\WorkSpaces\application\Image Capture\Imagecapture\application\obj\Debug\Image_Capture.exe
+D:\WorkSpaces\application\Image Capture\Imagecapture\application\obj\Debug\Image_Capture.pdb
+D:\WorkSpaces\application\Image Capture\Imagecapture\application\bin\Debug\Image_Capture.exe
+D:\WorkSpaces\application\Image Capture\Imagecapture\application\bin\Debug\Image_Capture.pdb
+D:\WorkSpaces\application\Image Capture\Imagecapture\application\bin\Debug\Image_Capture.exe.CodeAnalysisLog.xml
+D:\WorkSpaces\application\Image Capture\Imagecapture\application\bin\Debug\Image_Capture.exe.lastcodeanalysissucceeded
+D:\WorkSpaces\application\Image Capture\Imagecapture\application\obj\Debug\Image_Capture.FormMain.resources
+D:\WorkSpaces\application\Image Capture\Imagecapture\application\obj\Debug\Image_Capture.FormCaptureArea.resources
+D:\WorkSpaces\application\Image Capture\Imagecapture\application\obj\Debug\Image_Capture.FormColorPickup.resources
+D:\WorkSpaces\application\Image Capture\Imagecapture\application\obj\Debug\Image_Capture.Properties.Resources.resources
+D:\WorkSpaces\application\Image Capture\Imagecapture\application\obj\Debug\Application.csproj.GenerateResource.Cache

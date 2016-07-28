@@ -1,0 +1,11 @@
+D:\WorkSpaces\application\Image Capture\Imagecapture\application\obj\Release\Application.csprojResolveAssemblyReference.cache
+D:\WorkSpaces\application\Image Capture\Imagecapture\application\obj\Release\Image_Capture.FormMain.resources
+D:\WorkSpaces\application\Image Capture\Imagecapture\application\obj\Release\Image_Capture.FormCaptureArea.resources
+D:\WorkSpaces\application\Image Capture\Imagecapture\application\obj\Release\Image_Capture.FormColorPickup.resources
+D:\WorkSpaces\application\Image Capture\Imagecapture\application\obj\Release\Image_Capture.Properties.Resources.resources
+D:\WorkSpaces\application\Image Capture\Imagecapture\application\obj\Release\Application.csproj.GenerateResource.Cache
+D:\WorkSpaces\application\Image Capture\Imagecapture\application\bin\Release\application.exe.config
+D:\WorkSpaces\application\Image Capture\Imagecapture\application\bin\Release\application.exe
+D:\WorkSpaces\application\Image Capture\Imagecapture\application\bin\Release\application.pdb
+D:\WorkSpaces\application\Image Capture\Imagecapture\application\obj\Release\application.exe
+D:\WorkSpaces\application\Image Capture\Imagecapture\application\obj\Release\application.pdb

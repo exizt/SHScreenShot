@@ -1,20 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Image_Capture", "Image_Catcher\Image_Capture.csproj", "{32A3B600-4434-4137-8D6E-0EC4DAAD384B}"
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Image_Capture_Setup", "Image_Catcher_Setup\Image_Catcher_Setup.vdproj", "{80C9EDEC-7428-42E3-80F7-C16A1B3D4928}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2E0F5A02-87FB-40AF-8D43-0D16EDD253CD}"
 	ProjectSection(SolutionItems) = preProject
 		memo.txt = memo.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomClickOnceInstaller", "CustomClickOnceInstaller\CustomClickOnceInstaller.csproj", "{1B209349-F2A6-4062-9152-E145FE8EEA37}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "인스톨관리자들", "인스톨관리자들", "{C9A8049C-A0AB-4C21-96EF-0DB2B955A40E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "application\Application.csproj", "{32A3B600-4434-4137-8D6E-0EC4DAAD384B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,17 +20,8 @@ Global
 		{32A3B600-4434-4137-8D6E-0EC4DAAD384B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32A3B600-4434-4137-8D6E-0EC4DAAD384B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32A3B600-4434-4137-8D6E-0EC4DAAD384B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{80C9EDEC-7428-42E3-80F7-C16A1B3D4928}.Debug|Any CPU.ActiveCfg = Debug
-		{80C9EDEC-7428-42E3-80F7-C16A1B3D4928}.Release|Any CPU.ActiveCfg = Release
-		{1B209349-F2A6-4062-9152-E145FE8EEA37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1B209349-F2A6-4062-9152-E145FE8EEA37}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1B209349-F2A6-4062-9152-E145FE8EEA37}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{80C9EDEC-7428-42E3-80F7-C16A1B3D4928} = {C9A8049C-A0AB-4C21-96EF-0DB2B955A40E}
-		{1B209349-F2A6-4062-9152-E145FE8EEA37} = {C9A8049C-A0AB-4C21-96EF-0DB2B955A40E}
 	EndGlobalSection
 EndGlobal
