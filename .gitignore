@@ -1,6 +1,16 @@
-/Image_Catcher/bin
-/Image_Catcher/obj
-/Image_Catcher_Setup/Debug
-/Image_Catcher_Setup/Release
-/CustomClickOnceInstaller/bin
-/CustomClickOnceInstaller/obj
+# Trash files by OS
+.DS_Store
+Thumbs.db
+
+# Files of Visual Studio
+*.suo
+.vs/
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+build/
+[Bb]in/
+[Oo]bj/
+/MakeInstaller/SHCapture.exe
