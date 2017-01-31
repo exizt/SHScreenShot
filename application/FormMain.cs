@@ -87,7 +87,6 @@ namespace Image_Capture
         {
             SetAddRemoveProgramsIcon();
             InitializeComponent();//컴포넌트 초기화 메서드(기본적으로 들어감)
-            this.Text = cfgTitle;
 
             //tester();
         }
@@ -171,21 +170,6 @@ namespace Image_Capture
         }
 
         /// <summary>
-        /// 색상 추출 기능. 이벤트 메서드.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnSpoidColor_Click(object sender, EventArgs e)
-        {
-            //1. 커서를 숨긴다.
-            //Cursor.Hide();
-
-            //2. 커서의 좌표를 통하여 색상을 추출한다.
-            FormColorPickup nForm = new FormColorPickup(this);
-            nForm.Show();
-        }
-
-        /// <summary>
         /// 영역 캡처 기능. 이벤트 메서드.
         /// </summary>
         /// <param name="sender"></param>
@@ -261,55 +245,7 @@ namespace Image_Capture
                 byteData = (byte[])converter.ConvertTo(b, typeof(byte[]));
             }
         }
-        /// <summary>
-        /// 색상 추출에서 사용될 메서드. 
-        /// 픽셀 처리에서 각지게 표현해야 되서, 메서드를 분리함.
-        /// </summary>
-        /// <param name="_pointStart"></param>
-        /// <param name="_sizeImage"></param>
-        public void drawPreviewImage_ColorSpoid(Point _pointStart, Size _sizeImage)
-        {
-
-            Bitmap bitmapPreviewSpoid = new Bitmap(bitmapPreviewImage.Width, bitmapPreviewImage.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-
-            using (Bitmap b = new Bitmap(_sizeImage.Width, _sizeImage.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb))
-            {
-                //임시 비트맵으로 그래픽도구를 생성. 그리기 시작한다.
-                using (Graphics g = Graphics.FromImage(b))
-                {
-                    //그래픽 옵션 주기
-                    //g.SmoothingMode = SmoothingMode.AntiAlias;
-                    //g.InterpolationMode = InterpolationMode.HighQualityBicubic;//이것이 가장 퀄리티가 높다고 함.
-                    //g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;//샘플로 추가
-                    //g.CompositingQuality = CompositingQuality.HighQuality;
-                    //g.PixelOffsetMode = PixelOffsetMode.HighQuality;
-
-
-
-                    //스크린 캡쳐 시작                    
-                    // 인수:스크린좌표,그리기시작좌표,그리는사이즈.
-                    //g.CopyFromScreen(_pointStart, ptZero, _sizeImage);
-                    //copypixeloperation 옵션을 줄 수도 있다.
-                    g.CopyFromScreen(_pointStart, ptZero, _sizeImage);// 인수:스크린좌표,그리기시작좌표,그리는사이즈.
-
-                }
-
-                using (Graphics g = Graphics.FromImage(bitmapPreviewSpoid))
-                {
-                    //g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-                    //g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
-
-                    //이 항목이 있어야 선명하게 확대가 된다.
-                    g.InterpolationMode = InterpolationMode.NearestNeighbor;
-                    
-                    //g.DrawImage(b, 0, 0, _sizeImage.Width, _sizeImage.Height);
-                    g.DrawImage(b, 0, 0, bitmapPreviewImage.Width, bitmapPreviewImage.Height);
-                }
-
-            }
-            imgPreview.Image = bitmapPreviewSpoid;
-        }
-
+  
         /// <summary>
         /// 미리보기 화면의 이미지를 그린다.
         /// bitmapResult(Bitmap) 을 가져와서, 미리보기 사이즈에 맞춰서 bitmapPreviewImage 를 그린다.
