@@ -1,49 +1,49 @@
 Unicode true
 #################################################
 #
-# ë°°í¬ ìŠ¤í¬ë¦½íŠ¸
-# @ ìŠ¤í¬ë¦½íŠ¸ ë² ì´ìŠ¤ : NSIS 3.0 Simpe example
-# @ ìž‘ì„±ìž : e2xist 
+# ¹èÆ÷ ½ºÅ©¸³Æ®
+# @ ½ºÅ©¸³Æ® º£ÀÌ½º : NSIS 3.0 Simpe example
+# @ ÀÛ¼ºÀÚ : e2xist 
 # 
 #################################################
 
 ###
 # Setting Part 1
-# í”„ë¡œê·¸ëž¨ë³„ ì„¤ì • ë¶€ë¶„
+# ÇÁ·Î±×·¥º° ¼³Á¤ ºÎºÐ
 #
-!define S_APP_VER_MAJOR 1           ;ì£¼ ë²„ì „ì½”ë“œ ìž…ë‹ˆë‹¤. í”„ë¡œì íŠ¸ë¥¼ ì „ë¶€ ëœ¯ì–´ê³ ì¹œ ê²½ìš°ì— ì¹´ìš´íŠ¸ì—… ì‹œí‚µë‹ˆë‹¤.
-!define S_APP_VER_MINOR 0           ;ë§ˆì´ë„ˆ ì—…ë°ì´íŠ¸ ì‹œì— ì¦ê°€ì‹œí‚µë‹ˆë‹¤.
-!define S_APP_VER_BUILD  27             ;ì¹´ìš´íŠ¸ë¥¼ ê³„ì† ì¦ê°€ì‹œí‚µë‹ˆë‹¤. 
-!define S_APP_NAME_DISPLAY "SH Screen Capture"  ;í”„ë¡œê·¸ëž¨ëª…ì¹­
-!define S_APP_NAME_CODE "SHScreenCapture"     ;í”„ë¡œê·¸ëž¨ëª…ì¹­ (ì£¼ë¡œ ë””ë ‰í† ë¦¬ëª…ìœ¼ë¡œ ì“°ì¼ ê²ƒì´ë¯€ë¡œ ë¹ˆì¹¸ì—†ì´ ì˜ë¬¸ìœ¼ë¡œ)
-!define S_APP_COMPANY_DISPLAY "SH Software"  ;ë°°í¬ìž
-!define S_APP_COMPANY_CODE "SHSoft"             ;ì—…ì²´ëª… ë˜ëŠ” êµ¬ë¶„ëª… (ì£¼ë¡œ ë””ë ‰í† ë¦¬ëª…ìœ¼ë¡œ ì“°ì¼ ê²ƒì´ë¯€ë¡œ ë¹ˆì¹¸ì—†ì´ ì˜ë¬¸ìœ¼ë¡œ)
-!define S_APP_DESCRIPTION "capture screen"     ;í”„ë¡œê·¸ëž¨ ì„¤ëª…
-!define S_APP_VER "1.0"                                 ;í”„ë¡œê·¸ëž¨ ë²„ì „ì •ë³´
-!define S_APP_EXE "application.exe"                  ;ì‹¤í–‰ë  exe íŒŒì¼
-!define S_UNINST_SIZE 1200 ;ì„¤ì¹˜ í¬ê¸° ìž…ë‹ˆë‹¤. ì–¸ì¸ìŠ¤í†¨ì‹œì— ì°¸ê³  ì •ë³´ë¡œ ë‚˜ì˜µë‹ˆë‹¤.
+!define S_APP_VER_MAJOR 1           ;ÁÖ ¹öÀüÄÚµå ÀÔ´Ï´Ù. ÇÁ·ÎÁ§Æ®¸¦ ÀüºÎ ¶â¾î°íÄ£ °æ¿ì¿¡ Ä«¿îÆ®¾÷ ½ÃÅµ´Ï´Ù.
+!define S_APP_VER_MINOR 0           ;¸¶ÀÌ³Ê ¾÷µ¥ÀÌÆ® ½Ã¿¡ Áõ°¡½ÃÅµ´Ï´Ù.
+!define S_APP_VER_BUILD  27             ;Ä«¿îÆ®¸¦ °è¼Ó Áõ°¡½ÃÅµ´Ï´Ù. 
+!define S_APP_NAME_DISPLAY "SH Screen Capture"  ;ÇÁ·Î±×·¥¸íÄª
+!define S_APP_NAME_CODE "SHScreenCapture"     ;ÇÁ·Î±×·¥¸íÄª (ÁÖ·Î µð·ºÅä¸®¸íÀ¸·Î ¾²ÀÏ °ÍÀÌ¹Ç·Î ºóÄ­¾øÀÌ ¿µ¹®À¸·Î)
+!define S_APP_COMPANY_DISPLAY "SH Software"  ;¹èÆ÷ÀÚ
+!define S_APP_COMPANY_CODE "SHSoft"             ;¾÷Ã¼¸í ¶Ç´Â ±¸ºÐ¸í (ÁÖ·Î µð·ºÅä¸®¸íÀ¸·Î ¾²ÀÏ °ÍÀÌ¹Ç·Î ºóÄ­¾øÀÌ ¿µ¹®À¸·Î)
+!define S_APP_DESCRIPTION "capture screen"     ;ÇÁ·Î±×·¥ ¼³¸í
+!define S_APP_VER "1.0"                                 ;ÇÁ·Î±×·¥ ¹öÀüÁ¤º¸
+!define S_APP_EXE "application.exe"                  ;½ÇÇàµÉ exe ÆÄÀÏ
+!define S_UNINST_SIZE 1200 ;¼³Ä¡ Å©±â ÀÔ´Ï´Ù. ¾ðÀÎ½ºÅç½Ã¿¡ Âü°í Á¤º¸·Î ³ª¿É´Ï´Ù.
 !define S_APP_HELP_URL "http://..." # "Support Information" link
 !define S_APP_UPDATE_URL "http://..." # "Product Updates" link
 !define S_APP_ABOUT_URL "http://..." # "Publisher" link
-# !define S_APP_INSTALLER "SHCapture_1.0.26.exe"   ;ìƒì„±ë  ì¸ìŠ¤í†¨ëŸ¬ íŒŒì¼ëª…
+# !define S_APP_INSTALLER "SHCapture_1.0.26.exe"   ;»ý¼ºµÉ ÀÎ½ºÅç·¯ ÆÄÀÏ¸í
 
 #######
 # Setting Part 2
-# íŠ¹ë³„í•˜ì§€ ì•Šì„ ê²½ìš°ì—ëŠ” ë³€ê²½ì•ˆí•´ë„ ë˜ëŠ” ë¶€ë¶„
+# Æ¯º°ÇÏÁö ¾ÊÀ» °æ¿ì¿¡´Â º¯°æ¾ÈÇØµµ µÇ´Â ºÎºÐ
 #
-# ì–¸ì¸ìŠ¤í†¨ëŸ¬ì— í‘œì‹œë  ì´ë¦„
+# ¾ðÀÎ½ºÅç·¯¿¡ Ç¥½ÃµÉ ÀÌ¸§
 !define S_UNINST_DISPLAY "${S_APP_COMPANY_CODE} ${S_APP_NAME_DISPLAY} ${S_APP_VER}"
-# ë ˆì§€ìŠ¤íŠ¸ë¦¬ì—ì„œ êµ¬ë¶„ìž. ê°€ëŠ¥í•˜ë©´ ë³€ê²½í•˜ì§€ ë§ ê²ƒ.
+# ·¹Áö½ºÆ®¸®¿¡¼­ ±¸ºÐÀÚ. °¡´ÉÇÏ¸é º¯°æÇÏÁö ¸» °Í.
 !define S_UNINST_REGDIR "${S_APP_COMPANY_CODE} ${S_APP_NAME_CODE}"
-# ìƒì„±ë  ì¸ìŠ¤í†¨ëŸ¬ íŒŒì¼ëª…
-!define S_APP_INSTALLER "SHCapture_${S_APP_VER_MAJOR}.${S_APP_VER_MINOR}.${S_APP_VER_BUILD}.exe"   ;ìƒì„±ë  ì¸ìŠ¤í†¨ëŸ¬ íŒŒì¼ëª…
+# »ý¼ºµÉ ÀÎ½ºÅç·¯ ÆÄÀÏ¸í
+!define S_APP_INSTALLER "SHCapture_${S_APP_VER_MAJOR}.${S_APP_VER_MINOR}.${S_APP_VER_BUILD}.exe"   ;»ý¼ºµÉ ÀÎ½ºÅç·¯ ÆÄÀÏ¸í
 
 # install
-!define S_INSTALL_DIR "$PROGRAMFILES64\${S_APP_COMPANY_CODE}\${S_APP_NAME_CODE}" ;ì¸ìŠ¤í†¨ë  ê²½ë¡œ
+!define S_INSTALL_DIR "$PROGRAMFILES64\${S_APP_COMPANY_CODE}\${S_APP_NAME_CODE}" ;ÀÎ½ºÅçµÉ °æ·Î
 
 # start menu
-!define S_SM_DIR "$SMPROGRAMS\${S_APP_COMPANY_CODE}" ;ì‹œìž‘ë©”ë‰´. ìƒì„±ë  í´ë” ê²½ë¡œ
-!define S_SM_LNK "${S_SM_DIR}\${S_APP_NAME_DISPLAY}.lnk" ;ì‹œìž‘ë©”ë‰´. ìƒì„±ë  ë°”ë¡œê°€ê¸° ê²½ë¡œ
+!define S_SM_DIR "$SMPROGRAMS\${S_APP_COMPANY_CODE}" ;½ÃÀÛ¸Þ´º. »ý¼ºµÉ Æú´õ °æ·Î
+!define S_SM_LNK "${S_SM_DIR}\${S_APP_NAME_DISPLAY}.lnk" ;½ÃÀÛ¸Þ´º. »ý¼ºµÉ ¹Ù·Î°¡±â °æ·Î
 
 
 !define S_APP_ICON "_logo.ico"
@@ -57,7 +57,7 @@ LicenseData "_license.rtf"
 # This will be in the installer/uninstaller's title bar
 Name "${S_APP_COMPANY_DISPLAY} - ${S_APP_NAME_DISPLAY}"
 Icon "_logo.ico"
-outFile "${S_APP_INSTALLER}"
+outFile "installer/${S_APP_INSTALLER}"
  
 !include LogicLib.nsh
  
