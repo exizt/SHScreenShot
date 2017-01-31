@@ -87,7 +87,6 @@ namespace Image_Capture
         {
             SetAddRemoveProgramsIcon();
             InitializeComponent();//컴포넌트 초기화 메서드(기본적으로 들어감)
-            this.Text = cfgTitle;
 
             //tester();
         }
