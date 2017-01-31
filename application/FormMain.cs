@@ -29,7 +29,7 @@ namespace Image_Capture
         /// <summary>
         /// 프로그램 타이틀 지정.
         /// </summary>
-        public static string cfgTitle = "Image Capture - by e2xist";
+        public static string cfgTitle = "SH Color Picker";
 
         /// <summary>
         /// point 0, 0
@@ -87,9 +87,6 @@ namespace Image_Capture
         {
             SetAddRemoveProgramsIcon();
             InitializeComponent();//컴포넌트 초기화 메서드(기본적으로 들어감)
-            this.Text = cfgTitle;
-
-            //tester();
         }
 
         private void tester()
@@ -136,40 +133,7 @@ namespace Image_Capture
             bitmapResult = new Bitmap(szPreviewImage.Width, szPreviewImage.Height);
         }
 
-        /// <summary>
-        /// 전체 스크린샷 메서드. 클릭 이벤트
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnCapture_Click(object sender, EventArgs e)
-        {
-            //기본창을 최소화.
-            this.hideForm();
-
-            //전체 스크린샷 이미지를 가져옴.
-            //Image _image = GetDesktopImage2();//스크린샷 이미지를 가져와서 저장시킬 곳에 넣어둠.
-            screenshotFullScreen();
-
-            Thread.Sleep(50);
-            //기본창을 다시 활성화.
-            this.showForm();
-
-            //미리보기 이미지 지정
-            //imgPreview.Image = getImageResizeFromImage(_image, imgPreview.Size);//스크린샷 이미지를 미리보기로.
-            drawPreviewImageFromBytes();
-
-
-            //스크린샷 이미지를 저장함.
-            // SaveScreenShotFile(_image);//해당 파일을 저장.
-            saveFile_ResultImageFromBytes();
-
-            /*
-            복수개의 모니터는 Screen.AllScreens 컬렉션 속성을 참조하여 엑세스할 수 있다.
-            즉, 첫번째 모니터는 Screen.AllScreens[0], 두번째 모니터는 Screen.AllScreens[1] 등과 같이 엑세스한다.
-            */
-
-        }
-
+ 
         /// <summary>
         /// 색상 추출 기능. 이벤트 메서드.
         /// </summary>
@@ -185,31 +149,6 @@ namespace Image_Capture
             nForm.Show();
         }
 
-        /// <summary>
-        /// 영역 캡처 기능. 이벤트 메서드.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnCaptureArea_Click(object sender, EventArgs e)
-        {
-            FormCaptureArea nForm = new FormCaptureArea(this);
-            nForm.Show();
-        }
-
-
-        /// <summary>
-        /// 이벤트 메서드.클릭. 폴더 열기 버튼 클릭시 동작.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnFolderOpen_Click(object sender, EventArgs e)
-        {
-            if (strFilePath != "")
-                System.Diagnostics.Process.Start("explorer.exe", System.IO.Path.GetDirectoryName(strFilePath));
-            else
-                System.Diagnostics.Process.Start("explorer.exe", HFilePath.Auto_Dir());
-
-        }
         //close of 이벤트 메서드들
         //=============================================================
 
@@ -432,54 +371,6 @@ namespace Image_Capture
             imgPreview.Image = _image;
         }
 
-        public void imgCapture_Save()
-        {
-            //해당 파일을 저장.
-            SaveFile_ResultImage(imgCaptureResult);
-        }
-
-        /// <summary>
-        /// SaveScreenShotFile 메서드를 대체하기 위해 만듦.
-        /// </summary>
-        public void saveFile_ResultImage()
-        {
-            if (MessageBox.Show("저장하시겠습니까?", "스크린샷 파일저장",
-                MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                strFilePath = HFilePath.PathDialog();//저장위치 선택/
-                HFilePath.Save(strFilePath, bitmapResult);//확장자도 선택할 수 있게 바꿔야겠다..
-            }
-        }
-
-
-        /// <summary>
-        /// SaveScreenShotFile 메서드를 대체하기 위해 만듦.
-        /// </summary>
-        public void saveFile_ResultImageFromBytes()
-        {
-            if (MessageBox.Show("저장하시겠습니까?", "스크린샷 파일저장",
-                MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                strFilePath = HFilePath.PathDialog();//저장위치 선택/
-                HFilePath.Save(strFilePath, (Bitmap)converter.ConvertFrom(byteData));//확장자도 선택할 수 있게 바꿔야겠다..
-            }
-        }
-
-        /// <summary>
-        /// 사진파일을 저장하는 메서드.
-        /// Messagebox 호출 후 저장위치 선택해서 저장
-        /// </summary>
-        /// <param name="_image"></param>
-        public void SaveFile_ResultImage(Image _image)
-        {
-            if (MessageBox.Show("저장하시겠습니까?", "스크린샷 파일저장",
-                MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                strFilePath = HFilePath.PathDialog();//저장위치 선택/
-                HFilePath.Save(strFilePath, (Bitmap)_image);//파일저장
-            }
-        }
-
         /// <summary>
         /// 미리보기 이미지 에 이미지를 지정
         /// </summary>
@@ -626,6 +517,11 @@ namespace Image_Capture
                     MessageBox.Show(ex.Message.ToString());
                 }
             }
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

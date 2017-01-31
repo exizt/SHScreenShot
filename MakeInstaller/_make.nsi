@@ -10,13 +10,13 @@
 # Setting Part 1
 # 프로그램별 설정 부분
 #
-!define S_APP_NAME_DISPLAY "SHCapture"  ;프로그램명칭
-!define S_APP_NAME_CODE "SHCapture"     ;프로그램명칭 (주로 디렉토리명으로 쓰일 것이므로 빈칸없이 영문으로)
-!define S_APP_COMPANY_DISPLAY "SH Softwares"  ;배포자
+!define S_APP_NAME_DISPLAY "SH Color Picker"  ;프로그램명칭
+!define S_APP_NAME_CODE "SHColorPicker"     ;프로그램명칭 (주로 디렉토리명으로 쓰일 것이므로 빈칸없이 영문으로)
+!define S_APP_COMPANY_DISPLAY "SH Software"  ;배포자
 !define S_APP_COMPANY_CODE "SHSoft"             ;업체명 또는 구분명 (주로 디렉토리명으로 쓰일 것이므로 빈칸없이 영문으로)
-!define S_APP_DESCRIPTION "capture screen"     ;프로그램 설명
+!define S_APP_DESCRIPTION "Choices and pick up color code"     ;프로그램 설명
 !define S_APP_VER "1.0"                                 ;프로그램 버전정보
-!define S_APP_INSTALLER "SHCapture.exe"   ;생성될 인스톨러 파일명
+!define S_APP_INSTALLER "SHColorPicker_1.0.0.exe"   ;생성될 인스톨러 파일명
 !define S_APP_EXE "application.exe"                  ;실행될 exe 파일
 !define S_UNINST_SIZE 3122 ;설치 크기 입니다. 언인스톨시에 참고 정보로 나옵니다.
 !define S_APP_HELP_URL "http://..." # "Support Information" link

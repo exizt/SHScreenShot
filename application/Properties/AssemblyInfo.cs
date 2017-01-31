@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 어셈블리의 일반 정보는 다음 특성 집합을 통해 제어됩니다.
 // 어셈블리와 관련된 정보를 수정하려면
 // 이 특성 값을 변경하십시오.
-[assembly: AssemblyTitle("Image_Capture")]
-[assembly: AssemblyDescription("색상추출과 스크린샷 기능을 지원합니다.")]
+[assembly: AssemblyTitle("SH Color Picker")]
+[assembly: AssemblyDescription("색상 추출")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("E2X Software")]
-[assembly: AssemblyProduct("Image_Capture")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
+[assembly: AssemblyProduct("SH Color Picker")]
+[assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

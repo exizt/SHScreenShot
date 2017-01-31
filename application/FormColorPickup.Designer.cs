@@ -58,7 +58,7 @@
             // spoidPicture
             // 
             this.spoidPicture.BackColor = System.Drawing.Color.Turquoise;
-            this.spoidPicture.Image = global::Image_Capture.Properties.Resources.Image3;
+            this.spoidPicture.Image = global::SHColorPicker.Properties.Resources.Image3;
             this.spoidPicture.Location = new System.Drawing.Point(171, 168);
             this.spoidPicture.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.spoidPicture.Name = "spoidPicture";

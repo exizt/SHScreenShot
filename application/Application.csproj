@@ -8,7 +8,7 @@
     <ProjectGuid>{32A3B600-4434-4137-8D6E-0EC4DAAD384B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Image_Capture</RootNamespace>
+    <RootNamespace>SHColorPicker</RootNamespace>
     <AssemblyName>application</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>
@@ -101,26 +101,16 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormCaptureArea.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormCaptureArea.Designer.cs">
-      <DependentUpon>FormCaptureArea.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormColorPickup.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormColorPickup.Designer.cs">
       <DependentUpon>FormColorPickup.cs</DependentUpon>
     </Compile>
-    <Compile Include="HFilePath.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormCaptureArea.resx">
-      <DependentUpon>FormCaptureArea.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormColorPickup.resx">
       <DependentUpon>FormColorPickup.cs</DependentUpon>
@@ -137,6 +127,7 @@
     </Compile>
     <None Include="app.config" />
     <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
