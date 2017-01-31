@@ -13,4 +13,4 @@ Thumbs.db
 [Rr]elease/
 x64/
 build/
-/MakeInstaller/SHCapture.exe
+/MakeInstaller/installer/
