@@ -159,8 +159,8 @@ namespace Image_Capture
 
 
 
-            debug("ptScreenXY " + ptScreenXY.X + "," + ptScreenXY.Y);
-            debug("szScreenWH " + szScreenWH.Width + "," + szScreenWH.Height);
+            //debug("ptScreenXY " + ptScreenXY.X + "," + ptScreenXY.Y);
+            //debug("szScreenWH " + szScreenWH.Width + "," + szScreenWH.Height);
             /**
             * 1. 결과값에 좌표 기준으로 image 타입 생성
             * 2. 미리보기 이미지에 결과값을 resize 한 것을 보여줌
