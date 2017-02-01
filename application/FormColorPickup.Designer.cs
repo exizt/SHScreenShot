@@ -15,6 +15,7 @@
         {
             if (disposing && (components != null))
             {
+                bitmapPreview.Dispose();
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -48,9 +49,8 @@
             this.pictureAreaPickupColor.ImageLocation = "0,0";
             this.pictureAreaPickupColor.InitialImage = null;
             this.pictureAreaPickupColor.Location = new System.Drawing.Point(0, 0);
-            this.pictureAreaPickupColor.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pictureAreaPickupColor.Name = "pictureAreaPickupColor";
-            this.pictureAreaPickupColor.Size = new System.Drawing.Size(343, 375);
+            this.pictureAreaPickupColor.Size = new System.Drawing.Size(300, 300);
             this.pictureAreaPickupColor.TabIndex = 0;
             this.pictureAreaPickupColor.TabStop = false;
             this.pictureAreaPickupColor.Click += new System.EventHandler(this.pictureAreaPickupColor_Click);
@@ -59,10 +59,9 @@
             // 
             this.spoidPicture.BackColor = System.Drawing.Color.Turquoise;
             this.spoidPicture.Image = global::SHColorPicker.Properties.Resources.Image3;
-            this.spoidPicture.Location = new System.Drawing.Point(171, 168);
-            this.spoidPicture.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.spoidPicture.Location = new System.Drawing.Point(150, 134);
             this.spoidPicture.Name = "spoidPicture";
-            this.spoidPicture.Size = new System.Drawing.Size(18, 18);
+            this.spoidPicture.Size = new System.Drawing.Size(16, 16);
             this.spoidPicture.TabIndex = 1;
             this.spoidPicture.TabStop = false;
             this.spoidPicture.WaitOnLoad = true;
@@ -70,13 +69,12 @@
             // 
             // FormColorPickup
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(343, 375);
+            this.ClientSize = new System.Drawing.Size(300, 300);
             this.Controls.Add(this.spoidPicture);
             this.Controls.Add(this.pictureAreaPickupColor);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormColorPickup";
