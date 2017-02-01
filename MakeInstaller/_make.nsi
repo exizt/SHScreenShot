@@ -23,7 +23,7 @@
 !define S_APP_ABOUT_URL "http://..." # "Publisher" link
 !define S_APP_VER_MAJOR 1           ;주 버전코드 입니다. 프로젝트를 전부 뜯어고친 경우에 카운트업 시킵니다.
 !define S_APP_VER_MINOR 0           ;마이너 업데이트 시에 증가시킵니다.
-!define S_APP_VER_BUILD  3             ;카운트를 계속 증가시킵니다. 
+!define S_APP_VER_BUILD  4             ;카운트를 계속 증가시킵니다. 
 #!define S_APP_INSTALLER "SHColorPicker_1.0.0.exe"   ;생성될 인스톨러 파일명
 
 #######

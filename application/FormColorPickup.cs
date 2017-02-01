@@ -100,7 +100,8 @@ namespace Image_Capture
             mParentForm.txtColorCodeR.Text = colorResult.R.ToString();
             mParentForm.txtColorCodeG.Text = colorResult.G.ToString();
             mParentForm.txtColorCodeB.Text = colorResult.B.ToString();
-            mParentForm.txtColorCodeFF.Text = string.Concat("#", ColorTranslator.ToHtml(colorResult).Substring(1, 6));
+            //mParentForm.txtColorCodeFF.Text = string.Concat("#", ColorTranslator.ToHtml(colorResult).Substring(1, 6));
+            mParentForm.txtColorCodeFF.Text = String.Format("#{0}", ColorTranslator.ToHtml(colorResult).Substring(1, 6));
             mParentForm.imgResultColor.BackColor = colorResult;
         }
 

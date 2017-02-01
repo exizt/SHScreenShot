@@ -8,27 +8,6 @@ namespace Image_Capture
 {
     public partial class FormMain : Form
     {
-        //=============================================================
-        //스크린샷을 찍기 위한 임포트
-        /*
-        [DllImport("user32.dll", EntryPoint = "GetDesktopWindow")]
-        private static extern IntPtr GetDesktopWindow();
-
-        [DllImport("user32.dll", EntryPoint = "GetSystemMetrics")]
-        private static extern int GetSystemMetrics(int abc);
-
-        private const int SM_CXSCREEN = 0;
-        private const int SM_CYSCREEN = 1;
-        */
-        //스크린샷을 찍기 위한 임포트 END
-        //=============================================================
-
-        /// <summary>
-        /// 프로그램 타이틀 지정.
-        /// </summary>
-        public static string cfgTitle = "SH Color Picker";
-
-
         /// <summary>
         /// 생성자 메서드
         /// </summary>
