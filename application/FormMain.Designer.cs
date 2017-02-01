@@ -131,7 +131,7 @@
             this.btnPickup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPickup.Font = new System.Drawing.Font("돋움", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnPickup.ForeColor = System.Drawing.Color.White;
-            this.btnPickup.Location = new System.Drawing.Point(30, 196);
+            this.btnPickup.Location = new System.Drawing.Point(30, 201);
             this.btnPickup.Name = "btnPickup";
             this.btnPickup.Size = new System.Drawing.Size(205, 58);
             this.btnPickup.TabIndex = 15;
@@ -153,7 +153,7 @@
             // 
             this.imgPreview.BackColor = System.Drawing.Color.White;
             this.imgPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.imgPreview.Location = new System.Drawing.Point(30, 23);
+            this.imgPreview.Location = new System.Drawing.Point(30, 28);
             this.imgPreview.Name = "imgPreview";
             this.imgPreview.Size = new System.Drawing.Size(205, 150);
             this.imgPreview.TabIndex = 18;
@@ -196,9 +196,9 @@
             this.groupBox1.Controls.Add(this.label_B);
             this.groupBox1.Font = new System.Drawing.Font("돋움", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.groupBox1.ForeColor = System.Drawing.Color.SlateBlue;
-            this.groupBox1.Location = new System.Drawing.Point(256, 23);
+            this.groupBox1.Location = new System.Drawing.Point(256, 21);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(163, 231);
+            this.groupBox1.Size = new System.Drawing.Size(163, 238);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "결과";
@@ -208,7 +208,7 @@
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(6, 14);
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(439, 279);
+            this.ClientSize = new System.Drawing.Size(451, 289);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.imgPreview);
             this.Controls.Add(this.btnPickup);
