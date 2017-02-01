@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+﻿using System.Drawing;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;//dll 임포트를 위한 녀석.
-using System.Diagnostics;//debug용
 
 namespace Image_Capture
 {
@@ -78,7 +70,8 @@ namespace Image_Capture
             ptPreviewImageCompress.Y = mousePosition.Y - szPreviewImageCompress.Height / 2;
 
             // 미리보기 이미지 를 생성
-            bitmapPreview = createPreviewBitmap(ptPreviewImageCompress, szPreviewImageCompress);
+            //bitmapPreview = createPreviewBitmap(ptPreviewImageCompress, szPreviewImageCompress);
+            createPreviewBitmap(ptPreviewImageCompress, szPreviewImageCompress);
 
             // 색상코드 를 추출
             colorResult = getColorFromImage(bitmapPreview, new Point(szPreviewImage.Width / 2, szPreviewImage.Height / 2));
@@ -93,11 +86,8 @@ namespace Image_Capture
         /// <param name="point">축소된 영역의 xy 좌표</param>
         /// <param name="size">축소된 영역의 size</param>
         /// <returns></returns>
-        private Bitmap createPreviewBitmap(Point point, Size size)
+        private void createPreviewBitmap(Point point, Size size)
         {
-
-            Bitmap bitmapPreview = new Bitmap(szPreviewImage.Width, szPreviewImage.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-
             using (Bitmap bitmap = new Bitmap(size.Width, size.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb))
             {
                 // 작은 이미지의 생성
@@ -116,9 +106,7 @@ namespace Image_Capture
                     //이미지 확대 (bitmap 의 크기가 작고, szPreviewImage 의 크기가 커서 확대가 됨)
                     g.DrawImage(bitmap, 0, 0, szPreviewImage.Width, szPreviewImage.Height);
                 }
-
             }
-            return bitmapPreview;
         }
 
         /// <summary>
