@@ -58,9 +58,9 @@
             // 
             // txtColorCodeR
             // 
-            this.txtColorCodeR.Location = new System.Drawing.Point(26, 95);
+            this.txtColorCodeR.Location = new System.Drawing.Point(34, 97);
             this.txtColorCodeR.Name = "txtColorCodeR";
-            this.txtColorCodeR.Size = new System.Drawing.Size(44, 21);
+            this.txtColorCodeR.Size = new System.Drawing.Size(44, 24);
             this.txtColorCodeR.TabIndex = 11;
             // 
             // label_R
@@ -68,7 +68,7 @@
             this.label_R.AutoSize = true;
             this.label_R.Location = new System.Drawing.Point(11, 100);
             this.label_R.Name = "label_R";
-            this.label_R.Size = new System.Drawing.Size(13, 12);
+            this.label_R.Size = new System.Drawing.Size(17, 15);
             this.label_R.TabIndex = 12;
             this.label_R.Text = "R";
             // 
@@ -77,7 +77,7 @@
             this.label_G.AutoSize = true;
             this.label_G.Location = new System.Drawing.Point(11, 132);
             this.label_G.Name = "label_G";
-            this.label_G.Size = new System.Drawing.Size(14, 12);
+            this.label_G.Size = new System.Drawing.Size(18, 15);
             this.label_G.TabIndex = 12;
             this.label_G.Text = "G";
             // 
@@ -86,31 +86,31 @@
             this.label_B.AutoSize = true;
             this.label_B.Location = new System.Drawing.Point(11, 165);
             this.label_B.Name = "label_B";
-            this.label_B.Size = new System.Drawing.Size(13, 12);
+            this.label_B.Size = new System.Drawing.Size(17, 15);
             this.label_B.TabIndex = 12;
             this.label_B.Text = "B";
             // 
             // txtColorCodeB
             // 
-            this.txtColorCodeB.Location = new System.Drawing.Point(26, 162);
+            this.txtColorCodeB.Location = new System.Drawing.Point(34, 159);
             this.txtColorCodeB.Name = "txtColorCodeB";
-            this.txtColorCodeB.Size = new System.Drawing.Size(44, 21);
+            this.txtColorCodeB.Size = new System.Drawing.Size(44, 24);
             this.txtColorCodeB.TabIndex = 13;
             // 
             // txtColorCodeG
             // 
-            this.txtColorCodeG.Location = new System.Drawing.Point(26, 129);
+            this.txtColorCodeG.Location = new System.Drawing.Point(34, 129);
             this.txtColorCodeG.Name = "txtColorCodeG";
-            this.txtColorCodeG.Size = new System.Drawing.Size(44, 21);
+            this.txtColorCodeG.Size = new System.Drawing.Size(44, 24);
             this.txtColorCodeG.TabIndex = 12;
             // 
             // txtColorCodeFF
             // 
             this.txtColorCodeFF.BackColor = System.Drawing.Color.White;
-            this.txtColorCodeFF.Location = new System.Drawing.Point(26, 193);
+            this.txtColorCodeFF.Location = new System.Drawing.Point(34, 193);
             this.txtColorCodeFF.Name = "txtColorCodeFF";
             this.txtColorCodeFF.ReadOnly = true;
-            this.txtColorCodeFF.Size = new System.Drawing.Size(73, 21);
+            this.txtColorCodeFF.Size = new System.Drawing.Size(73, 24);
             this.txtColorCodeFF.TabIndex = 14;
             // 
             // label_FF
@@ -118,12 +118,19 @@
             this.label_FF.AutoSize = true;
             this.label_FF.Location = new System.Drawing.Point(11, 196);
             this.label_FF.Name = "label_FF";
-            this.label_FF.Size = new System.Drawing.Size(11, 12);
+            this.label_FF.Size = new System.Drawing.Size(15, 15);
             this.label_FF.TabIndex = 14;
             this.label_FF.Text = "#";
             // 
             // btnPickup
             // 
+            this.btnPickup.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnPickup.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnPickup.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(67)))), ((int)(((byte)(92)))));
+            this.btnPickup.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(67)))), ((int)(((byte)(92)))));
+            this.btnPickup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPickup.Font = new System.Drawing.Font("돋움", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btnPickup.ForeColor = System.Drawing.Color.White;
             this.btnPickup.Location = new System.Drawing.Point(30, 196);
             this.btnPickup.Name = "btnPickup";
             this.btnPickup.Size = new System.Drawing.Size(205, 58);
@@ -144,6 +151,7 @@
             // 
             // imgPreview
             // 
+            this.imgPreview.BackColor = System.Drawing.Color.White;
             this.imgPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.imgPreview.Location = new System.Drawing.Point(30, 23);
             this.imgPreview.Name = "imgPreview";
@@ -176,6 +184,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.imgResultColor);
             this.groupBox1.Controls.Add(this.txtColorCodeR);
             this.groupBox1.Controls.Add(this.txtColorCodeB);
@@ -185,6 +194,8 @@
             this.groupBox1.Controls.Add(this.label_G);
             this.groupBox1.Controls.Add(this.txtColorCodeFF);
             this.groupBox1.Controls.Add(this.label_B);
+            this.groupBox1.Font = new System.Drawing.Font("돋움", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.groupBox1.ForeColor = System.Drawing.Color.SlateBlue;
             this.groupBox1.Location = new System.Drawing.Point(256, 23);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(163, 231);
@@ -201,6 +212,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.imgPreview);
             this.Controls.Add(this.btnPickup);
+            this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
