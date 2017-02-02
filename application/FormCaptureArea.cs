@@ -45,6 +45,8 @@ namespace Image_Capture
 
             //부모 폼 값
             mParentForm = _parentForm;
+
+            this.MinimumSize = new Size(60,80);
         }
 
         /// <summary>

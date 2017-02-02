@@ -17,8 +17,8 @@ namespace Image_Capture
         private void setCaptureScreenSize()
         {
             //선택 창의 사이즈 조절에 맞춰서, 투명영역의 사이즈를 조절한다.
-            imgCaptureScreen.Width = ClientSize.Width;
-            imgCaptureScreen.Height = ClientSize.Height;
+            if(ClientSize.Width>=0) imgCaptureScreen.Width = ClientSize.Width;
+            if (ClientSize.Height >= 0) imgCaptureScreen.Height = ClientSize.Height;
         }
 
         /// <summary>

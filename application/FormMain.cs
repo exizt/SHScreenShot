@@ -12,6 +12,11 @@ namespace Image_Capture
     public partial class FormMain : Form
     {
         /// <summary>
+        /// version 정보
+        /// </summary>
+        const string version = "1.0.30";
+
+        /// <summary>
         /// 화면상의 미리보기 비트맵 개체
         /// 주로 인스턴스로 사용되어서, picturebox.image 에 넣어지기 전까지 존재한다.
         /// </summary>
@@ -271,6 +276,11 @@ namespace Image_Capture
             this.Opacity = 0;
             this.Visible = false;
             //this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void btnAbout_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(string.Format("Version : {0}", version), "이 프로그램은?");
         }
     }
 }
