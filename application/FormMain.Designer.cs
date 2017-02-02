@@ -17,13 +17,13 @@
             {
                 components.Dispose();
             }
-            if (disposing && (bitmapResult != null))
+            if (disposing && (resultImage != null))
             {
-                bitmapResult.Dispose();
+                resultImage.Dispose();
             }
-            if (disposing && (bitmapPreviewImage != null))
+            if (disposing && (previewImage != null))
             {
-                bitmapPreviewImage.Dispose();
+                previewImage.Dispose();
             }
             base.Dispose(disposing);
         }
