@@ -27,11 +27,6 @@ namespace Image_Capture
         //=============================================================
 
         /// <summary>
-        /// 프로그램 타이틀 지정.
-        /// </summary>
-        public static string cfgTitle = "Image Capture - by e2xist";
-
-        /// <summary>
         /// point 0, 0
         /// </summary>
         Point ptZero = new Point(0, 0);
@@ -87,8 +82,6 @@ namespace Image_Capture
         {
             SetAddRemoveProgramsIcon();
             InitializeComponent();//컴포넌트 초기화 메서드(기본적으로 들어감)
-
-            //tester();
         }
 
         private void tester()
@@ -101,8 +94,6 @@ namespace Image_Capture
                 result += "CurrentVersion[" + ApplicationDeployment.CurrentDeployment.CurrentVersion + "]";
                 result += "UpdatedVersion[" + ApplicationDeployment.CurrentDeployment.UpdatedVersion + "]";
                 result += "UpdateLocation[" + ApplicationDeployment.CurrentDeployment.UpdateLocation + "]";
-
-
                 MessageBox.Show(result);
             }
         }
@@ -132,7 +123,7 @@ namespace Image_Capture
 
             //미리보기 이미지 객체 생성
             bitmapPreviewImage = new Bitmap(szPreviewImage.Width, szPreviewImage.Height);
-            bitmapResult = new Bitmap(szPreviewImage.Width, szPreviewImage.Height);
+            //bitmapResult = new Bitmap(szPreviewImage.Width, szPreviewImage.Height);
         }
 
         /// <summary>
@@ -140,33 +131,9 @@ namespace Image_Capture
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnCapture_Click(object sender, EventArgs e)
+        private void btnFullCapture_Click(object sender, EventArgs e)
         {
-            //기본창을 최소화.
-            this.hideForm();
-
-            //전체 스크린샷 이미지를 가져옴.
-            //Image _image = GetDesktopImage2();//스크린샷 이미지를 가져와서 저장시킬 곳에 넣어둠.
-            screenshotFullScreen();
-
-            Thread.Sleep(50);
-            //기본창을 다시 활성화.
-            this.showForm();
-
-            //미리보기 이미지 지정
-            //imgPreview.Image = getImageResizeFromImage(_image, imgPreview.Size);//스크린샷 이미지를 미리보기로.
-            drawPreviewImageFromBytes();
-
-
-            //스크린샷 이미지를 저장함.
-            // SaveScreenShotFile(_image);//해당 파일을 저장.
-            saveFile_ResultImageFromBytes();
-
-            /*
-            복수개의 모니터는 Screen.AllScreens 컬렉션 속성을 참조하여 엑세스할 수 있다.
-            즉, 첫번째 모니터는 Screen.AllScreens[0], 두번째 모니터는 Screen.AllScreens[1] 등과 같이 엑세스한다.
-            */
-
+            event_FullScreenCapture();
         }
 
         /// <summary>
@@ -189,9 +156,9 @@ namespace Image_Capture
         private void btnFolderOpen_Click(object sender, EventArgs e)
         {
             if (strFilePath != "")
-                System.Diagnostics.Process.Start("explorer.exe", System.IO.Path.GetDirectoryName(strFilePath));
+                Process.Start("explorer.exe", System.IO.Path.GetDirectoryName(strFilePath));
             else
-                System.Diagnostics.Process.Start("explorer.exe", HFilePath.Auto_Dir());
+                Process.Start("explorer.exe", HFilePath.Auto_Dir());
 
         }
         //close of 이벤트 메서드들

@@ -167,11 +167,13 @@ namespace Image_Capture
             */
             // 스크린 화면에서 좌표와 크기에 따른 이미지 객체를 생성합니다.
             // 해당 이미지는 부모창에서 imgCaptureResult 에 기록이 됩니다.
-            mParentForm.getByteFromScreen(ptScreenXY, szScreenWH);
+            //mParentForm.getByteFromScreen(ptScreenXY, szScreenWH);
 
             //미리보기 생성
-            mParentForm.drawPreviewImageFromBytes();
+            //mParentForm.drawPreviewImageFromBytes();
 
+
+            mParentForm.createImageByScreen(ptScreenXY, szScreenWH);
         }
 
         /// <summary>
@@ -182,7 +184,8 @@ namespace Image_Capture
         {
             //들어있는 imgCapture 의 내역을 파일로 저장시키는 메서드.
             //mParentForm.imgCapture_Save();
-            mParentForm.saveFile_ResultImageFromBytes();
+            //mParentForm.saveFile_ResultImageFromBytes();
+            mParentForm.SaveFile_Result();
         }
 
         /// <summary>
