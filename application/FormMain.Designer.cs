@@ -48,6 +48,9 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label_RGB = new System.Windows.Forms.Label();
+            this.txtColorCodeRGB = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.imgResultColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgPreview)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -56,15 +59,18 @@
             // 
             // txtColorCodeR
             // 
-            this.txtColorCodeR.Location = new System.Drawing.Point(34, 97);
+            this.txtColorCodeR.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.txtColorCodeR.Location = new System.Drawing.Point(160, 20);
             this.txtColorCodeR.Name = "txtColorCodeR";
             this.txtColorCodeR.Size = new System.Drawing.Size(44, 24);
             this.txtColorCodeR.TabIndex = 11;
+            this.txtColorCodeR.TextChanged += new System.EventHandler(this.txtColorCodeR_TextChanged);
+            this.txtColorCodeR.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtColorCodeR_KeyDown);
             // 
             // label_R
             // 
             this.label_R.AutoSize = true;
-            this.label_R.Location = new System.Drawing.Point(11, 100);
+            this.label_R.Location = new System.Drawing.Point(141, 23);
             this.label_R.Name = "label_R";
             this.label_R.Size = new System.Drawing.Size(17, 15);
             this.label_R.TabIndex = 12;
@@ -73,7 +79,7 @@
             // label_G
             // 
             this.label_G.AutoSize = true;
-            this.label_G.Location = new System.Drawing.Point(11, 132);
+            this.label_G.Location = new System.Drawing.Point(140, 55);
             this.label_G.Name = "label_G";
             this.label_G.Size = new System.Drawing.Size(18, 15);
             this.label_G.TabIndex = 12;
@@ -82,7 +88,7 @@
             // label_B
             // 
             this.label_B.AutoSize = true;
-            this.label_B.Location = new System.Drawing.Point(11, 165);
+            this.label_B.Location = new System.Drawing.Point(141, 85);
             this.label_B.Name = "label_B";
             this.label_B.Size = new System.Drawing.Size(17, 15);
             this.label_B.TabIndex = 12;
@@ -90,35 +96,41 @@
             // 
             // txtColorCodeB
             // 
-            this.txtColorCodeB.Location = new System.Drawing.Point(34, 159);
+            this.txtColorCodeB.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.txtColorCodeB.Location = new System.Drawing.Point(160, 82);
             this.txtColorCodeB.Name = "txtColorCodeB";
             this.txtColorCodeB.Size = new System.Drawing.Size(44, 24);
             this.txtColorCodeB.TabIndex = 13;
+            this.txtColorCodeB.TextChanged += new System.EventHandler(this.txtColorCodeB_TextChanged);
+            this.txtColorCodeB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtColorCodeB_KeyDown);
             // 
             // txtColorCodeG
             // 
-            this.txtColorCodeG.Location = new System.Drawing.Point(34, 129);
+            this.txtColorCodeG.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.txtColorCodeG.Location = new System.Drawing.Point(160, 52);
             this.txtColorCodeG.Name = "txtColorCodeG";
             this.txtColorCodeG.Size = new System.Drawing.Size(44, 24);
             this.txtColorCodeG.TabIndex = 12;
+            this.txtColorCodeG.TextChanged += new System.EventHandler(this.txtColorCodeG_TextChanged);
+            this.txtColorCodeG.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtColorCodeG_KeyDown);
             // 
             // txtColorCodeFF
             // 
             this.txtColorCodeFF.BackColor = System.Drawing.Color.White;
-            this.txtColorCodeFF.Location = new System.Drawing.Point(34, 193);
+            this.txtColorCodeFF.Location = new System.Drawing.Point(13, 142);
             this.txtColorCodeFF.Name = "txtColorCodeFF";
             this.txtColorCodeFF.ReadOnly = true;
-            this.txtColorCodeFF.Size = new System.Drawing.Size(73, 24);
+            this.txtColorCodeFF.Size = new System.Drawing.Size(137, 24);
             this.txtColorCodeFF.TabIndex = 14;
             // 
             // label_FF
             // 
             this.label_FF.AutoSize = true;
-            this.label_FF.Location = new System.Drawing.Point(11, 196);
+            this.label_FF.Location = new System.Drawing.Point(11, 119);
             this.label_FF.Name = "label_FF";
-            this.label_FF.Size = new System.Drawing.Size(15, 15);
+            this.label_FF.Size = new System.Drawing.Size(41, 15);
             this.label_FF.TabIndex = 14;
-            this.label_FF.Text = "#";
+            this.label_FF.Text = "#html";
             // 
             // btnPickup
             // 
@@ -143,7 +155,7 @@
             this.imgResultColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.imgResultColor.Location = new System.Drawing.Point(13, 20);
             this.imgResultColor.Name = "imgResultColor";
-            this.imgResultColor.Size = new System.Drawing.Size(137, 58);
+            this.imgResultColor.Size = new System.Drawing.Size(117, 87);
             this.imgResultColor.TabIndex = 16;
             this.imgResultColor.TabStop = false;
             // 
@@ -183,6 +195,8 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.txtColorCodeRGB);
+            this.groupBox1.Controls.Add(this.label_RGB);
             this.groupBox1.Controls.Add(this.imgResultColor);
             this.groupBox1.Controls.Add(this.txtColorCodeR);
             this.groupBox1.Controls.Add(this.txtColorCodeB);
@@ -196,17 +210,43 @@
             this.groupBox1.ForeColor = System.Drawing.Color.SlateBlue;
             this.groupBox1.Location = new System.Drawing.Point(256, 21);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(163, 238);
+            this.groupBox1.Size = new System.Drawing.Size(210, 269);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "결과";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(30, 267);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 20;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label_RGB
+            // 
+            this.label_RGB.AutoSize = true;
+            this.label_RGB.Location = new System.Drawing.Point(12, 178);
+            this.label_RGB.Name = "label_RGB";
+            this.label_RGB.Size = new System.Drawing.Size(70, 15);
+            this.label_RGB.TabIndex = 17;
+            this.label_RGB.Text = "RGB Html";
+            // 
+            // txtColorCodeRGB
+            // 
+            this.txtColorCodeRGB.Location = new System.Drawing.Point(13, 197);
+            this.txtColorCodeRGB.Name = "txtColorCodeRGB";
+            this.txtColorCodeRGB.Size = new System.Drawing.Size(137, 24);
+            this.txtColorCodeRGB.TabIndex = 18;
             // 
             // FormMain
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(6, 14);
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(451, 289);
+            this.ClientSize = new System.Drawing.Size(483, 331);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.imgPreview);
             this.Controls.Add(this.btnPickup);
@@ -248,6 +288,9 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label_RGB;
+        private System.Windows.Forms.TextBox txtColorCodeRGB;
     }
 }
 

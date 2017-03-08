@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Diagnostics;//debug용
 
 
 /// <summary>
@@ -110,12 +109,27 @@ namespace SHColorPicker
             mParentForm.imgPreview.Image = bitmapPreview;
 
             // 결과 색상코드 를 부모창에 대입
+            /*
             mParentForm.txtColorCodeR.Text = colorResult.R.ToString();
             mParentForm.txtColorCodeG.Text = colorResult.G.ToString();
             mParentForm.txtColorCodeB.Text = colorResult.B.ToString();
             //mParentForm.txtColorCodeFF.Text = string.Concat("#", ColorTranslator.ToHtml(colorResult).Substring(1, 6));
             mParentForm.txtColorCodeFF.Text = String.Format("#{0}", ColorTranslator.ToHtml(colorResult).Substring(1, 6));
             mParentForm.imgResultColor.BackColor = colorResult;
+            */
+            mParentForm.generateView_fromColor(colorResult);
+        }
+
+        /// <summary>
+        /// this 창의 클릭 이벤트에 의해서 호출될 메서드 이다.
+        /// 여기서 종료시에 처리할 구문을 모아둔다.
+        /// </summary>
+        private void PickerClose()
+        {
+            Cursor.Show();
+            //parentForm.ImgPreview_Spoid_Remove();
+            timerPickupColor.Stop();
+            Close();
         }
 
         /// <summary>
@@ -136,31 +150,6 @@ namespace SHColorPicker
         private void spoidPicture_Click(object sender, EventArgs e)
         {
             PickerClose();
-        }
-        //=============================================================
-
-
-
-
-
-
-
-        //debug method
-        private void debug(string msg)
-        {
-            Debug.WriteLine(msg);
-        }
-
-        /// <summary>
-        /// this 창의 클릭 이벤트에 의해서 호출될 메서드 이다.
-        /// 여기서 종료시에 처리할 구문을 모아둔다.
-        /// </summary>
-        private void PickerClose()
-        {
-            Cursor.Show();
-            //parentForm.ImgPreview_Spoid_Remove();
-            timerPickupColor.Stop();
-            Close();
         }
     }
 }

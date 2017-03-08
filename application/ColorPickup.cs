@@ -127,5 +127,14 @@ namespace SHColorPicker
                 return b.GetPixel((int)(point.X), (int)(point.Y));
             }
         }
+
+        /// <summary>
+        /// 디버그용 메서드
+        /// </summary>
+        /// <param name="msg"></param>
+        private void debug(string msg)
+        {
+            if(isDebug) System.Diagnostics.Debug.WriteLine(msg);
+        }
     }
 }

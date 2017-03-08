@@ -51,19 +51,26 @@ namespace SHColorPicker
         }
 
         /// <summary>
-        /// debug 용 메서드
+        /// 
         /// </summary>
-        /// <param name="msg"></param>
-        private void debug(string msg)
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtColorCodeR_TextChanged(object sender, EventArgs e)
         {
-            Debug.WriteLine(msg);
-        }
+            //changeColorRGBText();
+            try
+            {
+                int code = Int32.Parse(txtColorCodeR.Text);
+                if (code > 255) code = 255;
+                if (code < 0) code = 0;
 
-
-        private void MainForm_activated(object sender, EventArgs e)
-        {
-            //debug("[]MainForm_activated");
-            //Cursor.Show();
+                txtColorCodeR.Text = code.ToString();
+            }
+            catch (Exception exception)
+            {
+                //colorR = 0;
+                txtColorCodeR.Text = "0";
+            }
         }
 
         /// <summary>
@@ -71,10 +78,127 @@ namespace SHColorPicker
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void txtColorCodeG_TextChanged(object sender, EventArgs e)
+        {
+            //changeColorRGBText();
+            try
+            {
+                int code = Int32.Parse(txtColorCodeG.Text);
+                if (code > 255) code = 255;
+                if (code < 0) code = 0;
+
+                txtColorCodeG.Text = code.ToString();
+            }
+            catch (Exception exception)
+            {
+                //colorR = 0;
+                txtColorCodeG.Text = "0";
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtColorCodeB_TextChanged(object sender, EventArgs e)
+        {
+            //changeColorRGBText();
+            try
+            {
+                int code = Int32.Parse(txtColorCodeB.Text);
+                if (code > 255) code = 255;
+                if (code < 0) code = 0;
+
+                txtColorCodeB.Text = code.ToString();
+            }
+            catch (Exception exception)
+            {
+                //colorR = 0;
+                txtColorCodeB.Text = "0";
+            }
+        }
+
+        /// <summary>
+        /// [이벤트] 팔레트 버튼 클릭시
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Color color = getColor_fromColorDialog();
+            generateView_fromColor(color);
+            
+        }
+
+        private Color getColor_fromColorDialog()
+        {
+            try
+            {
+                if (colorDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    return colorDialog1.Color;
+                }
+                else
+                {
+                    return Color.Black;
+                }
+            } catch (Exception  e)
+            {
+                return Color.Black;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtColorCodeR_KeyDown(object sender, KeyEventArgs e)
+        {
+            changeColorRGBText();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtColorCodeG_KeyDown(object sender, KeyEventArgs e)
+        {
+            changeColorRGBText();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtColorCodeB_KeyDown(object sender, KeyEventArgs e)
+        {
+            changeColorRGBText();
+        }
+        /// <summary>
+        /// [이벤트] 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             this.showForm();
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.showForm();
+        }
+        private void MainForm_activated(object sender, EventArgs e)
+        {
+            //debug("[]MainForm_activated");
+            //Cursor.Show();
+        }
+
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -182,26 +306,6 @@ namespace SHColorPicker
                 {
                     MessageBox.Show(ex.Message.ToString());
                 }
-            }
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-        private void tester()
-        {
-            if (ApplicationDeployment.IsNetworkDeployed
-                 && ApplicationDeployment.CurrentDeployment.IsFirstRun)
-            {
-                string result = "";
-                result += "ActivationUri[" + ApplicationDeployment.CurrentDeployment.ActivationUri + "]";
-                result += "CurrentVersion[" + ApplicationDeployment.CurrentDeployment.CurrentVersion + "]";
-                result += "UpdatedVersion[" + ApplicationDeployment.CurrentDeployment.UpdatedVersion + "]";
-                result += "UpdateLocation[" + ApplicationDeployment.CurrentDeployment.UpdateLocation + "]";
-
-
-                MessageBox.Show(result);
             }
         }
     }
