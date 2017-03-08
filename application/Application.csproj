@@ -97,7 +97,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ColorPickup.cs">
+    <Compile Include="FormColorPickup_Core.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormMain.cs">
