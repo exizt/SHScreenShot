@@ -12,7 +12,7 @@ using System.Diagnostics;//debug용
 /// 이 과정에서 원래의 커서는 숨겨준다.
 /// 이 창을 종료하게 되면 커서는 복구된다.
 /// </summary>
-namespace Image_Capture
+namespace Color_Picker
 {
     public partial class FormColorPickup : Form
     {

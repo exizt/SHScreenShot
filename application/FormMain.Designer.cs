@@ -1,4 +1,4 @@
-﻿namespace Image_Capture
+﻿namespace Color_Picker
 {
     partial class FormMain
     {

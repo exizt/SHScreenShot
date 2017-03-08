@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace Image_Capture
+namespace Color_Picker
 {
     public partial class FormColorPickup : Form
     {

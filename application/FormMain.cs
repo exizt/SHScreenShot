@@ -4,7 +4,7 @@ using System.Diagnostics;//debug용
 using System.IO;
 using System.Windows.Forms;
 
-namespace Image_Capture
+namespace Color_Picker
 {
     public partial class FormMain : Form
     {
