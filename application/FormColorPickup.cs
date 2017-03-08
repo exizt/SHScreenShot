@@ -26,19 +26,24 @@ namespace SHColorPicker
         bool isDebug = false;
 
         /// <summary>
-        /// 마우스의 좌표를 담을 용도.
-        /// </summary>
-        Point ptMouseCursor = new Point();//
-
-        /// <summary>
-        /// 서브윈도우 창의 좌표를 담을 용도.
-        /// </summary>
-        Point winCPoint = new Point();
-
-        /// <summary>
         /// true 값으로 하면, 창의 투명화를 해제해서, 디버깅 하는 용도.
         /// </summary>
         bool isCursorDebug = false;
+
+        /// <summary>
+        /// 마우스의 좌표를 담을 용도.
+        /// </summary>
+        Point ptMouseCursor = new Point();
+
+        /// <summary>
+        /// 현재 창의 XY 좌표
+        /// </summary>
+        Point _formLocation = new Point();
+
+        /// <summary>
+        /// 현재 창의 Width,Height 크기
+        /// </summary>
+        Size _formSize = new Size();
 
         /// <summary>
         /// 생성자
@@ -53,7 +58,13 @@ namespace SHColorPicker
             //부모 폼 값
             mParentForm = _parentForm;
 
-            //
+            // 부모 창의 isDebug 옵션의 영향이 우선시
+            if (mParentForm.isDebug)
+            {
+                this.isDebug = true;
+            }
+
+            //부모창의 preview 와 크기가 같은 bitmap 생성
             initPickup();
         }
 
@@ -92,6 +103,11 @@ namespace SHColorPicker
 
         }
 
+        /// <summary>
+        /// Timer 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void timerPickupColor_Tick(object sender, EventArgs e)
         {
             //마우스 포인터에 변화가 없을 때에는 동작하지 않도록 합니다.
@@ -99,25 +115,12 @@ namespace SHColorPicker
             {
                 return;
             }
+
             // 마우스 커서의 좌표를 가져오기
             ptMouseCursor = Control.MousePosition;
 
             // 이벤트 호출
             callEventColorPickup(Control.MousePosition);
-
-            // 결과를 부모창의 미리보기 이미지 에 대입
-            mParentForm.imgPreview.Image = bitmapPreview;
-
-            // 결과 색상코드 를 부모창에 대입
-            /*
-            mParentForm.txtColorCodeR.Text = colorResult.R.ToString();
-            mParentForm.txtColorCodeG.Text = colorResult.G.ToString();
-            mParentForm.txtColorCodeB.Text = colorResult.B.ToString();
-            //mParentForm.txtColorCodeFF.Text = string.Concat("#", ColorTranslator.ToHtml(colorResult).Substring(1, 6));
-            mParentForm.txtColorCodeFF.Text = String.Format("#{0}", ColorTranslator.ToHtml(colorResult).Substring(1, 6));
-            mParentForm.imgResultColor.BackColor = colorResult;
-            */
-            mParentForm.generateView_fromColor(colorResult);
         }
 
         /// <summary>
@@ -129,6 +132,9 @@ namespace SHColorPicker
             Cursor.Show();
             //parentForm.ImgPreview_Spoid_Remove();
             timerPickupColor.Stop();
+
+            if(bitmapPreview!=null) bitmapPreview.Dispose();
+
             Close();
         }
 

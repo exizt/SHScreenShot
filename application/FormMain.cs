@@ -8,7 +8,12 @@ namespace SHColorPicker
 {
     public partial class FormMain : Form
     {
-        bool isDebug = false;
+        /// <summary>
+        /// 로그 디버깅 옵션.
+        /// formColorPickup 도 영향을 받는다.
+        /// </summary>
+        public bool isDebug = true;
+
         /// <summary>
         /// 생성자 메서드
         /// </summary>
@@ -46,8 +51,57 @@ namespace SHColorPicker
             //Cursor.Hide();
 
             //2. 커서의 좌표를 통하여 색상을 추출한다.
-            FormColorPickup nForm = new FormColorPickup(this);
-            nForm.Show();
+            //FormColorPickup form = new FormColorPickup(this);
+            //form.ShowDialog();
+
+            
+            using (FormColorPickup form = new FormColorPickup(this))
+            {
+                form.ShowDialog();
+            }
+            
+        }
+
+        /// <summary>
+        /// [이벤트] 팔레트 버튼 클릭시
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Color color = getColor_fromColorDialog();
+            generateView_fromColor(color);
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtColorCodeR_KeyDown(object sender, KeyEventArgs e)
+        {
+            changeColorRGBText();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtColorCodeG_KeyDown(object sender, KeyEventArgs e)
+        {
+            changeColorRGBText();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtColorCodeB_KeyDown(object sender, KeyEventArgs e)
+        {
+            changeColorRGBText();
         }
 
         /// <summary>
@@ -120,17 +174,9 @@ namespace SHColorPicker
         }
 
         /// <summary>
-        /// [이벤트] 팔레트 버튼 클릭시
+        /// 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Color color = getColor_fromColorDialog();
-            generateView_fromColor(color);
-            
-        }
-
+        /// <returns></returns>
         private Color getColor_fromColorDialog()
         {
             try
@@ -148,33 +194,7 @@ namespace SHColorPicker
                 return Color.Black;
             }
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txtColorCodeR_KeyDown(object sender, KeyEventArgs e)
-        {
-            changeColorRGBText();
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txtColorCodeG_KeyDown(object sender, KeyEventArgs e)
-        {
-            changeColorRGBText();
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txtColorCodeB_KeyDown(object sender, KeyEventArgs e)
-        {
-            changeColorRGBText();
-        }
+
         /// <summary>
         /// [이벤트] 
         /// </summary>
@@ -184,6 +204,7 @@ namespace SHColorPicker
         {
             this.showForm();
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -193,6 +214,8 @@ namespace SHColorPicker
         {
             this.showForm();
         }
+
+
         private void MainForm_activated(object sender, EventArgs e)
         {
             //debug("[]MainForm_activated");
@@ -206,6 +229,7 @@ namespace SHColorPicker
             //this.Visible = false;
             //this.hide(sender, e);
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -216,6 +240,7 @@ namespace SHColorPicker
             e.Cancel = true;
             this.hideForm();
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -225,6 +250,7 @@ namespace SHColorPicker
             this.Opacity = 100;
             this.WindowState = FormWindowState.Normal;//폼의 상태를 일반 상태로 되돌림.
         }
+
         /// <summary>
         /// 
         /// </summary>
