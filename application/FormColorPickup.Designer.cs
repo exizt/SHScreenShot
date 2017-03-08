@@ -1,4 +1,4 @@
-﻿namespace Color_Picker
+﻿namespace SHColorPicker
 {
     partial class FormColorPickup
     {

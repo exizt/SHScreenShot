@@ -12,7 +12,7 @@ using System.Diagnostics;//debug용
 /// 이 과정에서 원래의 커서는 숨겨준다.
 /// 이 창을 종료하게 되면 커서는 복구된다.
 /// </summary>
-namespace Color_Picker
+namespace SHColorPicker
 {
     public partial class FormColorPickup : Form
     {
@@ -21,9 +21,25 @@ namespace Color_Picker
         /// </summary>
         FormMain mParentForm;
 
-        Point ptMouseCursor = new Point();//마우스의 좌표를 담을 용도.
-        Point winCPoint = new Point();//서브윈도우 창의 좌표를 담을 용도.
-        bool isCursorTest = false;
+        /// <summary>
+        /// 로그 디버깅 옵션
+        /// </summary>
+        bool isDebug = false;
+
+        /// <summary>
+        /// 마우스의 좌표를 담을 용도.
+        /// </summary>
+        Point ptMouseCursor = new Point();//
+
+        /// <summary>
+        /// 서브윈도우 창의 좌표를 담을 용도.
+        /// </summary>
+        Point winCPoint = new Point();
+
+        /// <summary>
+        /// true 값으로 하면, 창의 투명화를 해제해서, 디버깅 하는 용도.
+        /// </summary>
+        bool isCursorDebug = false;
 
         /// <summary>
         /// 생성자
@@ -38,14 +54,10 @@ namespace Color_Picker
             //부모 폼 값
             mParentForm = _parentForm;
 
-            //디버깅 할 시에, 아래 주석을 풀면, 투명이 해제 됨.
-            isCursorTest = false;
-
+            //
             initPickup();
         }
 
-        //=============================================================
-        //이벤트 메서드들.
         /// <summary>
         /// 로드 되면서 발생되는 이벤트
         /// </summary>
@@ -58,7 +70,7 @@ namespace Color_Picker
             * 그러나 권장되는 것은, 이 윈도우가 뜨기 전에 이미 hide 처리 할 것을 권장한다.
             */
             // 테스트 중일 때에는 검은 화면으로 보면서 확인.
-            if (isCursorTest)
+            if (isCursorDebug)
             {
                 Cursor.Show();
                 pictureAreaPickupColor.BackColor = Color.Black;
@@ -71,6 +83,7 @@ namespace Color_Picker
             //debug("FormColorPickup_Load 호출");
             //szImgPreviewParent = mParentForm.szPreviewImage;
 
+            // spoid picturebox 를 조절하고, spoid 를 정가운데에 놓음
             loadPickup();
 
             //이벤트 발생

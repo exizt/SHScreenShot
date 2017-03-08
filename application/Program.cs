@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Color_Picker
+namespace SHColorPicker
 {
     static class Program
     {

@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Deployment.Application;
-using System.Diagnostics;//debug용
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
-namespace Color_Picker
+namespace SHColorPicker
 {
     public partial class FormMain : Form
     {
+        bool isDebug = false;
         /// <summary>
         /// 생성자 메서드
         /// </summary>
@@ -15,27 +16,11 @@ namespace Color_Picker
         {
             SetAddRemoveProgramsIcon();
             InitializeComponent();//컴포넌트 초기화 메서드(기본적으로 들어감)
+            notifyIcon1.Text = "SH Color Picker";
         }
 
-        private void tester()
-        {
-            if (ApplicationDeployment.IsNetworkDeployed
-                 && ApplicationDeployment.CurrentDeployment.IsFirstRun)
-            {
-                string result = "";
-                result += "ActivationUri[" + ApplicationDeployment.CurrentDeployment.ActivationUri + "]";
-                result += "CurrentVersion[" + ApplicationDeployment.CurrentDeployment.CurrentVersion + "]";
-                result += "UpdatedVersion[" + ApplicationDeployment.CurrentDeployment.UpdatedVersion + "]";
-                result += "UpdateLocation[" + ApplicationDeployment.CurrentDeployment.UpdateLocation + "]";
-
-
-                MessageBox.Show(result);
-            }
-        }
-        //=============================================================
-        //이벤트 메서드들.
         /// <summary>
-        /// 로드 되면서 발생되는 이벤트
+        /// [이벤트] 로드 되면서 발생되는 이벤트
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -51,7 +36,7 @@ namespace Color_Picker
         }
 
         /// <summary>
-        /// 색상 추출 기능. 이벤트 메서드.
+        /// [이벤트] '색상 추출' 버튼 클릭시 발생 이벤트
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -97,12 +82,11 @@ namespace Color_Picker
             //this.Visible = false;
             //this.hide(sender, e);
         }
-
-        private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
-        {
-            this.showForm();
-        }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void hide(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;
@@ -126,6 +110,7 @@ namespace Color_Picker
             this.Visible = false;
             //this.WindowState = FormWindowState.Minimized;
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -145,6 +130,7 @@ namespace Color_Picker
                 //MessageBox.Show("창이 최대화되었습니다.");
             }
         }
+
         /// <summary>
         /// 트레이 -> 종료 이벤트
         /// </summary>
@@ -154,6 +140,7 @@ namespace Color_Picker
         {
             Application.Exit();
         }
+
         /// <summary>
         /// ClickOnce 설치 의 경우, 제어판-프로그램추가/삭제 에서 아이콘 표시가 안 나온다. 그 부분을 보정하는 소스.
         /// </summary>
@@ -179,11 +166,11 @@ namespace Color_Picker
                     {
                         Microsoft.Win32.RegistryKey myKey = myUninstallKey.OpenSubKey(mySubKeyNames[i], true);
                         object myValue = myKey.GetValue("UrlUpdateInfo");
-                        if(myValue != null)
+                        if (myValue != null)
                         {
                             string updateinfo = myValue.ToString();
                             string updateLocation = ApplicationDeployment.CurrentDeployment.UpdateLocation.ToString();
-                            if (updateinfo==updateLocation)
+                            if (updateinfo == updateLocation)
                             {
                                 myKey.SetValue("DisplayIcon", iconSourcePath);
                                 break;

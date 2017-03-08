@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace Color_Picker
+namespace SHColorPicker
 {
     public partial class FormColorPickup : Form
     {
@@ -28,14 +28,19 @@ namespace Color_Picker
         /// </summary>
         Color colorResult;
 
+        /// <summary>
+        /// 부모창의 Preview 와 동일한 크기의 Bitmap 생성
+        /// 기본창의 '미리보기' PictureBox 가 있는데, 이것과 동일한 크기의 Bitmap 을 생성해놓는 작업이다.
+        /// </summary>
         private void initPickup()
         {
             //부모창의 Preview 와 동일한 크기의 Bitmap 생성
             bitmapPreview = new Bitmap(mParentForm.imgPreview.Width, mParentForm.imgPreview.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-
         }
+
         /// <summary>
-        /// 처음 한번만 로드 하면 되는 메서드
+        /// 현재 창의 spoid Picturebox 영역의 크기를 확대축소 비율에 맞게 조절한다. 
+        /// 스포이드 는 그 정가운데에 놓도록 한다.
         /// </summary>
         private void loadPickup()
         {
