@@ -48,9 +48,9 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label_RGB = new System.Windows.Forms.Label();
             this.txtColorCodeRGB = new System.Windows.Forms.TextBox();
+            this.label_RGB = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.imgResultColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgPreview)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -141,9 +141,9 @@
             this.btnPickup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPickup.Font = new System.Drawing.Font("돋움", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnPickup.ForeColor = System.Drawing.Color.White;
-            this.btnPickup.Location = new System.Drawing.Point(30, 201);
+            this.btnPickup.Location = new System.Drawing.Point(111, 203);
             this.btnPickup.Name = "btnPickup";
-            this.btnPickup.Size = new System.Drawing.Size(205, 58);
+            this.btnPickup.Size = new System.Drawing.Size(124, 87);
             this.btnPickup.TabIndex = 15;
             this.btnPickup.Text = "색상추출";
             this.btnPickup.UseVisualStyleBackColor = false;
@@ -208,22 +208,19 @@
             this.groupBox1.Controls.Add(this.label_B);
             this.groupBox1.Font = new System.Drawing.Font("돋움", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.groupBox1.ForeColor = System.Drawing.Color.SlateBlue;
-            this.groupBox1.Location = new System.Drawing.Point(256, 21);
+            this.groupBox1.Location = new System.Drawing.Point(254, 21);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(210, 269);
+            this.groupBox1.Size = new System.Drawing.Size(221, 269);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "결과";
             // 
-            // button1
+            // txtColorCodeRGB
             // 
-            this.button1.Location = new System.Drawing.Point(30, 267);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 20;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.txtColorCodeRGB.Location = new System.Drawing.Point(13, 197);
+            this.txtColorCodeRGB.Name = "txtColorCodeRGB";
+            this.txtColorCodeRGB.Size = new System.Drawing.Size(137, 24);
+            this.txtColorCodeRGB.TabIndex = 18;
             // 
             // label_RGB
             // 
@@ -234,18 +231,25 @@
             this.label_RGB.TabIndex = 17;
             this.label_RGB.Text = "RGB Html";
             // 
-            // txtColorCodeRGB
+            // button1
             // 
-            this.txtColorCodeRGB.Location = new System.Drawing.Point(13, 197);
-            this.txtColorCodeRGB.Name = "txtColorCodeRGB";
-            this.txtColorCodeRGB.Size = new System.Drawing.Size(137, 24);
-            this.txtColorCodeRGB.TabIndex = 18;
+            this.button1.BackColor = System.Drawing.Color.SteelBlue;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("돋움", 12F, System.Drawing.FontStyle.Bold);
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(30, 203);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 87);
+            this.button1.TabIndex = 20;
+            this.button1.Text = "선택";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // FormMain
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(6, 14);
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(483, 331);
+            this.ClientSize = new System.Drawing.Size(504, 320);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.imgPreview);

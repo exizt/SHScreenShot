@@ -12,7 +12,7 @@ namespace SHColorPicker
         /// 로그 디버깅 옵션.
         /// formColorPickup 도 영향을 받는다.
         /// </summary>
-        public bool isDebug = true;
+        public bool isDebug = false;
 
         /// <summary>
         /// 생성자 메서드
@@ -51,14 +51,15 @@ namespace SHColorPicker
             //Cursor.Hide();
 
             //2. 커서의 좌표를 통하여 색상을 추출한다.
-            //FormColorPickup form = new FormColorPickup(this);
-            //form.ShowDialog();
+            FormColorPickup form = new FormColorPickup(this);
+            form.Show();
 
-            
+            /*
             using (FormColorPickup form = new FormColorPickup(this))
             {
-                form.ShowDialog();
+                form.Show();
             }
+            */
             
         }
 

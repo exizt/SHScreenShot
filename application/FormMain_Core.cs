@@ -96,8 +96,6 @@ namespace SHColorPicker
                 sb.Append(color.B.ToString("X2"));
                 hex = sb.ToString();
                 sb.Length = 0;
-                //hex = "#" + color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
-                //hex = String.Format("#{0}{1}{2}",color.R.ToString("X2"), color.G.ToString("X2"), color.B.ToString("X2"));
             }
             catch (Exception e)
             {
@@ -124,7 +122,6 @@ namespace SHColorPicker
                 sb.Append(", ");
                 sb.Append(color.B.ToString());
                 sb.Append(")");
-                //rgb = "RGB(" + color.R.ToString() + ", " + color.G.ToString() + ", " + color.B.ToString() + ")";
                 rgb = sb.ToString();
                 sb.Length = 0;
             }

@@ -33,13 +33,14 @@ namespace SHColorPicker
         Bitmap bitmapPreview;
 
         Point _spoidPicture_Location = new Point();
-        
+
         /// <summary>
         /// 부모창의 Preview 와 동일한 크기의 Bitmap 생성
         /// 기본창의 '미리보기' PictureBox 가 있는데, 이것과 동일한 크기의 Bitmap 을 생성해놓는 작업이다.
         /// </summary>
         private void initPickup()
         {
+            // 부모창의 미리보기 picturebox 의 Size 를 가져온다.
             szPreviewImage = mParentForm.imgPreview.Size;
 
             //부모창의 Preview 와 동일한 크기의 Bitmap 생성
@@ -55,7 +56,7 @@ namespace SHColorPicker
         private void loadPickup()
         {
             // 부모창의 미리보기 사이즈 를 가져와서 대입
-            szPreviewImage = bitmapPreview.Size;
+            //szPreviewImage = bitmapPreview.Size;
 
             // 확대될 영역 (축소된 영역) 을 계산 (배율 역계산)
             szPreviewCompress.Width = szPreviewImage.Width / magnif;
@@ -98,7 +99,7 @@ namespace SHColorPicker
 
             // 결과를 부모창의 미리보기 이미지 에 대입
             mParentForm.imgPreview.Image = bitmapPreview;
-        }
+         }
 
         /// <summary>
         /// 이미지 생성. 스크린에서 xy 좌표, width height 를 기준으로 이미지를 생성.
@@ -109,7 +110,7 @@ namespace SHColorPicker
         /// <returns></returns>
         private void drawPreviewBitmap(Point _pointStart, Size _sizeImage,Image _PreviewImage)
         {
-            // 임시 bitmap 을 생성 한 후 작업. using 내부의 new 는 자동 해제 됨.
+            // 임시 bitmap 생성. compress 사이즈 로 생성. using 내의 new 는 자동 해제
             using (Bitmap bitmap = new Bitmap(_sizeImage.Width, _sizeImage.Height, PixelFormat.Format32bppArgb))
             {
                 // 임시 bitmap 을 기준으로 grahipcs 를 시작.
