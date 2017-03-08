@@ -41,10 +41,6 @@ namespace Color_Picker
         /// <param name="e"></param>
         private void FormMain_Load(object sender, EventArgs e)
         {
-            //debug("FormMain Load 이벤트 발생!");
-            //debug("imgPreview.Width : " + imgPreview.Width+","+imgPreview.Height);
-            //debug("imgPreview.Size.Width" + imgPreview.Size.Width + "," + imgPreview.Size.Height);
-
             //커서가 안 보이는 환경일 때, 커서를 복귀.
             Cursor current = Cursor.Current;
             if (current == null)
@@ -54,7 +50,6 @@ namespace Color_Picker
 
         }
 
- 
         /// <summary>
         /// 색상 추출 기능. 이벤트 메서드.
         /// </summary>
@@ -70,9 +65,6 @@ namespace Color_Picker
             nForm.Show();
         }
 
-        //close of 이벤트 메서드들
-        //=============================================================
-
         /// <summary>
         /// debug 용 메서드
         /// </summary>
@@ -83,14 +75,17 @@ namespace Color_Picker
         }
 
 
-
-
         private void MainForm_activated(object sender, EventArgs e)
         {
             //debug("[]MainForm_activated");
             //Cursor.Show();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             this.showForm();
@@ -206,6 +201,21 @@ namespace Color_Picker
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
+        }
+        private void tester()
+        {
+            if (ApplicationDeployment.IsNetworkDeployed
+                 && ApplicationDeployment.CurrentDeployment.IsFirstRun)
+            {
+                string result = "";
+                result += "ActivationUri[" + ApplicationDeployment.CurrentDeployment.ActivationUri + "]";
+                result += "CurrentVersion[" + ApplicationDeployment.CurrentDeployment.CurrentVersion + "]";
+                result += "UpdatedVersion[" + ApplicationDeployment.CurrentDeployment.UpdatedVersion + "]";
+                result += "UpdateLocation[" + ApplicationDeployment.CurrentDeployment.UpdateLocation + "]";
+
+
+                MessageBox.Show(result);
+            }
         }
     }
 }
