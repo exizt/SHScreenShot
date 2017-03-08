@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Diagnostics;//debug용
 
 
 /// <summary>
@@ -12,7 +11,7 @@ using System.Diagnostics;//debug용
 /// 이 과정에서 원래의 커서는 숨겨준다.
 /// 이 창을 종료하게 되면 커서는 복구된다.
 /// </summary>
-namespace Image_Capture
+namespace SHColorPicker
 {
     public partial class FormColorPickup : Form
     {
@@ -21,9 +20,30 @@ namespace Image_Capture
         /// </summary>
         FormMain mParentForm;
 
-        Point ptMouseCursor = new Point();//마우스의 좌표를 담을 용도.
-        Point winCPoint = new Point();//서브윈도우 창의 좌표를 담을 용도.
-        bool isCursorTest = false;
+        /// <summary>
+        /// 로그 디버깅 옵션
+        /// </summary>
+        bool isDebug = false;
+
+        /// <summary>
+        /// true 값으로 하면, 창의 투명화를 해제해서, 디버깅 하는 용도.
+        /// </summary>
+        bool isCursorDebug = false;
+
+        /// <summary>
+        /// 마우스의 좌표를 담을 용도.
+        /// </summary>
+        Point ptMouseCursor = new Point();
+
+        /// <summary>
+        /// 현재 창의 XY 좌표
+        /// </summary>
+        Point _formLocation = new Point();
+
+        /// <summary>
+        /// 현재 창의 Width,Height 크기
+        /// </summary>
+        Size _formSize = new Size();
 
         /// <summary>
         /// 생성자
@@ -38,14 +58,16 @@ namespace Image_Capture
             //부모 폼 값
             mParentForm = _parentForm;
 
-            //디버깅 할 시에, 아래 주석을 풀면, 투명이 해제 됨.
-            isCursorTest = false;
+            // 부모 창의 isDebug 옵션의 영향이 우선시
+            if (mParentForm.isDebug)
+            {
+                this.isDebug = true;
+            }
 
+            //부모창의 preview 와 크기가 같은 bitmap 생성
             initPickup();
         }
 
-        //=============================================================
-        //이벤트 메서드들.
         /// <summary>
         /// 로드 되면서 발생되는 이벤트
         /// </summary>
@@ -58,7 +80,7 @@ namespace Image_Capture
             * 그러나 권장되는 것은, 이 윈도우가 뜨기 전에 이미 hide 처리 할 것을 권장한다.
             */
             // 테스트 중일 때에는 검은 화면으로 보면서 확인.
-            if (isCursorTest)
+            if (isCursorDebug)
             {
                 Cursor.Show();
                 pictureAreaPickupColor.BackColor = Color.Black;
@@ -71,6 +93,7 @@ namespace Image_Capture
             //debug("FormColorPickup_Load 호출");
             //szImgPreviewParent = mParentForm.szPreviewImage;
 
+            // spoid picturebox 를 조절하고, spoid 를 정가운데에 놓음
             loadPickup();
 
             //이벤트 발생
@@ -80,6 +103,11 @@ namespace Image_Capture
 
         }
 
+        /// <summary>
+        /// Timer 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void timerPickupColor_Tick(object sender, EventArgs e)
         {
             //마우스 포인터에 변화가 없을 때에는 동작하지 않도록 합니다.
@@ -87,22 +115,27 @@ namespace Image_Capture
             {
                 return;
             }
+
             // 마우스 커서의 좌표를 가져오기
             ptMouseCursor = Control.MousePosition;
 
             // 이벤트 호출
             callEventColorPickup(Control.MousePosition);
+        }
 
-            // 결과를 부모창의 미리보기 이미지 에 대입
-            mParentForm.imgPreview.Image = bitmapPreview;
+        /// <summary>
+        /// this 창의 클릭 이벤트에 의해서 호출될 메서드 이다.
+        /// 여기서 종료시에 처리할 구문을 모아둔다.
+        /// </summary>
+        private void PickerClose()
+        {
+            Cursor.Show();
+            //parentForm.ImgPreview_Spoid_Remove();
+            timerPickupColor.Stop();
 
-            // 결과 색상코드 를 부모창에 대입
-            mParentForm.txtColorCodeR.Text = colorResult.R.ToString();
-            mParentForm.txtColorCodeG.Text = colorResult.G.ToString();
-            mParentForm.txtColorCodeB.Text = colorResult.B.ToString();
-            //mParentForm.txtColorCodeFF.Text = string.Concat("#", ColorTranslator.ToHtml(colorResult).Substring(1, 6));
-            mParentForm.txtColorCodeFF.Text = String.Format("#{0}", ColorTranslator.ToHtml(colorResult).Substring(1, 6));
-            mParentForm.imgResultColor.BackColor = colorResult;
+            if(bitmapPreview!=null) bitmapPreview.Dispose();
+
+            Close();
         }
 
         /// <summary>
@@ -123,31 +156,6 @@ namespace Image_Capture
         private void spoidPicture_Click(object sender, EventArgs e)
         {
             PickerClose();
-        }
-        //=============================================================
-
-
-
-
-
-
-
-        //debug method
-        private void debug(string msg)
-        {
-            Debug.WriteLine(msg);
-        }
-
-        /// <summary>
-        /// this 창의 클릭 이벤트에 의해서 호출될 메서드 이다.
-        /// 여기서 종료시에 처리할 구문을 모아둔다.
-        /// </summary>
-        private void PickerClose()
-        {
-            Cursor.Show();
-            //parentForm.ImgPreview_Spoid_Remove();
-            timerPickupColor.Stop();
-            Close();
         }
     }
 }

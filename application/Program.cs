@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Image_Capture
+namespace SHColorPicker
 {
     static class Program
     {

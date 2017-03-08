@@ -1,13 +1,19 @@
 ﻿using System;
 using System.Deployment.Application;
-using System.Diagnostics;//debug용
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
-namespace Image_Capture
+namespace SHColorPicker
 {
     public partial class FormMain : Form
     {
+        /// <summary>
+        /// 로그 디버깅 옵션.
+        /// formColorPickup 도 영향을 받는다.
+        /// </summary>
+        public bool isDebug = false;
+
         /// <summary>
         /// 생성자 메서드
         /// </summary>
@@ -15,36 +21,16 @@ namespace Image_Capture
         {
             SetAddRemoveProgramsIcon();
             InitializeComponent();//컴포넌트 초기화 메서드(기본적으로 들어감)
+            notifyIcon1.Text = "SH Color Picker";
         }
 
-        private void tester()
-        {
-            if (ApplicationDeployment.IsNetworkDeployed
-                 && ApplicationDeployment.CurrentDeployment.IsFirstRun)
-            {
-                string result = "";
-                result += "ActivationUri[" + ApplicationDeployment.CurrentDeployment.ActivationUri + "]";
-                result += "CurrentVersion[" + ApplicationDeployment.CurrentDeployment.CurrentVersion + "]";
-                result += "UpdatedVersion[" + ApplicationDeployment.CurrentDeployment.UpdatedVersion + "]";
-                result += "UpdateLocation[" + ApplicationDeployment.CurrentDeployment.UpdateLocation + "]";
-
-
-                MessageBox.Show(result);
-            }
-        }
-        //=============================================================
-        //이벤트 메서드들.
         /// <summary>
-        /// 로드 되면서 발생되는 이벤트
+        /// [이벤트] 로드 되면서 발생되는 이벤트
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void FormMain_Load(object sender, EventArgs e)
         {
-            //debug("FormMain Load 이벤트 발생!");
-            //debug("imgPreview.Width : " + imgPreview.Width+","+imgPreview.Height);
-            //debug("imgPreview.Size.Width" + imgPreview.Size.Width + "," + imgPreview.Size.Height);
-
             //커서가 안 보이는 환경일 때, 커서를 복귀.
             Cursor current = Cursor.Current;
             if (current == null)
@@ -54,9 +40,8 @@ namespace Image_Capture
 
         }
 
- 
         /// <summary>
-        /// 색상 추출 기능. 이벤트 메서드.
+        /// [이벤트] '색상 추출' 버튼 클릭시 발생 이벤트
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -66,23 +51,170 @@ namespace Image_Capture
             //Cursor.Hide();
 
             //2. 커서의 좌표를 통하여 색상을 추출한다.
-            FormColorPickup nForm = new FormColorPickup(this);
-            nForm.Show();
-        }
+            FormColorPickup form = new FormColorPickup(this);
+            form.Show();
 
-        //close of 이벤트 메서드들
-        //=============================================================
+            /*
+            using (FormColorPickup form = new FormColorPickup(this))
+            {
+                form.Show();
+            }
+            */
+            
+        }
 
         /// <summary>
-        /// debug 용 메서드
+        /// [이벤트] 팔레트 버튼 클릭시
         /// </summary>
-        /// <param name="msg"></param>
-        private void debug(string msg)
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, EventArgs e)
         {
-            Debug.WriteLine(msg);
+            Color color = getColor_fromColorDialog();
+            generateView_fromColor(color);
+
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtColorCodeR_KeyDown(object sender, KeyEventArgs e)
+        {
+            changeColorRGBText();
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtColorCodeG_KeyDown(object sender, KeyEventArgs e)
+        {
+            changeColorRGBText();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtColorCodeB_KeyDown(object sender, KeyEventArgs e)
+        {
+            changeColorRGBText();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtColorCodeR_TextChanged(object sender, EventArgs e)
+        {
+            //changeColorRGBText();
+            try
+            {
+                int code = Int32.Parse(txtColorCodeR.Text);
+                if (code > 255) code = 255;
+                if (code < 0) code = 0;
+
+                txtColorCodeR.Text = code.ToString();
+            }
+            catch (Exception exception)
+            {
+                //colorR = 0;
+                txtColorCodeR.Text = "0";
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtColorCodeG_TextChanged(object sender, EventArgs e)
+        {
+            //changeColorRGBText();
+            try
+            {
+                int code = Int32.Parse(txtColorCodeG.Text);
+                if (code > 255) code = 255;
+                if (code < 0) code = 0;
+
+                txtColorCodeG.Text = code.ToString();
+            }
+            catch (Exception exception)
+            {
+                //colorR = 0;
+                txtColorCodeG.Text = "0";
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtColorCodeB_TextChanged(object sender, EventArgs e)
+        {
+            //changeColorRGBText();
+            try
+            {
+                int code = Int32.Parse(txtColorCodeB.Text);
+                if (code > 255) code = 255;
+                if (code < 0) code = 0;
+
+                txtColorCodeB.Text = code.ToString();
+            }
+            catch (Exception exception)
+            {
+                //colorR = 0;
+                txtColorCodeB.Text = "0";
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private Color getColor_fromColorDialog()
+        {
+            try
+            {
+                if (colorDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    return colorDialog1.Color;
+                }
+                else
+                {
+                    return Color.Black;
+                }
+            } catch (Exception  e)
+            {
+                return Color.Black;
+            }
+        }
+
+        /// <summary>
+        /// [이벤트] 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            this.showForm();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.showForm();
+        }
 
 
         private void MainForm_activated(object sender, EventArgs e)
@@ -91,10 +223,6 @@ namespace Image_Capture
             //Cursor.Show();
         }
 
-        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            this.showForm();
-        }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -103,16 +231,17 @@ namespace Image_Capture
             //this.hide(sender, e);
         }
 
-        private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
-        {
-            this.showForm();
-        }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void hide(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;
             this.hideForm();
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -122,6 +251,7 @@ namespace Image_Capture
             this.Opacity = 100;
             this.WindowState = FormWindowState.Normal;//폼의 상태를 일반 상태로 되돌림.
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -131,6 +261,7 @@ namespace Image_Capture
             this.Visible = false;
             //this.WindowState = FormWindowState.Minimized;
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -150,6 +281,7 @@ namespace Image_Capture
                 //MessageBox.Show("창이 최대화되었습니다.");
             }
         }
+
         /// <summary>
         /// 트레이 -> 종료 이벤트
         /// </summary>
@@ -159,6 +291,7 @@ namespace Image_Capture
         {
             Application.Exit();
         }
+
         /// <summary>
         /// ClickOnce 설치 의 경우, 제어판-프로그램추가/삭제 에서 아이콘 표시가 안 나온다. 그 부분을 보정하는 소스.
         /// </summary>
@@ -184,11 +317,11 @@ namespace Image_Capture
                     {
                         Microsoft.Win32.RegistryKey myKey = myUninstallKey.OpenSubKey(mySubKeyNames[i], true);
                         object myValue = myKey.GetValue("UrlUpdateInfo");
-                        if(myValue != null)
+                        if (myValue != null)
                         {
                             string updateinfo = myValue.ToString();
                             string updateLocation = ApplicationDeployment.CurrentDeployment.UpdateLocation.ToString();
-                            if (updateinfo==updateLocation)
+                            if (updateinfo == updateLocation)
                             {
                                 myKey.SetValue("DisplayIcon", iconSourcePath);
                                 break;
@@ -201,11 +334,6 @@ namespace Image_Capture
                     MessageBox.Show(ex.Message.ToString());
                 }
             }
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
         }
     }
 }

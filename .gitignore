@@ -14,4 +14,4 @@ Thumbs.db
 x64/
 build/
 /MakeInstaller/installer/
-/MakeInstaller/application.exe
+/MakeInstaller/SHColorPickup.exe

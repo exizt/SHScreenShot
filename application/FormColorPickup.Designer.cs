@@ -1,4 +1,4 @@
-﻿namespace Image_Capture
+﻿namespace SHColorPicker
 {
     partial class FormColorPickup
     {
