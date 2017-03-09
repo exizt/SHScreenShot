@@ -36,7 +36,7 @@ namespace SHColorPicker
         /// 부모창의 Preview 와 동일한 크기의 Bitmap 생성
         /// 기본창의 '미리보기' PictureBox 가 있는데, 이것과 동일한 크기의 Bitmap 을 생성해놓는 작업이다.
         /// </summary>
-        private void init()
+        private void initPicker()
         {
             // 부모 창의 isDebug 옵션의 영향이 우선시
             if (mParentForm.isDebug)
@@ -56,7 +56,7 @@ namespace SHColorPicker
         /// 현재 창의 spoid Picturebox 영역의 크기를 확대축소 비율에 맞게 조절한다. 
         /// 스포이드 는 그 정가운데에 놓도록 한다.
         /// </summary>
-        private void loadPickup()
+        private void loadPicker()
         {
             // 확대될 영역 (축소된 영역) 을 계산 (배율 역계산)
             szPreviewCompress.Width = szPreviewImage.Width / magnif;
@@ -91,7 +91,7 @@ namespace SHColorPicker
             drawPreviewBitmap(ptPreviewCompress, szPreviewCompress, bitmapPreview);
 
             // 색상코드 를 추출. 부모창에 대입.
-            mParentForm.generateView_fromColor(getColorFromImage(bitmapPreview));
+            mParentForm.generateView_fromColor(getColor_fromImage(bitmapPreview));
 
             // 결과를 부모창의 미리보기 이미지 에 대입
             mParentForm.imgPreview.Image = bitmapPreview;
@@ -134,7 +134,7 @@ namespace SHColorPicker
         /// <param name="image"></param>
         /// <returns></returns>
         /// 
-        private Color getColorFromImage(Image image)
+        private Color getColor_fromImage(Image image)
         {
             using (Bitmap b = new Bitmap(image))
             {
@@ -149,6 +149,14 @@ namespace SHColorPicker
         private void debug(string msg)
         {
             if(isDebug) System.Diagnostics.Debug.WriteLine(msg);
+        }
+        /// <summary>
+        /// debug 용 메서드
+        /// </summary>
+        /// <param name="msg"></param>
+        private void debug(string msg, string msg2)
+        {
+            debug(msg + msg2);
         }
     }
 }

@@ -30,8 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.FolderBD_SShot = new System.Windows.Forms.FolderBrowserDialog();
             this.txtColorCodeR = new System.Windows.Forms.TextBox();
             this.label_R = new System.Windows.Forms.Label();
             this.label_G = new System.Windows.Forms.Label();
@@ -120,7 +118,7 @@
             this.txtColorCodeFF.Location = new System.Drawing.Point(13, 142);
             this.txtColorCodeFF.Name = "txtColorCodeFF";
             this.txtColorCodeFF.ReadOnly = true;
-            this.txtColorCodeFF.Size = new System.Drawing.Size(137, 24);
+            this.txtColorCodeFF.Size = new System.Drawing.Size(190, 24);
             this.txtColorCodeFF.TabIndex = 14;
             // 
             // label_FF
@@ -219,7 +217,7 @@
             // 
             this.txtColorCodeRGB.Location = new System.Drawing.Point(13, 197);
             this.txtColorCodeRGB.Name = "txtColorCodeRGB";
-            this.txtColorCodeRGB.Size = new System.Drawing.Size(137, 24);
+            this.txtColorCodeRGB.Size = new System.Drawing.Size(191, 24);
             this.txtColorCodeRGB.TabIndex = 18;
             // 
             // label_RGB
@@ -274,8 +272,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.FolderBrowserDialog FolderBD_SShot;
         private System.Windows.Forms.Label label_R;
         private System.Windows.Forms.Label label_G;
         private System.Windows.Forms.Label label_B;

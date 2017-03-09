@@ -30,7 +30,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.timerPickupColor = new System.Windows.Forms.Timer(this.components);
+            this.timerPick = new System.Windows.Forms.Timer(this.components);
             this.picSection = new System.Windows.Forms.PictureBox();
             this.picSpoidIcon = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.picSection)).BeginInit();
@@ -39,8 +39,8 @@
             // 
             // timerPickupColor
             // 
-            this.timerPickupColor.Interval = 1;
-            this.timerPickupColor.Tick += new System.EventHandler(this.timerPickupColor_Tick);
+            this.timerPick.Interval = 1;
+            this.timerPick.Tick += new System.EventHandler(this.timerPick_Tick);
             // 
             // picSection
             // 
@@ -53,7 +53,7 @@
             this.picSection.Size = new System.Drawing.Size(300, 300);
             this.picSection.TabIndex = 0;
             this.picSection.TabStop = false;
-            this.picSection.Click += new System.EventHandler(this.pictureAreaPickupColor_Click);
+            this.picSection.Click += new System.EventHandler(this.picArea_Click);
             // 
             // picSpoidIcon
             // 
@@ -65,7 +65,7 @@
             this.picSpoidIcon.TabIndex = 1;
             this.picSpoidIcon.TabStop = false;
             this.picSpoidIcon.WaitOnLoad = true;
-            this.picSpoidIcon.Click += new System.EventHandler(this.spoidPicture_Click);
+            this.picSpoidIcon.Click += new System.EventHandler(this.picSpoid_Click);
             // 
             // FormColorPickup
             // 
@@ -82,7 +82,7 @@
             this.Text = "ColorPickUp";
             this.TransparencyKey = System.Drawing.Color.Turquoise;
             this.Load += new System.EventHandler(this.FormColorPickup_Load);
-            this.Click += new System.EventHandler(this.FormColorPickup_Click);
+            this.Click += new System.EventHandler(this.Form_Click);
             ((System.ComponentModel.ISupportInitialize)(this.picSection)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSpoidIcon)).EndInit();
             this.ResumeLayout(false);
@@ -91,7 +91,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Timer timerPickupColor;
+        private System.Windows.Forms.Timer timerPick;
         private System.Windows.Forms.PictureBox picSection;
         private System.Windows.Forms.PictureBox picSpoidIcon;
     }

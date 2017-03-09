@@ -49,7 +49,7 @@ namespace SHColorPicker
             mParentForm = _parentForm;
 
             //부모창의 preview 와 크기가 같은 bitmap 생성
-            init();
+            initPicker();
         }
 
         /// <summary>
@@ -78,12 +78,12 @@ namespace SHColorPicker
             //szImgPreviewParent = mParentForm.szPreviewImage;
 
             // spoid picturebox 를 조절하고, spoid 를 정가운데에 놓음
-            loadPickup();
+            loadPicker();
 
             //이벤트 발생
-            timerPickupColor_Tick(sender, e);
+            timerPick_Tick(sender, e);
             //timerPickupColor.Interval = 1;
-            timerPickupColor.Start();
+            timerPick.Start();
 
         }
 
@@ -92,7 +92,7 @@ namespace SHColorPicker
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void timerPickupColor_Tick(object sender, EventArgs e)
+        private void timerPick_Tick(object sender, EventArgs e)
         {
             //마우스 포인터에 변화가 없을 때에는 동작하지 않도록 합니다.
             if (Equals(ptMouseCursor, Control.MousePosition))
@@ -111,10 +111,10 @@ namespace SHColorPicker
         /// this 창의 클릭 이벤트에 의해서 호출될 메서드 이다.
         /// 여기서 종료시에 처리할 구문을 모아둔다.
         /// </summary>
-        private void PickerClose()
+        private void closePicker()
         {
             Cursor.Show();
-            timerPickupColor.Stop();
+            timerPick.Stop();
 
             Close();
         }
@@ -124,19 +124,19 @@ namespace SHColorPicker
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void FormColorPickup_Click(object sender, EventArgs e)
+        private void Form_Click(object sender, EventArgs e)
         {
-            PickerClose();
+            closePicker();
         }
 
-        private void pictureAreaPickupColor_Click(object sender, EventArgs e)
+        private void picArea_Click(object sender, EventArgs e)
         {
-            PickerClose();
+            closePicker();
         }
 
-        private void spoidPicture_Click(object sender, EventArgs e)
+        private void picSpoid_Click(object sender, EventArgs e)
         {
-            PickerClose();
+            closePicker();
         }
     }
 }
