@@ -52,7 +52,7 @@ namespace SHColorPicker
 
             //2. 커서의 좌표를 통하여 색상을 추출한다.
             FormColorPickup form = new FormColorPickup(this);
-            form.Show();
+            form.ShowDialog();
 
             /*
             using (FormColorPickup form = new FormColorPickup(this))

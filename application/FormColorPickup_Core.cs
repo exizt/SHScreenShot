@@ -32,21 +32,24 @@ namespace SHColorPicker
         /// </summary>
         Bitmap bitmapPreview;
 
-        Point _spoidPicture_Location = new Point();
-
         /// <summary>
         /// 부모창의 Preview 와 동일한 크기의 Bitmap 생성
         /// 기본창의 '미리보기' PictureBox 가 있는데, 이것과 동일한 크기의 Bitmap 을 생성해놓는 작업이다.
         /// </summary>
-        private void initPickup()
+        private void init()
         {
+            // 부모 창의 isDebug 옵션의 영향이 우선시
+            if (mParentForm.isDebug)
+            {
+                this.isDebug = true;
+            }
+
             // 부모창의 미리보기 picturebox 의 Size 를 가져온다.
             szPreviewImage = mParentForm.imgPreview.Size;
 
             //부모창의 Preview 와 동일한 크기의 Bitmap 생성
             if (bitmapPreview != null) bitmapPreview.Dispose();
-            bitmapPreview = new Bitmap(mParentForm.imgPreview.Width, mParentForm.imgPreview.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-
+            bitmapPreview = new Bitmap(mParentForm.imgPreview.Width, mParentForm.imgPreview.Height, PixelFormat.Format32bppArgb);
         }
 
         /// <summary>
@@ -55,40 +58,33 @@ namespace SHColorPicker
         /// </summary>
         private void loadPickup()
         {
-            // 부모창의 미리보기 사이즈 를 가져와서 대입
-            //szPreviewImage = bitmapPreview.Size;
-
             // 확대될 영역 (축소된 영역) 을 계산 (배율 역계산)
             szPreviewCompress.Width = szPreviewImage.Width / magnif;
             szPreviewCompress.Height = szPreviewImage.Height / magnif;
 
             // 필요한 만큼으로만 윈도우 폼 을 구성
-            _formSize.Width = szPreviewCompress.Width + 100;
-            _formSize.Height = szPreviewCompress.Height + 100;
-            this.Size = _formSize;
+            this.Width = szPreviewCompress.Width + 200;
+            this.Height = szPreviewCompress.Height + 200;
 
             // ColorPickupForm 의 중간으로 Spoid Icon 위치
-            _spoidPicture_Location.X = _formSize.Width / 2;
-            _spoidPicture_Location.Y = _formSize.Height / 2 - this.spoidPicture.Height;
-            this.spoidPicture.Location = _spoidPicture_Location;
+            this.picSpoidIcon.Left = this.Width / 2;
+            this.picSpoidIcon.Top = this.Height / 2 - this.picSpoidIcon.Height/2 - 7;
         }
 
         /// <summary>
         /// 타이머 로 로드할 메서드
         /// </summary>
-        /// <param name="mousePosition"></param>
-        private void callEventColorPickup(Point mousePosition)
+        private void callEventColorPickup()
         {
 
             // 마우스 커서를 기준으로 해당 윈도우 창 (픽업용 히든 윈도우) 이 
             // 따라 움직이게 XY 좌표를 이동
-            _formLocation.X = mousePosition.X - (Size.Width / 2);
-            _formLocation.Y = mousePosition.Y - (Size.Height / 2);
-            this.Location = _formLocation;
+            this.Left = ptMouseCursor.X - (Size.Width / 2);
+            this.Top = ptMouseCursor.Y - (Size.Height / 2);
 
             // 축소된 영역의 XY 좌표
-            ptPreviewCompress.X = mousePosition.X - (szPreviewCompress.Width / 2);
-            ptPreviewCompress.Y = mousePosition.Y - (szPreviewCompress.Height / 2);
+            ptPreviewCompress.X = ptMouseCursor.X - (szPreviewCompress.Width / 2);
+            ptPreviewCompress.Y = ptMouseCursor.Y - (szPreviewCompress.Height / 2);
 
             // 미리보기 이미지 를 생성
             //bitmapPreview = createPreviewBitmap(ptPreviewImageCompress, szPreviewImageCompress);

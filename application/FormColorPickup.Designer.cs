@@ -31,10 +31,10 @@
         {
             this.components = new System.ComponentModel.Container();
             this.timerPickupColor = new System.Windows.Forms.Timer(this.components);
-            this.pictureAreaPickupColor = new System.Windows.Forms.PictureBox();
-            this.spoidPicture = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureAreaPickupColor)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spoidPicture)).BeginInit();
+            this.picSection = new System.Windows.Forms.PictureBox();
+            this.picSpoidIcon = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.picSection)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSpoidIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // timerPickupColor
@@ -42,38 +42,39 @@
             this.timerPickupColor.Interval = 1;
             this.timerPickupColor.Tick += new System.EventHandler(this.timerPickupColor_Tick);
             // 
-            // pictureAreaPickupColor
+            // picSection
             // 
-            this.pictureAreaPickupColor.BackColor = System.Drawing.Color.Turquoise;
-            this.pictureAreaPickupColor.ErrorImage = null;
-            this.pictureAreaPickupColor.ImageLocation = "0,0";
-            this.pictureAreaPickupColor.InitialImage = null;
-            this.pictureAreaPickupColor.Location = new System.Drawing.Point(0, 0);
-            this.pictureAreaPickupColor.Name = "pictureAreaPickupColor";
-            this.pictureAreaPickupColor.Size = new System.Drawing.Size(300, 300);
-            this.pictureAreaPickupColor.TabIndex = 0;
-            this.pictureAreaPickupColor.TabStop = false;
-            this.pictureAreaPickupColor.Click += new System.EventHandler(this.pictureAreaPickupColor_Click);
+            this.picSection.BackColor = System.Drawing.Color.Turquoise;
+            this.picSection.ErrorImage = null;
+            this.picSection.ImageLocation = "0,0";
+            this.picSection.InitialImage = null;
+            this.picSection.Location = new System.Drawing.Point(0, 0);
+            this.picSection.Name = "picSection";
+            this.picSection.Size = new System.Drawing.Size(300, 300);
+            this.picSection.TabIndex = 0;
+            this.picSection.TabStop = false;
+            this.picSection.Click += new System.EventHandler(this.pictureAreaPickupColor_Click);
             // 
-            // spoidPicture
+            // picSpoidIcon
             // 
-            this.spoidPicture.BackColor = System.Drawing.Color.Turquoise;
-            this.spoidPicture.Image = global::SHColorPicker.Properties.Resources.Image3;
-            this.spoidPicture.Location = new System.Drawing.Point(150, 134);
-            this.spoidPicture.Name = "spoidPicture";
-            this.spoidPicture.Size = new System.Drawing.Size(16, 16);
-            this.spoidPicture.TabIndex = 1;
-            this.spoidPicture.TabStop = false;
-            this.spoidPicture.WaitOnLoad = true;
-            this.spoidPicture.Click += new System.EventHandler(this.spoidPicture_Click);
+            this.picSpoidIcon.BackColor = System.Drawing.Color.Turquoise;
+            this.picSpoidIcon.Image = global::SHColorPicker.Properties.Resources.Image3;
+            this.picSpoidIcon.Location = new System.Drawing.Point(150, 134);
+            this.picSpoidIcon.Name = "picSpoidIcon";
+            this.picSpoidIcon.Size = new System.Drawing.Size(16, 16);
+            this.picSpoidIcon.TabIndex = 1;
+            this.picSpoidIcon.TabStop = false;
+            this.picSpoidIcon.WaitOnLoad = true;
+            this.picSpoidIcon.Click += new System.EventHandler(this.spoidPicture_Click);
             // 
             // FormColorPickup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Turquoise;
             this.ClientSize = new System.Drawing.Size(300, 300);
-            this.Controls.Add(this.spoidPicture);
-            this.Controls.Add(this.pictureAreaPickupColor);
+            this.Controls.Add(this.picSpoidIcon);
+            this.Controls.Add(this.picSection);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -82,8 +83,8 @@
             this.TransparencyKey = System.Drawing.Color.Turquoise;
             this.Load += new System.EventHandler(this.FormColorPickup_Load);
             this.Click += new System.EventHandler(this.FormColorPickup_Click);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureAreaPickupColor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spoidPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSection)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSpoidIcon)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -91,7 +92,7 @@
         #endregion
 
         private System.Windows.Forms.Timer timerPickupColor;
-        private System.Windows.Forms.PictureBox pictureAreaPickupColor;
-        private System.Windows.Forms.PictureBox spoidPicture;
+        private System.Windows.Forms.PictureBox picSection;
+        private System.Windows.Forms.PictureBox picSpoidIcon;
     }
 }

@@ -34,17 +34,7 @@ namespace SHColorPicker
         /// 마우스의 좌표를 담을 용도.
         /// </summary>
         Point ptMouseCursor = new Point();
-
-        /// <summary>
-        /// 현재 창의 XY 좌표
-        /// </summary>
-        Point _formLocation = new Point();
-
-        /// <summary>
-        /// 현재 창의 Width,Height 크기
-        /// </summary>
-        Size _formSize = new Size();
-
+        
         /// <summary>
         /// 생성자
         /// 기본 메서드. 폼 초기화.
@@ -58,14 +48,8 @@ namespace SHColorPicker
             //부모 폼 값
             mParentForm = _parentForm;
 
-            // 부모 창의 isDebug 옵션의 영향이 우선시
-            if (mParentForm.isDebug)
-            {
-                this.isDebug = true;
-            }
-
             //부모창의 preview 와 크기가 같은 bitmap 생성
-            initPickup();
+            init();
         }
 
         /// <summary>
@@ -83,7 +67,7 @@ namespace SHColorPicker
             if (isCursorDebug)
             {
                 Cursor.Show();
-                pictureAreaPickupColor.BackColor = Color.Black;
+                picSection.BackColor = Color.Black;
             }
             else
             {
@@ -113,14 +97,14 @@ namespace SHColorPicker
             //마우스 포인터에 변화가 없을 때에는 동작하지 않도록 합니다.
             if (Equals(ptMouseCursor, Control.MousePosition))
             {
-                return;
+                //return;
             }
 
             // 마우스 커서의 좌표를 가져오기
             ptMouseCursor = Control.MousePosition;
 
             // 이벤트 호출
-            callEventColorPickup(Control.MousePosition);
+            callEventColorPickup();
         }
 
         /// <summary>
@@ -130,10 +114,7 @@ namespace SHColorPicker
         private void PickerClose()
         {
             Cursor.Show();
-            //parentForm.ImgPreview_Spoid_Remove();
             timerPickupColor.Stop();
-
-            if(bitmapPreview!=null) bitmapPreview.Dispose();
 
             Close();
         }

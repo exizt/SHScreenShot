@@ -141,9 +141,9 @@
             this.btnPickup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPickup.Font = new System.Drawing.Font("돋움", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnPickup.ForeColor = System.Drawing.Color.White;
-            this.btnPickup.Location = new System.Drawing.Point(111, 203);
+            this.btnPickup.Location = new System.Drawing.Point(108, 217);
             this.btnPickup.Name = "btnPickup";
-            this.btnPickup.Size = new System.Drawing.Size(124, 87);
+            this.btnPickup.Size = new System.Drawing.Size(152, 87);
             this.btnPickup.TabIndex = 15;
             this.btnPickup.Text = "색상추출";
             this.btnPickup.UseVisualStyleBackColor = false;
@@ -163,9 +163,9 @@
             // 
             this.imgPreview.BackColor = System.Drawing.Color.White;
             this.imgPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.imgPreview.Location = new System.Drawing.Point(30, 28);
+            this.imgPreview.Location = new System.Drawing.Point(12, 12);
             this.imgPreview.Name = "imgPreview";
-            this.imgPreview.Size = new System.Drawing.Size(205, 150);
+            this.imgPreview.Size = new System.Drawing.Size(247, 194);
             this.imgPreview.TabIndex = 18;
             this.imgPreview.TabStop = false;
             // 
@@ -208,9 +208,9 @@
             this.groupBox1.Controls.Add(this.label_B);
             this.groupBox1.Font = new System.Drawing.Font("돋움", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.groupBox1.ForeColor = System.Drawing.Color.SlateBlue;
-            this.groupBox1.Location = new System.Drawing.Point(254, 21);
+            this.groupBox1.Location = new System.Drawing.Point(269, 7);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(221, 269);
+            this.groupBox1.Size = new System.Drawing.Size(221, 297);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "결과";
@@ -237,9 +237,9 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("돋움", 12F, System.Drawing.FontStyle.Bold);
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(30, 203);
+            this.button1.Location = new System.Drawing.Point(12, 217);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 87);
+            this.button1.Size = new System.Drawing.Size(89, 87);
             this.button1.TabIndex = 20;
             this.button1.Text = "선택";
             this.button1.UseVisualStyleBackColor = false;
