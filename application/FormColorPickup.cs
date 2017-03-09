@@ -34,17 +34,7 @@ namespace SHColorPicker
         /// 마우스의 좌표를 담을 용도.
         /// </summary>
         Point ptMouseCursor = new Point();
-
-        /// <summary>
-        /// 현재 창의 XY 좌표
-        /// </summary>
-        Point _formLocation = new Point();
-
-        /// <summary>
-        /// 현재 창의 Width,Height 크기
-        /// </summary>
-        Size _formSize = new Size();
-
+        
         /// <summary>
         /// 생성자
         /// 기본 메서드. 폼 초기화.
@@ -58,14 +48,8 @@ namespace SHColorPicker
             //부모 폼 값
             mParentForm = _parentForm;
 
-            // 부모 창의 isDebug 옵션의 영향이 우선시
-            if (mParentForm.isDebug)
-            {
-                this.isDebug = true;
-            }
-
             //부모창의 preview 와 크기가 같은 bitmap 생성
-            initPickup();
+            initPicker();
         }
 
         /// <summary>
@@ -83,7 +67,7 @@ namespace SHColorPicker
             if (isCursorDebug)
             {
                 Cursor.Show();
-                pictureAreaPickupColor.BackColor = Color.Black;
+                picSection.BackColor = Color.Black;
             }
             else
             {
@@ -94,12 +78,12 @@ namespace SHColorPicker
             //szImgPreviewParent = mParentForm.szPreviewImage;
 
             // spoid picturebox 를 조절하고, spoid 를 정가운데에 놓음
-            loadPickup();
+            loadPicker();
 
             //이벤트 발생
-            timerPickupColor_Tick(sender, e);
+            timerPick_Tick(sender, e);
             //timerPickupColor.Interval = 1;
-            timerPickupColor.Start();
+            timerPick.Start();
 
         }
 
@@ -108,32 +92,29 @@ namespace SHColorPicker
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void timerPickupColor_Tick(object sender, EventArgs e)
+        private void timerPick_Tick(object sender, EventArgs e)
         {
             //마우스 포인터에 변화가 없을 때에는 동작하지 않도록 합니다.
             if (Equals(ptMouseCursor, Control.MousePosition))
             {
-                return;
+                //return;
             }
 
             // 마우스 커서의 좌표를 가져오기
             ptMouseCursor = Control.MousePosition;
 
             // 이벤트 호출
-            callEventColorPickup(Control.MousePosition);
+            callEventColorPickup();
         }
 
         /// <summary>
         /// this 창의 클릭 이벤트에 의해서 호출될 메서드 이다.
         /// 여기서 종료시에 처리할 구문을 모아둔다.
         /// </summary>
-        private void PickerClose()
+        private void closePicker()
         {
             Cursor.Show();
-            //parentForm.ImgPreview_Spoid_Remove();
-            timerPickupColor.Stop();
-
-            if(bitmapPreview!=null) bitmapPreview.Dispose();
+            timerPick.Stop();
 
             Close();
         }
@@ -143,19 +124,19 @@ namespace SHColorPicker
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void FormColorPickup_Click(object sender, EventArgs e)
+        private void Form_Click(object sender, EventArgs e)
         {
-            PickerClose();
+            closePicker();
         }
 
-        private void pictureAreaPickupColor_Click(object sender, EventArgs e)
+        private void picArea_Click(object sender, EventArgs e)
         {
-            PickerClose();
+            closePicker();
         }
 
-        private void spoidPicture_Click(object sender, EventArgs e)
+        private void picSpoid_Click(object sender, EventArgs e)
         {
-            PickerClose();
+            closePicker();
         }
     }
 }

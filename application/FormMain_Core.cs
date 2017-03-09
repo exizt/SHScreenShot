@@ -16,7 +16,7 @@ namespace SHColorPicker
             if(imgResultColor.BackColor == color) {
                 return;
             }
-            debug("generateView_fromColor" + color.ToString());
+            debug("generateView_fromColor",color.ToString());
             txtColorCodeR.Text = color.R.ToString();
             txtColorCodeG.Text = color.G.ToString();
             txtColorCodeB.Text = color.B.ToString();
@@ -41,9 +41,10 @@ namespace SHColorPicker
                 if (colorR > 255) colorR = 255;
                 if (colorR < 0) colorR = 0;
             }
-            catch (Exception e)
+            catch (Exception exc)
             {
                 colorR = 0;
+                debug("Exception : ", exc.ToString());
             }
             try
             {
@@ -51,9 +52,10 @@ namespace SHColorPicker
                 if (colorG > 255) colorG = 255;
                 if (colorG < 0) colorG = 0;
             }
-            catch (Exception e)
+            catch (Exception exc)
             {
                 colorG = 0;
+                debug("Exception : ", exc.ToString());
             }
             try
             {
@@ -61,9 +63,10 @@ namespace SHColorPicker
                 if (colorB > 255) colorB = 255;
                 if (colorB < 0) colorB = 0;
             }
-            catch (Exception e)
+            catch (Exception exc)
             {
                 colorB = 0;
+                debug("Exception : ", exc.ToString());
             }
 
             try
@@ -71,10 +74,11 @@ namespace SHColorPicker
                 //color = Color.FromArgb(colorR, colorG, colorB);
                 generateView_fromColor(Color.FromArgb(colorR, colorG, colorB));
             }
-            catch (Exception e)
+            catch (Exception exc)
             {
                 //color = Color.Black;
                 generateView_fromColor(Color.Black);
+                debug("Exception : ", exc.ToString());
             }
             
         }
@@ -97,9 +101,9 @@ namespace SHColorPicker
                 hex = sb.ToString();
                 sb.Length = 0;
             }
-            catch (Exception e)
+            catch (Exception exc)
             {
-
+                debug("Exception : ", exc.ToString());
             }
             return hex;
         }
@@ -125,8 +129,9 @@ namespace SHColorPicker
                 rgb = sb.ToString();
                 sb.Length = 0;
             }
-            catch (Exception e)
+            catch (Exception exc)
             {
+                debug("Exception : ",exc.ToString());
             }
             return rgb;
         }
@@ -138,6 +143,14 @@ namespace SHColorPicker
         private void debug(string msg)
         {
             if(isDebug) System.Diagnostics.Debug.WriteLine(msg);
+        }
+        /// <summary>
+        /// debug 용 메서드
+        /// </summary>
+        /// <param name="msg"></param>
+        private void debug(string msg,string msg2)
+        {
+            debug(msg+msg2);
         }
     }
 }

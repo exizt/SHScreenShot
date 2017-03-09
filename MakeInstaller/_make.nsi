@@ -10,13 +10,13 @@
 # Setting Part 1
 # 프로그램별 설정 부분
 #
-!define S_APP_VER_MAJOR 1           ;주 버전코드 입니다. 프로젝트를 전부 뜯어고친 경우에 카운트업 시킵니다.
-!define S_APP_VER_MINOR 0           ;마이너 업데이트 시에 증가시킵니다.
-!define S_APP_VER_BUILD  5             ;카운트를 계속 증가시킵니다. 
-!define S_APP_NAME_DISPLAY "SH Color Picker"  ;프로그램명칭
-!define S_APP_NAME_CODE "SHColorPicker"     ;프로그램명칭 (주로 디렉토리명으로 쓰일 것이므로 빈칸없이 영문으로)
+!define S_APP_VER_MAJOR 1             ;주 버전코드 입니다. 프로젝트를 전부 뜯어고친 경우에 카운트업 시킵니다.
+!define S_APP_VER_MINOR 0             ;마이너 업데이트 시에 증가시킵니다.
+!define S_APP_VER_BUILD 6             ;카운트를 계속 증가시킵니다. 
+!define S_APP_NAME_DISPLAY "SH Color Picker" ;프로그램명칭
+!define S_APP_NAME_CODE "SHColorPicker"      ;프로그램명칭 (주로 디렉토리명으로 쓰일 것이므로 빈칸없이 영문으로)
 !define S_APP_COMPANY_DISPLAY "SH Software"  ;배포자
-!define S_APP_COMPANY_CODE "SHSoft"             ;업체명 또는 구분명 (주로 디렉토리명으로 쓰일 것이므로 빈칸없이 영문으로)
+!define S_APP_COMPANY_CODE "SHSoft"          ;업체명 또는 구분명 (주로 디렉토리명으로 쓰일 것이므로 빈칸없이 영문으로)
 !define S_APP_DESCRIPTION "Choices and pick up color code"     ;프로그램 설명
 !define S_APP_VER "1.0"                                 ;프로그램 버전정보
 !define S_APP_EXE "SHColorPickup.exe"                  ;실행될 exe 파일

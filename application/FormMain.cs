@@ -52,7 +52,7 @@ namespace SHColorPicker
 
             //2. 커서의 좌표를 통하여 색상을 추출한다.
             FormColorPickup form = new FormColorPickup(this);
-            form.Show();
+            form.ShowDialog();
 
             /*
             using (FormColorPickup form = new FormColorPickup(this))
@@ -112,7 +112,6 @@ namespace SHColorPicker
         /// <param name="e"></param>
         private void txtColorCodeR_TextChanged(object sender, EventArgs e)
         {
-            //changeColorRGBText();
             try
             {
                 int code = Int32.Parse(txtColorCodeR.Text);
@@ -121,10 +120,11 @@ namespace SHColorPicker
 
                 txtColorCodeR.Text = code.ToString();
             }
-            catch (Exception exception)
+            catch (Exception exc)
             {
                 //colorR = 0;
                 txtColorCodeR.Text = "0";
+                debug("Exception : ", exc.ToString());
             }
         }
 
@@ -135,7 +135,6 @@ namespace SHColorPicker
         /// <param name="e"></param>
         private void txtColorCodeG_TextChanged(object sender, EventArgs e)
         {
-            //changeColorRGBText();
             try
             {
                 int code = Int32.Parse(txtColorCodeG.Text);
@@ -144,10 +143,11 @@ namespace SHColorPicker
 
                 txtColorCodeG.Text = code.ToString();
             }
-            catch (Exception exception)
+            catch (Exception exc)
             {
                 //colorR = 0;
                 txtColorCodeG.Text = "0";
+                debug("Exception : ", exc.ToString());
             }
         }
 
@@ -158,7 +158,6 @@ namespace SHColorPicker
         /// <param name="e"></param>
         private void txtColorCodeB_TextChanged(object sender, EventArgs e)
         {
-            //changeColorRGBText();
             try
             {
                 int code = Int32.Parse(txtColorCodeB.Text);
@@ -167,10 +166,11 @@ namespace SHColorPicker
 
                 txtColorCodeB.Text = code.ToString();
             }
-            catch (Exception exception)
+            catch (Exception exc)
             {
                 //colorR = 0;
                 txtColorCodeB.Text = "0";
+                debug("Exception : ", exc.ToString());
             }
         }
 
@@ -190,8 +190,9 @@ namespace SHColorPicker
                 {
                     return Color.Black;
                 }
-            } catch (Exception  e)
+            } catch (Exception  exc)
             {
+                debug("Exception : ", exc.ToString());
                 return Color.Black;
             }
         }
