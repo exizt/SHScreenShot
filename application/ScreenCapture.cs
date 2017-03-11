@@ -21,6 +21,7 @@ namespace Image_Capture
         /// <param name="_sizeImage">이미지크기</param>
         public void createImageByScreen(Point _pointStart, Size _sizeImage)
         {
+            // dlatl bitmap 을 생성 한 후 작업. using 내부의 new 는 자동 해제 됨.
             using (Bitmap bitmap = new Bitmap(_sizeImage.Width, _sizeImage.Height, PixelFormat.Format32bppArgb))
             {
                 //임시 비트맵으로 그래픽도구를 생성. 그리기 시작한다.
@@ -36,7 +37,7 @@ namespace Image_Capture
                     //스크린 캡쳐 시작                    
                     // 인수:스크린좌표,그리기시작좌표,그리는사이즈.
                     //copypixeloperation 옵션을 줄 수도 있다.
-                    g.CopyFromScreen(_pointStart, ptZero, _sizeImage, CopyPixelOperation.SourceCopy);// 인수:스크린좌표,그리기시작좌표,그리는사이즈.
+                    g.CopyFromScreen(_pointStart, ptZero, _sizeImage, CopyPixelOperation.SourceCopy);
                 }
 
                 if (resultImage != null) { resultImage.Dispose(); }
