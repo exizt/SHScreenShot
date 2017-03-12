@@ -76,10 +76,11 @@
             this.Controls.Add(this.picSpoidIcon);
             this.Controls.Add(this.picSection);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = Properties.Resources.MainIcon;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FormColorPickup";
-            this.Text = "ColorPickUp";
+            this.Name = "ColorPickSpoid";
+            this.Text = "Color Pick Spoid";
             this.TransparencyKey = System.Drawing.Color.Turquoise;
             this.Load += new System.EventHandler(this.FormColorPickup_Load);
             this.Click += new System.EventHandler(this.Form_Click);
