@@ -8,12 +8,30 @@ namespace SHColorPicker
     public partial class FormMain : Form
     {
         /// <summary>
+        /// R, G, B 코드, #FFF 코드 등을 생성해서 화면에 적용시킨다. 
+        /// </summary>
+        /// <param name="colorR"></param>
+        /// <param name="colorG"></param>
+        /// <param name="colorB"></param>
+        public void getnerateView_formColor(int colorR,int colorG,int colorB)
+        {
+            if (colorR > 255) colorR = 255;
+            if (colorG > 255) colorG = 255;
+            if (colorB > 255) colorB = 255;
+            if (colorR < 0) colorR = 0;
+            if (colorG < 0) colorG = 0;
+            if (colorB < 0) colorB = 0;
+            generateView_fromColor(Color.FromArgb(colorR, colorG, colorB));
+        }
+
+        /// <summary>
         /// R, G, B 코드, #FFF 코드 등을 생성해서 화면에 적용시킨다.
         /// </summary>
         /// <param name="color"></param>
         public void generateView_fromColor(Color color)
         {
-            if(imgResultColor.BackColor == color) {
+            if(imgResultColor.BackColor == color)
+            {
                 return;
             }
             debug("generateView_fromColor",color.ToString());
@@ -23,62 +41,44 @@ namespace SHColorPicker
             txtColorCodeFF.Text = getHEX_fromColor(color);
             txtColorCodeRGB.Text = getRGB_fromColor(color);
             imgResultColor.BackColor = color;
-            //mParentForm.txtColorCodeFF.Text = string.Concat("#", ColorTranslator.ToHtml(color).Substring(1, 6));
-            //txtColorCodeFF.Text = String.Format(ColorTranslator.ToHtml(color).ToString());
-            //Debug.WriteLine("generateView_fromColor : " + ColorTranslator.ToHtml(color).ToString());
         }
 
+        /// <summary>
+        /// 문자열을 int 로 전환. 문제가 발생시 0 을 강제로 리턴.
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        private int forcedStrtoInt(string str)
+        {
+            try
+            {
+                return Int32.Parse(str);
+            }
+            catch (Exception ex)
+            {
+                debug("[Exception][forcedStrtoInt]",ex.ToString());
+                return 0;
+            }
+        }
         /// <summary>
         /// 
         /// </summary>
         private void changeColorRGBText()
         {
-            //Color color = new Color();
-            int colorR, colorG, colorB;
-            try
-            {
-                colorR = Int32.Parse(txtColorCodeR.Text);
-                if (colorR > 255) colorR = 255;
-                if (colorR < 0) colorR = 0;
-            }
-            catch (Exception exc)
-            {
-                colorR = 0;
-                debug("Exception : ", exc.ToString());
-            }
-            try
-            {
-                colorG = Int32.Parse(txtColorCodeG.Text);
-                if (colorG > 255) colorG = 255;
-                if (colorG < 0) colorG = 0;
-            }
-            catch (Exception exc)
-            {
-                colorG = 0;
-                debug("Exception : ", exc.ToString());
-            }
-            try
-            {
-                colorB = Int32.Parse(txtColorCodeB.Text);
-                if (colorB > 255) colorB = 255;
-                if (colorB < 0) colorB = 0;
-            }
-            catch (Exception exc)
-            {
-                colorB = 0;
-                debug("Exception : ", exc.ToString());
-            }
+            int colorR = forcedStrtoInt(txtColorCodeR.Text);
+            int colorG = forcedStrtoInt(txtColorCodeG.Text);
+            int colorB = forcedStrtoInt(txtColorCodeB.Text);
 
             try
             {
                 //color = Color.FromArgb(colorR, colorG, colorB);
                 generateView_fromColor(Color.FromArgb(colorR, colorG, colorB));
             }
-            catch (Exception exc)
+            catch (Exception ex)
             {
                 //color = Color.Black;
                 generateView_fromColor(Color.Black);
-                debug("Exception : ", exc.ToString());
+                debug("[Exception][changeColorRGBText]", ex.ToString());
             }
             
         }
@@ -101,9 +101,9 @@ namespace SHColorPicker
                 hex = sb.ToString();
                 sb.Length = 0;
             }
-            catch (Exception exc)
+            catch (Exception ex)
             {
-                debug("Exception : ", exc.ToString());
+                debug("[Exception][getHEX_fromColor]", ex.ToString());
             }
             return hex;
         }
@@ -127,11 +127,12 @@ namespace SHColorPicker
                 sb.Append(color.B.ToString());
                 sb.Append(")");
                 rgb = sb.ToString();
-                sb.Length = 0;
+                //sb.Length = 0;
+                sb.Clear();
             }
-            catch (Exception exc)
+            catch (Exception ex)
             {
-                debug("Exception : ",exc.ToString());
+                debug("[Exception][getRGB_fromColor]", ex.ToString());
             }
             return rgb;
         }
@@ -144,13 +145,18 @@ namespace SHColorPicker
         {
             if(isDebug) System.Diagnostics.Debug.WriteLine(msg);
         }
+
         /// <summary>
         /// debug 용 메서드
         /// </summary>
         /// <param name="msg"></param>
-        private void debug(string msg,string msg2)
+        private void debug(string msg, string msg2)
         {
-            debug(msg+msg2);
+            StringBuilder sb = new StringBuilder();
+            sb.Append(msg);
+            sb.Append(msg2);
+            debug(sb.ToString());
+            sb.Clear();
         }
     }
 }

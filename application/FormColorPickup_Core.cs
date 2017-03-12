@@ -1,5 +1,7 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Imaging;
+using System.Text;
 using System.Windows.Forms;
 
 namespace SHColorPicker
@@ -88,7 +90,15 @@ namespace SHColorPicker
 
             // 미리보기 이미지 를 생성
             //bitmapPreview = createPreviewBitmap(ptPreviewImageCompress, szPreviewImageCompress);
-            drawPreviewBitmap(ptPreviewCompress, szPreviewCompress, bitmapPreview);
+            try
+            {
+                drawPreviewBitmap(ptPreviewCompress, szPreviewCompress, bitmapPreview);
+            }
+            catch (Exception ex)
+            {
+                debug("[Exception][callEventColorPickup-drawPreviewBitmap]", ex.ToString());
+                return;
+            }
 
             // 색상코드 를 추출. 부모창에 대입.
             mParentForm.generateView_fromColor(getColor_fromImage(bitmapPreview));
@@ -106,25 +116,32 @@ namespace SHColorPicker
         /// <returns></returns>
         private void drawPreviewBitmap(Point _pointStart, Size _sizeImage,Image _PreviewImage)
         {
-            // 임시 bitmap 생성. compress 사이즈 로 생성. using 내의 new 는 자동 해제
-            using (Bitmap bitmap = new Bitmap(_sizeImage.Width, _sizeImage.Height, PixelFormat.Format32bppArgb))
+            try
             {
-                // 임시 bitmap 을 기준으로 grahipcs 를 시작.
-                using (Graphics g = Graphics.FromImage(bitmap))
+                // 임시 bitmap 생성. compress 사이즈 로 생성. using 내의 new 는 자동 해제
+                using (Bitmap bitmap = new Bitmap(_sizeImage.Width, _sizeImage.Height, PixelFormat.Format32bppArgb))
                 {
-                    // 인수:스크린좌표,그리기시작좌표,그리는사이즈.
-                    g.CopyFromScreen(_pointStart, ptZero, _sizeImage);
-                }
+                    // 임시 bitmap 을 기준으로 grahipcs 를 시작.
+                    using (Graphics g = Graphics.FromImage(bitmap))
+                    {
+                        // 인수:스크린좌표,그리기시작좌표,그리는사이즈.
+                        g.CopyFromScreen(_pointStart, ptZero, _sizeImage);
+                    }
 
-                // 이미지 의 확대 동작
-                using (Graphics g = Graphics.FromImage(_PreviewImage))
-                {
-                    //이 항목이 있어야 선명하게 확대가 된다.
-                    g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+                    // 이미지 의 확대 동작
+                    using (Graphics g = Graphics.FromImage(_PreviewImage))
+                    {
+                        //이 항목이 있어야 선명하게 확대가 된다.
+                        g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
 
-                    //이미지 확대 (bitmap 의 크기가 작고, szPreviewImage 의 크기가 커서 확대가 됨)
-                    g.DrawImage(bitmap, 0, 0, szPreviewImage.Width, szPreviewImage.Height);
+                        //이미지 확대 (bitmap 의 크기가 작고, szPreviewImage 의 크기가 커서 확대가 됨)
+                        g.DrawImage(bitmap, 0, 0, szPreviewImage.Width, szPreviewImage.Height);
+                    }
                 }
+            } catch (Exception ex)
+            {
+                debug("[Exception][drawPreviewBitmap]",ex.ToString());
+                throw;
             }
         }
 
@@ -150,13 +167,18 @@ namespace SHColorPicker
         {
             if(isDebug) System.Diagnostics.Debug.WriteLine(msg);
         }
+
         /// <summary>
         /// debug 용 메서드
         /// </summary>
         /// <param name="msg"></param>
         private void debug(string msg, string msg2)
         {
-            debug(msg + msg2);
+            StringBuilder sb = new StringBuilder();
+            sb.Append(msg);
+            sb.Append(msg2);
+            debug(sb.ToString());
+            sb.Clear();
         }
     }
 }
