@@ -59,11 +59,13 @@
             // 
             this.txtColorCodeR.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtColorCodeR.Location = new System.Drawing.Point(160, 20);
+            this.txtColorCodeR.MaxLength = 3;
             this.txtColorCodeR.Name = "txtColorCodeR";
             this.txtColorCodeR.Size = new System.Drawing.Size(44, 24);
             this.txtColorCodeR.TabIndex = 11;
-            this.txtColorCodeR.TextChanged += new System.EventHandler(this.txtColorCodeR_TextChanged);
-            this.txtColorCodeR.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtColorCodeR_KeyDown);
+            this.txtColorCodeR.TextChanged += new System.EventHandler(this.txtColorCode_TextChanged);
+            this.txtColorCodeR.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtColorCode_KeyDown);
+            this.txtColorCodeR.Leave += new System.EventHandler(this.txtColorCode_Leave);
             // 
             // label_R
             // 
@@ -96,30 +98,37 @@
             // 
             this.txtColorCodeB.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtColorCodeB.Location = new System.Drawing.Point(160, 82);
+            this.txtColorCodeB.MaxLength = 3;
             this.txtColorCodeB.Name = "txtColorCodeB";
             this.txtColorCodeB.Size = new System.Drawing.Size(44, 24);
             this.txtColorCodeB.TabIndex = 13;
-            this.txtColorCodeB.TextChanged += new System.EventHandler(this.txtColorCodeB_TextChanged);
-            this.txtColorCodeB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtColorCodeB_KeyDown);
+            this.txtColorCodeB.TextChanged += new System.EventHandler(this.txtColorCode_TextChanged);
+            this.txtColorCodeB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtColorCode_KeyDown);
+            this.txtColorCodeB.Leave += new System.EventHandler(this.txtColorCode_Leave);
             // 
             // txtColorCodeG
             // 
             this.txtColorCodeG.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtColorCodeG.Location = new System.Drawing.Point(160, 52);
+            this.txtColorCodeG.MaxLength = 3;
             this.txtColorCodeG.Name = "txtColorCodeG";
             this.txtColorCodeG.Size = new System.Drawing.Size(44, 24);
             this.txtColorCodeG.TabIndex = 12;
-            this.txtColorCodeG.TextChanged += new System.EventHandler(this.txtColorCodeG_TextChanged);
-            this.txtColorCodeG.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtColorCodeG_KeyDown);
+            this.txtColorCodeG.TextChanged += new System.EventHandler(this.txtColorCode_TextChanged);
+            this.txtColorCodeG.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtColorCode_KeyDown);
+            this.txtColorCodeG.Leave += new System.EventHandler(this.txtColorCode_Leave);
             // 
             // txtColorCodeFF
             // 
             this.txtColorCodeFF.BackColor = System.Drawing.Color.White;
+            this.txtColorCodeFF.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtColorCodeFF.Location = new System.Drawing.Point(13, 142);
+            this.txtColorCodeFF.MaxLength = 7;
             this.txtColorCodeFF.Name = "txtColorCodeFF";
-            this.txtColorCodeFF.ReadOnly = true;
             this.txtColorCodeFF.Size = new System.Drawing.Size(190, 24);
             this.txtColorCodeFF.TabIndex = 14;
+            this.txtColorCodeFF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtColorCodeFF_KeyPress);
+            this.txtColorCodeFF.Leave += new System.EventHandler(this.txtColorCodeFF_Leave);
             // 
             // label_FF
             // 
@@ -215,19 +224,22 @@
             // 
             // txtColorCodeRGB
             // 
+            this.txtColorCodeRGB.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txtColorCodeRGB.Location = new System.Drawing.Point(13, 197);
+            this.txtColorCodeRGB.MaxLength = 20;
             this.txtColorCodeRGB.Name = "txtColorCodeRGB";
             this.txtColorCodeRGB.Size = new System.Drawing.Size(191, 24);
             this.txtColorCodeRGB.TabIndex = 18;
+            this.txtColorCodeRGB.Leave += new System.EventHandler(this.txtColorCodeRGB_Leave);
             // 
             // label_RGB
             // 
             this.label_RGB.AutoSize = true;
             this.label_RGB.Location = new System.Drawing.Point(12, 178);
             this.label_RGB.Name = "label_RGB";
-            this.label_RGB.Size = new System.Drawing.Size(70, 15);
+            this.label_RGB.Size = new System.Drawing.Size(73, 15);
             this.label_RGB.TabIndex = 17;
-            this.label_RGB.Text = "RGB Html";
+            this.label_RGB.Text = "Web RGB";
             // 
             // button1
             // 
