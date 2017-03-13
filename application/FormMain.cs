@@ -2,20 +2,13 @@
 using System.Deployment.Application;
 using System.Diagnostics;//debug용
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.IO;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace Image_Capture
 {
     public partial class FormMain : Form
     {
-        /// <summary>
-        /// version 정보
-        /// </summary>
-        const string version = "1.0.30";
-
         /// <summary>
         /// 화면상의 미리보기 비트맵 개체
         /// 주로 인스턴스로 사용되어서, picturebox.image 에 넣어지기 전까지 존재한다.
@@ -53,7 +46,6 @@ namespace Image_Capture
         /// </summary>
         public FormMain()
         {
-            SetAddRemoveProgramsIcon();
             InitializeComponent();//컴포넌트 초기화 메서드(기본적으로 들어감)
         }
 
@@ -115,19 +107,6 @@ namespace Image_Capture
 
         }
 
-        private void MainForm_activated(object sender, EventArgs e)
-        {
-            //debug("[]MainForm_activated");
-            //Cursor.Show();
-        }
-
-        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //e.Cancel = true;
-            //this.Visible = false;
-            //this.hide(sender, e);
-        }
-
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             this.showForm();
@@ -176,50 +155,6 @@ namespace Image_Capture
         }
 
         /// <summary>
-        /// ClickOnce 설치 의 경우, 제어판-프로그램추가/삭제 에서 아이콘 표시가 안 나온다. 그 부분을 보정하는 소스.
-        /// </summary>
-        private static void SetAddRemoveProgramsIcon()
-        {
-            //only run if deployed
-            //clickonce 의 경우에만, currentdeployment 값을 가진다고 한다.
-            //clickOnce 여부는 isNetworkDeployed 값으로 판단한다.
-            if (ApplicationDeployment.IsNetworkDeployed
-                 && ApplicationDeployment.CurrentDeployment.IsFirstRun)
-            {
-                try
-                {
-                    //the icon is included in this program
-                    string iconSourcePath = Path.Combine(System.Windows.Forms.Application.StartupPath, "MainIcon.ico");
-
-                    if (!File.Exists(iconSourcePath))
-                        return;
-
-                    Microsoft.Win32.RegistryKey myUninstallKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Uninstall");
-                    string[] mySubKeyNames = myUninstallKey.GetSubKeyNames();
-                    for (int i = 0; i < mySubKeyNames.Length; i++)
-                    {
-                        Microsoft.Win32.RegistryKey myKey = myUninstallKey.OpenSubKey(mySubKeyNames[i], true);
-                        object myValue = myKey.GetValue("UrlUpdateInfo");
-                        if(myValue != null)
-                        {
-                            string updateinfo = myValue.ToString();
-                            string updateLocation = ApplicationDeployment.CurrentDeployment.UpdateLocation.ToString();
-                            if (updateinfo==updateLocation)
-                            {
-                                myKey.SetValue("DisplayIcon", iconSourcePath);
-                                break;
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message.ToString());
-                }
-            }
-        }
-
-        /// <summary>
         /// debug 용 메서드
         /// </summary>
         /// <param name="msg"></param>
@@ -241,7 +176,6 @@ namespace Image_Capture
                 MessageBox.Show(result);
             }
         }
-
 
         /// <summary>
         /// 미리보기 이미지 에 이미지를 지정
@@ -276,11 +210,6 @@ namespace Image_Capture
             this.Opacity = 0;
             this.Visible = false;
             //this.WindowState = FormWindowState.Minimized;
-        }
-
-        private void btnAbout_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(string.Format("Version : {0}", version), "이 프로그램은?");
         }
     }
 }

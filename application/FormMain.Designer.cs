@@ -143,7 +143,6 @@
             this.btnAbout.TabIndex = 20;
             this.btnAbout.Text = "About";
             this.btnAbout.UseVisualStyleBackColor = false;
-            this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
             // 
             // FormMain
             // 
@@ -161,8 +160,6 @@
             this.MaximizeBox = false;
             this.Name = "FormMain";
             this.Text = "SH Screen Capture";
-            this.Activated += new System.EventHandler(this.MainForm_activated);
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.Resize += new System.EventHandler(this.FormMain_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.imgPreview)).EndInit();
