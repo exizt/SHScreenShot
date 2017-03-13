@@ -225,7 +225,7 @@
             // txtColorCodeRGB
             // 
             this.txtColorCodeRGB.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.txtColorCodeRGB.Location = new System.Drawing.Point(13, 197);
+            this.txtColorCodeRGB.Location = new System.Drawing.Point(13, 202);
             this.txtColorCodeRGB.MaxLength = 20;
             this.txtColorCodeRGB.Name = "txtColorCodeRGB";
             this.txtColorCodeRGB.Size = new System.Drawing.Size(191, 24);
@@ -235,7 +235,7 @@
             // label_RGB
             // 
             this.label_RGB.AutoSize = true;
-            this.label_RGB.Location = new System.Drawing.Point(12, 178);
+            this.label_RGB.Location = new System.Drawing.Point(12, 183);
             this.label_RGB.Name = "label_RGB";
             this.label_RGB.Size = new System.Drawing.Size(73, 15);
             this.label_RGB.TabIndex = 17;
@@ -266,7 +266,7 @@
             this.Controls.Add(this.btnPickup);
             this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = Properties.Resources.MainIcon;
             this.MaximizeBox = false;
             this.Name = "FormMain";
             this.Text = "SH Color Picker";
