@@ -39,25 +39,25 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.btnFullCapture = new System.Windows.Forms.Button();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.savefileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.btnFolderOpen = new System.Windows.Forms.Button();
-            this.FolderBD_SShot = new System.Windows.Forms.FolderBrowserDialog();
+            this.folderbrowserDialog_SShot = new System.Windows.Forms.FolderBrowserDialog();
             this.btnCaptureArea = new System.Windows.Forms.Button();
-            this.imgPreview = new System.Windows.Forms.PictureBox();
+            this.picboxPreview = new System.Windows.Forms.PictureBox();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnAbout = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.imgPreview)).BeginInit();
+            this.labelPreviewTitle = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.picboxPreview)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnFullCapture
             // 
             this.btnFullCapture.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnFullCapture.FlatAppearance.BorderSize = 0;
             this.btnFullCapture.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFullCapture.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btnFullCapture.Font = new System.Drawing.Font("돋움", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnFullCapture.ForeColor = System.Drawing.Color.White;
             this.btnFullCapture.Location = new System.Drawing.Point(25, 21);
             this.btnFullCapture.Name = "btnFullCapture";
@@ -70,6 +70,7 @@
             // btnFolderOpen
             // 
             this.btnFolderOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFolderOpen.Font = new System.Drawing.Font("돋움", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnFolderOpen.Location = new System.Drawing.Point(350, 97);
             this.btnFolderOpen.Name = "btnFolderOpen";
             this.btnFolderOpen.Size = new System.Drawing.Size(108, 39);
@@ -83,7 +84,7 @@
             this.btnCaptureArea.BackColor = System.Drawing.Color.PaleTurquoise;
             this.btnCaptureArea.FlatAppearance.BorderSize = 0;
             this.btnCaptureArea.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCaptureArea.Font = new System.Drawing.Font("굴림", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btnCaptureArea.Font = new System.Drawing.Font("돋움", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnCaptureArea.ForeColor = System.Drawing.Color.White;
             this.btnCaptureArea.Location = new System.Drawing.Point(175, 21);
             this.btnCaptureArea.Name = "btnCaptureArea";
@@ -93,14 +94,14 @@
             this.btnCaptureArea.UseVisualStyleBackColor = false;
             this.btnCaptureArea.Click += new System.EventHandler(this.btnCaptureArea_Click);
             // 
-            // imgPreview
+            // picboxPreview
             // 
-            this.imgPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.imgPreview.Location = new System.Drawing.Point(25, 97);
-            this.imgPreview.Name = "imgPreview";
-            this.imgPreview.Size = new System.Drawing.Size(306, 191);
-            this.imgPreview.TabIndex = 18;
-            this.imgPreview.TabStop = false;
+            this.picboxPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picboxPreview.Location = new System.Drawing.Point(25, 97);
+            this.picboxPreview.Name = "picboxPreview";
+            this.picboxPreview.Size = new System.Drawing.Size(306, 191);
+            this.picboxPreview.TabIndex = 18;
+            this.picboxPreview.TabStop = false;
             // 
             // notifyIcon1
             // 
@@ -125,33 +126,22 @@
             this.exitToolStripMenuItem.Text = "종료";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
-            // label1
+            // labelPreviewTitle
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 79);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
-            this.label1.TabIndex = 19;
-            this.label1.Text = "미리보기";
-            // 
-            // btnAbout
-            // 
-            this.btnAbout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAbout.Location = new System.Drawing.Point(350, 142);
-            this.btnAbout.Name = "btnAbout";
-            this.btnAbout.Size = new System.Drawing.Size(108, 39);
-            this.btnAbout.TabIndex = 20;
-            this.btnAbout.Text = "About";
-            this.btnAbout.UseVisualStyleBackColor = false;
+            this.labelPreviewTitle.AutoSize = true;
+            this.labelPreviewTitle.Location = new System.Drawing.Point(25, 79);
+            this.labelPreviewTitle.Name = "labelPreviewTitle";
+            this.labelPreviewTitle.Size = new System.Drawing.Size(53, 12);
+            this.labelPreviewTitle.TabIndex = 19;
+            this.labelPreviewTitle.Text = "미리보기";
             // 
             // FormMain
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(6, 14);
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(487, 319);
-            this.Controls.Add(this.btnAbout);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.imgPreview);
+            this.Controls.Add(this.labelPreviewTitle);
+            this.Controls.Add(this.picboxPreview);
             this.Controls.Add(this.btnCaptureArea);
             this.Controls.Add(this.btnFolderOpen);
             this.Controls.Add(this.btnFullCapture);
@@ -162,7 +152,7 @@
             this.Text = "SH Screen Capture";
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.Resize += new System.EventHandler(this.FormMain_Resize);
-            ((System.ComponentModel.ISupportInitialize)(this.imgPreview)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picboxPreview)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -171,17 +161,16 @@
 
         #endregion
 
+        private System.Windows.Forms.Label labelPreviewTitle;
         private System.Windows.Forms.Button btnFullCapture;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Button btnFolderOpen;
-        private System.Windows.Forms.FolderBrowserDialog FolderBD_SShot;
         private System.Windows.Forms.Button btnCaptureArea;
-        public System.Windows.Forms.PictureBox imgPreview;
+        public System.Windows.Forms.PictureBox picboxPreview;
+        private System.Windows.Forms.SaveFileDialog savefileDialog1;
+        private System.Windows.Forms.FolderBrowserDialog folderbrowserDialog_SShot;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnAbout;
     }
 }
 

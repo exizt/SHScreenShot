@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Deployment.Application;
-using System.Diagnostics;//debug용
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -10,36 +9,10 @@ namespace Image_Capture
     public partial class FormMain : Form
     {
         /// <summary>
-        /// 화면상의 미리보기 비트맵 개체
-        /// 주로 인스턴스로 사용되어서, picturebox.image 에 넣어지기 전까지 존재한다.
+        /// 로그 디버깅 옵션.
+        /// formCaptureArea 도 영향을 받는다.
         /// </summary>
-        Image previewImage;
-
-        /// <summary>
-        /// 결과 이미지
-        /// </summary>
-        private Image resultImage;
-
-        /// <summary>
-        /// point 0, 0
-        /// </summary>
-        Point ptZero = new Point(0, 0);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        string strFilePath = "";
-
-        /// <summary>
-        /// 결과 이미지의 사이즈 개체
-        /// </summary>
-        Size szResultImage = new Size(0, 0);
-
-        /// <summary>
-        /// 미리보기 이미지의 사이즈 값.
-        /// 윈도우 설정에 따라 변경 될 수 있으므로, Load 된 이후에 실제 크기(픽셀) 을 알아온다.
-        /// </summary>
-        public Size szPreviewImage;
+        public bool isDebug = false;
 
         /// <summary>
         /// 생성자 메서드
@@ -65,7 +38,7 @@ namespace Image_Capture
 
             //미리보기 이미지의 사이즈 를 가져온다.
             //폼 컨트롤의 크기를 처리 할 때에는 최소 Load 이후에 하도록 한다.(생성자에 넣으면 버그 발생 가능성 있음)
-            szPreviewImage = imgPreview.Size;
+            szPreviewImage = picboxPreview.Size;
 
             //미리보기 이미지 객체 생성
             previewImage = new Bitmap(szPreviewImage.Width, szPreviewImage.Height);
@@ -92,7 +65,6 @@ namespace Image_Capture
             nForm.Show();
         }
 
-
         /// <summary>
         /// 이벤트 메서드.클릭. 폴더 열기 버튼 클릭시 동작.
         /// </summary>
@@ -101,28 +73,44 @@ namespace Image_Capture
         private void btnFolderOpen_Click(object sender, EventArgs e)
         {
             if (strFilePath != "")
-                Process.Start("explorer.exe", Path.GetDirectoryName(strFilePath));
-            else
-                Process.Start("explorer.exe", FileSave_Auto_Dir());
-
+            {
+                System.Diagnostics.Process.Start("explorer.exe", Path.GetDirectoryName(strFilePath));
+            } else
+            {
+                System.Diagnostics.Process.Start("explorer.exe", FileSave_Auto_Dir());
+            }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             this.showForm();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
         {
             this.showForm();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void hide(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;
             this.hideForm();
         }
-
 
         /// <summary>
         /// 
@@ -152,64 +140,6 @@ namespace Image_Capture
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        /// <summary>
-        /// debug 용 메서드
-        /// </summary>
-        /// <param name="msg"></param>
-        private void debug(string msg)
-        {
-            Debug.WriteLine(msg);
-        }
-
-        private void tester()
-        {
-            if (ApplicationDeployment.IsNetworkDeployed
-                 && ApplicationDeployment.CurrentDeployment.IsFirstRun)
-            {
-                string result = "";
-                result += "ActivationUri[" + ApplicationDeployment.CurrentDeployment.ActivationUri + "]";
-                result += "CurrentVersion[" + ApplicationDeployment.CurrentDeployment.CurrentVersion + "]";
-                result += "UpdatedVersion[" + ApplicationDeployment.CurrentDeployment.UpdatedVersion + "]";
-                result += "UpdateLocation[" + ApplicationDeployment.CurrentDeployment.UpdateLocation + "]";
-                MessageBox.Show(result);
-            }
-        }
-
-        /// <summary>
-        /// 미리보기 이미지 에 이미지를 지정
-        /// </summary>
-        /// <param name="_image">지정할 이미지</param>
-        public void setImgPreview_Image(Image _image)
-        {
-            imgPreview.Image = _image;
-        }
-
-
-        public void setImgPreview_BackgroundImage(Image _image)
-        {
-            imgPreview.BackgroundImage = _image;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void showForm()
-        {
-            this.Visible = true;//활성화
-            this.Opacity = 100;
-            this.WindowState = FormWindowState.Normal;//폼의 상태를 일반 상태로 되돌림.
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void hideForm()
-        {
-            this.Opacity = 0;
-            this.Visible = false;
-            //this.WindowState = FormWindowState.Minimized;
         }
     }
 }

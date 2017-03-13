@@ -1,10 +1,9 @@
-﻿using System;
-using System.Diagnostics;//debug용
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Threading;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
+using System.Text;
 
 /// <summary>
 /// 전체 화면 스크린 캡쳐 기능 을 모아놓음
@@ -13,6 +12,56 @@ namespace Image_Capture
 {
     public partial class FormMain : Form
     {
+        /// <summary>
+        /// 화면상의 미리보기 비트맵 개체
+        /// 주로 인스턴스로 사용되어서, picturebox.image 에 넣어지기 전까지 존재한다.
+        /// </summary>
+        Image previewImage;
+
+        /// <summary>
+        /// 결과 이미지
+        /// </summary>
+        private Image resultImage;
+
+        /// <summary>
+        /// point 0, 0
+        /// </summary>
+        Point ptZero = new Point(0, 0);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        string strFilePath = "";
+
+        /// <summary>
+        /// 결과 이미지의 사이즈 개체
+        /// </summary>
+        Size szResultImage = new Size(0, 0);
+
+        /// <summary>
+        /// 미리보기 이미지의 사이즈 값.
+        /// 윈도우 설정에 따라 변경 될 수 있으므로, Load 된 이후에 실제 크기(픽셀) 을 알아온다.
+        /// </summary>
+        public Size szPreviewImage;
+
+        /// <summary>
+        /// 미리보기 이미지 에 이미지를 지정
+        /// </summary>
+        /// <param name="_image">지정할 이미지</param>
+        public void setImgPreview_Image(Image _image)
+        {
+            picboxPreview.Image = _image;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="_image"></param>
+        public void setImgPreview_BackgroundImage(Image _image)
+        {
+            picboxPreview.BackgroundImage = _image;
+        }
+
         /// <summary>
         /// 전체 스크린샷 메서드
         /// </summary>
@@ -89,7 +138,7 @@ namespace Image_Capture
                     g.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
                     //미리보기 화면상에 지정
-                    imgPreview.Image = previewImage;
+                    picboxPreview.Image = previewImage;
                 }
             }
         }
@@ -106,6 +155,48 @@ namespace Image_Capture
                 SaveFile_Dialog();
 
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void showForm()
+        {
+            this.Visible = true;//활성화
+            this.Opacity = 100;
+            this.WindowState = FormWindowState.Normal;//폼의 상태를 일반 상태로 되돌림.
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void hideForm()
+        {
+            this.Opacity = 0;
+            this.Visible = false;
+            //this.WindowState = FormWindowState.Minimized;
+        }
+
+        /// <summary>
+        /// debug 용 메서드
+        /// </summary>
+        /// <param name="msg"></param>
+        private void debug(string msg)
+        {
+            if (isDebug) System.Diagnostics.Debug.WriteLine(msg);
+        }
+
+        /// <summary>
+        /// debug 용 메서드
+        /// </summary>
+        /// <param name="msg"></param>
+        private void debug(string msg, string msg2)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(msg);
+            sb.Append(msg2);
+            debug(sb.ToString());
+            sb.Clear();
         }
     }
 }
