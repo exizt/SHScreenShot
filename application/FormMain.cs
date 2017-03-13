@@ -41,6 +41,7 @@ namespace SHColorPicker
             this.tboxColorCodeR.KeyPress += new KeyPressEventHandler(this.KeyPress_onlyNumeric);
             this.tboxColorCodeG.KeyPress += new KeyPressEventHandler(this.KeyPress_onlyNumeric);
             this.tboxColorCodeB.KeyPress += new KeyPressEventHandler(this.KeyPress_onlyNumeric);
+            bitmapPreview = new Bitmap(picboxPreview.Width, picboxPreview.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
         }
 
         /// <summary>
@@ -54,16 +55,10 @@ namespace SHColorPicker
             //Cursor.Hide();
 
             //2. 커서의 좌표를 통하여 색상을 추출한다.
-            FormColorPickup form = new FormColorPickup(this);
-            form.ShowDialog();
-
-            /*
             using (FormColorPickup form = new FormColorPickup(this))
             {
-                form.Show();
+                form.ShowDialog();
             }
-            */
-            
         }
 
         /// <summary>

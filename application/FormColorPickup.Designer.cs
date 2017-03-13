@@ -15,7 +15,6 @@
         {
             if (disposing && (components != null))
             {
-                bitmapPreview.Dispose();
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -76,7 +75,6 @@
             this.Controls.Add(this.picSpoidIcon);
             this.Controls.Add(this.picSection);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Icon = Properties.Resources.MainIcon;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ColorPickSpoid";

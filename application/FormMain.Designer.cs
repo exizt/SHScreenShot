@@ -17,6 +17,10 @@
             {
                 components.Dispose();
             }
+            if(disposing && (bitmapPreview != null))
+            {
+                bitmapPreview.Dispose();
+            }
             base.Dispose(disposing);
         }
 
