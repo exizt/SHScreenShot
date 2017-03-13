@@ -37,7 +37,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picSpoidIcon)).BeginInit();
             this.SuspendLayout();
             // 
-            // timerPickupColor
+            // timerPick
             // 
             this.timerPick.Interval = 1;
             this.timerPick.Tick += new System.EventHandler(this.timerPick_Tick);

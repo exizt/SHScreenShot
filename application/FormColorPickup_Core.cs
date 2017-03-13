@@ -47,11 +47,11 @@ namespace SHColorPicker
             }
 
             // 부모창의 미리보기 picturebox 의 Size 를 가져온다.
-            szPreviewImage = mParentForm.imgPreview.Size;
+            szPreviewImage = mParentForm.picboxPreview.Size;
 
             //부모창의 Preview 와 동일한 크기의 Bitmap 생성
             if (bitmapPreview != null) bitmapPreview.Dispose();
-            bitmapPreview = new Bitmap(mParentForm.imgPreview.Width, mParentForm.imgPreview.Height, PixelFormat.Format32bppArgb);
+            bitmapPreview = new Bitmap(mParentForm.picboxPreview.Width, mParentForm.picboxPreview.Height, PixelFormat.Format32bppArgb);
         }
 
         /// <summary>

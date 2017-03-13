@@ -38,9 +38,9 @@ namespace SHColorPicker
             {
                 Cursor.Show();
             }
-            this.txtColorCodeR.KeyPress += new KeyPressEventHandler(this.KeyPress_onlyNumeric);
-            this.txtColorCodeG.KeyPress += new KeyPressEventHandler(this.KeyPress_onlyNumeric);
-            this.txtColorCodeB.KeyPress += new KeyPressEventHandler(this.KeyPress_onlyNumeric);
+            this.tboxColorCodeR.KeyPress += new KeyPressEventHandler(this.KeyPress_onlyNumeric);
+            this.tboxColorCodeG.KeyPress += new KeyPressEventHandler(this.KeyPress_onlyNumeric);
+            this.tboxColorCodeB.KeyPress += new KeyPressEventHandler(this.KeyPress_onlyNumeric);
         }
 
         /// <summary>
@@ -67,13 +67,24 @@ namespace SHColorPicker
         }
 
         /// <summary>
-        /// 
+        /// [이벤트] 팔레트 버튼 클릭시
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void txtColorCode_KeyDown(object sender, KeyEventArgs e)
+        private void btnColorPaletteDialog_Click(object sender, EventArgs e)
         {
-            //changeColorRGBText();
+            Color color = getColor_fromColorDialog();
+            generateView_fromColor(color);
+        }
+
+        /// <summary>
+        /// 입력된 값으로 색상코드 추출
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtColorCode_KeyUp(object sender, KeyEventArgs e)
+        {
+            changeColorRGBText();
         }
 
         /// <summary>
@@ -99,28 +110,107 @@ namespace SHColorPicker
         }
 
         /// <summary>
-        /// [이벤트] 팔레트 버튼 클릭시
+        /// RGB () 형태의 입력값 으로 color 전환
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void button1_Click(object sender, EventArgs e)
+        private void txtColorCodeRGB_KeyUp(object sender, KeyEventArgs e)
         {
-            Color color = getColor_fromColorDialog();
-            generateView_fromColor(color);
+            if (string.IsNullOrEmpty((sender as TextBox).Text))
+            {
+                return;
+            }
+            Regex reg = new Regex(@"rgb\((\d+),(\d+),(\d+)\)");
+            Match match = reg.Match((sender as TextBox).Text.Replace(" ", "").ToLower());
+            if (match.Success)
+            {
+                try
+                {
+                    int colorR, colorG, colorB;
+                    string[] strs = (sender as TextBox).Text.Replace("RGB(", "").Replace(")", "").Split(new char[] { ',' });
+                    colorR = forcedStrtoInt(strs[0]);
+                    colorG = forcedStrtoInt(strs[1]);
+                    colorB = forcedStrtoInt(strs[2]);
+
+                    getnerateView_formColor(colorR, colorG, colorB);
+                }
+                catch (Exception ex)
+                {
+                    generateView_fromColor(Color.Black);
+                    debug("[Exception][txtColorCodeRGB_KeyUp]", ex.ToString());
+                }
+
+            }
+            else
+            {
+                debug("[txtColorCodeRGB_KeyUp] ColorCode [Hex] 입력값이 양식과 일치하지 않음");
+            }
 
         }
 
         /// <summary>
-        /// 
+        /// 입력된 값으로 색상코드 추출
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtColorCodeFF_KeyUp(object sender, KeyEventArgs e)
+        {
+            //debug("[txtColorCodeFF_KeyUp]");
+            if (string.IsNullOrEmpty((sender as TextBox).Text))
+            {
+                return;
+            }
+
+            Regex reg = new Regex(@"^#(([0-9a-fA-F]{2}){3}|([0-9a-fA-F]){3})$");
+            Match match = reg.Match((sender as TextBox).Text.Replace(" ", "").ToLower());
+            if (match.Success)
+            {
+                try
+                {
+                    Color color = ColorTranslator.FromHtml((sender as TextBox).Text);
+                    generateView_fromColor(color);
+                }
+                catch (Exception ex)
+                {
+                    generateView_fromColor(Color.Black);
+                    debug("[Exception][txtColorCodeFF_KeyUp]", ex.ToString());
+                }
+            }
+            else
+            {
+                debug("[txtColorCodeFF_KeyUp] ColorCode [Hex] 입력값이 양식과 일치하지 않음");
+            }
+        }
+
+        /// <summary>
+        /// #00FF11 과 같은 형태 입력받음. 입력문자 를 제한.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtColorCodeFF_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //debug("[txtColorCodeFF_KeyPress]");
+            char c = e.KeyChar;
+
+            if (
+                !(char.IsDigit(e.KeyChar) || (c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f') || (c == Convert.ToChar(35)) || c == Convert.ToChar(Keys.Back))
+               )
+            {
+                e.Handled = true;
+            }
+        }
+
+        /// <summary>
+        /// 색상 팔레트 다이얼로그 열기.
         /// </summary>
         /// <returns></returns>
         private Color getColor_fromColorDialog()
         {
             try
             {
-                if (colorDialog1.ShowDialog() == DialogResult.OK)
+                if (colordialog1.ShowDialog() == DialogResult.OK)
                 {
-                    return colorDialog1.Color;
+                    return colordialog1.Color;
                 }
                 else
                 {
@@ -274,125 +364,5 @@ namespace SHColorPicker
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txtColorCode_Leave(object sender, EventArgs e)
-        {
-            changeColorRGBText();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txtColorCodeFF_Leave(object sender, EventArgs e)
-        {
-            string str = (sender as TextBox).Text;
-            if (string.IsNullOrEmpty(str))
-            {
-                return;
-            }
-            
-            try
-            {
-                //int argb = Int32.Parse(str.Replace("#", ""), System.Globalization.NumberStyles.HexNumber);
-                //Color color = (Color)ColorConverter.ConvertFromString("#FFDFD991");
-                //color.FromArgb(argb);
-                Color color = ColorTranslator.FromHtml(str);
-                generateView_fromColor(color);
-            }
-            catch (Exception ex)
-            {
-                generateView_fromColor(Color.Black);
-                debug("[Exception][txtColorCodeFF_Leave]", ex.ToString());
-            }
-        }
-
-        /// <summary>
-        /// #00FF11 과 같은 형태 입력받음
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txtColorCodeFF_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            char c = e.KeyChar;
-
-            if (
-                !(char.IsDigit(e.KeyChar) || (c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f') || (c == Convert.ToChar(35)) || c == Convert.ToChar(Keys.Back))
-               )
-            {
-                e.Handled = true;
-            }
-        }
-
-        /// <summary>
-        /// 숫자만 입력받음
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void KeyPress_onlyNumeric(object sender, KeyPressEventArgs e)
-        {
-            //숫자만 입력되도록 필터링
-            //숫자와 백스페이스를 제외한 나머지를 바로 처리
-            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == Convert.ToChar(Keys.Back)))
-            {
-                e.Handled = true;
-            }
-        }
-
-        /// <summary>
-        /// 숫자, 영문 만 입력받음
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void KeyPress_onlyAlphaNumeric(object sender, KeyPressEventArgs e)
-        {
-            if (!(char.IsLetterOrDigit(e.KeyChar) || e.KeyChar == Convert.ToChar(Keys.Back)))
-            {
-                e.Handled = true;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txtColorCodeRGB_Leave(object sender, EventArgs e)
-        {
-            string str = (sender as TextBox).Text;
-            str = str.Replace(" ", "");
-            if (string.IsNullOrEmpty(str))
-            {
-                return;
-            }
-            Regex reg = new Regex(@"rgb\((\d+),(\d+),(\d+)\)");
-            Match match = reg.Match(str.ToLower());
-            if (!match.Success)
-            {
-                debug("RGB () 가 양식과 일치하지 않음");
-                return;
-            }
-
-            try
-            {
-                int colorR, colorG, colorB;
-                string[] strs = str.Replace("RGB(", "").Replace(")", "").Split(new char[] { ',' });
-                colorR = forcedStrtoInt(strs[0]);
-                colorG = forcedStrtoInt(strs[1]);
-                colorB = forcedStrtoInt(strs[2]);
-
-                getnerateView_formColor(colorR, colorG, colorB);
-            }
-            catch (Exception ex)
-            {
-                generateView_fromColor(Color.Black);
-                debug("[Exception][txtColorCodeRGB_Leave]", ex.ToString());
-            }
-        }
     }
 }

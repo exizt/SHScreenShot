@@ -113,9 +113,8 @@ namespace SHColorPicker
         /// </summary>
         private void closePicker()
         {
-            Cursor.Show();
             timerPick.Stop();
-
+            Cursor.Show();
             Close();
         }
 

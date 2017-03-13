@@ -30,114 +30,111 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            this.txtColorCodeR = new System.Windows.Forms.TextBox();
-            this.label_R = new System.Windows.Forms.Label();
-            this.label_G = new System.Windows.Forms.Label();
-            this.label_B = new System.Windows.Forms.Label();
-            this.txtColorCodeB = new System.Windows.Forms.TextBox();
-            this.txtColorCodeG = new System.Windows.Forms.TextBox();
-            this.txtColorCodeFF = new System.Windows.Forms.TextBox();
-            this.label_FF = new System.Windows.Forms.Label();
+            this.tboxColorCodeR = new System.Windows.Forms.TextBox();
+            this.labelR = new System.Windows.Forms.Label();
+            this.labelG = new System.Windows.Forms.Label();
+            this.labelB = new System.Windows.Forms.Label();
+            this.tboxColorCodeB = new System.Windows.Forms.TextBox();
+            this.tboxColorCodeG = new System.Windows.Forms.TextBox();
+            this.tboxColorCodeFF = new System.Windows.Forms.TextBox();
+            this.labelFF = new System.Windows.Forms.Label();
             this.btnPickup = new System.Windows.Forms.Button();
-            this.imgResultColor = new System.Windows.Forms.PictureBox();
-            this.imgPreview = new System.Windows.Forms.PictureBox();
+            this.picboxResultColor = new System.Windows.Forms.PictureBox();
+            this.picboxPreview = new System.Windows.Forms.PictureBox();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtColorCodeRGB = new System.Windows.Forms.TextBox();
-            this.label_RGB = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.imgResultColor)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgPreview)).BeginInit();
+            this.colordialog1 = new System.Windows.Forms.ColorDialog();
+            this.gboxResult = new System.Windows.Forms.GroupBox();
+            this.tboxColorCodeRGB = new System.Windows.Forms.TextBox();
+            this.labelRGB = new System.Windows.Forms.Label();
+            this.btnColorPalette = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.picboxResultColor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picboxPreview)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.gboxResult.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtColorCodeR
             // 
-            this.txtColorCodeR.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.txtColorCodeR.Location = new System.Drawing.Point(160, 20);
-            this.txtColorCodeR.MaxLength = 3;
-            this.txtColorCodeR.Name = "txtColorCodeR";
-            this.txtColorCodeR.Size = new System.Drawing.Size(44, 24);
-            this.txtColorCodeR.TabIndex = 11;
-            this.txtColorCodeR.TextChanged += new System.EventHandler(this.txtColorCode_TextChanged);
-            this.txtColorCodeR.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtColorCode_KeyDown);
-            this.txtColorCodeR.Leave += new System.EventHandler(this.txtColorCode_Leave);
+            this.tboxColorCodeR.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.tboxColorCodeR.Location = new System.Drawing.Point(160, 20);
+            this.tboxColorCodeR.MaxLength = 3;
+            this.tboxColorCodeR.Name = "txtColorCodeR";
+            this.tboxColorCodeR.Size = new System.Drawing.Size(44, 24);
+            this.tboxColorCodeR.TabIndex = 11;
+            this.tboxColorCodeR.TextChanged += new System.EventHandler(this.txtColorCode_TextChanged);
+            this.tboxColorCodeR.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtColorCode_KeyUp);
             // 
             // label_R
             // 
-            this.label_R.AutoSize = true;
-            this.label_R.Location = new System.Drawing.Point(141, 23);
-            this.label_R.Name = "label_R";
-            this.label_R.Size = new System.Drawing.Size(17, 15);
-            this.label_R.TabIndex = 12;
-            this.label_R.Text = "R";
+            this.labelR.AutoSize = true;
+            this.labelR.Location = new System.Drawing.Point(141, 23);
+            this.labelR.Name = "label_R";
+            this.labelR.Size = new System.Drawing.Size(17, 15);
+            this.labelR.TabIndex = 12;
+            this.labelR.Text = "R";
             // 
             // label_G
             // 
-            this.label_G.AutoSize = true;
-            this.label_G.Location = new System.Drawing.Point(140, 55);
-            this.label_G.Name = "label_G";
-            this.label_G.Size = new System.Drawing.Size(18, 15);
-            this.label_G.TabIndex = 12;
-            this.label_G.Text = "G";
+            this.labelG.AutoSize = true;
+            this.labelG.Location = new System.Drawing.Point(140, 55);
+            this.labelG.Name = "label_G";
+            this.labelG.Size = new System.Drawing.Size(18, 15);
+            this.labelG.TabIndex = 12;
+            this.labelG.Text = "G";
             // 
             // label_B
             // 
-            this.label_B.AutoSize = true;
-            this.label_B.Location = new System.Drawing.Point(141, 85);
-            this.label_B.Name = "label_B";
-            this.label_B.Size = new System.Drawing.Size(17, 15);
-            this.label_B.TabIndex = 12;
-            this.label_B.Text = "B";
+            this.labelB.AutoSize = true;
+            this.labelB.Location = new System.Drawing.Point(141, 85);
+            this.labelB.Name = "label_B";
+            this.labelB.Size = new System.Drawing.Size(17, 15);
+            this.labelB.TabIndex = 12;
+            this.labelB.Text = "B";
             // 
             // txtColorCodeB
             // 
-            this.txtColorCodeB.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.txtColorCodeB.Location = new System.Drawing.Point(160, 82);
-            this.txtColorCodeB.MaxLength = 3;
-            this.txtColorCodeB.Name = "txtColorCodeB";
-            this.txtColorCodeB.Size = new System.Drawing.Size(44, 24);
-            this.txtColorCodeB.TabIndex = 13;
-            this.txtColorCodeB.TextChanged += new System.EventHandler(this.txtColorCode_TextChanged);
-            this.txtColorCodeB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtColorCode_KeyDown);
-            this.txtColorCodeB.Leave += new System.EventHandler(this.txtColorCode_Leave);
+            this.tboxColorCodeB.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.tboxColorCodeB.Location = new System.Drawing.Point(160, 82);
+            this.tboxColorCodeB.MaxLength = 3;
+            this.tboxColorCodeB.Name = "txtColorCodeB";
+            this.tboxColorCodeB.Size = new System.Drawing.Size(44, 24);
+            this.tboxColorCodeB.TabIndex = 13;
+            this.tboxColorCodeB.TextChanged += new System.EventHandler(this.txtColorCode_TextChanged);
+            this.tboxColorCodeB.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtColorCode_KeyUp);
             // 
             // txtColorCodeG
             // 
-            this.txtColorCodeG.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.txtColorCodeG.Location = new System.Drawing.Point(160, 52);
-            this.txtColorCodeG.MaxLength = 3;
-            this.txtColorCodeG.Name = "txtColorCodeG";
-            this.txtColorCodeG.Size = new System.Drawing.Size(44, 24);
-            this.txtColorCodeG.TabIndex = 12;
-            this.txtColorCodeG.TextChanged += new System.EventHandler(this.txtColorCode_TextChanged);
-            this.txtColorCodeG.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtColorCode_KeyDown);
-            this.txtColorCodeG.Leave += new System.EventHandler(this.txtColorCode_Leave);
+            this.tboxColorCodeG.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.tboxColorCodeG.Location = new System.Drawing.Point(160, 52);
+            this.tboxColorCodeG.MaxLength = 3;
+            this.tboxColorCodeG.Name = "txtColorCodeG";
+            this.tboxColorCodeG.Size = new System.Drawing.Size(44, 24);
+            this.tboxColorCodeG.TabIndex = 12;
+            this.tboxColorCodeG.TextChanged += new System.EventHandler(this.txtColorCode_TextChanged);
+            this.tboxColorCodeG.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtColorCode_KeyUp);
             // 
             // txtColorCodeFF
             // 
-            this.txtColorCodeFF.BackColor = System.Drawing.Color.White;
-            this.txtColorCodeFF.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.txtColorCodeFF.Location = new System.Drawing.Point(13, 142);
-            this.txtColorCodeFF.MaxLength = 7;
-            this.txtColorCodeFF.Name = "txtColorCodeFF";
-            this.txtColorCodeFF.Size = new System.Drawing.Size(190, 24);
-            this.txtColorCodeFF.TabIndex = 14;
-            this.txtColorCodeFF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtColorCodeFF_KeyPress);
-            this.txtColorCodeFF.Leave += new System.EventHandler(this.txtColorCodeFF_Leave);
+            this.tboxColorCodeFF.BackColor = System.Drawing.Color.White;
+            this.tboxColorCodeFF.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.tboxColorCodeFF.Location = new System.Drawing.Point(13, 142);
+            this.tboxColorCodeFF.MaxLength = 7;
+            this.tboxColorCodeFF.Name = "txtColorCodeFF";
+            this.tboxColorCodeFF.Size = new System.Drawing.Size(190, 24);
+            this.tboxColorCodeFF.TabIndex = 14;
+            this.tboxColorCodeFF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtColorCodeFF_KeyPress);
+            this.tboxColorCodeFF.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtColorCodeFF_KeyUp);
             // 
             // label_FF
             // 
-            this.label_FF.AutoSize = true;
-            this.label_FF.Location = new System.Drawing.Point(11, 119);
-            this.label_FF.Name = "label_FF";
-            this.label_FF.Size = new System.Drawing.Size(41, 15);
-            this.label_FF.TabIndex = 14;
-            this.label_FF.Text = "#html";
+            this.labelFF.AutoSize = true;
+            this.labelFF.Location = new System.Drawing.Point(11, 119);
+            this.labelFF.Name = "label_FF";
+            this.labelFF.Size = new System.Drawing.Size(41, 15);
+            this.labelFF.TabIndex = 14;
+            this.labelFF.Text = "#html";
             // 
             // btnPickup
             // 
@@ -158,23 +155,23 @@
             // 
             // imgResultColor
             // 
-            this.imgResultColor.BackColor = System.Drawing.Color.White;
-            this.imgResultColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.imgResultColor.Location = new System.Drawing.Point(13, 20);
-            this.imgResultColor.Name = "imgResultColor";
-            this.imgResultColor.Size = new System.Drawing.Size(117, 87);
-            this.imgResultColor.TabIndex = 16;
-            this.imgResultColor.TabStop = false;
+            this.picboxResultColor.BackColor = System.Drawing.Color.White;
+            this.picboxResultColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picboxResultColor.Location = new System.Drawing.Point(13, 20);
+            this.picboxResultColor.Name = "imgResultColor";
+            this.picboxResultColor.Size = new System.Drawing.Size(117, 87);
+            this.picboxResultColor.TabIndex = 16;
+            this.picboxResultColor.TabStop = false;
             // 
             // imgPreview
             // 
-            this.imgPreview.BackColor = System.Drawing.Color.White;
-            this.imgPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.imgPreview.Location = new System.Drawing.Point(12, 12);
-            this.imgPreview.Name = "imgPreview";
-            this.imgPreview.Size = new System.Drawing.Size(247, 194);
-            this.imgPreview.TabIndex = 18;
-            this.imgPreview.TabStop = false;
+            this.picboxPreview.BackColor = System.Drawing.Color.White;
+            this.picboxPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picboxPreview.Location = new System.Drawing.Point(12, 12);
+            this.picboxPreview.Name = "imgPreview";
+            this.picboxPreview.Size = new System.Drawing.Size(247, 194);
+            this.picboxPreview.TabIndex = 18;
+            this.picboxPreview.TabStop = false;
             // 
             // notifyIcon1
             // 
@@ -201,72 +198,72 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox1.Controls.Add(this.txtColorCodeRGB);
-            this.groupBox1.Controls.Add(this.label_RGB);
-            this.groupBox1.Controls.Add(this.imgResultColor);
-            this.groupBox1.Controls.Add(this.txtColorCodeR);
-            this.groupBox1.Controls.Add(this.txtColorCodeB);
-            this.groupBox1.Controls.Add(this.txtColorCodeG);
-            this.groupBox1.Controls.Add(this.label_R);
-            this.groupBox1.Controls.Add(this.label_FF);
-            this.groupBox1.Controls.Add(this.label_G);
-            this.groupBox1.Controls.Add(this.txtColorCodeFF);
-            this.groupBox1.Controls.Add(this.label_B);
-            this.groupBox1.Font = new System.Drawing.Font("돋움", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.groupBox1.ForeColor = System.Drawing.Color.SlateBlue;
-            this.groupBox1.Location = new System.Drawing.Point(269, 7);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(221, 297);
-            this.groupBox1.TabIndex = 19;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "결과";
+            this.gboxResult.BackColor = System.Drawing.Color.Transparent;
+            this.gboxResult.Controls.Add(this.tboxColorCodeRGB);
+            this.gboxResult.Controls.Add(this.labelRGB);
+            this.gboxResult.Controls.Add(this.picboxResultColor);
+            this.gboxResult.Controls.Add(this.tboxColorCodeR);
+            this.gboxResult.Controls.Add(this.tboxColorCodeB);
+            this.gboxResult.Controls.Add(this.tboxColorCodeG);
+            this.gboxResult.Controls.Add(this.labelR);
+            this.gboxResult.Controls.Add(this.labelFF);
+            this.gboxResult.Controls.Add(this.labelG);
+            this.gboxResult.Controls.Add(this.tboxColorCodeFF);
+            this.gboxResult.Controls.Add(this.labelB);
+            this.gboxResult.Font = new System.Drawing.Font("돋움", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.gboxResult.ForeColor = System.Drawing.Color.SlateBlue;
+            this.gboxResult.Location = new System.Drawing.Point(269, 7);
+            this.gboxResult.Name = "groupBox1";
+            this.gboxResult.Size = new System.Drawing.Size(221, 297);
+            this.gboxResult.TabIndex = 19;
+            this.gboxResult.TabStop = false;
+            this.gboxResult.Text = "결과";
             // 
             // txtColorCodeRGB
             // 
-            this.txtColorCodeRGB.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.txtColorCodeRGB.Location = new System.Drawing.Point(13, 202);
-            this.txtColorCodeRGB.MaxLength = 20;
-            this.txtColorCodeRGB.Name = "txtColorCodeRGB";
-            this.txtColorCodeRGB.Size = new System.Drawing.Size(191, 24);
-            this.txtColorCodeRGB.TabIndex = 18;
-            this.txtColorCodeRGB.Leave += new System.EventHandler(this.txtColorCodeRGB_Leave);
+            this.tboxColorCodeRGB.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.tboxColorCodeRGB.Location = new System.Drawing.Point(13, 202);
+            this.tboxColorCodeRGB.MaxLength = 20;
+            this.tboxColorCodeRGB.Name = "txtColorCodeRGB";
+            this.tboxColorCodeRGB.Size = new System.Drawing.Size(191, 24);
+            this.tboxColorCodeRGB.TabIndex = 18;
+            this.tboxColorCodeRGB.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtColorCodeRGB_KeyUp);
             // 
             // label_RGB
             // 
-            this.label_RGB.AutoSize = true;
-            this.label_RGB.Location = new System.Drawing.Point(12, 183);
-            this.label_RGB.Name = "label_RGB";
-            this.label_RGB.Size = new System.Drawing.Size(73, 15);
-            this.label_RGB.TabIndex = 17;
-            this.label_RGB.Text = "Web RGB";
+            this.labelRGB.AutoSize = true;
+            this.labelRGB.Location = new System.Drawing.Point(12, 183);
+            this.labelRGB.Name = "label_RGB";
+            this.labelRGB.Size = new System.Drawing.Size(73, 15);
+            this.labelRGB.TabIndex = 17;
+            this.labelRGB.Text = "Web RGB";
             // 
-            // button1
+            // btnColorPaletteDialog
             // 
-            this.button1.BackColor = System.Drawing.Color.SteelBlue;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("돋움", 12F, System.Drawing.FontStyle.Bold);
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(12, 217);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(89, 87);
-            this.button1.TabIndex = 20;
-            this.button1.Text = "선택";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnColorPalette.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnColorPalette.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnColorPalette.Font = new System.Drawing.Font("돋움", 12F, System.Drawing.FontStyle.Bold);
+            this.btnColorPalette.ForeColor = System.Drawing.Color.White;
+            this.btnColorPalette.Location = new System.Drawing.Point(12, 217);
+            this.btnColorPalette.Name = "btnColorPaletteDialog";
+            this.btnColorPalette.Size = new System.Drawing.Size(89, 87);
+            this.btnColorPalette.TabIndex = 20;
+            this.btnColorPalette.Text = "선택";
+            this.btnColorPalette.UseVisualStyleBackColor = false;
+            this.btnColorPalette.Click += new System.EventHandler(this.btnColorPaletteDialog_Click);
             // 
             // FormMain
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(6, 14);
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(504, 320);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.imgPreview);
+            this.Controls.Add(this.btnColorPalette);
+            this.Controls.Add(this.gboxResult);
+            this.Controls.Add(this.picboxPreview);
             this.Controls.Add(this.btnPickup);
             this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = Properties.Resources.MainIcon;
+            this.Icon = global::SHColorPicker.Properties.Resources.MainIcon;
             this.MaximizeBox = false;
             this.Name = "FormMain";
             this.Text = "SH Color Picker";
@@ -274,35 +271,35 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.Resize += new System.EventHandler(this.FormMain_Resize);
-            ((System.ComponentModel.ISupportInitialize)(this.imgResultColor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgPreview)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picboxResultColor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picboxPreview)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gboxResult.ResumeLayout(false);
+            this.gboxResult.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.Label label_R;
-        private System.Windows.Forms.Label label_G;
-        private System.Windows.Forms.Label label_B;
-        public System.Windows.Forms.TextBox txtColorCodeR;
-        public System.Windows.Forms.TextBox txtColorCodeB;
-        public System.Windows.Forms.TextBox txtColorCodeG;
-        public System.Windows.Forms.TextBox txtColorCodeFF;
-        private System.Windows.Forms.Label label_FF;
+        private System.Windows.Forms.Label labelR;
+        private System.Windows.Forms.Label labelG;
+        private System.Windows.Forms.Label labelB;
+        private System.Windows.Forms.Label labelFF;
+        private System.Windows.Forms.Label labelRGB;
+        public System.Windows.Forms.TextBox tboxColorCodeR;
+        public System.Windows.Forms.TextBox tboxColorCodeB;
+        public System.Windows.Forms.TextBox tboxColorCodeG;
+        public System.Windows.Forms.TextBox tboxColorCodeFF;
+        private System.Windows.Forms.TextBox tboxColorCodeRGB;
         private System.Windows.Forms.Button btnPickup;
-        public System.Windows.Forms.PictureBox imgResultColor;
-        public System.Windows.Forms.PictureBox imgPreview;
+        private System.Windows.Forms.Button btnColorPalette;
+        private System.Windows.Forms.GroupBox gboxResult;
+        public System.Windows.Forms.PictureBox picboxResultColor;
+        public System.Windows.Forms.PictureBox picboxPreview;
+        private System.Windows.Forms.ColorDialog colordialog1;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ColorDialog colorDialog1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label_RGB;
-        private System.Windows.Forms.TextBox txtColorCodeRGB;
     }
 }
 
