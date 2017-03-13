@@ -8,6 +8,11 @@ namespace SHColorPicker
     public partial class FormMain : Form
     {
         /// <summary>
+        /// 미리보기 이미지 비트맵
+        /// </summary>
+        public Bitmap bitmapPreview;
+
+        /// <summary>
         /// R, G, B 코드, #FFF 코드 등을 생성해서 화면에 적용시킨다. 
         /// </summary>
         /// <param name="colorR"></param>
@@ -30,17 +35,17 @@ namespace SHColorPicker
         /// <param name="color"></param>
         public void generateView_fromColor(Color color)
         {
-            if(imgResultColor.BackColor == color)
+            if(picboxResultColor.BackColor == color)
             {
                 return;
             }
             debug("generateView_fromColor",color.ToString());
-            txtColorCodeR.Text = color.R.ToString();
-            txtColorCodeG.Text = color.G.ToString();
-            txtColorCodeB.Text = color.B.ToString();
-            txtColorCodeFF.Text = getHEX_fromColor(color);
-            txtColorCodeRGB.Text = getRGB_fromColor(color);
-            imgResultColor.BackColor = color;
+            tboxColorCodeR.Text = color.R.ToString();
+            tboxColorCodeG.Text = color.G.ToString();
+            tboxColorCodeB.Text = color.B.ToString();
+            tboxColorCodeFF.Text = getHEX_fromColor(color);
+            tboxColorCodeRGB.Text = getRGB_fromColor(color);
+            picboxResultColor.BackColor = color;
         }
 
         /// <summary>
@@ -65,9 +70,9 @@ namespace SHColorPicker
         /// </summary>
         private void changeColorRGBText()
         {
-            int colorR = forcedStrtoInt(txtColorCodeR.Text);
-            int colorG = forcedStrtoInt(txtColorCodeG.Text);
-            int colorB = forcedStrtoInt(txtColorCodeB.Text);
+            int colorR = forcedStrtoInt(tboxColorCodeR.Text);
+            int colorG = forcedStrtoInt(tboxColorCodeG.Text);
+            int colorB = forcedStrtoInt(tboxColorCodeB.Text);
 
             try
             {
@@ -135,6 +140,34 @@ namespace SHColorPicker
                 debug("[Exception][getRGB_fromColor]", ex.ToString());
             }
             return rgb;
+        }
+
+        /// <summary>
+        /// 숫자만 입력받음
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void KeyPress_onlyNumeric(object sender, KeyPressEventArgs e)
+        {
+            //숫자만 입력되도록 필터링
+            //숫자와 백스페이스를 제외한 나머지를 바로 처리
+            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == Convert.ToChar(Keys.Back)))
+            {
+                e.Handled = true;
+            }
+        }
+
+        /// <summary>
+        /// 숫자, 영문 만 입력받음
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void KeyPress_onlyAlphaNumeric(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsLetterOrDigit(e.KeyChar) || e.KeyChar == Convert.ToChar(Keys.Back)))
+            {
+                e.Handled = true;
+            }
         }
 
         /// <summary>

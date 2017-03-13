@@ -15,7 +15,6 @@
         {
             if (disposing && (components != null))
             {
-                bitmapPreview.Dispose();
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -37,7 +36,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picSpoidIcon)).BeginInit();
             this.SuspendLayout();
             // 
-            // timerPickupColor
+            // timerPick
             // 
             this.timerPick.Interval = 1;
             this.timerPick.Tick += new System.EventHandler(this.timerPick_Tick);
@@ -78,8 +77,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FormColorPickup";
-            this.Text = "ColorPickUp";
+            this.Name = "ColorPickSpoid";
+            this.Text = "Color Pick Spoid";
             this.TransparencyKey = System.Drawing.Color.Turquoise;
             this.Load += new System.EventHandler(this.FormColorPickup_Load);
             this.Click += new System.EventHandler(this.Form_Click);

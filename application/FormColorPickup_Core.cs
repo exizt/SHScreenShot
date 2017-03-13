@@ -21,7 +21,7 @@ namespace SHColorPicker
         /// <summary>
         /// 부모폼에 있는 미리보기 사이즈.
         /// </summary>
-        Size szPreviewImage;
+        Size szPreviewImage = new Size(0, 0);
 
         /// <summary>
         /// 미리보기 사이즈 를 배율을 역으로 축소시킨 사이즈.
@@ -30,11 +30,7 @@ namespace SHColorPicker
         Point ptPreviewCompress;
 
         /// <summary>
-        /// 미리보기 이미지 비트맵
-        /// </summary>
-        Bitmap bitmapPreview;
-
-        /// <summary>
+        /// 처음에 한번만 호출되는 메서드 이다.
         /// 부모창의 Preview 와 동일한 크기의 Bitmap 생성
         /// 기본창의 '미리보기' PictureBox 가 있는데, 이것과 동일한 크기의 Bitmap 을 생성해놓는 작업이다.
         /// </summary>
@@ -47,11 +43,8 @@ namespace SHColorPicker
             }
 
             // 부모창의 미리보기 picturebox 의 Size 를 가져온다.
-            szPreviewImage = mParentForm.imgPreview.Size;
-
-            //부모창의 Preview 와 동일한 크기의 Bitmap 생성
-            if (bitmapPreview != null) bitmapPreview.Dispose();
-            bitmapPreview = new Bitmap(mParentForm.imgPreview.Width, mParentForm.imgPreview.Height, PixelFormat.Format32bppArgb);
+            szPreviewImage.Width = mParentForm.picboxPreview.Size.Width;
+            szPreviewImage.Height = mParentForm.picboxPreview.Size.Height;
         }
 
         /// <summary>
@@ -92,7 +85,7 @@ namespace SHColorPicker
             //bitmapPreview = createPreviewBitmap(ptPreviewImageCompress, szPreviewImageCompress);
             try
             {
-                drawPreviewBitmap(ptPreviewCompress, szPreviewCompress, bitmapPreview);
+                drawPreviewBitmap(ptPreviewCompress, szPreviewCompress, mParentForm.bitmapPreview);
             }
             catch (Exception ex)
             {
@@ -101,10 +94,10 @@ namespace SHColorPicker
             }
 
             // 색상코드 를 추출. 부모창에 대입.
-            mParentForm.generateView_fromColor(getColor_fromImage(bitmapPreview));
+            mParentForm.generateView_fromColor(getColor_fromImage(mParentForm.bitmapPreview));
 
             // 결과를 부모창의 미리보기 이미지 에 대입
-            mParentForm.imgPreview.Image = bitmapPreview;
+            mParentForm.picboxPreview.Image = mParentForm.bitmapPreview;
          }
 
         /// <summary>
