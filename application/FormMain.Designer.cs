@@ -146,7 +146,7 @@
             this.Controls.Add(this.btnFolderOpen);
             this.Controls.Add(this.btnFullCapture);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = Properties.Resources.MainIcon;
             this.MaximizeBox = false;
             this.Name = "FormMain";
             this.Text = "SH Screen Capture";
