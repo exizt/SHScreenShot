@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Diagnostics;
 using System.Security.Permissions;
 
 /// <summary>
 /// 영역 캡처 다이얼로그
 /// 
-/// [메모]
 /// imgCaptureScreen 는 캡처영역의 사이즈(투명 영역의 사이즈)
 /// </summary>
 namespace Image_Capture
@@ -20,19 +18,9 @@ namespace Image_Capture
         FormMain mParentForm;
 
         /// <summary>
-        /// '영역 선택 창' 의 좌표
+        /// 로그 디버깅 옵션
         /// </summary>
-        Point ptScreenXY;
-
-        /// <summary>
-        /// '영억 선택 창' 의 크기
-        /// </summary>
-        Size szScreenWH;
-
-        /// <summary>
-        /// 로드가 완료되었는지 여부.
-        /// </summary>
-        bool loaded = false;
+        bool isDebug = false;
 
         /// <summary>
         /// 생성자
@@ -63,7 +51,7 @@ namespace Image_Capture
             getCapture();
 
             //로드여부 활성화
-            loaded = true;
+            isLoaded = true;
         }
 
         /// <summary>
@@ -74,7 +62,7 @@ namespace Image_Capture
         /// <param name="e"></param>
         private void FormCaptureArea_Resize(object sender, EventArgs e)
         {
-            if(loaded)
+            if(isLoaded)
             {
                 //투명영역의 크기 조절
                 setCaptureScreenSize();
@@ -96,9 +84,8 @@ namespace Image_Capture
         /// <param name="e"></param>
         private void FormCaptureArea_Move(object sender, EventArgs e)
         {
-            //debug("FormCaptureArea_Move 호출");
-
-            if (loaded)
+            debug("FormCaptureArea_Move 호출");
+            if (isLoaded)
             {
                 //캡처 이미지 생성
                 getCapture();
@@ -125,7 +112,6 @@ namespace Image_Capture
         [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-
             Keys key = keyData;
             if (key != Keys.ShiftKey)
             {
@@ -136,15 +122,5 @@ namespace Image_Capture
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
-
-        /// <summary>
-        /// debug method
-        /// </summary>
-        /// <param name="msg"></param>
-        private void debug(string msg)
-        {
-            Debug.WriteLine(msg);
-        }
-
     }
 }
