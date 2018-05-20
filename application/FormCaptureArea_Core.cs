@@ -58,6 +58,7 @@ namespace Image_Capture
             ptScreenXY.X = this.Location.X + (Width - ClientSize.Width) / 2;
             ptScreenXY.Y = this.Location.Y + (Height - ClientSize.Height - (Width - ClientSize.Width) / 2);
 
+            debug("ScreenXY["+ptScreenXY.ToString()+"] thisLocation["+ this.Location.ToString()+"] this.Size["+this.Size.ToString()+"] ClientSize["+ClientSize.ToString()+"]");
             // 선택영역의 가로 세로 크기 구하기.
             szScreenWH.Width = picboxCaptureScreen.Width;
             szScreenWH.Height = picboxCaptureScreen.Height;

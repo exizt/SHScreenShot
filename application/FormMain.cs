@@ -12,9 +12,7 @@ namespace Image_Capture
         /// formCaptureArea 도 영향을 받는다.
         /// </summary>
         public bool isDebug = false;
-        private ScreenImageDrawer screenImageDrawer;
-
-        internal ScreenImageDrawer ScreenImageDrawer { get => screenImageDrawer; set => screenImageDrawer=value; }
+        internal ScreenImageDrawer ScreenImageDrawer { get;}
 
         /// <summary>
         /// 생성자 메서드
@@ -22,6 +20,9 @@ namespace Image_Capture
         public FormMain()
         {
             InitializeComponent();//컴포넌트 초기화 메서드(기본적으로 들어감)
+
+            // 스크린 이미지를 가져오는 클래스 생성. composition 으로.
+            ScreenImageDrawer = new ScreenImageDrawer(picboxPreview.Size);
         }
 
         /// <summary>
@@ -41,12 +42,6 @@ namespace Image_Capture
             //미리보기 이미지의 사이즈 를 가져온다.
             //폼 컨트롤의 크기를 처리 할 때에는 최소 Load 이후에 하도록 한다.(생성자에 넣으면 버그 발생 가능성 있음)
             szPreviewImage = picboxPreview.Size;
-
-            //미리보기 이미지 객체 생성
-            previewImage = new Bitmap(szPreviewImage.Width, szPreviewImage.Height);
-
-            // 스크린 이미지를 가져오는 클래스 생성. composition 으로.
-            ScreenImageDrawer = new ScreenImageDrawer(picboxPreview.Size);
         }
 
         /// <summary>

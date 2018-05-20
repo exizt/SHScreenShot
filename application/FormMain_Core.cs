@@ -13,12 +13,6 @@ namespace Image_Capture
     public partial class FormMain : Form
     {
         /// <summary>
-        /// 화면상의 미리보기 비트맵 개체
-        /// 주로 인스턴스로 사용되어서, picturebox.image 에 넣어지기 전까지 존재한다.
-        /// </summary>
-        Image previewImage;
-
-        /// <summary>
         /// 결과 이미지
         /// </summary>
         public Image resultImage;

@@ -21,10 +21,6 @@
             {
                 resultImage.Dispose();
             }
-            if (disposing && (previewImage != null))
-            {
-                previewImage.Dispose();
-            }
             base.Dispose(disposing);
         }
 

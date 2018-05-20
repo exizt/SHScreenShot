@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Image_Capture
 {
+
     class ScreenImageDrawer
     {
         private readonly Point ptZero = new Point(0, 0);
