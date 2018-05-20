@@ -57,9 +57,9 @@
             this.btnFullCapture.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnFullCapture.FlatAppearance.BorderSize = 0;
             this.btnFullCapture.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFullCapture.Font = new System.Drawing.Font("돋움", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btnFullCapture.ForeColor = System.Drawing.Color.Black;
-            this.btnFullCapture.Location = new System.Drawing.Point(12, 12);
+            this.btnFullCapture.Font = new System.Drawing.Font("돋움", 11F, System.Drawing.FontStyle.Bold);
+            this.btnFullCapture.ForeColor = System.Drawing.Color.White;
+            this.btnFullCapture.Location = new System.Drawing.Point(1, 1);
             this.btnFullCapture.Name = "btnFullCapture";
             this.btnFullCapture.Size = new System.Drawing.Size(108, 45);
             this.btnFullCapture.TabIndex = 1;
@@ -69,9 +69,10 @@
             // 
             // btnFolderOpen
             // 
+            this.btnFolderOpen.FlatAppearance.BorderSize = 0;
             this.btnFolderOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFolderOpen.Font = new System.Drawing.Font("돋움", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btnFolderOpen.Location = new System.Drawing.Point(12, 111);
+            this.btnFolderOpen.Location = new System.Drawing.Point(1, 88);
             this.btnFolderOpen.Name = "btnFolderOpen";
             this.btnFolderOpen.Size = new System.Drawing.Size(108, 42);
             this.btnFolderOpen.TabIndex = 2;
@@ -84,9 +85,9 @@
             this.btnCaptureArea.BackColor = System.Drawing.Color.PaleTurquoise;
             this.btnCaptureArea.FlatAppearance.BorderSize = 0;
             this.btnCaptureArea.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCaptureArea.Font = new System.Drawing.Font("돋움", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btnCaptureArea.Font = new System.Drawing.Font("돋움", 11F, System.Drawing.FontStyle.Bold);
             this.btnCaptureArea.ForeColor = System.Drawing.Color.White;
-            this.btnCaptureArea.Location = new System.Drawing.Point(12, 63);
+            this.btnCaptureArea.Location = new System.Drawing.Point(1, 46);
             this.btnCaptureArea.Name = "btnCaptureArea";
             this.btnCaptureArea.Size = new System.Drawing.Size(108, 42);
             this.btnCaptureArea.TabIndex = 17;
@@ -97,9 +98,9 @@
             // picboxPreview
             // 
             this.picboxPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picboxPreview.Location = new System.Drawing.Point(132, 12);
+            this.picboxPreview.Location = new System.Drawing.Point(112, 1);
             this.picboxPreview.Name = "picboxPreview";
-            this.picboxPreview.Size = new System.Drawing.Size(203, 141);
+            this.picboxPreview.Size = new System.Drawing.Size(206, 132);
             this.picboxPreview.TabIndex = 18;
             this.picboxPreview.TabStop = false;
             // 
@@ -129,7 +130,7 @@
             // labelPreviewTitle
             // 
             this.labelPreviewTitle.AutoSize = true;
-            this.labelPreviewTitle.Location = new System.Drawing.Point(282, 156);
+            this.labelPreviewTitle.Location = new System.Drawing.Point(265, 135);
             this.labelPreviewTitle.Name = "labelPreviewTitle";
             this.labelPreviewTitle.Size = new System.Drawing.Size(53, 12);
             this.labelPreviewTitle.TabIndex = 19;
@@ -139,7 +140,7 @@
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(6, 14);
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(347, 180);
+            this.ClientSize = new System.Drawing.Size(324, 157);
             this.Controls.Add(this.labelPreviewTitle);
             this.Controls.Add(this.picboxPreview);
             this.Controls.Add(this.btnCaptureArea);
