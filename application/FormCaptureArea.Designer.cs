@@ -44,7 +44,7 @@
             // 
             // picboxCaptureScreen
             // 
-            this.picboxCaptureScreen.BackColor = System.Drawing.Color.Turquoise;
+            this.picboxCaptureScreen.BackColor = System.Drawing.Color.LimeGreen;
             this.picboxCaptureScreen.Location = new System.Drawing.Point(0, 0);
             this.picboxCaptureScreen.Name = "picboxCaptureScreen";
             this.picboxCaptureScreen.Size = new System.Drawing.Size(207, 194);
@@ -64,7 +64,7 @@
             this.Name = "FormCaptureArea";
             this.ShowIcon = false;
             this.Text = "영역 캡쳐";
-            this.TransparencyKey = System.Drawing.Color.Turquoise;
+            this.TransparencyKey = System.Drawing.Color.LimeGreen;
             this.Load += new System.EventHandler(this.FormCaptureArea_Load);
             this.Move += new System.EventHandler(this.FormCaptureArea_Move);
             this.Resize += new System.EventHandler(this.FormCaptureArea_Resize);

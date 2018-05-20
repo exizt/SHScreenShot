@@ -28,11 +28,6 @@ namespace Image_Capture
         bool isLoaded = false;
 
         /// <summary>
-        /// 로그 디버깅 옵션
-        /// </summary>
-        bool isDebug = true;
-
-        /// <summary>
         /// 스크린의 사이즈를 셋팅.
         /// 현재 창에서 여백을 제거하고, 투명영역의 크기를 조절함.
         /// </summary>
@@ -49,7 +44,6 @@ namespace Image_Capture
             }
         }
 
-        
         /// <summary>
         /// 스크린샷 이미지 생성
         /// </summary>
@@ -68,19 +62,19 @@ namespace Image_Capture
             szScreenWH.Width = picboxCaptureScreen.Width;
             szScreenWH.Height = picboxCaptureScreen.Height;
 
+            // 시작 좌표와 영역을 통해서 미리보기 이미지 생성
+            mParentForm.DrawPreviewImage(ptScreenXY, szScreenWH);
+
             // 좌표와 사이즈 를 기준으로 스크린샷 생성
             //mParentForm.createImageByScreen(ptScreenXY, szScreenWH);
 
-            // 좌표와 영역 크기를 기준으로 미리보기 생성
-            mParentForm.DrawPreviewImage(ptScreenXY, szScreenWH);
 
-            /*
-            mParentForm.ScreenImageDrawer.DrawResultImageFromScreen(ptScreenXY, szScreenWH);
-            mParentForm.ScreenImageDrawer.DrawPreviewImage();
 
-            mParentForm.resultImage = mParentForm.ScreenImageDrawer.ResultImage;
-            mParentForm.picboxPreview.Image = mParentForm.ScreenImageDrawer.PreviewImage;
-            */
+            //mParentForm.ScreenImageDrawer.DrawResultImageFromScreen(ptScreenXY, szScreenWH);
+            //mParentForm.ScreenImageDrawer.DrawPreviewImage();
+
+            //mParentForm.resultImage = mParentForm.ScreenImageDrawer.ResultImage;
+            //mParentForm.picboxPreview.Image = mParentForm.ScreenImageDrawer.PreviewImage;
         }
 
         /// <summary>
@@ -89,7 +83,8 @@ namespace Image_Capture
         /// </summary>
         private void save()
         {
-            mParentForm.SaveFile_Result();
+            mParentForm.SaveAndDrawResultImage(ptScreenXY, szScreenWH);
+            //mParentForm.SaveFile_Result();
         }
 
         /// <summary>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Deployment.Application;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -15,7 +14,7 @@ namespace Image_Capture
         public bool isDebug = false;
         private ScreenImageDrawer screenImageDrawer;
 
-        internal ScreenImageDrawer ScreenImageDrawer { get => screenImageDrawer; set => screenImageDrawer = value; }
+        internal ScreenImageDrawer ScreenImageDrawer { get => screenImageDrawer; set => screenImageDrawer=value; }
 
         /// <summary>
         /// 생성자 메서드
@@ -47,7 +46,7 @@ namespace Image_Capture
             previewImage = new Bitmap(szPreviewImage.Width, szPreviewImage.Height);
 
             // 스크린 이미지를 가져오는 클래스 생성. composition 으로.
-            ScreenImageDrawer = new ScreenImageDrawer(szPreviewImage);
+            ScreenImageDrawer = new ScreenImageDrawer(picboxPreview.Size);
         }
 
         /// <summary>

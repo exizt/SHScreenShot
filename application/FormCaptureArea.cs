@@ -18,6 +18,11 @@ namespace Image_Capture
         FormMain mParentForm;
 
         /// <summary>
+        /// 로그 디버깅 옵션
+        /// </summary>
+        private bool isDebug = true;
+
+        /// <summary>
         /// 생성자
         /// </summary>
         /// <param name="_parentForm"></param>
@@ -95,7 +100,7 @@ namespace Image_Capture
         private void imgCaptureScreen_Click(object sender, EventArgs e)
         {
             //이미지 파일 저장
-            save();
+            //save();
         }
         
         /// <summary>

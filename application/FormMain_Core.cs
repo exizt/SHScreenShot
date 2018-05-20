@@ -92,20 +92,14 @@ namespace Image_Capture
             복수개의 모니터는 Screen.AllScreens 컬렉션 속성을 참조하여 엑세스할 수 있다.
             즉, 첫번째 모니터는 Screen.AllScreens[0], 두번째 모니터는 Screen.AllScreens[1] 등과 같이 엑세스한다.
             */
-            //createImageByScreen(ptZero, Screen.PrimaryScreen.Bounds.Size);
+            //ResultImage 만들기
             ScreenImageDrawer.DrawResultImageFromScreen(ptZero, Screen.PrimaryScreen.Bounds.Size);
+            resultImage = ScreenImageDrawer.ResultImage;
+            
+            //PrevieImage 만들기 (ResultImage 를 기준으로)
             ScreenImageDrawer.DrawPreviewImage();
             picboxPreview.Image = ScreenImageDrawer.PreviewImage;
-            resultImage = ScreenImageDrawer.ResultImage;
-            //DrawPreviewImage();
-        }
 
-        /// <summary>
-        /// 전체 캡쳐 기능의 미리보기 이미지 드로잉
-        /// </summary>
-        private void DrawPreviewImage()
-        {
-            DrawPreviewImage(ptZero, Screen.PrimaryScreen.Bounds.Size);
         }
 
         /// <summary>
@@ -120,55 +114,6 @@ namespace Image_Capture
 
             // ScreenImageDrawer.PreviewImage 의 포인터는 변하지 않는 포인트이므로, 메모리 누수 우려 안해도 됨.
             picboxPreview.Image = ScreenImageDrawer.PreviewImage;
-        }
-
-        /// <summary>
-        /// 스크린 이미지 생성 및 저장 메서드.
-        /// byteDate[] 타입의 멤버변수에 저장을 한다.
-        /// 기존의 getImageCopyFromScreen 메서드를 대체한다.
-        /// 기존의 bitmap 리턴 타입에서 byte 타입으로 개선되었다.(메모리 회수가 더 쉽다)
-        /// 가비지 컬렉션을 배려한 using 구문으로 대처하였다.
-        /// </summary>
-        /// <param name="_pointStart">시작점좌표</param>
-        /// <param name="_sizeImage">이미지크기</param>
-        public void createImageByScreen(Point _pointStart, Size _sizeImage)
-        {
-            // 임시 bitmap 을 생성 한 후 작업. using 내부의 new 는 자동 해제 됨.
-            using (Bitmap bitmap = new Bitmap(_sizeImage.Width, _sizeImage.Height, PixelFormat.Format32bppArgb))
-            {
-                // 임시 Bitmap 에서 Graphic도구 를 생성
-                using (Graphics g = Graphics.FromImage(bitmap))
-                {
-                    //그래픽 옵션 주기
-                    g.SmoothingMode = SmoothingMode.AntiAlias;
-                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;//이것이 가장 퀄리티가 높다고 함.
-                    //g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;//샘플로 추가
-                    g.CompositingQuality = CompositingQuality.HighQuality;
-                    g.PixelOffsetMode = PixelOffsetMode.HighQuality;
-
-                    //스크린 캡쳐 시작                    
-                    // 인수:스크린좌표,그리기시작좌표,그리는사이즈.
-                    //copypixeloperation 옵션을 줄 수도 있다.
-                    g.CopyFromScreen(_pointStart, ptZero, _sizeImage, CopyPixelOperation.SourceCopy);
-                }
-
-                // 결과 이미지
-                if (resultImage != null) { resultImage.Dispose(); }
-                resultImage = new Bitmap(bitmap);
-
-                // 미리보기 이미지 생성
-                using (Graphics g = Graphics.FromImage(previewImage))
-                {
-                    //결과 이미지와 미리보기 이미지의 사이즈가 다르므로 이것을 리사이징 하는 부분이다.
-                    g.DrawImage(bitmap, 0, 0, szPreviewImage.Width, szPreviewImage.Height);
-
-                    //리사이징 하면서 이미지가 지저분하므로, 렌더링 처리를 한다.
-                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-
-                    //미리보기 화면상에 지정
-                    picboxPreview.Image = previewImage;
-                }
-            }
         }
 
         /// <summary>
@@ -194,16 +139,7 @@ namespace Image_Capture
             ScreenImageDrawer.DrawResultImageFromScreen(startPoint, areaSize);
             resultImage = ScreenImageDrawer.ResultImage;
 
-            // 저장 여부
-            if (MessageBox.Show("저장하시겠습니까?", "스크린샷 파일저장",
-                MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                // 저장하기 위한 '파일명, 폴더명 선택'
-                SaveFile_Dialog();
-            } else
-            {
-                if (resultImage != null) { resultImage.Dispose(); }
-            }
+            SaveFile_Result();
         }
 
         /// <summary>
