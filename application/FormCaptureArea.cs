@@ -18,11 +18,6 @@ namespace Image_Capture
         FormMain mParentForm;
 
         /// <summary>
-        /// 로그 디버깅 옵션
-        /// </summary>
-        bool isDebug = false;
-
-        /// <summary>
         /// 생성자
         /// </summary>
         /// <param name="_parentForm"></param>
@@ -115,6 +110,7 @@ namespace Image_Capture
             Keys key = keyData;
             if (key != Keys.ShiftKey)
             {
+                //debug(key.ToString());
                 if (key == Keys.P || key == Keys.PrintScreen || key == Keys.Print || key == Keys.F1)
                 {
                     save();//이미지 저장 호출

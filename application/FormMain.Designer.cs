@@ -48,6 +48,8 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.labelPreviewTitle = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picboxPreview)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -55,13 +57,14 @@
             // btnFullCapture
             // 
             this.btnFullCapture.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnFullCapture.FlatAppearance.BorderColor = System.Drawing.Color.LightSkyBlue;
             this.btnFullCapture.FlatAppearance.BorderSize = 0;
             this.btnFullCapture.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFullCapture.Font = new System.Drawing.Font("돋움", 11F, System.Drawing.FontStyle.Bold);
             this.btnFullCapture.ForeColor = System.Drawing.Color.White;
             this.btnFullCapture.Location = new System.Drawing.Point(1, 1);
             this.btnFullCapture.Name = "btnFullCapture";
-            this.btnFullCapture.Size = new System.Drawing.Size(108, 45);
+            this.btnFullCapture.Size = new System.Drawing.Size(109, 45);
             this.btnFullCapture.TabIndex = 1;
             this.btnFullCapture.Text = "전체캡처";
             this.btnFullCapture.UseVisualStyleBackColor = false;
@@ -69,12 +72,15 @@
             // 
             // btnFolderOpen
             // 
+            this.btnFolderOpen.BackColor = System.Drawing.Color.DarkGray;
+            this.btnFolderOpen.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
             this.btnFolderOpen.FlatAppearance.BorderSize = 0;
             this.btnFolderOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFolderOpen.Font = new System.Drawing.Font("돋움", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btnFolderOpen.Location = new System.Drawing.Point(1, 88);
+            this.btnFolderOpen.ForeColor = System.Drawing.Color.White;
+            this.btnFolderOpen.Location = new System.Drawing.Point(1, 90);
             this.btnFolderOpen.Name = "btnFolderOpen";
-            this.btnFolderOpen.Size = new System.Drawing.Size(108, 42);
+            this.btnFolderOpen.Size = new System.Drawing.Size(109, 42);
             this.btnFolderOpen.TabIndex = 2;
             this.btnFolderOpen.Text = "저장된 폴더열기";
             this.btnFolderOpen.UseVisualStyleBackColor = false;
@@ -82,14 +88,15 @@
             // 
             // btnCaptureArea
             // 
-            this.btnCaptureArea.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.btnCaptureArea.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.btnCaptureArea.FlatAppearance.BorderColor = System.Drawing.Color.MediumTurquoise;
             this.btnCaptureArea.FlatAppearance.BorderSize = 0;
             this.btnCaptureArea.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCaptureArea.Font = new System.Drawing.Font("돋움", 11F, System.Drawing.FontStyle.Bold);
             this.btnCaptureArea.ForeColor = System.Drawing.Color.White;
-            this.btnCaptureArea.Location = new System.Drawing.Point(1, 46);
+            this.btnCaptureArea.Location = new System.Drawing.Point(1, 47);
             this.btnCaptureArea.Name = "btnCaptureArea";
-            this.btnCaptureArea.Size = new System.Drawing.Size(108, 42);
+            this.btnCaptureArea.Size = new System.Drawing.Size(109, 42);
             this.btnCaptureArea.TabIndex = 17;
             this.btnCaptureArea.Text = "영역캡처";
             this.btnCaptureArea.UseVisualStyleBackColor = false;
@@ -136,11 +143,31 @@
             this.labelPreviewTitle.TabIndex = 19;
             this.labelPreviewTitle.Text = "미리보기";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(1, 148);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(57, 12);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "폴더 경로";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(1, 187);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 12);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "단축키";
+            // 
             // FormMain
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(6, 14);
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(324, 157);
+            this.ClientSize = new System.Drawing.Size(319, 238);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.labelPreviewTitle);
             this.Controls.Add(this.picboxPreview);
             this.Controls.Add(this.btnCaptureArea);
@@ -173,6 +200,8 @@
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
 

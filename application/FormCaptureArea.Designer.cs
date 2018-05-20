@@ -34,19 +34,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.picboxCaptureScreen)).BeginInit();
             this.SuspendLayout();
             // 
-            // imgBackground
+            // picboxBackground
             // 
             this.picboxBackground.Location = new System.Drawing.Point(0, 0);
-            this.picboxBackground.Name = "imgBackground";
+            this.picboxBackground.Name = "picboxBackground";
             this.picboxBackground.Size = new System.Drawing.Size(282, 263);
             this.picboxBackground.TabIndex = 0;
             this.picboxBackground.TabStop = false;
             // 
-            // imgCaptureScreen
+            // picboxCaptureScreen
             // 
             this.picboxCaptureScreen.BackColor = System.Drawing.Color.Turquoise;
             this.picboxCaptureScreen.Location = new System.Drawing.Point(0, 0);
-            this.picboxCaptureScreen.Name = "imgCaptureScreen";
+            this.picboxCaptureScreen.Name = "picboxCaptureScreen";
             this.picboxCaptureScreen.Size = new System.Drawing.Size(207, 194);
             this.picboxCaptureScreen.TabIndex = 1;
             this.picboxCaptureScreen.TabStop = false;

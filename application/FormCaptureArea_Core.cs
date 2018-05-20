@@ -28,6 +28,11 @@ namespace Image_Capture
         bool isLoaded = false;
 
         /// <summary>
+        /// 로그 디버깅 옵션
+        /// </summary>
+        bool isDebug = true;
+
+        /// <summary>
         /// 스크린의 사이즈를 셋팅.
         /// 현재 창에서 여백을 제거하고, 투명영역의 크기를 조절함.
         /// </summary>
@@ -44,6 +49,7 @@ namespace Image_Capture
             }
         }
 
+        
         /// <summary>
         /// 스크린샷 이미지 생성
         /// </summary>
@@ -85,9 +91,10 @@ namespace Image_Capture
         }
 
         /// <summary>
-        /// debug 용 메서드
+        /// Debug 용 메서드
         /// </summary>
         /// <param name="msg"></param>
+        /// <param name="msg2"></param>
         private void debug(string msg, string msg2)
         {
             StringBuilder sb = new StringBuilder();

@@ -70,8 +70,8 @@ namespace Image_Capture
             //기본창을 최소화.
             this.hideForm();
 
-            //전체 스크린샷 이미지를 가져옴.
-            drawImagebyFullScreen();
+            // 스크린샷 이미지를 생성하고, 미리보기 이미지도 생성
+            DrawImagebyFullScreen();
 
             //잠깐 텀 을 준후 윈도우창 복귀
             Thread.Sleep(50);
@@ -86,7 +86,7 @@ namespace Image_Capture
         /// <summary>
         /// 스크린 이미지 캡쳐 + 미리보기 이미지 생성
         /// </summary>
-        private void drawImagebyFullScreen()
+        private void DrawImagebyFullScreen()
         {
             /*
             복수개의 모니터는 Screen.AllScreens 컬렉션 속성을 참조하여 엑세스할 수 있다.
