@@ -69,7 +69,18 @@ namespace Image_Capture
             szScreenWH.Height = picboxCaptureScreen.Height;
 
             // 좌표와 사이즈 를 기준으로 스크린샷 생성
-            mParentForm.createImageByScreen(ptScreenXY, szScreenWH);
+            //mParentForm.createImageByScreen(ptScreenXY, szScreenWH);
+
+            // 좌표와 영역 크기를 기준으로 미리보기 생성
+            mParentForm.DrawPreviewImage(ptScreenXY, szScreenWH);
+
+            /*
+            mParentForm.ScreenImageDrawer.DrawResultImageFromScreen(ptScreenXY, szScreenWH);
+            mParentForm.ScreenImageDrawer.DrawPreviewImage();
+
+            mParentForm.resultImage = mParentForm.ScreenImageDrawer.ResultImage;
+            mParentForm.picboxPreview.Image = mParentForm.ScreenImageDrawer.PreviewImage;
+            */
         }
 
         /// <summary>

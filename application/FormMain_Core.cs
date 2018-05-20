@@ -21,7 +21,7 @@ namespace Image_Capture
         /// <summary>
         /// 결과 이미지
         /// </summary>
-        private Image resultImage;
+        public Image resultImage;
 
         /// <summary>
         /// point 0, 0
@@ -92,7 +92,34 @@ namespace Image_Capture
             복수개의 모니터는 Screen.AllScreens 컬렉션 속성을 참조하여 엑세스할 수 있다.
             즉, 첫번째 모니터는 Screen.AllScreens[0], 두번째 모니터는 Screen.AllScreens[1] 등과 같이 엑세스한다.
             */
-            createImageByScreen(ptZero, Screen.PrimaryScreen.Bounds.Size);
+            //createImageByScreen(ptZero, Screen.PrimaryScreen.Bounds.Size);
+            ScreenImageDrawer.DrawResultImageFromScreen(ptZero, Screen.PrimaryScreen.Bounds.Size);
+            ScreenImageDrawer.DrawPreviewImage();
+            picboxPreview.Image = ScreenImageDrawer.PreviewImage;
+            resultImage = ScreenImageDrawer.ResultImage;
+            //DrawPreviewImage();
+        }
+
+        /// <summary>
+        /// 전체 캡쳐 기능의 미리보기 이미지 드로잉
+        /// </summary>
+        private void DrawPreviewImage()
+        {
+            DrawPreviewImage(ptZero, Screen.PrimaryScreen.Bounds.Size);
+        }
+
+        /// <summary>
+        /// 미리보기 이미지 '만' 드로잉 하는 메서드
+        /// 외부 에서도 호출 가능한 메서드. 좌표만 넘겨주면 됨.
+        /// </summary>
+        /// <param name="startPoint">시작 좌표</param>
+        /// <param name="areaSize">영역 크기</param>
+        public void DrawPreviewImage(Point startPoint, Size areaSize)
+        {
+            ScreenImageDrawer.DrawPreviewImageFromScreen(startPoint, areaSize);
+
+            // ScreenImageDrawer.PreviewImage 의 포인터는 변하지 않는 포인트이므로, 메모리 누수 우려 안해도 됨.
+            picboxPreview.Image = ScreenImageDrawer.PreviewImage;
         }
 
         /// <summary>
@@ -106,10 +133,10 @@ namespace Image_Capture
         /// <param name="_sizeImage">이미지크기</param>
         public void createImageByScreen(Point _pointStart, Size _sizeImage)
         {
-            // dlatl bitmap 을 생성 한 후 작업. using 내부의 new 는 자동 해제 됨.
+            // 임시 bitmap 을 생성 한 후 작업. using 내부의 new 는 자동 해제 됨.
             using (Bitmap bitmap = new Bitmap(_sizeImage.Width, _sizeImage.Height, PixelFormat.Format32bppArgb))
             {
-                //임시 비트맵으로 그래픽도구를 생성. 그리기 시작한다.
+                // 임시 Bitmap 에서 Graphic도구 를 생성
                 using (Graphics g = Graphics.FromImage(bitmap))
                 {
                     //그래픽 옵션 주기
@@ -125,6 +152,7 @@ namespace Image_Capture
                     g.CopyFromScreen(_pointStart, ptZero, _sizeImage, CopyPixelOperation.SourceCopy);
                 }
 
+                // 결과 이미지
                 if (resultImage != null) { resultImage.Dispose(); }
                 resultImage = new Bitmap(bitmap);
 
@@ -153,7 +181,28 @@ namespace Image_Capture
                 MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 SaveFile_Dialog();
+            }
+            else
+            {
+                if (resultImage != null) { resultImage.Dispose(); }
+            }
+        }
 
+        public void SaveAndDrawResultImage(Point startPoint, Size areaSize)
+        {
+            // 결과 이미지를 생성하는 부분
+            ScreenImageDrawer.DrawResultImageFromScreen(startPoint, areaSize);
+            resultImage = ScreenImageDrawer.ResultImage;
+
+            // 저장 여부
+            if (MessageBox.Show("저장하시겠습니까?", "스크린샷 파일저장",
+                MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                // 저장하기 위한 '파일명, 폴더명 선택'
+                SaveFile_Dialog();
+            } else
+            {
+                if (resultImage != null) { resultImage.Dispose(); }
             }
         }
 

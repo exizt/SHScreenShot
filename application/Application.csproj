@@ -97,6 +97,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ScreenImageDrawer.cs" />
     <Compile Include="FormCaptureArea_Core.cs">
       <SubType>Form</SubType>
     </Compile>
