@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
+/// <summary>
+/// 
+/// </summary>
 namespace Image_Capture
 {
-
-    class ScreenImageDrawer
+    class ScreenImageDrawer: IDisposable
     {
         private readonly Point ptZero = new Point(0, 0);
 
@@ -118,6 +116,21 @@ namespace Image_Capture
                 //리사이징 하면서 이미지가 지저분하므로, 렌더링 처리를 한다.
                 g.InterpolationMode = InterpolationMode.HighQualityBicubic;
             }
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (PreviewImage != null) { PreviewImage.Dispose(); }
+                if (ResultImage != null) { ResultImage.Dispose(); }
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }
