@@ -24,6 +24,22 @@ namespace Image_Capture
 
         private const int CAPTURE_AREA_PADDING = 7;
 
+        // --------------------- movable 구간 ▽▽▽▽▽ ----------------------------
+        private const int WM_NCHITTEST = 0x84;
+        private const int HT_CLIENT = 0x1;
+        private const int HT_CAPTION = 0x2;
+        private const int WM_NCLBUTTONDOWN = 0xA1;
+
+        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
+        public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+        // --------------------- movable 구간 △△△△△ ----------------------------
+        private const int cGrip = 16;
+        private const int cCaption = 32;
+
+
         /// <summary>
         /// 생성자
         /// </summary>
@@ -126,6 +142,46 @@ namespace Image_Capture
                 }
             }
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            // resizable 
+            if (m.Msg == WM_NCHITTEST)
+            {
+                Point pos = new Point(m.LParam.ToInt32());
+                pos = this.PointToClient(pos);
+                if (pos.Y < cCaption)
+                {
+                    m.Result = (IntPtr)2;
+                    return;
+                }
+                if (pos.X >= this.ClientSize.Width - cGrip && pos.Y >= this.ClientSize.Height - cGrip)
+                {
+                    m.Result = (IntPtr)17;
+                    return;
+                }
+            }
+            base.WndProc(ref m);
+
+            // movable -----------------
+            if (m.Msg == WM_NCHITTEST)
+                m.Result = (IntPtr)(HT_CAPTION);
+            // ---------------- movable
+        }
+
+        private void headerPanel_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
