@@ -65,7 +65,7 @@ namespace Image_Capture
             picboxCaptureArea.Location = new Point(CAPTURE_AREA_PADDING, CAPTURE_AREA_PADDING);
 
             //투명영역의 크기 조절
-            ResizeCaptureArea();
+            //ResizeCaptureArea();
             
             //캡처 이미지 생성
             DrawPreviewImage();
@@ -85,7 +85,7 @@ namespace Image_Capture
             if(isLoaded)
             {
                 //투명영역의 크기 조절
-                ResizeCaptureArea();
+                //ResizeCaptureArea();
 
                 //debug("this.Size " + this.Size.Width + "," + this.Size.Height);
                 //debug("this.Location " + this.Location.X + "," + this.Location.Y);
