@@ -45,7 +45,7 @@ namespace Image_Capture
         private void FormCaptureArea_Load(object sender, EventArgs e)
         {
             //투명영역의 크기 조절
-            setCaptureScreenSize();
+            ResizeCaptureArea();
             
             //캡처 이미지 생성
             getCapture();
@@ -65,7 +65,7 @@ namespace Image_Capture
             if(isLoaded)
             {
                 //투명영역의 크기 조절
-                setCaptureScreenSize();
+                ResizeCaptureArea();
 
                 //debug("this.Size " + this.Size.Width + "," + this.Size.Height);
                 //debug("this.Location " + this.Location.X + "," + this.Location.Y);

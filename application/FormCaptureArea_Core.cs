@@ -31,7 +31,7 @@ namespace Image_Capture
         /// 스크린의 사이즈를 셋팅.
         /// 현재 창에서 여백을 제거하고, 투명영역의 크기를 조절함.
         /// </summary>
-        private void setCaptureScreenSize()
+        private void ResizeCaptureArea()
         {
             //선택 창의 사이즈 조절에 맞춰서, 투명영역의 사이즈를 조절한다.
             if (ClientSize.Width >= 0)
