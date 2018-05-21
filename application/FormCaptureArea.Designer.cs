@@ -28,22 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.picboxBackground = new System.Windows.Forms.PictureBox();
             this.picboxCaptureScreen = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.picboxBackground)).BeginInit();
             this.headerPanel = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.picboxCaptureScreen)).BeginInit();
             this.headerPanel.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // picboxBackground
-            // 
-            this.picboxBackground.Location = new System.Drawing.Point(0, 0);
-            this.picboxBackground.Name = "picboxBackground";
-            this.picboxBackground.Size = new System.Drawing.Size(282, 263);
-            this.picboxBackground.TabIndex = 0;
-            this.picboxBackground.TabStop = false;
             // 
             // picboxCaptureScreen
             // 
@@ -79,14 +71,25 @@
             this.btnClose.Text = "X";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.picboxCaptureScreen);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(597, 537);
+            this.panel1.TabIndex = 3;
+            // 
             // FormCaptureArea
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
-            this.Controls.Add(this.picboxCaptureScreen);
-            this.Controls.Add(this.picboxBackground);
             this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(597, 537);
+            this.Controls.Add(this.headerPanel);
+            this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -97,15 +100,17 @@
             this.Load += new System.EventHandler(this.FormCaptureArea_Load);
             this.Move += new System.EventHandler(this.FormCaptureArea_Move);
             this.Resize += new System.EventHandler(this.FormCaptureArea_Resize);
-            ((System.ComponentModel.ISupportInitialize)(this.picboxBackground)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picboxCaptureScreen)).EndInit();
+            this.headerPanel.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox picboxBackground;
         private System.Windows.Forms.PictureBox picboxCaptureScreen;
+        private System.Windows.Forms.Panel headerPanel;
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Panel panel1;
     }
 }

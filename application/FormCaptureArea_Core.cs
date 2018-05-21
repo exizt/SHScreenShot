@@ -40,7 +40,7 @@ namespace Image_Capture
             }
             if (ClientSize.Height >= 0)
             {
-                picboxCaptureScreen.Height = ClientSize.Height - CAPTURE_AREA_PADDING * 2;
+                picboxCaptureScreen.Height = ClientSize.Height - CAPTURE_AREA_PADDING * 4;
             }
         }
 
