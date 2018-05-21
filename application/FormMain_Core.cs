@@ -42,7 +42,7 @@ namespace Image_Capture
         /// 미리보기 이미지 에 이미지를 지정
         /// </summary>
         /// <param name="_image">지정할 이미지</param>
-        public void setImgPreview_Image(Image _image)
+        public void SetImgPreview_Image(Image _image)
         {
             picboxPreview.Image = _image;
         }
@@ -51,7 +51,7 @@ namespace Image_Capture
         /// 
         /// </summary>
         /// <param name="_image"></param>
-        public void setImgPreview_BackgroundImage(Image _image)
+        public void SetImgPreview_BackgroundImage(Image _image)
         {
             picboxPreview.BackgroundImage = _image;
         }
@@ -59,17 +59,17 @@ namespace Image_Capture
         /// <summary>
         /// 전체 스크린샷 메서드
         /// </summary>
-        private void event_FullScreenCapture()
+        private void Event_FullScreenCapture()
         {
             //기본창을 최소화.
-            this.hideForm();
+            this.HideForm();
 
             // 스크린샷 이미지를 생성하고, 미리보기 이미지도 생성
             DrawImagebyFullScreen();
 
             //잠깐 텀 을 준후 윈도우창 복귀
             Thread.Sleep(50);
-            this.showForm();
+            this.ShowForm();
 
             SaveFile_Result();
 
@@ -139,7 +139,7 @@ namespace Image_Capture
         /// <summary>
         /// 
         /// </summary>
-        private void showForm()
+        private void ShowForm()
         {
             this.Visible = true;//활성화
             this.Opacity = 100;
@@ -149,7 +149,7 @@ namespace Image_Capture
         /// <summary>
         /// 
         /// </summary>
-        private void hideForm()
+        private void HideForm()
         {
             this.Opacity = 0;
             this.Visible = false;
@@ -160,7 +160,7 @@ namespace Image_Capture
         /// debug 용 메서드
         /// </summary>
         /// <param name="msg"></param>
-        private void debug(string msg)
+        private void Debug(string msg)
         {
             if (isDebug) System.Diagnostics.Debug.WriteLine(msg);
         }
@@ -169,12 +169,12 @@ namespace Image_Capture
         /// debug 용 메서드
         /// </summary>
         /// <param name="msg"></param>
-        private void debug(string msg, string msg2)
+        private void Debug(string msg, string msg2)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(msg);
             sb.Append(msg2);
-            debug(sb.ToString());
+            Debug(sb.ToString());
             sb.Clear();
         }
     }

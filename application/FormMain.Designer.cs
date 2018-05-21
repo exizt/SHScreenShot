@@ -68,7 +68,7 @@
             this.btnFullCapture.TabIndex = 1;
             this.btnFullCapture.Text = "전체캡처";
             this.btnFullCapture.UseVisualStyleBackColor = false;
-            this.btnFullCapture.Click += new System.EventHandler(this.btnFullCapture_Click);
+            this.btnFullCapture.Click += new System.EventHandler(this.BtnFullCapture_Click);
             // 
             // btnFolderOpen
             // 
@@ -84,7 +84,7 @@
             this.btnFolderOpen.TabIndex = 2;
             this.btnFolderOpen.Text = "저장된 폴더열기";
             this.btnFolderOpen.UseVisualStyleBackColor = false;
-            this.btnFolderOpen.Click += new System.EventHandler(this.btnFolderOpen_Click);
+            this.btnFolderOpen.Click += new System.EventHandler(this.BtnFolderOpen_Click);
             // 
             // btnCaptureArea
             // 
@@ -100,7 +100,7 @@
             this.btnCaptureArea.TabIndex = 17;
             this.btnCaptureArea.Text = "영역캡처";
             this.btnCaptureArea.UseVisualStyleBackColor = false;
-            this.btnCaptureArea.Click += new System.EventHandler(this.btnCaptureArea_Click);
+            this.btnCaptureArea.Click += new System.EventHandler(this.BtnCaptureArea_Click);
             // 
             // picboxPreview
             // 
@@ -117,8 +117,8 @@
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
             this.notifyIcon1.Text = "스크린캡쳐";
             this.notifyIcon1.Visible = true;
-            this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseClick);
-            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
+            this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon1_MouseClick);
+            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon1_MouseDoubleClick);
             // 
             // contextMenuStrip1
             // 
@@ -132,7 +132,7 @@
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.exitToolStripMenuItem.Text = "종료";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // labelPreviewTitle
             // 
