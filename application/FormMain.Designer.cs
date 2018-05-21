@@ -157,9 +157,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(1, 187);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 12);
+            this.label2.Size = new System.Drawing.Size(82, 12);
             this.label2.TabIndex = 21;
-            this.label2.Text = "단축키";
+            this.label2.Text = "단축키 : P. F1";
             // 
             // FormMain
             // 
