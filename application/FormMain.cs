@@ -21,9 +21,9 @@ namespace Image_Capture
         private const int HT_CAPTION = 0x2;
         private const int WM_NCLBUTTONDOWN = 0xA1;
 
-        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
+        [DllImport("user32.dll")]
         public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
-        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
+        [DllImport("user32.dll")]
         public static extern bool ReleaseCapture();
 
         // --------------------- movable 구간 △△△△△ ----------------------------
