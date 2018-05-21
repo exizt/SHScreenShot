@@ -48,7 +48,7 @@ namespace Image_Capture
                     catch (Exception e)
                     {
                         MessageBox.Show("에러 발생" + e);
-                        Debug.WriteLine(e);
+                        System.Diagnostics.Debug.WriteLine(e);
                     }
                     finally
                     {

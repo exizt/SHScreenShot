@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Deployment.Application;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace Image_Capture
 {
@@ -12,7 +12,21 @@ namespace Image_Capture
         /// 로그 디버깅 옵션.
         /// formCaptureArea 도 영향을 받는다.
         /// </summary>
-        public bool isDebug = false;
+        public bool isDebug = true;
+        internal ScreenImageDrawer ScreenImageDrawer { get; private set; }
+
+        // --------------------- movable 구간 ▽▽▽▽▽ ----------------------------
+        private const int WM_NCHITTEST = 0x84;
+        private const int HT_CLIENT = 0x1;
+        private const int HT_CAPTION = 0x2;
+        private const int WM_NCLBUTTONDOWN = 0xA1;
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+        // --------------------- movable 구간 △△△△△ ----------------------------
 
         /// <summary>
         /// 생성자 메서드
@@ -20,6 +34,9 @@ namespace Image_Capture
         public FormMain()
         {
             InitializeComponent();//컴포넌트 초기화 메서드(기본적으로 들어감)
+
+            // 스크린 이미지를 가져오는 클래스 생성. composition 으로.
+            ScreenImageDrawer = new ScreenImageDrawer(picboxPreview.Size);
         }
 
         /// <summary>
@@ -39,9 +56,6 @@ namespace Image_Capture
             //미리보기 이미지의 사이즈 를 가져온다.
             //폼 컨트롤의 크기를 처리 할 때에는 최소 Load 이후에 하도록 한다.(생성자에 넣으면 버그 발생 가능성 있음)
             szPreviewImage = picboxPreview.Size;
-
-            //미리보기 이미지 객체 생성
-            previewImage = new Bitmap(szPreviewImage.Width, szPreviewImage.Height);
         }
 
         /// <summary>
@@ -49,9 +63,9 @@ namespace Image_Capture
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnFullCapture_Click(object sender, EventArgs e)
+        private void BtnFullCapture_Click(object sender, EventArgs e)
         {
-            event_FullScreenCapture();
+            Event_FullScreenCapture();
         }
 
         /// <summary>
@@ -59,7 +73,7 @@ namespace Image_Capture
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnCaptureArea_Click(object sender, EventArgs e)
+        private void BtnCaptureArea_Click(object sender, EventArgs e)
         {
             FormCaptureArea nForm = new FormCaptureArea(this);
             nForm.Show();
@@ -70,7 +84,7 @@ namespace Image_Capture
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnFolderOpen_Click(object sender, EventArgs e)
+        private void BtnFolderOpen_Click(object sender, EventArgs e)
         {
             if (strFilePath != "")
             {
@@ -86,9 +100,9 @@ namespace Image_Capture
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void NotifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            this.showForm();
+            this.ShowForm();
         }
 
         /// <summary>
@@ -96,9 +110,9 @@ namespace Image_Capture
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
+        private void NotifyIcon1_MouseClick(object sender, MouseEventArgs e)
         {
-            this.showForm();
+            this.ShowForm();
         }
 
         /// <summary>
@@ -106,10 +120,10 @@ namespace Image_Capture
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void hide(object sender, FormClosingEventArgs e)
+        private void Hide(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;
-            this.hideForm();
+            this.HideForm();
         }
 
         /// <summary>
@@ -124,7 +138,7 @@ namespace Image_Capture
             {
                 //MessageBox.Show("창이 최소화되었습니다.");
                 //창을 숨김 처리 한다.
-                this.hideForm();
+                this.HideForm();
             }
             else if (this.WindowState == FormWindowState.Maximized)
             {
@@ -137,9 +151,33 @@ namespace Image_Capture
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+
+        }
+
+        private void FormMain_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
         }
     }
 }

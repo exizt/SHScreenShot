@@ -9,8 +9,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("색상추출과 스크린샷 기능을 지원합니다.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("E2X Software")]
-[assembly: AssemblyProduct("Image_Capture")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
+[assembly: AssemblyProduct("Screen Capture")]
+[assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
