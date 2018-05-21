@@ -28,20 +28,24 @@ namespace Image_Capture
         bool isLoaded = false;
 
         /// <summary>
+        /// deprecated
         /// 스크린의 사이즈를 셋팅.
         /// 현재 창에서 여백을 제거하고, 투명영역의 크기를 조절함.
+        /// 레이아웃에서 Dock 기능을 사용했기 때문에...이제는 필요없어짐...
         /// </summary>
         private void ResizeCaptureArea()
         {
+            /*
             //선택 창의 사이즈 조절에 맞춰서, 투명영역의 사이즈를 조절한다.
             if (ClientSize.Width >= 0)
             {
-                picboxCaptureScreen.Width = ClientSize.Width - CAPTURE_AREA_PADDING * 2;
+                picboxCaptureArea.Width = ClientSize.Width - CAPTURE_AREA_PADDING * 2;
             }
             if (ClientSize.Height >= 0)
             {
-                picboxCaptureScreen.Height = ClientSize.Height - CAPTURE_AREA_PADDING * 4;
+                picboxCaptureArea.Height = ClientSize.Height - CAPTURE_AREA_PADDING * 4;
             }
+            */
         }
 
         /// <summary>
@@ -50,24 +54,34 @@ namespace Image_Capture
         private void DrawPreviewImage()
         {
             /**
-            * 선택영역의 좌표를 구하기. (좌표는 상단 좌측 기준으로 0,0 으로 시작한다)
-            * 그러므로, 해당 창 의 좌표를 구하고, 거기서 헤더부분과 좌측 border 를 추가한 좌표를 구해야한다.
-            * X : 선택 창의 X 좌표
-            * Y : 선택 창의 Y 좌표
+            * this.Location 은 창의 XY 좌표 (Screen 기준으로의 좌표. 상단 좌측부터 0,0 으로 시작됨)
+            * this.Location 에서 촬영할 위치에 맞게 좌표를 조금씩 더 한다.
             */
-            ptScreenXY.X = this.Location.X + (Width - ClientSize.Width) / 2 + picboxCaptureScreen.Location.X;
-            ptScreenXY.Y = this.Location.Y + (Height - ClientSize.Height - (Width - ClientSize.Width) / 2) + picboxCaptureScreen.Location.Y;
+            //ptScreenXY.X = this.Location.X + (Width - ClientSize.Width) / 2 + picboxCaptureArea.Location.X;
+            //ptScreenXY.Y = this.Location.Y + (Height - ClientSize.Height - (Width - ClientSize.Width) / 2) + picboxCaptureArea.Location.Y;
+            //ptScreenXY.X = this.Location.X + picboxCaptureArea.Location.X;
+            //ptScreenXY.Y = this.Location.Y + picboxCaptureArea.Location.Y;
 
-            Debug("ScreenXY["+ptScreenXY.ToString()+"] thisLocation["+ this.Location.ToString()+"] this.Size["+this.Size.ToString()+"] ClientSize["+ClientSize.ToString()+"]");
+
+            //Point locationOnForm = picboxCaptureArea.FindForm().PointToClient(picboxCaptureArea.Parent.PointToScreen(picboxCaptureArea.Location));
+            //Point locationOnForm = picboxCaptureArea.FindForm().PointToClient(picboxCaptureArea.Parent.PointToScreen(picboxCaptureArea.Location));
+            Point locationCaptureArea = picboxCaptureArea.Parent.PointToScreen(picboxCaptureArea.Location);
+            //ptScreenXY.X = locationCaptureArea.X;
+            //ptScreenXY.Y = locationCaptureArea.Y;
+
+            ptScreenXY = locationCaptureArea;
+
+            Debug("ScreenXY["+ptScreenXY.ToString()+"] thisLocation["+ this.Location.ToString()+ "] locationOnForm[" + locationCaptureArea.ToString()+"]"+"picboxLocation["+picboxCaptureArea.Location.ToString()+"]");
             //debug("picboxCaptureScreen.location[" + picboxCaptureScreen.Location.ToString()+"]");
             
             
             // 선택영역의 가로 세로 크기 구하기.
-            szScreenWH.Width = picboxCaptureScreen.Width;
-            szScreenWH.Height = picboxCaptureScreen.Height;
+            //szScreenWH.Width = picboxCaptureArea.Width;
+            //szScreenWH.Height = picboxCaptureArea.Height;
+            szScreenWH = picboxCaptureArea.Size;
 
             // 시작 좌표와 영역을 통해서 미리보기 이미지 생성
-            mParentForm.DrawPreviewImage(ptScreenXY, szScreenWH);
+            mParentForm.DrawPreviewImage(locationCaptureArea, szScreenWH);
 
             // 좌표와 사이즈 를 기준으로 스크린샷 생성
             //mParentForm.createImageByScreen(ptScreenXY, szScreenWH);

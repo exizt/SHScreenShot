@@ -62,7 +62,7 @@ namespace Image_Capture
         /// <param name="e"></param>
         private void FormCaptureArea_Load(object sender, EventArgs e)
         {
-            picboxCaptureScreen.Location = new Point(CAPTURE_AREA_PADDING, CAPTURE_AREA_PADDING);
+            picboxCaptureArea.Location = new Point(CAPTURE_AREA_PADDING, CAPTURE_AREA_PADDING);
 
             //투명영역의 크기 조절
             ResizeCaptureArea();
