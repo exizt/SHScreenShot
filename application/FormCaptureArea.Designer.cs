@@ -50,7 +50,7 @@
             this.picboxCaptureScreen.Size = new System.Drawing.Size(207, 194);
             this.picboxCaptureScreen.TabIndex = 1;
             this.picboxCaptureScreen.TabStop = false;
-            this.picboxCaptureScreen.Click += new System.EventHandler(this.imgCaptureScreen_Click);
+            this.picboxCaptureScreen.Click += new System.EventHandler(this.ImgCaptureScreen_Click);
             // 
             // FormCaptureArea
             // 

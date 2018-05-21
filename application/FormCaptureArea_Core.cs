@@ -47,7 +47,7 @@ namespace Image_Capture
         /// <summary>
         /// 스크린샷 이미지 생성
         /// </summary>
-        private void getCapture()
+        private void GetCapture()
         {
             /**
             * 선택영역의 좌표를 구하기. (좌표는 상단 좌측 기준으로 0,0 으로 시작한다)
@@ -58,7 +58,10 @@ namespace Image_Capture
             ptScreenXY.X = this.Location.X + (Width - ClientSize.Width) / 2;
             ptScreenXY.Y = this.Location.Y + (Height - ClientSize.Height - (Width - ClientSize.Width) / 2);
 
-            debug("ScreenXY["+ptScreenXY.ToString()+"] thisLocation["+ this.Location.ToString()+"] this.Size["+this.Size.ToString()+"] ClientSize["+ClientSize.ToString()+"]");
+            Debug("ScreenXY["+ptScreenXY.ToString()+"] thisLocation["+ this.Location.ToString()+"] this.Size["+this.Size.ToString()+"] ClientSize["+ClientSize.ToString()+"]");
+            //debug("picboxCaptureScreen.location[" + picboxCaptureScreen.Location.ToString()+"]");
+            
+            
             // 선택영역의 가로 세로 크기 구하기.
             szScreenWH.Width = picboxCaptureScreen.Width;
             szScreenWH.Height = picboxCaptureScreen.Height;
@@ -82,7 +85,7 @@ namespace Image_Capture
         /// 이미지 파일 저장
         /// 메인 폼의 이미지 저장 메서드 호출
         /// </summary>
-        private void save()
+        private void Save()
         {
             mParentForm.SaveAndDrawResultImage(ptScreenXY, szScreenWH);
             //mParentForm.SaveFile_Result();
@@ -92,7 +95,7 @@ namespace Image_Capture
         /// debug 용 메서드
         /// </summary>
         /// <param name="msg"></param>
-        private void debug(string msg)
+        private void Debug(string msg)
         {
             if (isDebug) System.Diagnostics.Debug.WriteLine(msg);
         }
@@ -102,12 +105,12 @@ namespace Image_Capture
         /// </summary>
         /// <param name="msg"></param>
         /// <param name="msg2"></param>
-        private void debug(string msg, string msg2)
+        private void Debug(string msg, string msg2)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(msg);
             sb.Append(msg2);
-            debug(sb.ToString());
+            Debug(sb.ToString());
             sb.Clear();
         }
     }
