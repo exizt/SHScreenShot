@@ -132,5 +132,10 @@ namespace Image_Capture
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+        ~ScreenImageDrawer()
+        {
+            Dispose(false);
+        }
     }
 }

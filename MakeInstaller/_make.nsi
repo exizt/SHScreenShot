@@ -4,7 +4,7 @@
 ; Build 번호에 alpah 인 경우는 [숫자a]
 !define S_APP_VER_MAJOR 1
 !define S_APP_VER_MINOR 1
-!define S_APP_VER_BUILD 7
+!define S_APP_VER_BUILD 8
 
 ; 프로그램 그룹명 (폴더이름. 가급적 공백없이)
 !define S_PROG_GROUP "SHSoft"
