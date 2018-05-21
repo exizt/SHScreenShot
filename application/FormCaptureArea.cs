@@ -22,8 +22,6 @@ namespace Image_Capture
         /// </summary>
         private bool isDebug = true;
 
-        private const int CAPTURE_AREA_PADDING = 7;
-
         // --------------------- movable 구간 ▽▽▽▽▽ ----------------------------
         private const int WM_NCHITTEST = 0x84;
         private const int HT_CLIENT = 0x1;
@@ -62,11 +60,6 @@ namespace Image_Capture
         /// <param name="e"></param>
         private void FormCaptureArea_Load(object sender, EventArgs e)
         {
-            picboxCaptureArea.Location = new Point(CAPTURE_AREA_PADDING, CAPTURE_AREA_PADDING);
-
-            //투명영역의 크기 조절
-            //ResizeCaptureArea();
-            
             //캡처 이미지 생성
             DrawPreviewImage();
 
@@ -82,16 +75,10 @@ namespace Image_Capture
         /// <param name="e"></param>
         private void FormCaptureArea_Resize(object sender, EventArgs e)
         {
-            if(isLoaded)
+            //Debug("FormCaptureArea_Resize 호출");
+            if (isLoaded)
             {
-                //투명영역의 크기 조절
-                //ResizeCaptureArea();
-
-                //debug("this.Size " + this.Size.Width + "," + this.Size.Height);
-                //debug("this.Location " + this.Location.X + "," + this.Location.Y);
-                //debug("imgCaptureScreenWH " + imgCaptureScreen.Width + "," + imgCaptureScreen.Height);
-                
-                //캡처 이미지 생성
+                //미리보기 이미지 생성
                 DrawPreviewImage();
             }
         }
@@ -104,16 +91,17 @@ namespace Image_Capture
         /// <param name="e"></param>
         private void FormCaptureArea_Move(object sender, EventArgs e)
         {
-            Debug("FormCaptureArea_Move 호출");
+            //Debug("FormCaptureArea_Move 호출");
             if (isLoaded)
             {
-                //캡처 이미지 생성
+                //미리보기 이미지 생성
                 DrawPreviewImage();
             }
         }
 
         /// <summary>
         /// 창 클릭 이벤트.
+        /// 이제 안 쓰기로... 단축키로 사용함.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -144,6 +132,10 @@ namespace Image_Capture
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
+        /// <summary>
+        /// 창 크기 조절을 위한 부분
+        /// </summary>
+        /// <param name="m"></param>
         protected override void WndProc(ref Message m)
         {
             // resizable 
@@ -170,6 +162,11 @@ namespace Image_Capture
             // ---------------- movable
         }
 
+        /// <summary>
+        /// 헤더의 Panel 에서 창 이동이 가능하게 하는 부분
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void headerPanel_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -179,6 +176,11 @@ namespace Image_Capture
             }
         }
 
+        /// <summary>
+        /// 헤더의 Panel 에서 창 닫기
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
