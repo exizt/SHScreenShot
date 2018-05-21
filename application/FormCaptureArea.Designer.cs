@@ -34,23 +34,23 @@
             ((System.ComponentModel.ISupportInitialize)(this.picboxCaptureScreen)).BeginInit();
             this.SuspendLayout();
             // 
-            // imgBackground
+            // picboxBackground
             // 
             this.picboxBackground.Location = new System.Drawing.Point(0, 0);
-            this.picboxBackground.Name = "imgBackground";
+            this.picboxBackground.Name = "picboxBackground";
             this.picboxBackground.Size = new System.Drawing.Size(282, 263);
             this.picboxBackground.TabIndex = 0;
             this.picboxBackground.TabStop = false;
             // 
-            // imgCaptureScreen
+            // picboxCaptureScreen
             // 
-            this.picboxCaptureScreen.BackColor = System.Drawing.Color.Turquoise;
+            this.picboxCaptureScreen.BackColor = System.Drawing.Color.LimeGreen;
             this.picboxCaptureScreen.Location = new System.Drawing.Point(0, 0);
-            this.picboxCaptureScreen.Name = "imgCaptureScreen";
+            this.picboxCaptureScreen.Name = "picboxCaptureScreen";
             this.picboxCaptureScreen.Size = new System.Drawing.Size(207, 194);
             this.picboxCaptureScreen.TabIndex = 1;
             this.picboxCaptureScreen.TabStop = false;
-            this.picboxCaptureScreen.Click += new System.EventHandler(this.imgCaptureScreen_Click);
+            this.picboxCaptureScreen.Click += new System.EventHandler(this.ImgCaptureScreen_Click);
             // 
             // FormCaptureArea
             // 
@@ -64,7 +64,7 @@
             this.Name = "FormCaptureArea";
             this.ShowIcon = false;
             this.Text = "영역 캡쳐";
-            this.TransparencyKey = System.Drawing.Color.Turquoise;
+            this.TransparencyKey = System.Drawing.Color.LimeGreen;
             this.Load += new System.EventHandler(this.FormCaptureArea_Load);
             this.Move += new System.EventHandler(this.FormCaptureArea_Move);
             this.Resize += new System.EventHandler(this.FormCaptureArea_Resize);

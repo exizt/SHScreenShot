@@ -13,15 +13,9 @@ namespace Image_Capture
     public partial class FormMain : Form
     {
         /// <summary>
-        /// 화면상의 미리보기 비트맵 개체
-        /// 주로 인스턴스로 사용되어서, picturebox.image 에 넣어지기 전까지 존재한다.
-        /// </summary>
-        Image previewImage;
-
-        /// <summary>
         /// 결과 이미지
         /// </summary>
-        private Image resultImage;
+        public Image resultImage;
 
         /// <summary>
         /// point 0, 0
@@ -48,7 +42,7 @@ namespace Image_Capture
         /// 미리보기 이미지 에 이미지를 지정
         /// </summary>
         /// <param name="_image">지정할 이미지</param>
-        public void setImgPreview_Image(Image _image)
+        public void SetImgPreview_Image(Image _image)
         {
             picboxPreview.Image = _image;
         }
@@ -57,7 +51,7 @@ namespace Image_Capture
         /// 
         /// </summary>
         /// <param name="_image"></param>
-        public void setImgPreview_BackgroundImage(Image _image)
+        public void SetImgPreview_BackgroundImage(Image _image)
         {
             picboxPreview.BackgroundImage = _image;
         }
@@ -65,17 +59,17 @@ namespace Image_Capture
         /// <summary>
         /// 전체 스크린샷 메서드
         /// </summary>
-        private void event_FullScreenCapture()
+        private void Event_FullScreenCapture()
         {
             //기본창을 최소화.
-            this.hideForm();
+            this.HideForm();
 
-            //전체 스크린샷 이미지를 가져옴.
-            drawImagebyFullScreen();
+            // 스크린샷 이미지를 생성하고, 미리보기 이미지도 생성
+            DrawImagebyFullScreen();
 
             //잠깐 텀 을 준후 윈도우창 복귀
             Thread.Sleep(50);
-            this.showForm();
+            this.ShowForm();
 
             SaveFile_Result();
 
@@ -86,61 +80,34 @@ namespace Image_Capture
         /// <summary>
         /// 스크린 이미지 캡쳐 + 미리보기 이미지 생성
         /// </summary>
-        private void drawImagebyFullScreen()
+        private void DrawImagebyFullScreen()
         {
             /*
             복수개의 모니터는 Screen.AllScreens 컬렉션 속성을 참조하여 엑세스할 수 있다.
             즉, 첫번째 모니터는 Screen.AllScreens[0], 두번째 모니터는 Screen.AllScreens[1] 등과 같이 엑세스한다.
             */
-            createImageByScreen(ptZero, Screen.PrimaryScreen.Bounds.Size);
+            //ResultImage 만들기
+            ScreenImageDrawer.DrawResultImageFromScreen(ptZero, Screen.PrimaryScreen.Bounds.Size);
+            resultImage = ScreenImageDrawer.ResultImage;
+            
+            //PrevieImage 만들기 (ResultImage 를 기준으로)
+            ScreenImageDrawer.DrawPreviewImage();
+            picboxPreview.Image = ScreenImageDrawer.PreviewImage;
+
         }
 
         /// <summary>
-        /// 스크린 이미지 생성 및 저장 메서드.
-        /// byteDate[] 타입의 멤버변수에 저장을 한다.
-        /// 기존의 getImageCopyFromScreen 메서드를 대체한다.
-        /// 기존의 bitmap 리턴 타입에서 byte 타입으로 개선되었다.(메모리 회수가 더 쉽다)
-        /// 가비지 컬렉션을 배려한 using 구문으로 대처하였다.
+        /// 미리보기 이미지 '만' 드로잉 하는 메서드
+        /// 외부 에서도 호출 가능한 메서드. 좌표만 넘겨주면 됨.
         /// </summary>
-        /// <param name="_pointStart">시작점좌표</param>
-        /// <param name="_sizeImage">이미지크기</param>
-        public void createImageByScreen(Point _pointStart, Size _sizeImage)
+        /// <param name="startPoint">시작 좌표</param>
+        /// <param name="areaSize">영역 크기</param>
+        public void DrawPreviewImage(Point startPoint, Size areaSize)
         {
-            // dlatl bitmap 을 생성 한 후 작업. using 내부의 new 는 자동 해제 됨.
-            using (Bitmap bitmap = new Bitmap(_sizeImage.Width, _sizeImage.Height, PixelFormat.Format32bppArgb))
-            {
-                //임시 비트맵으로 그래픽도구를 생성. 그리기 시작한다.
-                using (Graphics g = Graphics.FromImage(bitmap))
-                {
-                    //그래픽 옵션 주기
-                    g.SmoothingMode = SmoothingMode.AntiAlias;
-                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;//이것이 가장 퀄리티가 높다고 함.
-                    //g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;//샘플로 추가
-                    g.CompositingQuality = CompositingQuality.HighQuality;
-                    g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+            ScreenImageDrawer.DrawPreviewImageFromScreen(startPoint, areaSize);
 
-                    //스크린 캡쳐 시작                    
-                    // 인수:스크린좌표,그리기시작좌표,그리는사이즈.
-                    //copypixeloperation 옵션을 줄 수도 있다.
-                    g.CopyFromScreen(_pointStart, ptZero, _sizeImage, CopyPixelOperation.SourceCopy);
-                }
-
-                if (resultImage != null) { resultImage.Dispose(); }
-                resultImage = new Bitmap(bitmap);
-
-                // 미리보기 이미지 생성
-                using (Graphics g = Graphics.FromImage(previewImage))
-                {
-                    //결과 이미지와 미리보기 이미지의 사이즈가 다르므로 이것을 리사이징 하는 부분이다.
-                    g.DrawImage(bitmap, 0, 0, szPreviewImage.Width, szPreviewImage.Height);
-
-                    //리사이징 하면서 이미지가 지저분하므로, 렌더링 처리를 한다.
-                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-
-                    //미리보기 화면상에 지정
-                    picboxPreview.Image = previewImage;
-                }
-            }
+            // ScreenImageDrawer.PreviewImage 의 포인터는 변하지 않는 포인트이므로, 메모리 누수 우려 안해도 됨.
+            picboxPreview.Image = ScreenImageDrawer.PreviewImage;
         }
 
         /// <summary>
@@ -153,14 +120,26 @@ namespace Image_Capture
                 MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 SaveFile_Dialog();
-
             }
+            else
+            {
+                if (resultImage != null) { resultImage.Dispose(); }
+            }
+        }
+
+        public void SaveAndDrawResultImage(Point startPoint, Size areaSize)
+        {
+            // 결과 이미지를 생성하는 부분
+            ScreenImageDrawer.DrawResultImageFromScreen(startPoint, areaSize);
+            resultImage = ScreenImageDrawer.ResultImage;
+
+            SaveFile_Result();
         }
 
         /// <summary>
         /// 
         /// </summary>
-        private void showForm()
+        private void ShowForm()
         {
             this.Visible = true;//활성화
             this.Opacity = 100;
@@ -170,7 +149,7 @@ namespace Image_Capture
         /// <summary>
         /// 
         /// </summary>
-        private void hideForm()
+        private void HideForm()
         {
             this.Opacity = 0;
             this.Visible = false;
@@ -181,7 +160,7 @@ namespace Image_Capture
         /// debug 용 메서드
         /// </summary>
         /// <param name="msg"></param>
-        private void debug(string msg)
+        private void Debug(string msg)
         {
             if (isDebug) System.Diagnostics.Debug.WriteLine(msg);
         }
@@ -190,12 +169,12 @@ namespace Image_Capture
         /// debug 용 메서드
         /// </summary>
         /// <param name="msg"></param>
-        private void debug(string msg, string msg2)
+        private void Debug(string msg, string msg2)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(msg);
             sb.Append(msg2);
-            debug(sb.ToString());
+            Debug(sb.ToString());
             sb.Clear();
         }
     }

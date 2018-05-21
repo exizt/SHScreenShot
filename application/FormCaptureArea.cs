@@ -20,7 +20,9 @@ namespace Image_Capture
         /// <summary>
         /// 로그 디버깅 옵션
         /// </summary>
-        bool isDebug = false;
+        private bool isDebug = true;
+
+        private const int CAPTURE_AREA_PADDING = 7;
 
         /// <summary>
         /// 생성자
@@ -44,11 +46,13 @@ namespace Image_Capture
         /// <param name="e"></param>
         private void FormCaptureArea_Load(object sender, EventArgs e)
         {
+            picboxCaptureScreen.Location = new Point(CAPTURE_AREA_PADDING, CAPTURE_AREA_PADDING);
+
             //투명영역의 크기 조절
-            setCaptureScreenSize();
+            ResizeCaptureArea();
             
             //캡처 이미지 생성
-            getCapture();
+            GetCapture();
 
             //로드여부 활성화
             isLoaded = true;
@@ -65,14 +69,14 @@ namespace Image_Capture
             if(isLoaded)
             {
                 //투명영역의 크기 조절
-                setCaptureScreenSize();
+                ResizeCaptureArea();
 
                 //debug("this.Size " + this.Size.Width + "," + this.Size.Height);
                 //debug("this.Location " + this.Location.X + "," + this.Location.Y);
                 //debug("imgCaptureScreenWH " + imgCaptureScreen.Width + "," + imgCaptureScreen.Height);
                 
                 //캡처 이미지 생성
-                getCapture();
+                GetCapture();
             }
         }
 
@@ -84,11 +88,11 @@ namespace Image_Capture
         /// <param name="e"></param>
         private void FormCaptureArea_Move(object sender, EventArgs e)
         {
-            debug("FormCaptureArea_Move 호출");
+            Debug("FormCaptureArea_Move 호출");
             if (isLoaded)
             {
                 //캡처 이미지 생성
-                getCapture();
+                GetCapture();
             }
         }
 
@@ -97,10 +101,10 @@ namespace Image_Capture
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void imgCaptureScreen_Click(object sender, EventArgs e)
+        private void ImgCaptureScreen_Click(object sender, EventArgs e)
         {
             //이미지 파일 저장
-            save();
+            //save();
         }
         
         /// <summary>
@@ -115,9 +119,10 @@ namespace Image_Capture
             Keys key = keyData;
             if (key != Keys.ShiftKey)
             {
+                //debug(key.ToString());
                 if (key == Keys.P || key == Keys.PrintScreen || key == Keys.Print || key == Keys.F1)
                 {
-                    save();//이미지 저장 호출
+                    Save();//이미지 저장 호출
                 }
             }
             return base.ProcessCmdKey(ref msg, keyData);
