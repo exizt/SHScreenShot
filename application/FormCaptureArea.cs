@@ -22,6 +22,8 @@ namespace Image_Capture
         /// </summary>
         private bool isDebug = true;
 
+        private const int CAPTURE_AREA_PADDING = 7;
+
         /// <summary>
         /// 생성자
         /// </summary>
@@ -44,6 +46,8 @@ namespace Image_Capture
         /// <param name="e"></param>
         private void FormCaptureArea_Load(object sender, EventArgs e)
         {
+            picboxCaptureScreen.Location = new Point(CAPTURE_AREA_PADDING, CAPTURE_AREA_PADDING);
+
             //투명영역의 크기 조절
             ResizeCaptureArea();
             

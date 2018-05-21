@@ -36,11 +36,11 @@ namespace Image_Capture
             //선택 창의 사이즈 조절에 맞춰서, 투명영역의 사이즈를 조절한다.
             if (ClientSize.Width >= 0)
             {
-                picboxCaptureScreen.Width = ClientSize.Width;
+                picboxCaptureScreen.Width = ClientSize.Width - CAPTURE_AREA_PADDING * 2;
             }
             if (ClientSize.Height >= 0)
             {
-                picboxCaptureScreen.Height = ClientSize.Height;
+                picboxCaptureScreen.Height = ClientSize.Height - CAPTURE_AREA_PADDING * 2;
             }
         }
 
@@ -55,8 +55,8 @@ namespace Image_Capture
             * X : 선택 창의 X 좌표
             * Y : 선택 창의 Y 좌표
             */
-            ptScreenXY.X = this.Location.X + (Width - ClientSize.Width) / 2;
-            ptScreenXY.Y = this.Location.Y + (Height - ClientSize.Height - (Width - ClientSize.Width) / 2);
+            ptScreenXY.X = this.Location.X + (Width - ClientSize.Width) / 2 + picboxCaptureScreen.Location.X;
+            ptScreenXY.Y = this.Location.Y + (Height - ClientSize.Height - (Width - ClientSize.Width) / 2) + picboxCaptureScreen.Location.Y;
 
             Debug("ScreenXY["+ptScreenXY.ToString()+"] thisLocation["+ this.Location.ToString()+"] this.Size["+this.Size.ToString()+"] ClientSize["+ClientSize.ToString()+"]");
             //debug("picboxCaptureScreen.location[" + picboxCaptureScreen.Location.ToString()+"]");
