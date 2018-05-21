@@ -12,7 +12,7 @@ namespace Image_Capture
         /// formCaptureArea 도 영향을 받는다.
         /// </summary>
         public bool isDebug = false;
-        internal ScreenImageDrawer ScreenImageDrawer { get;}
+        internal ScreenImageDrawer ScreenImageDrawer { get; private set; }
 
         /// <summary>
         /// 생성자 메서드

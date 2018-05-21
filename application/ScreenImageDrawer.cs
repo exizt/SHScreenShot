@@ -12,7 +12,7 @@ namespace Image_Capture
     {
         private readonly Point ptZero = new Point(0, 0);
 
-        public Image PreviewImage { get; }
+        public Image PreviewImage { get; private set; }
         public Image ResultImage { get; private set;}
         public Size szPreviewImage;
 
