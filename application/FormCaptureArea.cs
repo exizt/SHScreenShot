@@ -68,7 +68,7 @@ namespace Image_Capture
             ResizeCaptureArea();
             
             //캡처 이미지 생성
-            GetCapture();
+            DrawPreviewImage();
 
             //로드여부 활성화
             isLoaded = true;
@@ -92,7 +92,7 @@ namespace Image_Capture
                 //debug("imgCaptureScreenWH " + imgCaptureScreen.Width + "," + imgCaptureScreen.Height);
                 
                 //캡처 이미지 생성
-                GetCapture();
+                DrawPreviewImage();
             }
         }
 
@@ -108,7 +108,7 @@ namespace Image_Capture
             if (isLoaded)
             {
                 //캡처 이미지 생성
-                GetCapture();
+                DrawPreviewImage();
             }
         }
 

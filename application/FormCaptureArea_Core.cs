@@ -47,7 +47,7 @@ namespace Image_Capture
         /// <summary>
         /// 스크린샷 이미지 생성
         /// </summary>
-        private void GetCapture()
+        private void DrawPreviewImage()
         {
             /**
             * 선택영역의 좌표를 구하기. (좌표는 상단 좌측 기준으로 0,0 으로 시작한다)
