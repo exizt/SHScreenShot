@@ -146,7 +146,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1, 148);
+            this.label1.Location = new System.Drawing.Point(1, 149);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 12);
             this.label1.TabIndex = 20;
@@ -155,7 +155,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1, 187);
+            this.label2.Location = new System.Drawing.Point(1, 188);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(82, 12);
             this.label2.TabIndex = 21;
@@ -173,13 +173,14 @@
             this.Controls.Add(this.btnCaptureArea);
             this.Controls.Add(this.btnFolderOpen);
             this.Controls.Add(this.btnFullCapture);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = global::Image_Capture.Properties.Resources.MainIcon;
             this.MaximizeBox = false;
             this.Name = "FormMain";
             this.ShowIcon = false;
             this.Text = "SH Screen Capture";
             this.Load += new System.EventHandler(this.FormMain_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FormMain_MouseDown);
             this.Resize += new System.EventHandler(this.FormMain_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.picboxPreview)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);

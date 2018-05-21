@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace Image_Capture
 {
@@ -11,8 +12,21 @@ namespace Image_Capture
         /// 로그 디버깅 옵션.
         /// formCaptureArea 도 영향을 받는다.
         /// </summary>
-        public bool isDebug = false;
+        public bool isDebug = true;
         internal ScreenImageDrawer ScreenImageDrawer { get; private set; }
+
+        // --------------------- movable 구간 ▽▽▽▽▽ ----------------------------
+        private const int WM_NCHITTEST = 0x84;
+        private const int HT_CLIENT = 0x1;
+        private const int HT_CAPTION = 0x2;
+        private const int WM_NCLBUTTONDOWN = 0xA1;
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+        // --------------------- movable 구간 △△△△△ ----------------------------
 
         /// <summary>
         /// 생성자 메서드
@@ -140,6 +154,30 @@ namespace Image_Capture
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+
+        }
+
+        private void FormMain_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
         }
     }
 }
