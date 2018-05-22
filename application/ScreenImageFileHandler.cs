@@ -13,35 +13,49 @@ namespace Image_Capture
     /// </summary>
     class ScreenImageFileHandler
     {
-        string filePath;
+        public string FileDirPath { get; set; }
+
+        public ScreenImageFileHandler()
+        {
+            FileDirPath = GenerateBasePath();
+        }
 
         /// <summary>
         /// 결과 이미지 저장. 파일 다이얼로그.
         /// </summary>
-        public void CallSaveFileDialog(Image image)
+        public bool CallSaveFileDialog(Image image)
         {
-            string filepath = "";
+            string filePath = "";
             using (SaveFileDialog fileDialog = new SaveFileDialog())
             {
                 fileDialog.Filter = "PNG 이미지 (*.png)|*.png|JPG 이미지 (*.jpg)|*.jpg|BMP 이미지 (*.bmp)|*.bmp|모든 파일 (*.*)|*.*";//확장자 선택
-                fileDialog.Title = "다른 이름으로 저장";//창위에 뜨는 타이틀
+                fileDialog.Title = "스크린샷 이미지 저장";//창위에 뜨는 타이틀
                 fileDialog.FileName = GenerateBaseFilename();
+                fileDialog.DefaultExt = "png";
+                //fileDialog.InitialDirectory = "";
                 //showDialog의 리턴값이 OK 일 때
                 if (fileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    filepath = fileDialog.FileName;
+                    filePath = fileDialog.FileName;
+                } else
+                {
+                    // 취소 한 경우
+                    return false;
                 }
             }
-
-            if (filepath != "")
+            
+            if (filePath != "")
             {
                 if (image != null)
                 {
                     try
                     {
-                        image.Save(filepath, GetImageFormat(filepath));
-                        this.filePath = filepath;
+                        //image.Save(filePath, GetImageFormat(filePath));
+                        SaveImageFile(image, filePath);
                         MessageBox.Show("저장 되었습니다.");
+                        //저장이 완료된 경우에 속성값 FilePath 에 기록해둠.
+                        FileDirPath = Path.GetDirectoryName(filePath);
+                        return true;
                     }
                     catch (ArgumentNullException e)
                     {
@@ -50,21 +64,73 @@ namespace Image_Capture
                     catch (Exception e)
                     {
                         MessageBox.Show("에러 발생" + e);
-                        System.Diagnostics.Debug.WriteLine(e);
-                    }
-                    finally
-                    {
-                        if (image != null)
-                        {
-                            image.Dispose();
-                        }
                     }
                 }
                 else { MessageBox.Show("그림을 캡쳐해주세요."); }
             }
-            else { MessageBox.Show("저장경로를 설정해주세요"); }
+            else
+            { 
+                // 경로를 잘못 지정한 경우
+                MessageBox.Show("저장경로를 설정해주세요");
+            }
+            return false;
         }
 
+        /// <summary>
+        /// 퀵 세이브 기능.
+        /// </summary>
+        /// <param name="image"></param>
+        public bool QuickSaveImageFile(Image image)
+        {
+            string filePath = Path.Combine(FileDirPath, GenerateBaseFilename() + ".png");
+            try
+            {
+                SaveImageFile(image, filePath);
+                MessageBox.Show("저장 되었습니다.");
+                FileDirPath = Path.GetDirectoryName(filePath);
+                return true;
+            }
+            catch (ArgumentNullException e)
+            {
+                MessageBox.Show("에러 발생 ArgNulls" + e);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("에러 발생" + e);
+            }
+            finally
+            {
+                if (image != null)
+                {
+                    image.Dispose();
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 이미지파일을 저장하는 부분만 따로 캡슐화 해둠. 
+        /// 만약에 대비하기 위한 부분.
+        /// </summary>
+        /// <param name="image">저장하려는 이미지 파일</param>
+        /// <param name="path">저장하려는 경로. (경로+파일명)</param>
+        private void SaveImageFile(Image image, string path)
+        {
+            try
+            {
+                image.Save(path, GetImageFormat(path));
+                System.Diagnostics.Debug.WriteLine(path);
+            }
+            catch (ArgumentNullException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e);
+                throw e;
+            }
+        }
         /// <summary>
         /// 이미지 확장자
         /// </summary>
@@ -99,7 +165,11 @@ namespace Image_Capture
         /// <returns></returns>
         public string GenerateBasePath()
         {
-            return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            return Environment.GetFolderPath(Environment.SpecialFolder.Desktop); ;
+
+            //Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location); //설치 경로
+            //Environment.GetFolderPath(Environment.SpecialFolder.Desktop); //Desktop
+            //Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData); //AppData
         }
 
         /// <summary>
