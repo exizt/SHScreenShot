@@ -39,7 +39,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.btnFullCapture = new System.Windows.Forms.Button();
-            this.savefileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.btnFolderOpen = new System.Windows.Forms.Button();
             this.folderbrowserDialog_SShot = new System.Windows.Forms.FolderBrowserDialog();
             this.btnCaptureArea = new System.Windows.Forms.Button();
@@ -50,6 +49,9 @@
             this.labelPreviewTitle = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.saveDirectoryPath = new System.Windows.Forms.Label();
+            this.switchQuickSaveMode = new Image_Capture.SwitchCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.picboxPreview)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -146,7 +148,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1, 149);
+            this.label1.Location = new System.Drawing.Point(-1, 194);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 12);
             this.label1.TabIndex = 20;
@@ -155,17 +157,50 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1, 188);
+            this.label2.Location = new System.Drawing.Point(225, 213);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(82, 12);
             this.label2.TabIndex = 21;
             this.label2.Text = "단축키 : P. F1";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(-1, 145);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(85, 12);
+            this.label3.TabIndex = 25;
+            this.label3.Text = "퀵 세이브 모드";
+            // 
+            // saveDirectoryPath
+            // 
+            this.saveDirectoryPath.AutoSize = true;
+            this.saveDirectoryPath.Location = new System.Drawing.Point(6, 214);
+            this.saveDirectoryPath.Name = "saveDirectoryPath";
+            this.saveDirectoryPath.Size = new System.Drawing.Size(145, 12);
+            this.saveDirectoryPath.TabIndex = 27;
+            this.saveDirectoryPath.Text = "[폴더경로가 들어갈 위치]";
+            // 
+            // switchQuickSaveMode
+            // 
+            this.switchQuickSaveMode.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.switchQuickSaveMode.Location = new System.Drawing.Point(8, 160);
+            this.switchQuickSaveMode.Name = "switchQuickSaveMode";
+            this.switchQuickSaveMode.Padding = new System.Windows.Forms.Padding(1);
+            this.switchQuickSaveMode.Size = new System.Drawing.Size(35, 21);
+            this.switchQuickSaveMode.TabIndex = 26;
+            this.switchQuickSaveMode.Text = "switchCheckBox1";
+            this.switchQuickSaveMode.UseVisualStyleBackColor = true;
+            this.switchQuickSaveMode.CheckedChanged += new System.EventHandler(this.switchQuickSaveMode_CheckedChanged);
+            // 
             // FormMain
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(6, 14);
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(319, 238);
+            this.ClientSize = new System.Drawing.Size(319, 241);
+            this.Controls.Add(this.saveDirectoryPath);
+            this.Controls.Add(this.switchQuickSaveMode);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelPreviewTitle);
@@ -196,13 +231,15 @@
         private System.Windows.Forms.Button btnFolderOpen;
         private System.Windows.Forms.Button btnCaptureArea;
         public System.Windows.Forms.PictureBox picboxPreview;
-        private System.Windows.Forms.SaveFileDialog savefileDialog1;
         private System.Windows.Forms.FolderBrowserDialog folderbrowserDialog_SShot;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private SwitchCheckBox switchQuickSaveMode;
+        private System.Windows.Forms.Label saveDirectoryPath;
     }
 }
 

@@ -111,8 +111,8 @@ namespace Image_Capture
         /// </summary>
         private void Save()
         {
-            mParentForm.SaveAndDrawResultImage(locationCaptureArea, sizeCaptureArea);
-            //mParentForm.SaveFile_Result();
+            mParentForm.DrawResultImage(locationCaptureArea,sizeCaptureArea);
+            mParentForm.SaveResultImageFile();
         }
 
 
