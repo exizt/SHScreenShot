@@ -52,10 +52,6 @@ namespace Image_Capture
             {
                 Cursor.Show();
             }
-
-            //미리보기 이미지의 사이즈 를 가져온다.
-            //폼 컨트롤의 크기를 처리 할 때에는 최소 Load 이후에 하도록 한다.(생성자에 넣으면 버그 발생 가능성 있음)
-            szPreviewImage = picboxPreview.Size;
         }
 
         /// <summary>

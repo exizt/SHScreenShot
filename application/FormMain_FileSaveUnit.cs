@@ -21,7 +21,7 @@ namespace Image_Capture
             string filepath = "";
             using (SaveFileDialog fileDialog = new SaveFileDialog())
             {
-                fileDialog.Filter = "이미지 파일 (*.jpg)|*.jpg|비트맵파일 (*.bmp)|*.bmp|비트맵파일 (*.png)|*.png|모든 파일 (*.*)|*.*";//확장자 선택
+                fileDialog.Filter = "PNG 이미지 (*.png)|*.png|JPG 이미지 (*.jpg)|*.jpg|BMP 이미지 (*.bmp)|*.bmp|모든 파일 (*.*)|*.*";//확장자 선택
                 fileDialog.Title = "다른 이름으로 저장";//창위에 뜨는 타이틀
                 fileDialog.FileName = FileSave_Auto_FileName();
                 //showDialog의 리턴값이 OK 일 때

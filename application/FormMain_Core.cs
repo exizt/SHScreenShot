@@ -28,17 +28,6 @@ namespace Image_Capture
         string strFilePath = "";
 
         /// <summary>
-        /// 결과 이미지의 사이즈 개체
-        /// </summary>
-        Size szResultImage = new Size(0, 0);
-
-        /// <summary>
-        /// 미리보기 이미지의 사이즈 값.
-        /// 윈도우 설정에 따라 변경 될 수 있으므로, Load 된 이후에 실제 크기(픽셀) 을 알아온다.
-        /// </summary>
-        public Size szPreviewImage;
-
-        /// <summary>
         /// 미리보기 이미지 에 이미지를 지정
         /// </summary>
         /// <param name="_image">지정할 이미지</param>
@@ -153,7 +142,7 @@ namespace Image_Capture
         }
 
         /// <summary>
-        /// 
+        /// 숨김처리했던 폼을 다시 visible 처리
         /// </summary>
         private void ShowForm()
         {
@@ -163,7 +152,7 @@ namespace Image_Capture
         }
 
         /// <summary>
-        /// 
+        /// 폼을 숨김처리
         /// </summary>
         private void HideForm()
         {
@@ -175,7 +164,7 @@ namespace Image_Capture
         /// <summary>
         /// debug 용 메서드
         /// </summary>
-        /// <param name="msg"></param>
+        /// <param name="msg">Message</param>
         private void Debug(string msg)
         {
             if (isDebug) System.Diagnostics.Debug.WriteLine(msg);
@@ -184,7 +173,7 @@ namespace Image_Capture
         /// <summary>
         /// debug 용 메서드
         /// </summary>
-        /// <param name="msg"></param>
+        /// <param name="msg">Message</param>
         private void Debug(string msg, string msg2)
         {
             StringBuilder sb = new StringBuilder();
