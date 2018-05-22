@@ -61,11 +61,25 @@ namespace Image_Capture
         /// </summary>
         private void Event_FullScreenCapture()
         {
+            //Debug(this.Location.ToString());
+
+            Screen screen = Screen.FromControl(this);
+
+            //Debug(screen.DeviceName);
+            //Debug(screen.Bounds.Location.ToString());
+
             //기본창을 최소화.
             this.HideForm();
 
+            /*
+            복수개의 모니터는 Screen.AllScreens 컬렉션 속성을 참조하여 엑세스할 수 있다.
+            즉, 첫번째 모니터는 Screen.AllScreens[0], 두번째 모니터는 Screen.AllScreens[1] 등과 같이 엑세스한다.
+            주 모니터만 참고하려면 PrimaryScreen 을 사용할 수 있다.
+            */
+
             // 스크린샷 이미지를 생성하고, 미리보기 이미지도 생성
-            DrawImagebyFullScreen();
+            //DrawImagebyFullScreen();
+            DrawResultImageWithPreviewImage(screen.Bounds.Location,screen.Bounds.Size);
 
             //잠깐 텀 을 준후 윈도우창 복귀
             Thread.Sleep(50);
@@ -75,21 +89,20 @@ namespace Image_Capture
 
             // 메모리 정리
             if (resultImage != null) { resultImage.Dispose(); }
+            
         }
 
         /// <summary>
-        /// 스크린 이미지 캡쳐 + 미리보기 이미지 생성
+        /// 결과 이미지와 미리보기 이미지를 같이 그리기
         /// </summary>
-        private void DrawImagebyFullScreen()
+        /// <param name="location">시작 좌표</param>
+        /// <param name="screenArea">영역 크기</param> 
+        private void DrawResultImageWithPreviewImage(Point location, Size screenArea)
         {
-            /*
-            복수개의 모니터는 Screen.AllScreens 컬렉션 속성을 참조하여 엑세스할 수 있다.
-            즉, 첫번째 모니터는 Screen.AllScreens[0], 두번째 모니터는 Screen.AllScreens[1] 등과 같이 엑세스한다.
-            */
             //ResultImage 만들기
-            ScreenImageDrawer.DrawResultImageFromScreen(ptZero, Screen.PrimaryScreen.Bounds.Size);
+            ScreenImageDrawer.DrawResultImageFromScreen(location, screenArea);
             resultImage = ScreenImageDrawer.ResultImage;
-            
+
             //PrevieImage 만들기 (ResultImage 를 기준으로)
             ScreenImageDrawer.DrawPreviewImage();
             picboxPreview.Image = ScreenImageDrawer.PreviewImage;
