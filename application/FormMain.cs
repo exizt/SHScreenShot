@@ -22,7 +22,7 @@ namespace Image_Capture
         /// </summary>
         internal ScreenImageDrawer ScreenImageDrawer { get; private set; }
 
-        internal ScreenImageFileHandler ScreenImageSaver { get; private set; }
+        internal ScreenImageFileHandler ScreenImageFileHandler { get; private set; }
 
         /// <summary>
         /// 결과 이미지
@@ -38,6 +38,8 @@ namespace Image_Capture
         /// 파일 경로
         /// </summary>
         string strFilePath = "";
+
+        bool isQuickSaveMode = false;
 
         // --------------------- movable 구간 ▽▽▽▽▽ ----------------------------
         private const int WM_NCHITTEST = 0x84;
@@ -62,7 +64,8 @@ namespace Image_Capture
             // 스크린 이미지를 가져오는 클래스 생성. composition 으로.
             ScreenImageDrawer = new ScreenImageDrawer(picboxPreview.Size);
 
-            ScreenImageSaver = new ScreenImageFileHandler();
+            ScreenImageFileHandler = new ScreenImageFileHandler();
+            ChangeDirPath();
         }
 
         /// <summary>
@@ -108,12 +111,14 @@ namespace Image_Capture
         /// <param name="e"></param>
         private void BtnFolderOpen_Click(object sender, EventArgs e)
         {
-            if (strFilePath != "")
+            Debug("GenerateBasePath:" + ScreenImageFileHandler.GenerateBasePath());
+            Debug("BtnFolderOpen_Click:" + ScreenImageFileHandler.FileDirPath);
+            if (ScreenImageFileHandler.FileDirPath != "")
             {
-                System.Diagnostics.Process.Start("explorer.exe", Path.GetDirectoryName(strFilePath));
+                System.Diagnostics.Process.Start("explorer.exe", ScreenImageFileHandler.FileDirPath);
             } else
             {
-                System.Diagnostics.Process.Start("explorer.exe", ScreenImageSaver.GenerateBasePath());
+                System.Diagnostics.Process.Start("explorer.exe", ScreenImageFileHandler.GenerateBasePath());
             }
         }
 
@@ -236,7 +241,7 @@ namespace Image_Capture
             Thread.Sleep(50);
             this.ShowForm();
 
-            SaveFile_Result();
+            SaveResultImageFile();
 
             // 메모리 정리
             if (resultImage != null) { resultImage.Dispose(); }
@@ -290,18 +295,30 @@ namespace Image_Capture
         /// 사진파일을 저장하는 메서드.
         /// Messagebox 호출 후 저장위치 선택해서 저장
         /// </summary>
-        public void SaveFile_Result()
+        public void SaveResultImageFile()
         {
-            if (MessageBox.Show("저장하시겠습니까?", "스크린샷 파일저장",
-                MessageBoxButtons.YesNo) == DialogResult.Yes)
+            // 여기서 퀵 세이브 모드와 관련된 설정을 해주어야 할 듯 하다.
+            if (isQuickSaveMode)
             {
-                //SaveFile_Dialog();
-                ScreenImageSaver.CallSaveFileDialog(resultImage);
+                ScreenImageFileHandler.QuickSaveImageFile(resultImage);
             }
             else
             {
-                if (resultImage != null) { resultImage.Dispose(); }
+                if (MessageBox.Show("저장하시겠습니까?", "스크린샷 파일저장",
+                    MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    //SaveFile_Dialog();
+                    if (ScreenImageFileHandler.CallSaveFileDialog(resultImage))
+                    {
+                        ChangeDirPath();
+                    }
+                }
             }
+
+            // 저장을 했건, 안 했건, 오류가 났건 resultImage 는 Dispose 시킨다.
+            // 어차피 다시 시도할 때, 새로 캡쳐해야하기 때문이다.
+            if (resultImage != null) { resultImage.Dispose(); }
+
         }
 
         /// <summary>
@@ -344,6 +361,37 @@ namespace Image_Capture
             sb.Append(msg2);
             Debug(sb.ToString());
             sb.Clear();
+        }
+
+        private void switchQuickSaveMode_CheckedChanged(object sender, EventArgs e)
+        {
+            if (((CheckBox)sender).Checked)
+            {
+                isQuickSaveMode = true;
+                FolderBrowser();
+                //Debug("isQuickSaveMode true");
+            } else
+            {
+                isQuickSaveMode = false;
+                //Debug("isQuickSaveMode false");
+            }
+        }
+
+        private void FolderBrowser()
+        {
+            FolderBrowserDialog folderDlg = new FolderBrowserDialog();
+            folderDlg.ShowNewFolderButton = true;
+            DialogResult result = folderDlg.ShowDialog();
+            if(result == DialogResult.OK)
+            {
+                ScreenImageFileHandler.FileDirPath = folderDlg.SelectedPath;
+                ChangeDirPath();
+            }
+        }
+
+        private void ChangeDirPath()
+        {
+            saveDirectoryPath.Text = ScreenImageFileHandler.FileDirPath;
         }
     }
 }
