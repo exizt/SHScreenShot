@@ -238,7 +238,7 @@ namespace Image_Capture
             Thread.Sleep(50);
             this.ShowForm();
 
-            SaveFile_Result();
+            SaveResultImageFile();
 
             // 메모리 정리
             if (resultImage != null) { resultImage.Dispose(); }
@@ -292,7 +292,7 @@ namespace Image_Capture
         /// 사진파일을 저장하는 메서드.
         /// Messagebox 호출 후 저장위치 선택해서 저장
         /// </summary>
-        public void SaveFile_Result()
+        public void SaveResultImageFile()
         {
             if (MessageBox.Show("저장하시겠습니까?", "스크린샷 파일저장",
                 MessageBoxButtons.YesNo) == DialogResult.Yes)
