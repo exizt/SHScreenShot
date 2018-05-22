@@ -410,7 +410,7 @@ namespace Image_Capture
         /// <param name="e"></param>
         private void FormMain_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Control && e.KeyCode == Keys.S)       // Ctrl-S Save
+            if (e.Control && e.KeyCode == Keys.S)
             {
                 // 스크린 캡쳐 기능
                 DoScreenCaptureFeature();

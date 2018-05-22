@@ -245,10 +245,14 @@ namespace Image_Capture
         /// <param name="e"></param>
         private void FormCaptureArea_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Control && e.KeyCode == Keys.S)       // Ctrl-S Save
+            if (e.Control && e.KeyCode == Keys.S)
             {
                 Save();//이미지 저장 호출
                 e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
+            } else if (e.Control && e.KeyCode == Keys.W)
+            {
+                this.Close();
+                e.SuppressKeyPress = true;
             }
         }
     }
