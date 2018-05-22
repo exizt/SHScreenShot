@@ -1,22 +1,24 @@
 ﻿using System;
-using System.Diagnostics;//debug용
 using System.Drawing;
-using System.IO;
-using System.Windows.Forms;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Reflection;
+using System.Windows.Forms;
 
-/// <summary>
-/// 파일 저장과 관련된 부분만 모아둠
-/// </summary>
 namespace Image_Capture
 {
-    public partial class FormMain : Form
+    /// <summary>
+    /// 이미지 파일 저장을 담당하는 클래스
+    /// FormMain 의 구성 클래스
+    /// </summary>
+    class ScreenImageFileHandler
     {
+        string filePath;
+
         /// <summary>
         /// 결과 이미지 저장. 파일 다이얼로그.
         /// </summary>
-        private void SaveFile_Dialog()
+        public void CallSaveFileDialog(Image image)
         {
             string filepath = "";
             using (SaveFileDialog fileDialog = new SaveFileDialog())
@@ -33,12 +35,12 @@ namespace Image_Capture
 
             if (filepath != "")
             {
-                if (resultImage != null)
+                if (image != null)
                 {
                     try
                     {
-                        resultImage.Save(filepath, GetImageFormat(filepath));
-                        strFilePath = filepath;
+                        image.Save(filepath, GetImageFormat(filepath));
+                        this.filePath = filepath;
                         MessageBox.Show("저장 되었습니다.");
                     }
                     catch (ArgumentNullException e)
@@ -52,9 +54,9 @@ namespace Image_Capture
                     }
                     finally
                     {
-                        if (resultImage != null)
+                        if (image != null)
                         {
-                            resultImage.Dispose();
+                            image.Dispose();
                         }
                     }
                 }
@@ -90,11 +92,12 @@ namespace Image_Capture
             }
         }
 
+
         /// <summary>
         /// 설치 경로를 가져온다.
         /// </summary>
         /// <returns></returns>
-        private string GenerateBasePath()
+        public string GenerateBasePath()
         {
             return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         }

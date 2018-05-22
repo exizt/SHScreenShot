@@ -39,7 +39,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.btnFullCapture = new System.Windows.Forms.Button();
-            this.savefileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.btnFolderOpen = new System.Windows.Forms.Button();
             this.folderbrowserDialog_SShot = new System.Windows.Forms.FolderBrowserDialog();
             this.btnCaptureArea = new System.Windows.Forms.Button();
@@ -196,7 +195,6 @@
         private System.Windows.Forms.Button btnFolderOpen;
         private System.Windows.Forms.Button btnCaptureArea;
         public System.Windows.Forms.PictureBox picboxPreview;
-        private System.Windows.Forms.SaveFileDialog savefileDialog1;
         private System.Windows.Forms.FolderBrowserDialog folderbrowserDialog_SShot;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;

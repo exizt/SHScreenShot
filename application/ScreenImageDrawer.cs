@@ -3,12 +3,12 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 
-/// <summary>
-/// 
-/// </summary>
 namespace Image_Capture
 {
-    class ScreenImageDrawer: IDisposable
+    /// <summary>
+    /// 이미지 캡쳐 등의 기능을 담은 클래스
+    /// </summary>
+    class ScreenImageDrawer : IDisposable
     {
         private readonly Point ptZero = new Point(0, 0);
 
@@ -16,6 +16,10 @@ namespace Image_Capture
         public Image ResultImage { get; private set;}
         public Size szPreviewImage;
 
+        /// <summary>
+        /// ScreenImageDrawer 의 생성자
+        /// </summary>
+        /// <param name="previewImageSize">미리보기 이미지의 크기</param>
         public ScreenImageDrawer(Size previewImageSize)
         {
             PreviewImage = new Bitmap(previewImageSize.Width, previewImageSize.Height);
