@@ -110,17 +110,29 @@ namespace Image_Capture
         }
 
         /// <summary>
-        /// 미리보기 이미지 '만' 드로잉 하는 메서드
+        /// 미리보기 이미지 '만' 드로잉하는 메서드
         /// 외부 에서도 호출 가능한 메서드. 좌표만 넘겨주면 됨.
         /// </summary>
-        /// <param name="startPoint">시작 좌표</param>
-        /// <param name="areaSize">영역 크기</param>
-        public void DrawPreviewImage(Point startPoint, Size areaSize)
+        /// <param name="location">시작 좌표</param>
+        /// <param name="screenArea">영역 크기</param>
+        public void DrawPreviewImage(Point location, Size screenArea)
         {
-            ScreenImageDrawer.DrawPreviewImageFromScreen(startPoint, areaSize);
+            ScreenImageDrawer.DrawPreviewImageFromScreen(location, screenArea);
 
             // ScreenImageDrawer.PreviewImage 의 포인터는 변하지 않는 포인트이므로, 메모리 누수 우려 안해도 됨.
             picboxPreview.Image = ScreenImageDrawer.PreviewImage;
+        }
+
+        /// <summary>
+        /// 결과 이미지 '만' 드로잉하는 메서드
+        /// </summary>
+        /// <param name="location">좌표</param>
+        /// <param name="screenArea">크기</param>
+        public void DrawResultImage(Point location, Size screenArea)
+        {
+            // 결과 이미지를 생성하는 부분
+            ScreenImageDrawer.DrawResultImageFromScreen(location, screenArea);
+            resultImage = ScreenImageDrawer.ResultImage;
         }
 
         /// <summary>
@@ -138,15 +150,6 @@ namespace Image_Capture
             {
                 if (resultImage != null) { resultImage.Dispose(); }
             }
-        }
-
-        public void SaveAndDrawResultImage(Point startPoint, Size areaSize)
-        {
-            // 결과 이미지를 생성하는 부분
-            ScreenImageDrawer.DrawResultImageFromScreen(startPoint, areaSize);
-            resultImage = ScreenImageDrawer.ResultImage;
-
-            SaveFile_Result();
         }
 
         /// <summary>
