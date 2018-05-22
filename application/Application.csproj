@@ -113,6 +113,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScreenImageFileHandler.cs" />
+    <Compile Include="SwitchCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SwitchCheckBox.Designer.cs">
+      <DependentUpon>SwitchCheckBox.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>

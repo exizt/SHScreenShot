@@ -49,6 +49,8 @@
             this.labelPreviewTitle = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.switchQuickSaveMode = new Image_Capture.SwitchCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.picboxPreview)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -160,11 +162,34 @@
             this.label2.TabIndex = 21;
             this.label2.Text = "단축키 : P. F1";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 212);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(85, 12);
+            this.label3.TabIndex = 25;
+            this.label3.Text = "퀵 세이브 모드";
+            // 
+            // switchQuickSaveMode
+            // 
+            this.switchQuickSaveMode.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.switchQuickSaveMode.Location = new System.Drawing.Point(94, 207);
+            this.switchQuickSaveMode.Name = "switchQuickSaveMode";
+            this.switchQuickSaveMode.Padding = new System.Windows.Forms.Padding(1);
+            this.switchQuickSaveMode.Size = new System.Drawing.Size(35, 21);
+            this.switchQuickSaveMode.TabIndex = 26;
+            this.switchQuickSaveMode.Text = "switchCheckBox1";
+            this.switchQuickSaveMode.UseVisualStyleBackColor = true;
+            this.switchQuickSaveMode.CheckedChanged += new System.EventHandler(this.switchQuickSaveMode_CheckedChanged);
+            // 
             // FormMain
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(6, 14);
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(319, 238);
+            this.Controls.Add(this.switchQuickSaveMode);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelPreviewTitle);
@@ -201,6 +226,8 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private SwitchCheckBox switchQuickSaveMode;
     }
 }
 

@@ -39,6 +39,8 @@ namespace Image_Capture
         /// </summary>
         string strFilePath = "";
 
+        bool isQuickSaveMode = false;
+
         // --------------------- movable 구간 ▽▽▽▽▽ ----------------------------
         private const int WM_NCHITTEST = 0x84;
         private const int HT_CLIENT = 0x1;
@@ -344,6 +346,19 @@ namespace Image_Capture
             sb.Append(msg2);
             Debug(sb.ToString());
             sb.Clear();
+        }
+
+        private void switchQuickSaveMode_CheckedChanged(object sender, EventArgs e)
+        {
+            if (((CheckBox)sender).Checked)
+            {
+                isQuickSaveMode = true;
+                Debug("isQuickSaveMode true");
+            } else
+            {
+                isQuickSaveMode = false;
+                Debug("isQuickSaveMode false");
+            }
         }
     }
 }
