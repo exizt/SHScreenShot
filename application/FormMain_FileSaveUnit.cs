@@ -7,7 +7,7 @@ using System.Drawing.Imaging;
 using System.Reflection;
 
 /// <summary>
-/// 전체 화면 스크린 캡쳐 기능 을 모아놓음
+/// 파일 저장과 관련된 부분만 모아둠
 /// </summary>
 namespace Image_Capture
 {
@@ -23,7 +23,7 @@ namespace Image_Capture
             {
                 fileDialog.Filter = "PNG 이미지 (*.png)|*.png|JPG 이미지 (*.jpg)|*.jpg|BMP 이미지 (*.bmp)|*.bmp|모든 파일 (*.*)|*.*";//확장자 선택
                 fileDialog.Title = "다른 이름으로 저장";//창위에 뜨는 타이틀
-                fileDialog.FileName = FileSave_Auto_FileName();
+                fileDialog.FileName = GenerateBaseFilename();
                 //showDialog의 리턴값이 OK 일 때
                 if (fileDialog.ShowDialog() == DialogResult.OK)
                 {
@@ -37,7 +37,7 @@ namespace Image_Capture
                 {
                     try
                     {
-                        resultImage.Save(filepath, ImageExtension(filepath));
+                        resultImage.Save(filepath, GetImageFormat(filepath));
                         strFilePath = filepath;
                         MessageBox.Show("저장 되었습니다.");
                     }
@@ -68,7 +68,7 @@ namespace Image_Capture
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        private ImageFormat ImageExtension(string path)
+        private ImageFormat GetImageFormat(string path)
         {
             //string ext = _dir_path.Substring(_dir_path.LastIndexOf('.'));
             string ext = Path.GetExtension(path);
@@ -94,16 +94,16 @@ namespace Image_Capture
         /// 설치 경로를 가져온다.
         /// </summary>
         /// <returns></returns>
-        private string FileSave_Auto_Dir()
+        private string GenerateBasePath()
         {
             return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         }
 
         /// <summary>
-        /// 현재 시간을 가져온다.
+        /// 파일명의 기본값을 만들어준다.
         /// </summary>
         /// <returns></returns>
-        private string FileSave_Auto_FileName()
+        private string GenerateBaseFilename()
         {
             //return DateTime.Now.ToString("yyyy.MM.dd-HH.mm.ss.fff");
             return DateTime.Now.ToString("yyyyMMdd-HH.mm.ss.fff");
@@ -116,7 +116,7 @@ namespace Image_Capture
         /// <returns></returns>
         private string FileSave_Auto_FilePath()
         {
-            return FileSave_Auto_Dir() + "\\" + FileSave_Auto_FileName() + ".jpg";
+            return GenerateBasePath() + "\\" + GenerateBaseFilename() + ".jpg";
         }
     }
 }

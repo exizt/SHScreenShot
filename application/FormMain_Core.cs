@@ -13,21 +13,6 @@ namespace Image_Capture
     public partial class FormMain : Form
     {
         /// <summary>
-        /// 결과 이미지
-        /// </summary>
-        public Image resultImage;
-
-        /// <summary>
-        /// point 0, 0
-        /// </summary>
-        Point ptZero = new Point(0, 0);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        string strFilePath = "";
-
-        /// <summary>
         /// 미리보기 이미지 에 이미지를 지정
         /// </summary>
         /// <param name="_image">지정할 이미지</param>
@@ -50,24 +35,21 @@ namespace Image_Capture
         /// </summary>
         private void Event_FullScreenCapture()
         {
-            //Debug(this.Location.ToString());
-
+            // 프로그램이 떠 있는 스크린을 감지
             Screen screen = Screen.FromControl(this);
-
-            //Debug(screen.DeviceName);
-            //Debug(screen.Bounds.Location.ToString());
 
             //기본창을 최소화.
             this.HideForm();
 
             /*
-            복수개의 모니터는 Screen.AllScreens 컬렉션 속성을 참조하여 엑세스할 수 있다.
-            즉, 첫번째 모니터는 Screen.AllScreens[0], 두번째 모니터는 Screen.AllScreens[1] 등과 같이 엑세스한다.
             주 모니터만 참고하려면 PrimaryScreen 을 사용할 수 있다.
+            감지된 모니터만 사용하려면 FromControl 을 이용함.
+            주 모니터만 사용하려면 PrimaryScreen 을 이용함.
+            전체 모니터에서 하나씩 이용하려면 AllScreens 를 이용함. AllScreens[0] ~ 
+            전체 모니터를 감지하는 다른 방법으로, System.Windows.Forms.SystemInformation.VirtualScreen
             */
 
             // 스크린샷 이미지를 생성하고, 미리보기 이미지도 생성
-            //DrawImagebyFullScreen();
             DrawResultImageWithPreviewImage(screen.Bounds.Location,screen.Bounds.Size);
 
             //잠깐 텀 을 준후 윈도우창 복귀

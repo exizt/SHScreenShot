@@ -13,7 +13,27 @@ namespace Image_Capture
         /// formCaptureArea 도 영향을 받는다.
         /// </summary>
         public bool isDebug = true;
+
+        /// <summary>
+        /// ScreenImageDrawer 인스턴스
+        /// 이미지 캡쳐 등의 기능을 담은 클래스
+        /// </summary>
         internal ScreenImageDrawer ScreenImageDrawer { get; private set; }
+
+        /// <summary>
+        /// 결과 이미지
+        /// </summary>
+        public Image resultImage;
+
+        /// <summary>
+        /// point 0, 0
+        /// </summary>
+        Point ptZero = new Point(0, 0);
+
+        /// <summary>
+        /// 파일 경로
+        /// </summary>
+        string strFilePath = "";
 
         // --------------------- movable 구간 ▽▽▽▽▽ ----------------------------
         private const int WM_NCHITTEST = 0x84;
@@ -87,7 +107,7 @@ namespace Image_Capture
                 System.Diagnostics.Process.Start("explorer.exe", Path.GetDirectoryName(strFilePath));
             } else
             {
-                System.Diagnostics.Process.Start("explorer.exe", FileSave_Auto_Dir());
+                System.Diagnostics.Process.Start("explorer.exe", GenerateBasePath());
             }
         }
 
@@ -152,21 +172,11 @@ namespace Image_Capture
             Application.Exit();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void panel1_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-            }
-
-        }
-
+        /// <summary>
+        /// 폼에서 드래그 기능
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FormMain_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
