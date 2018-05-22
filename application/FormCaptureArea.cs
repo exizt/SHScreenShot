@@ -159,27 +159,6 @@ namespace Image_Capture
             //이미지 파일 저장
             //save();
         }
-        
-        /// <summary>
-        /// 단축키 지정
-        /// </summary>
-        /// <param name="msg"></param>
-        /// <param name="keyData"></param>
-        /// <returns></returns>
-        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            Keys key = keyData;
-            if (key != Keys.ShiftKey)
-            {
-                //debug(key.ToString());
-                if (key == Keys.P || key == Keys.PrintScreen || key == Keys.Print || key == Keys.F1)
-                {
-                    Save();//이미지 저장 호출
-                }
-            }
-            return base.ProcessCmdKey(ref msg, keyData);
-        }
 
         /// <summary>
         /// 창 크기 조절을 위한 부분
@@ -257,6 +236,24 @@ namespace Image_Capture
             sb.Append(msg2);
             Debug(sb.ToString());
             sb.Clear();
+        }
+
+        /// <summary>
+        /// 단축키 지정
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormCaptureArea_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.S)
+            {
+                Save();//이미지 저장 호출
+                e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
+            } else if (e.Control && e.KeyCode == Keys.W)
+            {
+                this.Close();
+                e.SuppressKeyPress = true;
+            }
         }
     }
 }

@@ -68,7 +68,7 @@
             this.btnFullCapture.Name = "btnFullCapture";
             this.btnFullCapture.Size = new System.Drawing.Size(109, 45);
             this.btnFullCapture.TabIndex = 1;
-            this.btnFullCapture.Text = "전체캡처";
+            this.btnFullCapture.Text = "스크린캡쳐";
             this.btnFullCapture.UseVisualStyleBackColor = false;
             this.btnFullCapture.Click += new System.EventHandler(this.BtnFullCapture_Click);
             // 
@@ -82,7 +82,7 @@
             this.btnFolderOpen.ForeColor = System.Drawing.Color.White;
             this.btnFolderOpen.Location = new System.Drawing.Point(1, 90);
             this.btnFolderOpen.Name = "btnFolderOpen";
-            this.btnFolderOpen.Size = new System.Drawing.Size(109, 42);
+            this.btnFolderOpen.Size = new System.Drawing.Size(109, 43);
             this.btnFolderOpen.TabIndex = 2;
             this.btnFolderOpen.Text = "저장된 폴더열기";
             this.btnFolderOpen.UseVisualStyleBackColor = false;
@@ -148,7 +148,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(-1, 194);
+            this.label1.Location = new System.Drawing.Point(-1, 206);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 12);
             this.label1.TabIndex = 20;
@@ -157,16 +157,17 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(225, 213);
+            this.label2.Location = new System.Drawing.Point(139, 151);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(82, 12);
+            this.label2.Size = new System.Drawing.Size(168, 60);
             this.label2.TabIndex = 21;
-            this.label2.Text = "단축키 : P. F1";
+            this.label2.Text = "단축키\r\n   스크린 캡쳐 : Ctrl+S\r\n   영역 캡쳐 열기 : Ctrl+C\r\n   영역 캡쳐에서 저장 : Ctrl+S\r\n   영역 캡쳐에서" +
+    " 닫기 : Ctrl+W";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(-1, 145);
+            this.label3.Location = new System.Drawing.Point(-1, 151);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(85, 12);
             this.label3.TabIndex = 25;
@@ -175,7 +176,7 @@
             // saveDirectoryPath
             // 
             this.saveDirectoryPath.AutoSize = true;
-            this.saveDirectoryPath.Location = new System.Drawing.Point(6, 214);
+            this.saveDirectoryPath.Location = new System.Drawing.Point(6, 226);
             this.saveDirectoryPath.Name = "saveDirectoryPath";
             this.saveDirectoryPath.Size = new System.Drawing.Size(145, 12);
             this.saveDirectoryPath.TabIndex = 27;
@@ -184,7 +185,7 @@
             // switchQuickSaveMode
             // 
             this.switchQuickSaveMode.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.switchQuickSaveMode.Location = new System.Drawing.Point(8, 160);
+            this.switchQuickSaveMode.Location = new System.Drawing.Point(8, 166);
             this.switchQuickSaveMode.Name = "switchQuickSaveMode";
             this.switchQuickSaveMode.Padding = new System.Windows.Forms.Padding(1);
             this.switchQuickSaveMode.Size = new System.Drawing.Size(35, 21);
@@ -197,7 +198,7 @@
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(6, 14);
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(319, 241);
+            this.ClientSize = new System.Drawing.Size(319, 253);
             this.Controls.Add(this.saveDirectoryPath);
             this.Controls.Add(this.switchQuickSaveMode);
             this.Controls.Add(this.label3);
@@ -210,11 +211,13 @@
             this.Controls.Add(this.btnFullCapture);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = global::Image_Capture.Properties.Resources.MainIcon;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "FormMain";
             this.ShowIcon = false;
             this.Text = "SH Screen Capture";
             this.Load += new System.EventHandler(this.FormMain_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyDown);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FormMain_MouseDown);
             this.Resize += new System.EventHandler(this.FormMain_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.picboxPreview)).EndInit();

@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.headerPanel = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.picboxCaptureArea = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.headerPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picboxCaptureArea)).BeginInit();
             this.panel1.SuspendLayout();
@@ -50,6 +50,16 @@
             this.headerPanel.Size = new System.Drawing.Size(597, 24);
             this.headerPanel.TabIndex = 2;
             this.headerPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.headerPanel_MouseDown);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label1.Location = new System.Drawing.Point(7, 6);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(57, 12);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "영역 캡쳐";
             // 
             // btnClose
             // 
@@ -89,16 +99,6 @@
             this.panel1.Size = new System.Drawing.Size(597, 503);
             this.panel1.TabIndex = 3;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label1.Location = new System.Drawing.Point(7, 6);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 12);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "영역 캡쳐";
-            // 
             // FormCaptureArea
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -108,6 +108,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.headerPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormCaptureArea";
@@ -116,6 +117,7 @@
             this.Text = "영역 캡쳐";
             this.TransparencyKey = System.Drawing.Color.LimeGreen;
             this.Load += new System.EventHandler(this.FormCaptureArea_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormCaptureArea_KeyDown);
             this.Move += new System.EventHandler(this.FormCaptureArea_Move);
             this.Resize += new System.EventHandler(this.FormCaptureArea_Resize);
             this.headerPanel.ResumeLayout(false);
