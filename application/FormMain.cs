@@ -422,5 +422,10 @@ namespace Image_Capture
                 e.SuppressKeyPress = true;
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("단축키\n   스크린 캡쳐: Ctrl + S\n   영역 캡쳐 열기: Ctrl + C\n   영역 캡쳐에서 저장: Ctrl + S\n   영역 캡쳐에서 닫기: Ctrl + W");
+        }
     }
 }
