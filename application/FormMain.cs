@@ -22,6 +22,9 @@ namespace Image_Capture
         /// </summary>
         internal ScreenImageDrawer ScreenImageDrawer { get; private set; }
 
+        /// <summary>
+        /// 이미지 파일 저장 관련
+        /// </summary>
         internal ScreenImageFileHandler ScreenImageFileHandler { get; private set; }
 
         /// <summary>
@@ -35,10 +38,8 @@ namespace Image_Capture
         Point ptZero = new Point(0, 0);
 
         /// <summary>
-        /// 파일 경로
+        /// Quick 세이브 모드 여부
         /// </summary>
-        string strFilePath = "";
-
         bool isQuickSaveMode = false;
 
         // --------------------- movable 구간 ▽▽▽▽▽ ----------------------------
@@ -51,7 +52,6 @@ namespace Image_Capture
         public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [DllImport("user32.dll")]
         public static extern bool ReleaseCapture();
-
         // --------------------- movable 구간 △△△△△ ----------------------------
 
         /// <summary>
@@ -425,7 +425,9 @@ namespace Image_Capture
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("단축키\n   스크린 캡쳐: Ctrl + S\n   영역 캡쳐 열기: Ctrl + C\n   영역 캡쳐에서 저장: Ctrl + S\n   영역 캡쳐에서 닫기: Ctrl + W");
+            MessageBox.Show("스크린 캡쳐: Ctrl + S\n영역 캡쳐 열기: Ctrl + C\n" +
+                "영역 캡쳐에서 저장: Ctrl + S\n" +
+                "영역 캡쳐에서 닫기: Ctrl + W","단축키 일람");
         }
     }
 }
