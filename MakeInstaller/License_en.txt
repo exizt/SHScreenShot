@@ -1,0 +1,1 @@
+'SScShot'('Simple Screen Shot') is a freeware that captures screen image on Windows
