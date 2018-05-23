@@ -1,4 +1,3 @@
-프리웨어 입니다. 
-자유롭게 사용하시면 됩니다.
+Simple Scshot (이하 SScShot)은 심플한 스크린샷 Freeware 입니다.
 
-This Software is Freeware.
+윈도우10에서 테스트되었으며, 간단하게 스크린샷 파일을 생성하는 목적을 가진 도구입니다. 
