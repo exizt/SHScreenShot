@@ -5,7 +5,9 @@
 ; 어느 정도 stable 하다 싶을 때 Minor 카운팅
 !define S_APP_VER_MAJOR 1
 !define S_APP_VER_MINOR 3
-!define S_APP_VER_BUILD 5
+!define S_APP_VER_BUILD 7
+
+
 
 ; 프로그램 그룹명 (폴더이름. 가급적 공백없이)
 !define S_PROG_GROUP "SHSoft"
@@ -13,7 +15,7 @@
 ; 실행될 프로그램 exe 명
 !define S_MAIN_EXE "SHScreenCapture.exe"
 !define S_FILE_LOGO "_logo.ico"
-!define S_PRODUCT_SIZE 985 ;설치 크기 입니다. 언인스톨시에 참고 정보로 나옵니다.
+!define S_PRODUCT_SIZE 4238 ;설치 크기 입니다. 언인스톨시에 참고 정보로 나옵니다.
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "SH Screen Capture"
@@ -23,7 +25,6 @@
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\${S_MAIN_EXE}"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
-
 
 ; -------------------------------------------------
 ; 설치 경로
