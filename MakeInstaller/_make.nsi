@@ -69,8 +69,11 @@
 !insertmacro MUI_LANGUAGE "Korean"
 !insertmacro MUI_LANGUAGE "English"
 
+LicenseLangString license ${LANG_ENGLISH} "license_en.txt"
+LicenseLangString license ${LANG_KOREAN} "license.txt"
 ; MUI end ------
 
+; 변수들
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
 OutFile "${CUSTOM_OUTFILE}"
 InstallDir "${CUSTOM_INSTALL_DIR}"
@@ -78,10 +81,14 @@ InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
 ShowUnInstDetails show
 
-Function .onInit
-  !insertmacro MUI_LANGDLL_DISPLAY
-FunctionEnd
+; 하단의 'nullsoft install system' 을 대체하는 문구
+BrandingText " "
+; -------------------------------------------------
 
+
+
+
+; ---- Sections -----------------------------------------------------
 Section "MainSection" SEC01
   SetOutPath "$INSTDIR"
   SetOverwrite ifnewer
@@ -112,17 +119,7 @@ Section -Post
 SectionEnd
 
 
-Function un.onUninstSuccess
-  HideWindow
-  MessageBox MB_ICONINFORMATION|MB_OK "$(^Name)는(은) 완전히 제거되었습니다."
-FunctionEnd
-
-Function un.onInit
-!insertmacro MUI_UNGETLANGUAGE
-  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "$(^Name)을(를) 제거하시겠습니까?" IDYES +2
-  Abort
-FunctionEnd
-
+; Unstall Section
 Section Uninstall
   Delete "$INSTDIR\${PRODUCT_NAME}.url"
   Delete "$INSTDIR\uninst.exe"
@@ -141,3 +138,37 @@ Section Uninstall
   DeleteRegKey HKLM "${PRODUCT_DIR_REGKEY}"
   SetAutoClose true
 SectionEnd
+; ---- End of Sections -----------------------------------------------------
+
+
+
+; ---- Functions -----------------------------------------------------
+; 설치할 때
+Function .onInit
+  !insertmacro MUI_LANGDLL_DISPLAY
+FunctionEnd
+
+
+; uninstall question message
+LangString message_Uninst ${LANG_ENGLISH} "$(^Name)을(를) 제거하시겠습니까?"
+LangString message_Uninst ${LANG_KOREAN} "$(^Name)을(를) 제거하시겠습니까?"
+; uninstall success message
+LangString message_UninstSuccess ${LANG_ENGLISH} "$(^Name)는(은) 완전히 제거되었습니다."
+LangString message_UninstSuccess ${LANG_KOREAN} "$(^Name)는(은) 완전히 제거되었습니다."
+
+
+; 앱 삭제 완료된 후
+Function un.onUninstSuccess
+  HideWindow
+  MessageBox MB_ICONINFORMATION|MB_OK "$(message_UninstSuccess)"
+FunctionEnd
+
+
+; 앱 삭제시
+Function un.onInit
+!insertmacro MUI_UNGETLANGUAGE
+  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "$(message_Uninst)" IDYES +2
+  Abort
+FunctionEnd
+; ---- End of Functions -----------------------------------------------------
+
