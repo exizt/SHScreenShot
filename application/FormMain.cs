@@ -42,17 +42,10 @@ namespace Image_Capture
         /// </summary>
         bool isQuickSaveMode = false;
 
-        // --------------------- movable 구간 ▽▽▽▽▽ ----------------------------
-        private const int WM_NCHITTEST = 0x84;
-        private const int HT_CLIENT = 0x1;
-        private const int HT_CAPTION = 0x2;
-        private const int WM_NCLBUTTONDOWN = 0xA1;
-
-        [DllImport("user32.dll")]
-        public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
-        [DllImport("user32.dll")]
-        public static extern bool ReleaseCapture();
-        // --------------------- movable 구간 △△△△△ ----------------------------
+        /// <summary>
+        /// 
+        /// </summary>
+        private Point mousePoint;
 
         /// <summary>
         /// 생성자 메서드
@@ -296,19 +289,6 @@ namespace Image_Capture
             Application.Exit();
         }
 
-        /// <summary>
-        /// 폼에서 드래그 기능
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FormMain_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-            }
-        }
 
         /// <summary>
         /// 미리보기 이미지 에 이미지를 지정
@@ -428,6 +408,30 @@ namespace Image_Capture
             MessageBox.Show("스크린 캡쳐: Ctrl + S\n영역 캡쳐 열기: Ctrl + C\n" +
                 "영역 캡쳐에서 저장: Ctrl + S\n" +
                 "영역 캡쳐에서 닫기: Ctrl + W","단축키 일람");
+        }
+
+        /// <summary>
+        /// 폼에서 드래그 기능
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormMain_MouseDown(object sender, MouseEventArgs e)
+        {
+            mousePoint = new Point(e.X, e.Y);
+        }
+
+        /// <summary>
+        /// 창 의 드래그 기능
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormMain_MouseMove(object sender, MouseEventArgs e)
+        {
+            if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
+            {
+                Location = new Point(this.Left - (mousePoint.X - e.X),
+                    this.Top - (mousePoint.Y - e.Y));
+            }
         }
     }
 }
