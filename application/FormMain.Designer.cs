@@ -182,7 +182,7 @@
             this.button1.TabIndex = 28;
             this.button1.Text = "단축키";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.BtnShortcutGuide_Click);
             // 
             // switchQuickSaveMode
             // 
@@ -194,7 +194,7 @@
             this.switchQuickSaveMode.TabIndex = 26;
             this.switchQuickSaveMode.Text = "switchCheckBox1";
             this.switchQuickSaveMode.UseVisualStyleBackColor = true;
-            this.switchQuickSaveMode.CheckedChanged += new System.EventHandler(this.switchQuickSaveMode_CheckedChanged);
+            this.switchQuickSaveMode.CheckedChanged += new System.EventHandler(this.SwitchQuickSaveMode_CheckedChanged);
             // 
             // FormMain
             // 

@@ -43,7 +43,7 @@ namespace Image_Capture
         bool isQuickSaveMode = false;
 
         /// <summary>
-        /// 
+        /// 마우스 포인터 저장할 값
         /// </summary>
         private Point mousePoint;
 
@@ -289,27 +289,6 @@ namespace Image_Capture
             Application.Exit();
         }
 
-
-        /// <summary>
-        /// 미리보기 이미지 에 이미지를 지정
-        /// </summary>
-        /// <param name="_image">지정할 이미지</param>
-        public void SetImgPreview_Image(Image _image)
-        {
-            picboxPreview.Image = _image;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="_image"></param>
-        public void SetImgPreview_BackgroundImage(Image _image)
-        {
-            picboxPreview.BackgroundImage = _image;
-        }
-
-
-
         /// <summary>
         /// 숨김처리했던 폼을 다시 visible 처리
         /// </summary>
@@ -352,7 +331,7 @@ namespace Image_Capture
             sb.Clear();
         }
 
-        private void switchQuickSaveMode_CheckedChanged(object sender, EventArgs e)
+        private void SwitchQuickSaveMode_CheckedChanged(object sender, EventArgs e)
         {
             if (((CheckBox)sender).Checked)
             {
@@ -368,8 +347,10 @@ namespace Image_Capture
 
         private void FolderBrowser()
         {
-            FolderBrowserDialog folderDlg = new FolderBrowserDialog();
-            folderDlg.ShowNewFolderButton = true;
+            FolderBrowserDialog folderDlg = new FolderBrowserDialog
+            {
+                ShowNewFolderButton = true
+            };
             DialogResult result = folderDlg.ShowDialog();
             if(result == DialogResult.OK)
             {
@@ -403,7 +384,12 @@ namespace Image_Capture
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnShortcutGuide_Click(object sender, EventArgs e)
         {
             MessageBox.Show("스크린 캡쳐: Ctrl + S\n영역 캡쳐 열기: Ctrl + C\n" +
                 "영역 캡쳐에서 저장: Ctrl + S\n" +

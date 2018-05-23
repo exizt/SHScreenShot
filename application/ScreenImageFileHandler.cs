@@ -121,14 +121,14 @@ namespace Image_Capture
                 image.Save(path, GetImageFormat(path));
                 System.Diagnostics.Debug.WriteLine(path);
             }
-            catch (ArgumentNullException e)
+            catch (ArgumentNullException)
             {
-                throw e;
+                throw;
             }
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e);
-                throw e;
+                throw;
             }
         }
         /// <summary>

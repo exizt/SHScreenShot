@@ -51,7 +51,7 @@
             this.headerPanel.Padding = new System.Windows.Forms.Padding(1);
             this.headerPanel.Size = new System.Drawing.Size(597, 24);
             this.headerPanel.TabIndex = 2;
-            this.headerPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.headerPanel_MouseDown);
+            this.headerPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PanelHeader_MouseDown);
             // 
             // label1
             // 
@@ -77,7 +77,7 @@
             this.btnClose.TabIndex = 3;
             this.btnClose.Text = "✕";
             this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
             // picboxCaptureArea
             // 
@@ -104,7 +104,7 @@
             // timer1
             // 
             this.timer1.Interval = 3500;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer1.Tick += new System.EventHandler(this.Timer1_Tick);
             // 
             // FormCaptureArea
             // 
