@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.Security.Permissions;
+using System.Runtime.InteropServices;
 
 /// <summary>
 /// 영역 캡처 다이얼로그
@@ -37,20 +38,30 @@ namespace Image_Capture
         /// </summary>
         private bool isDebug = true;
 
-        // --------------------- movable 구간 ▽▽▽▽▽ ----------------------------
-        private const int WM_NCHITTEST = 0x84;
-        private const int HT_CLIENT = 0x1;
-        private const int HT_CAPTION = 0x2;
-        private const int WM_NCLBUTTONDOWN = 0xA1;
-
-        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
-        public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
-        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
-        public static extern bool ReleaseCapture();
-
-        // --------------------- movable 구간 △△△△△ ----------------------------
+        /// <summary>
+        /// 
+        /// </summary>
         private const int cGrip = 16;
+
+        /// <summary>
+        /// 
+        /// </summary>
         private const int cCaption = 32;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private const int WM_NCHITTEST = 0x84;
+        private const int WM_NCLBUTTONDOWN = 0xA1;
+        private const int HT_CAPTION = 0x2;
+
+        internal static class NativeMethods
+        {
+            [DllImport("user32.dll")]
+            internal static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
+            [DllImport("user32.dll")]
+            internal static extern bool ReleaseCapture();
+        }
 
 
         /// <summary>
@@ -185,33 +196,15 @@ namespace Image_Capture
                 }
             }
             base.WndProc(ref m);
-
-            // movable -----------------
-            if (m.Msg == WM_NCHITTEST)
-                m.Result = (IntPtr)(HT_CAPTION);
-            // ---------------- movable
         }
 
-        /// <summary>
-        /// 헤더의 Panel 에서 창 이동이 가능하게 하는 부분
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void headerPanel_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-            }
-        }
 
         /// <summary>
         /// 헤더의 Panel 에서 창 닫기
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnClose_Click(object sender, EventArgs e)
+        private void BtnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -258,7 +251,7 @@ namespace Image_Capture
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void Timer1_Tick(object sender, EventArgs e)
         {
             //Debug("Timer_Tick");
             //미리보기 이미지 생성
@@ -268,6 +261,21 @@ namespace Image_Capture
         private void FormCaptureArea_ResizeEnd(object sender, EventArgs e)
         {
             timer1.Start();
+        }
+
+        /// <summary>
+        /// 헤더의 Panel 에서 창 이동이 가능하게 하는 부분
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PanelHeader_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                NativeMethods.ReleaseCapture();
+                NativeMethods.SendMessage(Handle, WM_NCLBUTTONDOWN, (IntPtr)HT_CAPTION, (IntPtr)0);
+            }
+            //mousePoint = new Point(e.X, e.Y);
         }
     }
 }

@@ -5,7 +5,7 @@
 ; 어느 정도 stable 하다 싶을 때 Minor 카운팅
 !define S_APP_VER_MAJOR 1
 !define S_APP_VER_MINOR 3
-!define S_APP_VER_BUILD 4
+!define S_APP_VER_BUILD 5
 
 ; 프로그램 그룹명 (폴더이름. 가급적 공백없이)
 !define S_PROG_GROUP "SHSoft"

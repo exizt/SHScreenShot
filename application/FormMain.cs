@@ -22,6 +22,9 @@ namespace Image_Capture
         /// </summary>
         internal ScreenImageDrawer ScreenImageDrawer { get; private set; }
 
+        /// <summary>
+        /// 이미지 파일 저장 관련
+        /// </summary>
         internal ScreenImageFileHandler ScreenImageFileHandler { get; private set; }
 
         /// <summary>
@@ -35,24 +38,14 @@ namespace Image_Capture
         Point ptZero = new Point(0, 0);
 
         /// <summary>
-        /// 파일 경로
+        /// Quick 세이브 모드 여부
         /// </summary>
-        string strFilePath = "";
-
         bool isQuickSaveMode = false;
 
-        // --------------------- movable 구간 ▽▽▽▽▽ ----------------------------
-        private const int WM_NCHITTEST = 0x84;
-        private const int HT_CLIENT = 0x1;
-        private const int HT_CAPTION = 0x2;
-        private const int WM_NCLBUTTONDOWN = 0xA1;
-
-        [DllImport("user32.dll")]
-        public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
-        [DllImport("user32.dll")]
-        public static extern bool ReleaseCapture();
-
-        // --------------------- movable 구간 △△△△△ ----------------------------
+        /// <summary>
+        /// 마우스 포인터 저장할 값
+        /// </summary>
+        private Point mousePoint;
 
         /// <summary>
         /// 생성자 메서드
@@ -297,40 +290,6 @@ namespace Image_Capture
         }
 
         /// <summary>
-        /// 폼에서 드래그 기능
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FormMain_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-            }
-        }
-
-        /// <summary>
-        /// 미리보기 이미지 에 이미지를 지정
-        /// </summary>
-        /// <param name="_image">지정할 이미지</param>
-        public void SetImgPreview_Image(Image _image)
-        {
-            picboxPreview.Image = _image;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="_image"></param>
-        public void SetImgPreview_BackgroundImage(Image _image)
-        {
-            picboxPreview.BackgroundImage = _image;
-        }
-
-
-
-        /// <summary>
         /// 숨김처리했던 폼을 다시 visible 처리
         /// </summary>
         private void ShowForm()
@@ -372,7 +331,7 @@ namespace Image_Capture
             sb.Clear();
         }
 
-        private void switchQuickSaveMode_CheckedChanged(object sender, EventArgs e)
+        private void SwitchQuickSaveMode_CheckedChanged(object sender, EventArgs e)
         {
             if (((CheckBox)sender).Checked)
             {
@@ -388,8 +347,10 @@ namespace Image_Capture
 
         private void FolderBrowser()
         {
-            FolderBrowserDialog folderDlg = new FolderBrowserDialog();
-            folderDlg.ShowNewFolderButton = true;
+            FolderBrowserDialog folderDlg = new FolderBrowserDialog
+            {
+                ShowNewFolderButton = true
+            };
             DialogResult result = folderDlg.ShowDialog();
             if(result == DialogResult.OK)
             {
@@ -423,9 +384,40 @@ namespace Image_Capture
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnShortcutGuide_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("단축키\n   스크린 캡쳐: Ctrl + S\n   영역 캡쳐 열기: Ctrl + C\n   영역 캡쳐에서 저장: Ctrl + S\n   영역 캡쳐에서 닫기: Ctrl + W");
+            MessageBox.Show("스크린 캡쳐: Ctrl + S\n영역 캡쳐 열기: Ctrl + C\n" +
+                "영역 캡쳐에서 저장: Ctrl + S\n" +
+                "영역 캡쳐에서 닫기: Ctrl + W","단축키 일람");
+        }
+
+        /// <summary>
+        /// 폼에서 드래그 기능
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormMain_MouseDown(object sender, MouseEventArgs e)
+        {
+            mousePoint = new Point(e.X, e.Y);
+        }
+
+        /// <summary>
+        /// 창 의 드래그 기능
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormMain_MouseMove(object sender, MouseEventArgs e)
+        {
+            if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
+            {
+                Location = new Point(this.Left - (mousePoint.X - e.X),
+                    this.Top - (mousePoint.Y - e.Y));
+            }
         }
     }
 }
