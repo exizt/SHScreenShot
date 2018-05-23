@@ -53,8 +53,11 @@ namespace Image_Capture
         /// </summary>
         private const int WM_NCHITTEST = 0x84;
         private const int WM_NCLBUTTONDOWN = 0xA1;
-        private const int HT_CAPTION = 0x2;
+        private const int HT_CAPTION = 2;
 
+        /// <summary>
+        /// 
+        /// </summary>
         internal static class NativeMethods
         {
             [DllImport("user32.dll")]
@@ -62,7 +65,6 @@ namespace Image_Capture
             [DllImport("user32.dll")]
             internal static extern bool ReleaseCapture();
         }
-
 
         /// <summary>
         /// 생성자
@@ -92,7 +94,6 @@ namespace Image_Capture
             //로드여부 활성화
             isLoaded = true;
         }
-
 
         /// <summary>
         /// 스크린샷 이미지 생성
@@ -125,7 +126,6 @@ namespace Image_Capture
             mParentForm.DrawResultImage(locationCaptureArea,sizeCaptureArea);
             mParentForm.SaveResultImageFile();
         }
-
 
         /// <summary>
         /// 창 리사이즈 시 발생 이벤트
@@ -179,6 +179,15 @@ namespace Image_Capture
         /// <param name="m"></param>
         protected override void WndProc(ref Message m)
         {
+            const int HT_LEFT = 10;
+            const int HT_RIGHT = 11;
+            //const int HT_TOP = 12;
+            //const int HT_TOPLEFT = 13;
+            //const int HT_TOPRIGHT = 14;
+            //const int HT_BOTTOM = 15;
+            const int HT_BOTTOMLEFT = 16;
+            const int HT_BOTTOMRIGHT = 17;
+
             // resizable 
             if (m.Msg == WM_NCHITTEST)
             {
@@ -186,18 +195,42 @@ namespace Image_Capture
                 pos = this.PointToClient(pos);
                 if (pos.Y < cCaption)
                 {
-                    m.Result = (IntPtr)2;
+                    m.Result = (IntPtr)HT_CAPTION;
                     return;
                 }
+                // 우측 하단
                 if (pos.X >= this.ClientSize.Width - cGrip && pos.Y >= this.ClientSize.Height - cGrip)
                 {
-                    m.Result = (IntPtr)17;
+                    m.Result = (IntPtr)HT_BOTTOMRIGHT;
+                    return;
+                }
+                // 좌측 하단
+                if (pos.X <= cGrip && pos.Y >= this.ClientSize.Height - cGrip)
+                {
+                    m.Result = (IntPtr)HT_BOTTOMLEFT;
+                    return;
+                }
+                // 좌측 
+                if (pos.X <= 7)
+                {
+                    m.Result = (IntPtr)HT_LEFT;
+                    return;
+                }
+                // 우측
+                if (pos.X >= this.ClientSize.Width - 7)
+                {
+                    m.Result = (IntPtr)HT_RIGHT;
+                    return;
+                }
+                // 하단
+                if (pos.Y > this.ClientSize.Height - this.Padding.Bottom)
+                {
+                    m.Result = (IntPtr)HT_CAPTION;
                     return;
                 }
             }
             base.WndProc(ref m);
         }
-
 
         /// <summary>
         /// 헤더의 Panel 에서 창 닫기
@@ -208,7 +241,6 @@ namespace Image_Capture
         {
             this.Close();
         }
-
 
         /// <summary>
         /// debug 용 메서드
@@ -251,6 +283,11 @@ namespace Image_Capture
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Timer1_Tick(object sender, EventArgs e)
         {
             //Debug("Timer_Tick");
@@ -258,6 +295,11 @@ namespace Image_Capture
             DrawPreviewImage();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FormCaptureArea_ResizeEnd(object sender, EventArgs e)
         {
             timer1.Start();
