@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.headerPanel = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.picboxCaptureArea = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.headerPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picboxCaptureArea)).BeginInit();
             this.panel1.SuspendLayout();
@@ -99,6 +101,11 @@
             this.panel1.Size = new System.Drawing.Size(597, 503);
             this.panel1.TabIndex = 3;
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 3500;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // FormCaptureArea
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -117,6 +124,7 @@
             this.Text = "영역 캡쳐";
             this.TransparencyKey = System.Drawing.Color.LimeGreen;
             this.Load += new System.EventHandler(this.FormCaptureArea_Load);
+            this.ResizeEnd += new System.EventHandler(this.FormCaptureArea_ResizeEnd);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormCaptureArea_KeyDown);
             this.Move += new System.EventHandler(this.FormCaptureArea_Move);
             this.Resize += new System.EventHandler(this.FormCaptureArea_Resize);
@@ -134,5 +142,6 @@
         private System.Windows.Forms.PictureBox picboxCaptureArea;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer timer1;
     }
 }

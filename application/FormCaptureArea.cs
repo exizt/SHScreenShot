@@ -127,6 +127,7 @@ namespace Image_Capture
             //Debug("FormCaptureArea_Resize 호출");
             if (isLoaded)
             {
+                timer1.Stop();
                 //미리보기 이미지 생성
                 DrawPreviewImage();
             }
@@ -143,6 +144,7 @@ namespace Image_Capture
             //Debug("FormCaptureArea_Move 호출");
             if (isLoaded)
             {
+                timer1.Stop();
                 //미리보기 이미지 생성
                 DrawPreviewImage();
             }
@@ -254,6 +256,18 @@ namespace Image_Capture
                 this.Close();
                 e.SuppressKeyPress = true;
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            //Debug("Timer_Tick");
+            //미리보기 이미지 생성
+            DrawPreviewImage();
+        }
+
+        private void FormCaptureArea_ResizeEnd(object sender, EventArgs e)
+        {
+            timer1.Start();
         }
     }
 }

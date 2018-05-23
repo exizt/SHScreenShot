@@ -48,9 +48,9 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.labelPreviewTitle = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.saveDirectoryPath = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.switchQuickSaveMode = new Image_Capture.SwitchCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.picboxPreview)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -154,16 +154,6 @@
             this.label1.TabIndex = 20;
             this.label1.Text = "폴더 경로";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(139, 151);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(168, 60);
-            this.label2.TabIndex = 21;
-            this.label2.Text = "단축키\r\n   스크린 캡쳐 : Ctrl+S\r\n   영역 캡쳐 열기 : Ctrl+C\r\n   영역 캡쳐에서 저장 : Ctrl+S\r\n   영역 캡쳐에서" +
-    " 닫기 : Ctrl+W";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -182,6 +172,18 @@
             this.saveDirectoryPath.TabIndex = 27;
             this.saveDirectoryPath.Text = "[폴더경로가 들어갈 위치]";
             // 
+            // button1
+            // 
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(243, 221);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 28;
+            this.button1.Text = "단축키";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // switchQuickSaveMode
             // 
             this.switchQuickSaveMode.ForeColor = System.Drawing.Color.DodgerBlue;
@@ -199,10 +201,10 @@
             this.AutoScaleBaseSize = new System.Drawing.Size(6, 14);
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(319, 253);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.saveDirectoryPath);
             this.Controls.Add(this.switchQuickSaveMode);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelPreviewTitle);
             this.Controls.Add(this.picboxPreview);
@@ -239,10 +241,10 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private SwitchCheckBox switchQuickSaveMode;
         private System.Windows.Forms.Label saveDirectoryPath;
+        private System.Windows.Forms.Button button1;
     }
 }
 
