@@ -47,6 +47,38 @@ namespace Image_Capture
         /// </summary>
         private Point mousePoint;
 
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HTCAPTION = 0x2;
+
+        internal static class NativeMethods
+        {
+            [DllImport("User32.dll")]
+            public static extern bool ReleaseCapture();
+            [DllImport("User32.dll")]
+            public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        }
+
+        /// <summary>
+        /// Round 된 윈도우 구현
+        /// </summary>
+        /// <param name="nLeftRect"></param>
+        /// <param name="nTopRect"></param>
+        /// <param name="nRightRect"></param>
+        /// <param name="nBottomRect"></param>
+        /// <param name="nWidthEllipse"></param>
+        /// <param name="nHeightEllipse"></param>
+        /// <returns></returns>
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn
+        (
+            int nLeftRect,     // x-coordinate of upper-left corner
+            int nTopRect,      // y-coordinate of upper-left corner
+            int nRightRect,    // x-coordinate of lower-right corner
+            int nBottomRect,   // y-coordinate of lower-right corner
+            int nWidthEllipse, // width of ellipse
+            int nHeightEllipse // height of ellipse
+        );
+
         /// <summary>
         /// 생성자 메서드
         /// </summary>
@@ -59,6 +91,10 @@ namespace Image_Capture
 
             ScreenImageFileHandler = new ScreenImageFileHandler();
             ChangeDirPath();
+
+            // Rounded 윈도우 구현
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
         }
 
         /// <summary>
@@ -336,7 +372,7 @@ namespace Image_Capture
             if (((CheckBox)sender).Checked)
             {
                 isQuickSaveMode = true;
-                FolderBrowser();
+                //FolderBrowser();
                 //Debug("isQuickSaveMode true");
             } else
             {
@@ -417,6 +453,30 @@ namespace Image_Capture
             {
                 Location = new Point(this.Left - (mousePoint.X - e.X),
                     this.Top - (mousePoint.Y - e.Y));
+            }
+        }
+
+        private void BtnFolderChange_Click(object sender, EventArgs e)
+        {
+            FolderBrowser();
+        }
+
+        private void BtnMin_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void pnlTopNav_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                NativeMethods.ReleaseCapture();
+                NativeMethods.SendMessage(Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
             }
         }
     }
