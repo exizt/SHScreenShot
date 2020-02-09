@@ -139,7 +139,7 @@ namespace Image_Capture
         private ImageFormat GetImageFormat(string path)
         {
             //string ext = _dir_path.Substring(_dir_path.LastIndexOf('.'));
-            string ext = Path.GetExtension(path);
+            string ext = Path.GetExtension(path).ToLower();
             if (ext.Equals(".jpg") || ext.Equals(".jpeg"))
             {
                 return ImageFormat.Jpeg;
@@ -154,7 +154,7 @@ namespace Image_Capture
             }
             else
             {
-                return ImageFormat.Bmp;
+                return ImageFormat.Png;
             }
         }
 
