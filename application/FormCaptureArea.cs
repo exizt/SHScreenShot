@@ -53,7 +53,7 @@ namespace Image_Capture
         /// </summary>
         private const int WM_NCHITTEST = 0x84;
         private const int WM_NCLBUTTONDOWN = 0xA1;
-        private const int HT_CAPTION = 2;
+        private const int HT_CAPTION = 0x2;
 
         /// <summary>
         /// 
