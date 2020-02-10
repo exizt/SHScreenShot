@@ -25,11 +25,6 @@ namespace Image_Capture
         public Image resultImage;
 
         /// <summary>
-        /// point 0, 0
-        /// </summary>
-        Point ptZero = new Point(0, 0);
-
-        /// <summary>
         /// Quick 세이브 모드 여부
         /// </summary>
         bool isQuickSaveMode = false;
