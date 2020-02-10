@@ -85,6 +85,7 @@ namespace Image_Capture
         public FormMain()
         {
             InitializeComponent();//컴포넌트 초기화 메서드(기본적으로 들어감)
+            pnlSettings.Visible = false;
 
             // 스크린 이미지를 가져오는 클래스 생성. composition 으로.
             ScreenImageDrawer = new ScreenImageDrawer(picboxPreview.Size);
@@ -95,6 +96,20 @@ namespace Image_Capture
             // Rounded 윈도우 구현
             this.FormBorderStyle = FormBorderStyle.None;
             this.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
+        }
+
+        /// <summary>
+        /// 그림자 구현
+        /// </summary>
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                const int CS_DROPSHADOW = 0x20000;
+                CreateParams cp = base.CreateParams;
+                cp.ClassStyle |= CS_DROPSHADOW;
+                return cp;
+            }
         }
 
         /// <summary>
@@ -233,6 +248,7 @@ namespace Image_Capture
         /// <param name="e"></param>
         private void BtnFullCapture_Click(object sender, EventArgs e)
         {
+            pnlSettings.Visible = false;
             DoScreenCaptureFeature();
         }
 
@@ -243,6 +259,7 @@ namespace Image_Capture
         /// <param name="e"></param>
         private void BtnCaptureArea_Click(object sender, EventArgs e)
         {
+            pnlSettings.Visible = false;
             DoCaptureAreaFeature();
         }
 
@@ -478,6 +495,11 @@ namespace Image_Capture
                 NativeMethods.ReleaseCapture();
                 NativeMethods.SendMessage(Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
             }
+        }
+
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            pnlSettings.Visible = true;
         }
     }
 }
