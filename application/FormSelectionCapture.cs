@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 /// </summary>
 namespace Image_Capture
 {
-    public partial class FormCaptureArea : Form
+    public partial class FormSelectionCapture : Form
     {
         /// <summary>
         /// 부모폼을 담아올 용도
@@ -70,7 +70,7 @@ namespace Image_Capture
         /// 생성자
         /// </summary>
         /// <param name="_parentForm"></param>
-        public FormCaptureArea(FormMain _parentForm)
+        public FormSelectionCapture(FormMain _parentForm)
         {
             //컴포넌트 초기화 메서드(기본적으로 들어감)
             InitializeComponent();
