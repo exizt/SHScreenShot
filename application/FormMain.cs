@@ -128,12 +128,20 @@ namespace Image_Capture
         }
 
         /// <summary>
-        /// 영역 캡쳐 기능
+        /// 영역 선택 캡쳐 기능.
+        /// 버튼 클릭시 영역 선택 창을 띄운다. (그것뿐...)
         /// </summary>
-        private void DoCaptureAreaFeature()
+        private void DoSelectionCaptureFeature()
         {
-            FormCaptureArea nForm = new FormCaptureArea(this);
-            nForm.Show();
+            //FormCaptureArea nForm = new FormCaptureArea(this);
+            //nForm.Show();
+
+            // modaless 에서 modal 로 변경하고, using 구문과 GC 구문을 추가.
+            using (FormSelectionCapture form = new FormSelectionCapture(this))
+            {
+                form.ShowDialog();
+            }
+            GC.Collect();
         }
 
         /// <summary>
@@ -257,10 +265,10 @@ namespace Image_Capture
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtnCaptureArea_Click(object sender, EventArgs e)
+        private void BtnSelectionCapture_Click(object sender, EventArgs e)
         {
             pnlSettings.Visible = false;
-            DoCaptureAreaFeature();
+            DoSelectionCaptureFeature();
         }
 
         /// <summary>
@@ -429,11 +437,6 @@ namespace Image_Capture
                 // 스크린 캡쳐 기능
                 DoScreenCaptureFeature();
                 e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
-            } else if(e.Control && e.KeyCode == Keys.C)
-            {
-                //영역 캡쳐 기능
-                DoCaptureAreaFeature();
-                e.SuppressKeyPress = true;
             }
         }
 
@@ -444,7 +447,7 @@ namespace Image_Capture
         /// <param name="e"></param>
         private void BtnShortcutGuide_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("스크린 캡쳐: Ctrl + S\n영역 캡쳐 열기: Ctrl + C\n" +
+            MessageBox.Show("스크린 캡쳐: Ctrl + S\n" +
                 "영역 캡쳐에서 저장: Ctrl + S\n" +
                 "영역 캡쳐에서 닫기: Ctrl + W","단축키 일람");
         }

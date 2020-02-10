@@ -56,7 +56,7 @@ namespace Image_Capture
         private const int HT_CAPTION = 0x2;
 
         /// <summary>
-        /// 
+        /// 드래그 가능하게 해주는 SendMessage, ReleaseCapture 추가
         /// </summary>
         internal static class NativeMethods
         {
@@ -162,77 +162,6 @@ namespace Image_Capture
         }
 
         /// <summary>
-        /// 창 클릭 이벤트.
-        /// 이제 안 쓰기로... 단축키로 사용함.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ImgCaptureScreen_Click(object sender, EventArgs e)
-        {
-            //이미지 파일 저장
-            //save();
-        }
-
-        /// <summary>
-        /// 창 크기 조절을 위한 부분
-        /// </summary>
-        /// <param name="m"></param>
-        protected override void WndProc(ref Message m)
-        {
-            const int HT_LEFT = 10;
-            const int HT_RIGHT = 11;
-            //const int HT_TOP = 12;
-            //const int HT_TOPLEFT = 13;
-            //const int HT_TOPRIGHT = 14;
-            //const int HT_BOTTOM = 15;
-            const int HT_BOTTOMLEFT = 16;
-            const int HT_BOTTOMRIGHT = 17;
-
-            // resizable 
-            if (m.Msg == WM_NCHITTEST)
-            {
-                Point pos = new Point(m.LParam.ToInt32());
-                pos = this.PointToClient(pos);
-                if (pos.Y < cCaption)
-                {
-                    m.Result = (IntPtr)HT_CAPTION;
-                    return;
-                }
-                // 우측 하단
-                if (pos.X >= this.ClientSize.Width - cGrip && pos.Y >= this.ClientSize.Height - cGrip)
-                {
-                    m.Result = (IntPtr)HT_BOTTOMRIGHT;
-                    return;
-                }
-                // 좌측 하단
-                if (pos.X <= cGrip && pos.Y >= this.ClientSize.Height - cGrip)
-                {
-                    m.Result = (IntPtr)HT_BOTTOMLEFT;
-                    return;
-                }
-                // 좌측 
-                if (pos.X <= 7)
-                {
-                    m.Result = (IntPtr)HT_LEFT;
-                    return;
-                }
-                // 우측
-                if (pos.X >= this.ClientSize.Width - 7)
-                {
-                    m.Result = (IntPtr)HT_RIGHT;
-                    return;
-                }
-                // 하단
-                if (pos.Y > this.ClientSize.Height - this.Padding.Bottom)
-                {
-                    m.Result = (IntPtr)HT_CAPTION;
-                    return;
-                }
-            }
-            base.WndProc(ref m);
-        }
-
-        /// <summary>
         /// 헤더의 Panel 에서 창 닫기
         /// </summary>
         /// <param name="sender"></param>
@@ -306,7 +235,7 @@ namespace Image_Capture
         }
 
         /// <summary>
-        /// 헤더의 Panel 에서 창 이동이 가능하게 하는 부분
+        /// 드래그 가능하게 하기 위함
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -318,6 +247,65 @@ namespace Image_Capture
                 NativeMethods.SendMessage(Handle, WM_NCLBUTTONDOWN, (IntPtr)HT_CAPTION, (IntPtr)0);
             }
             //mousePoint = new Point(e.X, e.Y);
+        }
+
+        /// <summary>
+        /// 창 크기 조절을 위한 부분
+        /// </summary>
+        /// <param name="m"></param>
+        protected override void WndProc(ref Message m)
+        {
+            const int HT_LEFT = 10;
+            const int HT_RIGHT = 11;
+            //const int HT_TOP = 12;
+            //const int HT_TOPLEFT = 13;
+            //const int HT_TOPRIGHT = 14;
+            //const int HT_BOTTOM = 15;
+            const int HT_BOTTOMLEFT = 16;
+            const int HT_BOTTOMRIGHT = 17;
+
+            // resizable 
+            if (m.Msg == WM_NCHITTEST)
+            {
+                Point pos = new Point(m.LParam.ToInt32());
+                pos = this.PointToClient(pos);
+                if (pos.Y < cCaption)
+                {
+                    m.Result = (IntPtr)HT_CAPTION;
+                    return;
+                }
+                // 우측 하단
+                if (pos.X >= this.ClientSize.Width - cGrip && pos.Y >= this.ClientSize.Height - cGrip)
+                {
+                    m.Result = (IntPtr)HT_BOTTOMRIGHT;
+                    return;
+                }
+                // 좌측 하단
+                if (pos.X <= cGrip && pos.Y >= this.ClientSize.Height - cGrip)
+                {
+                    m.Result = (IntPtr)HT_BOTTOMLEFT;
+                    return;
+                }
+                // 좌측 
+                if (pos.X <= 7)
+                {
+                    m.Result = (IntPtr)HT_LEFT;
+                    return;
+                }
+                // 우측
+                if (pos.X >= this.ClientSize.Width - 7)
+                {
+                    m.Result = (IntPtr)HT_RIGHT;
+                    return;
+                }
+                // 하단
+                if (pos.Y > this.ClientSize.Height - this.Padding.Bottom)
+                {
+                    m.Result = (IntPtr)HT_CAPTION;
+                    return;
+                }
+            }
+            base.WndProc(ref m);
         }
     }
 }

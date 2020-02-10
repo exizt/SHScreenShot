@@ -41,7 +41,7 @@
             this.btnScrCapture = new System.Windows.Forms.Button();
             this.btnFolderOpen = new System.Windows.Forms.Button();
             this.folderbrowserDialog_SShot = new System.Windows.Forms.FolderBrowserDialog();
-            this.btnSectCapture = new System.Windows.Forms.Button();
+            this.btnSelectionCapture = new System.Windows.Forms.Button();
             this.picboxPreview = new System.Windows.Forms.PictureBox();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -133,24 +133,24 @@
             this.btnFolderOpen.UseVisualStyleBackColor = false;
             this.btnFolderOpen.Click += new System.EventHandler(this.BtnFolderOpen_Click);
             // 
-            // btnSectCapture
+            // btnSelectionCapture
             // 
-            this.btnSectCapture.BackColor = System.Drawing.Color.Transparent;
-            this.btnSectCapture.FlatAppearance.BorderColor = System.Drawing.Color.MediumTurquoise;
-            this.btnSectCapture.FlatAppearance.BorderSize = 0;
-            this.btnSectCapture.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSectCapture.Font = new System.Drawing.Font("맑은 고딕", 9F);
-            this.btnSectCapture.ForeColor = System.Drawing.Color.White;
-            this.btnSectCapture.Image = global::Image_Capture.Properties.Resources.fullscreen_43_wh;
-            this.btnSectCapture.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSectCapture.Location = new System.Drawing.Point(0, 77);
-            this.btnSectCapture.Name = "btnSectCapture";
-            this.btnSectCapture.Size = new System.Drawing.Size(110, 74);
-            this.btnSectCapture.TabIndex = 17;
-            this.btnSectCapture.Text = "영역캡처";
-            this.btnSectCapture.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnSectCapture.UseVisualStyleBackColor = false;
-            this.btnSectCapture.Click += new System.EventHandler(this.BtnCaptureArea_Click);
+            this.btnSelectionCapture.BackColor = System.Drawing.Color.Transparent;
+            this.btnSelectionCapture.FlatAppearance.BorderColor = System.Drawing.Color.MediumTurquoise;
+            this.btnSelectionCapture.FlatAppearance.BorderSize = 0;
+            this.btnSelectionCapture.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSelectionCapture.Font = new System.Drawing.Font("맑은 고딕", 9F);
+            this.btnSelectionCapture.ForeColor = System.Drawing.Color.White;
+            this.btnSelectionCapture.Image = global::Image_Capture.Properties.Resources.fullscreen_43_wh;
+            this.btnSelectionCapture.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnSelectionCapture.Location = new System.Drawing.Point(0, 77);
+            this.btnSelectionCapture.Name = "btnSelectionCapture";
+            this.btnSelectionCapture.Size = new System.Drawing.Size(110, 74);
+            this.btnSelectionCapture.TabIndex = 17;
+            this.btnSelectionCapture.Text = "영역캡처";
+            this.btnSelectionCapture.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnSelectionCapture.UseVisualStyleBackColor = false;
+            this.btnSelectionCapture.Click += new System.EventHandler(this.BtnSelectionCapture_Click);
             // 
             // picboxPreview
             // 
@@ -642,7 +642,7 @@
         #endregion
         private System.Windows.Forms.Button btnScrCapture;
         private System.Windows.Forms.Button btnFolderOpen;
-        private System.Windows.Forms.Button btnSectCapture;
+        private System.Windows.Forms.Button btnSelectionCapture;
         public System.Windows.Forms.PictureBox picboxPreview;
         private System.Windows.Forms.FolderBrowserDialog folderbrowserDialog_SShot;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
