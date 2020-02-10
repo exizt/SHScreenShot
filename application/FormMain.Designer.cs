@@ -59,31 +59,31 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.pnlSettings = new System.Windows.Forms.Panel();
-            this.lblStep1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.pnlFNOptDatePos = new System.Windows.Forms.Panel();
+            this.radioButton8 = new System.Windows.Forms.RadioButton();
+            this.label7 = new System.Windows.Forms.Label();
+            this.radioButton7 = new System.Windows.Forms.RadioButton();
+            this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.pnlFNOptDateType = new System.Windows.Forms.Panel();
             this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.label7 = new System.Windows.Forms.Label();
-            this.pnlFNOptDatePos = new System.Windows.Forms.Panel();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
-            this.radioButton7 = new System.Windows.Forms.RadioButton();
-            this.radioButton8 = new System.Windows.Forms.RadioButton();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.lblStep1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picboxPreview)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.pnlSideNav.SuspendLayout();
@@ -91,10 +91,10 @@
             this.pnlTopRight.SuspendLayout();
             this.pnlMain.SuspendLayout();
             this.pnlSettings.SuspendLayout();
-            this.pnlFNOptDateType.SuspendLayout();
-            this.pnlFNOptDatePos.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.pnlFNOptDatePos.SuspendLayout();
+            this.pnlFNOptDateType.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnScrCapture
@@ -222,7 +222,7 @@
             this.pnlSideNav.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.pnlSideNav.Controls.Add(this.btnSettings);
             this.pnlSideNav.Controls.Add(this.btnScrCapture);
-            this.pnlSideNav.Controls.Add(this.btnSectCapture);
+            this.pnlSideNav.Controls.Add(this.btnSelectionCapture);
             this.pnlSideNav.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlSideNav.Location = new System.Drawing.Point(0, 50);
             this.pnlSideNav.Name = "pnlSideNav";
@@ -349,99 +349,19 @@
             this.pnlSettings.Size = new System.Drawing.Size(334, 585);
             this.pnlSettings.TabIndex = 30;
             // 
-            // lblStep1
+            // panel2
             // 
-            this.lblStep1.AutoSize = true;
-            this.lblStep1.Location = new System.Drawing.Point(10, 29);
-            this.lblStep1.Name = "lblStep1";
-            this.lblStep1.Size = new System.Drawing.Size(53, 12);
-            this.lblStep1.TabIndex = 0;
-            this.lblStep1.Text = "저장경로";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(10, 49);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(316, 21);
-            this.textBox1.TabIndex = 1;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(10, 72);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "폴더변경";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(10, 101);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "미리지정 A";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(85, 102);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(241, 21);
-            this.textBox2.TabIndex = 5;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 6);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(137, 12);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "저장될 이미지 기본 타입";
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(8, 21);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(44, 16);
-            this.radioButton1.TabIndex = 11;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "png";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(125, 21);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(48, 16);
-            this.radioButton2.TabIndex = 12;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "bmp";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton3
-            // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(65, 21);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(40, 16);
-            this.radioButton3.TabIndex = 13;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "jpg";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            // 
-            // radioButton4
-            // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(188, 21);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(36, 16);
-            this.radioButton4.TabIndex = 14;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "gif";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.panel2.Controls.Add(this.label3);
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.pnlFNOptDatePos);
+            this.panel2.Controls.Add(this.textBox3);
+            this.panel2.Controls.Add(this.pnlFNOptDateType);
+            this.panel2.Controls.Add(this.label5);
+            this.panel2.Controls.Add(this.textBox4);
+            this.panel2.Location = new System.Drawing.Point(0, 237);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(334, 178);
+            this.panel2.TabIndex = 25;
             // 
             // label3
             // 
@@ -461,37 +381,68 @@
             this.label4.TabIndex = 16;
             this.label4.Text = "앞문자";
             // 
+            // pnlFNOptDatePos
+            // 
+            this.pnlFNOptDatePos.Controls.Add(this.radioButton8);
+            this.pnlFNOptDatePos.Controls.Add(this.label7);
+            this.pnlFNOptDatePos.Controls.Add(this.radioButton7);
+            this.pnlFNOptDatePos.Controls.Add(this.radioButton6);
+            this.pnlFNOptDatePos.Location = new System.Drawing.Point(0, 116);
+            this.pnlFNOptDatePos.Name = "pnlFNOptDatePos";
+            this.pnlFNOptDatePos.Size = new System.Drawing.Size(269, 34);
+            this.pnlFNOptDatePos.TabIndex = 23;
+            // 
+            // radioButton8
+            // 
+            this.radioButton8.AutoSize = true;
+            this.radioButton8.Location = new System.Drawing.Point(194, 6);
+            this.radioButton8.Margin = new System.Windows.Forms.Padding(0);
+            this.radioButton8.Name = "radioButton8";
+            this.radioButton8.Size = new System.Drawing.Size(47, 16);
+            this.radioButton8.TabIndex = 2;
+            this.radioButton8.TabStop = true;
+            this.radioButton8.Text = "맨뒤";
+            this.radioButton8.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(5, 5);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(69, 12);
+            this.label7.TabIndex = 22;
+            this.label7.Text = "추가셋 위치";
+            // 
+            // radioButton7
+            // 
+            this.radioButton7.AutoSize = true;
+            this.radioButton7.Location = new System.Drawing.Point(141, 6);
+            this.radioButton7.Margin = new System.Windows.Forms.Padding(0);
+            this.radioButton7.Name = "radioButton7";
+            this.radioButton7.Size = new System.Drawing.Size(47, 16);
+            this.radioButton7.TabIndex = 1;
+            this.radioButton7.TabStop = true;
+            this.radioButton7.Text = "중간";
+            this.radioButton7.UseVisualStyleBackColor = true;
+            // 
+            // radioButton6
+            // 
+            this.radioButton6.AutoSize = true;
+            this.radioButton6.Location = new System.Drawing.Point(87, 6);
+            this.radioButton6.Margin = new System.Windows.Forms.Padding(0);
+            this.radioButton6.Name = "radioButton6";
+            this.radioButton6.Size = new System.Drawing.Size(47, 16);
+            this.radioButton6.TabIndex = 0;
+            this.radioButton6.TabStop = true;
+            this.radioButton6.Text = "맨앞";
+            this.radioButton6.UseVisualStyleBackColor = true;
+            // 
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(44, 25);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(129, 21);
             this.textBox3.TabIndex = 17;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 55);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 12);
-            this.label5.TabIndex = 18;
-            this.label5.Text = "뒤문자";
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(44, 50);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(129, 21);
-            this.textBox4.TabIndex = 19;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 4);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(69, 12);
-            this.label6.TabIndex = 20;
-            this.label6.Text = "추가셋 유형";
             // 
             // pnlFNOptDateType
             // 
@@ -513,61 +464,30 @@
             this.radioButton5.Text = "yyyymmdd.hhmmss.sss";
             this.radioButton5.UseVisualStyleBackColor = true;
             // 
-            // label7
+            // label6
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(5, 5);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(69, 12);
-            this.label7.TabIndex = 22;
-            this.label7.Text = "추가셋 위치";
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 4);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(69, 12);
+            this.label6.TabIndex = 20;
+            this.label6.Text = "추가셋 유형";
             // 
-            // pnlFNOptDatePos
+            // label5
             // 
-            this.pnlFNOptDatePos.Controls.Add(this.radioButton8);
-            this.pnlFNOptDatePos.Controls.Add(this.label7);
-            this.pnlFNOptDatePos.Controls.Add(this.radioButton7);
-            this.pnlFNOptDatePos.Controls.Add(this.radioButton6);
-            this.pnlFNOptDatePos.Location = new System.Drawing.Point(0, 116);
-            this.pnlFNOptDatePos.Name = "pnlFNOptDatePos";
-            this.pnlFNOptDatePos.Size = new System.Drawing.Size(269, 34);
-            this.pnlFNOptDatePos.TabIndex = 23;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 55);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(41, 12);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "뒤문자";
             // 
-            // radioButton6
+            // textBox4
             // 
-            this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(87, 6);
-            this.radioButton6.Margin = new System.Windows.Forms.Padding(0);
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(47, 16);
-            this.radioButton6.TabIndex = 0;
-            this.radioButton6.TabStop = true;
-            this.radioButton6.Text = "맨앞";
-            this.radioButton6.UseVisualStyleBackColor = true;
-            // 
-            // radioButton7
-            // 
-            this.radioButton7.AutoSize = true;
-            this.radioButton7.Location = new System.Drawing.Point(141, 6);
-            this.radioButton7.Margin = new System.Windows.Forms.Padding(0);
-            this.radioButton7.Name = "radioButton7";
-            this.radioButton7.Size = new System.Drawing.Size(47, 16);
-            this.radioButton7.TabIndex = 1;
-            this.radioButton7.TabStop = true;
-            this.radioButton7.Text = "중간";
-            this.radioButton7.UseVisualStyleBackColor = true;
-            // 
-            // radioButton8
-            // 
-            this.radioButton8.AutoSize = true;
-            this.radioButton8.Location = new System.Drawing.Point(194, 6);
-            this.radioButton8.Margin = new System.Windows.Forms.Padding(0);
-            this.radioButton8.Name = "radioButton8";
-            this.radioButton8.Size = new System.Drawing.Size(47, 16);
-            this.radioButton8.TabIndex = 2;
-            this.radioButton8.TabStop = true;
-            this.radioButton8.Text = "맨뒤";
-            this.radioButton8.UseVisualStyleBackColor = true;
+            this.textBox4.Location = new System.Drawing.Point(44, 50);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(129, 21);
+            this.textBox4.TabIndex = 19;
             // 
             // panel1
             // 
@@ -581,19 +501,99 @@
             this.panel1.Size = new System.Drawing.Size(334, 67);
             this.panel1.TabIndex = 24;
             // 
-            // panel2
+            // radioButton1
             // 
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.pnlFNOptDatePos);
-            this.panel2.Controls.Add(this.textBox3);
-            this.panel2.Controls.Add(this.pnlFNOptDateType);
-            this.panel2.Controls.Add(this.label5);
-            this.panel2.Controls.Add(this.textBox4);
-            this.panel2.Location = new System.Drawing.Point(0, 237);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(334, 178);
-            this.panel2.TabIndex = 25;
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(8, 21);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(44, 16);
+            this.radioButton1.TabIndex = 11;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "png";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(65, 21);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(40, 16);
+            this.radioButton3.TabIndex = 13;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "jpg";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(125, 21);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(48, 16);
+            this.radioButton2.TabIndex = 12;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "bmp";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(188, 21);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(36, 16);
+            this.radioButton4.TabIndex = 14;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "gif";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 6);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(137, 12);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "저장될 이미지 기본 타입";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(85, 102);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(241, 21);
+            this.textBox2.TabIndex = 5;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(10, 101);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "미리지정 A";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(10, 72);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "폴더변경";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(10, 49);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(316, 21);
+            this.textBox1.TabIndex = 1;
+            // 
+            // lblStep1
+            // 
+            this.lblStep1.AutoSize = true;
+            this.lblStep1.Location = new System.Drawing.Point(10, 29);
+            this.lblStep1.Name = "lblStep1";
+            this.lblStep1.Size = new System.Drawing.Size(53, 12);
+            this.lblStep1.TabIndex = 0;
+            this.lblStep1.Text = "저장경로";
             // 
             // FormMain
             // 
@@ -627,14 +627,14 @@
             this.pnlMain.PerformLayout();
             this.pnlSettings.ResumeLayout(false);
             this.pnlSettings.PerformLayout();
-            this.pnlFNOptDateType.ResumeLayout(false);
-            this.pnlFNOptDateType.PerformLayout();
-            this.pnlFNOptDatePos.ResumeLayout(false);
-            this.pnlFNOptDatePos.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.pnlFNOptDatePos.ResumeLayout(false);
+            this.pnlFNOptDatePos.PerformLayout();
+            this.pnlFNOptDateType.ResumeLayout(false);
+            this.pnlFNOptDateType.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
