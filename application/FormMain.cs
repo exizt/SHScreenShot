@@ -356,7 +356,7 @@ namespace Image_Capture
         private void ShowForm()
         {
             this.Visible = true;//활성화
-            this.Opacity = 100;
+            this.Opacity = 1.0;
             this.WindowState = FormWindowState.Normal;//폼의 상태를 일반 상태로 되돌림.
         }
 
@@ -367,7 +367,7 @@ namespace Image_Capture
         {
             this.Opacity = 0;
             this.Visible = false;
-            //this.WindowState = FormWindowState.Minimized;
+            this.WindowState = FormWindowState.Minimized;
         }
 
         /// <summary>
