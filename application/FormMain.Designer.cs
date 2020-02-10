@@ -21,10 +21,6 @@
             {
                 resultImage.Dispose();
             }
-            if (disposing && (ScreenImageDrawer != null))
-            {
-                ScreenImageDrawer.Dispose();
-            }
             base.Dispose(disposing);
         }
 

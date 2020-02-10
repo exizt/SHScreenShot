@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -12,15 +11,8 @@ namespace Image_Capture
     {
         /// <summary>
         /// 로그 디버깅 옵션.
-        /// formCaptureArea 도 영향을 받는다.
         /// </summary>
-        public bool isDebug = true;
-
-        /// <summary>
-        /// ScreenImageDrawer 인스턴스.
-        /// 이미지 캡쳐 등의 기능을 담은 클래스.
-        /// </summary>
-        internal ScreenImageDrawer ScreenImageDrawer { get; private set; }
+        public bool isDebug = false;
 
         /// <summary>
         /// 이미지 파일 저장 관련
@@ -88,7 +80,7 @@ namespace Image_Capture
             pnlSettings.Visible = false;
 
             // 스크린 이미지를 가져오는 클래스 생성. composition 으로.
-            ScreenImageDrawer = new ScreenImageDrawer(picboxPreview.Size);
+            //ScreenImageDrawer = new ScreenImageDrawer(picboxPreview.Size);
 
             ScreenImageFileHandler = new ScreenImageFileHandler();
             ChangeDirPath();
@@ -178,45 +170,58 @@ namespace Image_Capture
 
         /// <summary>
         /// 결과 이미지와 미리보기 이미지를 같이 그리기
+        /// '스크린 캡쳐','전체 캡쳐', '영역 캡쳐 > 저장' 에서 호출
         /// </summary>
         /// <param name="location">시작 좌표</param>
         /// <param name="screenArea">영역 크기</param> 
-        private void DrawResultImageWithPreviewImage(Point location, Size screenArea)
+        public void DrawResultImageWithPreviewImage(Point location, Size screenArea)
         {
+            /*
             //ResultImage 만들기
             ScreenImageDrawer.DrawResultImageFromScreen(location, screenArea);
+            if (resultImage != null) resultImage.Dispose();
             resultImage = ScreenImageDrawer.ResultImage;
 
             //PrevieImage 만들기 (ResultImage 를 기준으로)
             ScreenImageDrawer.DrawPreviewImage();
+            //if (picboxPreview.Image != null) picboxPreview.Image.Dispose();
             picboxPreview.Image = ScreenImageDrawer.PreviewImage;
+            */
+
+            using (ScreenImageDrawer drawer = new ScreenImageDrawer(picboxPreview.Size))
+            {
+                drawer.DrawFromScreen(location, screenArea, true, true);
+                if (resultImage != null) resultImage.Dispose();
+                resultImage = new Bitmap(drawer.ResultImage);
+
+                if (picboxPreview.Image != null) picboxPreview.Image.Dispose();
+                picboxPreview.Image = new Bitmap(drawer.PreviewImage);
+            }
 
         }
 
         /// <summary>
         /// 미리보기 이미지 '만' 드로잉하는 메서드
         /// 외부 에서도 호출 가능한 메서드. 좌표만 넘겨주면 됨.
+        /// '영역 캡쳐'에서 이용됨.
         /// </summary>
         /// <param name="location">시작 좌표</param>
         /// <param name="screenArea">영역 크기</param>
         public void DrawPreviewImage(Point location, Size screenArea)
         {
+            /*
             ScreenImageDrawer.DrawPreviewImageFromScreen(location, screenArea);
 
-            // ScreenImageDrawer.PreviewImage 의 포인터는 변하지 않는 포인트이므로, 메모리 누수 우려 안해도 됨.
+            if (picboxPreview.Image != null) picboxPreview.Image.Dispose();
             picboxPreview.Image = ScreenImageDrawer.PreviewImage;
-        }
+            */
 
-        /// <summary>
-        /// 결과 이미지 '만' 드로잉하는 메서드
-        /// </summary>
-        /// <param name="location">좌표</param>
-        /// <param name="screenArea">크기</param>
-        public void DrawResultImage(Point location, Size screenArea)
-        {
-            // 결과 이미지를 생성하는 부분
-            ScreenImageDrawer.DrawResultImageFromScreen(location, screenArea);
-            resultImage = ScreenImageDrawer.ResultImage;
+            using (ScreenImageDrawer drawer = new ScreenImageDrawer(picboxPreview.Size))
+            {
+                drawer.DrawFromScreen(location, screenArea, false, true);
+                if (picboxPreview.Image != null) picboxPreview.Image.Dispose();
+                picboxPreview.Image = new Bitmap(drawer.PreviewImage);
+            }
         }
 
         /// <summary>
@@ -376,20 +381,25 @@ namespace Image_Capture
         /// <param name="msg">Message</param>
         private void Debug(string msg)
         {
-            if (isDebug) System.Diagnostics.Debug.WriteLine(msg);
+            if (isDebug) System.Diagnostics.Debug.WriteLine($"[FormMain] {msg}");
         }
 
         /// <summary>
         /// debug 용 메서드
         /// </summary>
         /// <param name="msg">Message</param>
+#pragma warning disable IDE0051 // 사용되지 않는 private 멤버 제거
         private void Debug(string msg, string msg2)
+#pragma warning restore IDE0051 // 사용되지 않는 private 멤버 제거
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append(msg);
-            sb.Append(msg2);
-            Debug(sb.ToString());
-            sb.Clear();
+            if (isDebug)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(msg);
+                sb.Append(msg2);
+                Debug(sb.ToString());
+                sb.Clear();
+            }
         }
 
         private void SwitchQuickSaveMode_CheckedChanged(object sender, EventArgs e)

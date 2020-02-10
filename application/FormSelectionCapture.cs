@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Security.Permissions;
+using System.Text;
 using System.Runtime.InteropServices;
 
 /// <summary>
@@ -34,9 +34,9 @@ namespace Image_Capture
         bool isLoaded = false;
 
         /// <summary>
-        /// 로그 디버깅 옵션
+        /// 로그 디버깅 옵션.
         /// </summary>
-        private bool isDebug = true;
+        private readonly bool isDebug = false;
 
         /// <summary>
         /// 
@@ -123,7 +123,8 @@ namespace Image_Capture
         /// </summary>
         private void Save()
         {
-            mParentForm.DrawResultImage(locationCaptureArea,sizeCaptureArea);
+            //mParentForm.DrawResultImage(locationCaptureArea,sizeCaptureArea);
+            mParentForm.DrawResultImageWithPreviewImage(locationCaptureArea, sizeCaptureArea);
             mParentForm.SaveResultImageFile();
         }
 
@@ -177,7 +178,7 @@ namespace Image_Capture
         /// <param name="msg"></param>
         private void Debug(string msg)
         {
-            if (isDebug) System.Diagnostics.Debug.WriteLine(msg);
+            if (isDebug) System.Diagnostics.Debug.WriteLine($"[FormSelectionCapture] {msg}");
         }
 
         /// <summary>
@@ -185,13 +186,18 @@ namespace Image_Capture
         /// </summary>
         /// <param name="msg"></param>
         /// <param name="msg2"></param>
+#pragma warning disable IDE0051 // 사용되지 않는 private 멤버 제거
         private void Debug(string msg, string msg2)
+#pragma warning restore IDE0051 // 사용되지 않는 private 멤버 제거
         {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append(msg);
-            sb.Append(msg2);
-            Debug(sb.ToString());
-            sb.Clear();
+            if (isDebug)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(msg);
+                sb.Append(msg2);
+                Debug(sb.ToString());
+                sb.Clear();
+            }
         }
 
         /// <summary>
