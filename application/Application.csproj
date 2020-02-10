@@ -104,11 +104,11 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormCaptureArea.cs">
+    <Compile Include="FormSelectionCapture.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormCaptureArea.Designer.cs">
-      <DependentUpon>FormCaptureArea.cs</DependentUpon>
+    <Compile Include="FormSelectionCapture.Designer.cs">
+      <DependentUpon>FormSelectionCapture.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -122,8 +122,8 @@
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormCaptureArea.resx">
-      <DependentUpon>FormCaptureArea.cs</DependentUpon>
+    <EmbeddedResource Include="FormSelectionCapture.resx">
+      <DependentUpon>FormSelectionCapture.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -161,6 +161,15 @@
       <ProductName>Windows Installer 4.5</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sh-settings-75px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fullscreen-43-wh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sh-settings-30px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

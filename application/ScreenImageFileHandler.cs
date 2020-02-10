@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Text;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -13,6 +14,11 @@ namespace Image_Capture
     /// </summary>
     class ScreenImageFileHandler
     {
+        /// <summary>
+        /// 로그 디버깅 옵션.
+        /// </summary>
+        public bool isDebug = false;
+
         public string FileDirPath { get; set; }
 
         public ScreenImageFileHandler()
@@ -44,7 +50,7 @@ namespace Image_Capture
                 }
             }
             
-            if (filePath != "")
+            if (filePath.Trim().Length > 1)
             {
                 if (image != null)
                 {
@@ -66,7 +72,7 @@ namespace Image_Capture
                         MessageBox.Show("에러 발생" + e);
                     }
                 }
-                else { MessageBox.Show("그림을 캡쳐해주세요."); }
+                else { MessageBox.Show("이미지 캡쳐해주세요."); }
             }
             else
             { 
@@ -119,7 +125,7 @@ namespace Image_Capture
             try
             {
                 image.Save(path, GetImageFormat(path));
-                System.Diagnostics.Debug.WriteLine(path);
+                Debug(path);
             }
             catch (ArgumentNullException)
             {
@@ -127,7 +133,8 @@ namespace Image_Capture
             }
             catch (Exception e)
             {
-                System.Diagnostics.Debug.WriteLine(e);
+                //System.Diagnostics.Debug.WriteLine(e);
+                Debug("SaveImageFile Exception", e);
                 throw;
             }
         }
@@ -139,7 +146,7 @@ namespace Image_Capture
         private ImageFormat GetImageFormat(string path)
         {
             //string ext = _dir_path.Substring(_dir_path.LastIndexOf('.'));
-            string ext = Path.GetExtension(path);
+            string ext = Path.GetExtension(path).ToLower();
             if (ext.Equals(".jpg") || ext.Equals(".jpeg"))
             {
                 return ImageFormat.Jpeg;
@@ -154,7 +161,7 @@ namespace Image_Capture
             }
             else
             {
-                return ImageFormat.Bmp;
+                return ImageFormat.Png;
             }
         }
 
@@ -190,6 +197,44 @@ namespace Image_Capture
         private string FileSave_Auto_FilePath()
         {
             return GenerateBasePath() + "\\" + GenerateBaseFilename() + ".jpg";
+        }
+
+        /// <summary>
+        /// debug 용 메서드
+        /// </summary>
+        /// <param name="msg">Message</param>
+        private void Debug(string msg)
+        {
+            if (isDebug) System.Diagnostics.Debug.WriteLine($"[ScreenImageFileHandler] {msg}");
+        }
+
+        /// <summary>
+        /// debug 용 메서드
+        /// </summary>
+        /// <param name="msg">Message</param>
+#pragma warning disable IDE0051 // 사용되지 않는 private 멤버 제거
+        private void Debug(string msg, string msg2)
+#pragma warning restore IDE0051 // 사용되지 않는 private 멤버 제거
+        {
+            if (isDebug)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(msg);
+                sb.Append(msg2);
+                Debug(sb.ToString());
+                sb.Clear();
+            }
+        }
+        private void Debug(string msg, Object obj)
+        {
+            if (isDebug)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(msg);
+                sb.Append(obj.ToString());
+                Debug(sb.ToString());
+                sb.Clear();
+            }
         }
     }
 }

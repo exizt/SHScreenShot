@@ -1,6 +1,6 @@
 ﻿namespace Image_Capture
 {
-    partial class FormCaptureArea
+    partial class FormSelectionCapture
     {
         /// <summary>
         /// Required designer variable.
@@ -92,7 +92,6 @@
             this.picboxCaptureArea.Size = new System.Drawing.Size(587, 503);
             this.picboxCaptureArea.TabIndex = 1;
             this.picboxCaptureArea.TabStop = false;
-            this.picboxCaptureArea.Click += new System.EventHandler(this.ImgCaptureScreen_Click);
             // 
             // FormCaptureArea
             // 

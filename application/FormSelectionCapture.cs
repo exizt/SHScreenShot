@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Security.Permissions;
+using System.Text;
 using System.Runtime.InteropServices;
 
 /// <summary>
@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 /// </summary>
 namespace Image_Capture
 {
-    public partial class FormCaptureArea : Form
+    public partial class FormSelectionCapture : Form
     {
         /// <summary>
         /// 부모폼을 담아올 용도
@@ -34,9 +34,9 @@ namespace Image_Capture
         bool isLoaded = false;
 
         /// <summary>
-        /// 로그 디버깅 옵션
+        /// 로그 디버깅 옵션.
         /// </summary>
-        private bool isDebug = true;
+        private readonly bool isDebug = false;
 
         /// <summary>
         /// 
@@ -53,10 +53,10 @@ namespace Image_Capture
         /// </summary>
         private const int WM_NCHITTEST = 0x84;
         private const int WM_NCLBUTTONDOWN = 0xA1;
-        private const int HT_CAPTION = 2;
+        private const int HT_CAPTION = 0x2;
 
         /// <summary>
-        /// 
+        /// 드래그 가능하게 해주는 SendMessage, ReleaseCapture 추가
         /// </summary>
         internal static class NativeMethods
         {
@@ -70,7 +70,7 @@ namespace Image_Capture
         /// 생성자
         /// </summary>
         /// <param name="_parentForm"></param>
-        public FormCaptureArea(FormMain _parentForm)
+        public FormSelectionCapture(FormMain _parentForm)
         {
             //컴포넌트 초기화 메서드(기본적으로 들어감)
             InitializeComponent();
@@ -123,7 +123,8 @@ namespace Image_Capture
         /// </summary>
         private void Save()
         {
-            mParentForm.DrawResultImage(locationCaptureArea,sizeCaptureArea);
+            //mParentForm.DrawResultImage(locationCaptureArea,sizeCaptureArea);
+            mParentForm.DrawResultImageWithPreviewImage(locationCaptureArea, sizeCaptureArea);
             mParentForm.SaveResultImageFile();
         }
 
@@ -162,15 +163,96 @@ namespace Image_Capture
         }
 
         /// <summary>
-        /// 창 클릭 이벤트.
-        /// 이제 안 쓰기로... 단축키로 사용함.
+        /// 헤더의 Panel 에서 창 닫기
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ImgCaptureScreen_Click(object sender, EventArgs e)
+        private void BtnClose_Click(object sender, EventArgs e)
         {
-            //이미지 파일 저장
-            //save();
+            this.Close();
+        }
+
+        /// <summary>
+        /// debug 용 메서드
+        /// </summary>
+        /// <param name="msg"></param>
+        private void Debug(string msg)
+        {
+            if (isDebug) System.Diagnostics.Debug.WriteLine($"[FormSelectionCapture] {msg}");
+        }
+
+        /// <summary>
+        /// Debug 용 메서드
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="msg2"></param>
+#pragma warning disable IDE0051 // 사용되지 않는 private 멤버 제거
+        private void Debug(string msg, string msg2)
+#pragma warning restore IDE0051 // 사용되지 않는 private 멤버 제거
+        {
+            if (isDebug)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(msg);
+                sb.Append(msg2);
+                Debug(sb.ToString());
+                sb.Clear();
+            }
+        }
+
+        /// <summary>
+        /// 단축키 지정
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormCaptureArea_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.S)
+            {
+                Save();//이미지 저장 호출
+                e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
+            } else if (e.Control && e.KeyCode == Keys.W)
+            {
+                this.Close();
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Timer1_Tick(object sender, EventArgs e)
+        {
+            //Debug("Timer_Tick");
+            //미리보기 이미지 생성
+            DrawPreviewImage();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormCaptureArea_ResizeEnd(object sender, EventArgs e)
+        {
+            timer1.Start();
+        }
+
+        /// <summary>
+        /// 드래그 가능하게 하기 위함
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PanelHeader_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                NativeMethods.ReleaseCapture();
+                NativeMethods.SendMessage(Handle, WM_NCLBUTTONDOWN, (IntPtr)HT_CAPTION, (IntPtr)0);
+            }
+            //mousePoint = new Point(e.X, e.Y);
         }
 
         /// <summary>
@@ -230,94 +312,6 @@ namespace Image_Capture
                 }
             }
             base.WndProc(ref m);
-        }
-
-        /// <summary>
-        /// 헤더의 Panel 에서 창 닫기
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BtnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        /// <summary>
-        /// debug 용 메서드
-        /// </summary>
-        /// <param name="msg"></param>
-        private void Debug(string msg)
-        {
-            if (isDebug) System.Diagnostics.Debug.WriteLine(msg);
-        }
-
-        /// <summary>
-        /// Debug 용 메서드
-        /// </summary>
-        /// <param name="msg"></param>
-        /// <param name="msg2"></param>
-        private void Debug(string msg, string msg2)
-        {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append(msg);
-            sb.Append(msg2);
-            Debug(sb.ToString());
-            sb.Clear();
-        }
-
-        /// <summary>
-        /// 단축키 지정
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FormCaptureArea_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Control && e.KeyCode == Keys.S)
-            {
-                Save();//이미지 저장 호출
-                e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
-            } else if (e.Control && e.KeyCode == Keys.W)
-            {
-                this.Close();
-                e.SuppressKeyPress = true;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Timer1_Tick(object sender, EventArgs e)
-        {
-            //Debug("Timer_Tick");
-            //미리보기 이미지 생성
-            DrawPreviewImage();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FormCaptureArea_ResizeEnd(object sender, EventArgs e)
-        {
-            timer1.Start();
-        }
-
-        /// <summary>
-        /// 헤더의 Panel 에서 창 이동이 가능하게 하는 부분
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void PanelHeader_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                NativeMethods.ReleaseCapture();
-                NativeMethods.SendMessage(Handle, WM_NCLBUTTONDOWN, (IntPtr)HT_CAPTION, (IntPtr)0);
-            }
-            //mousePoint = new Point(e.X, e.Y);
         }
     }
 }

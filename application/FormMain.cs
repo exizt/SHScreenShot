@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -12,15 +11,8 @@ namespace Image_Capture
     {
         /// <summary>
         /// 로그 디버깅 옵션.
-        /// formCaptureArea 도 영향을 받는다.
         /// </summary>
-        public bool isDebug = true;
-
-        /// <summary>
-        /// ScreenImageDrawer 인스턴스.
-        /// 이미지 캡쳐 등의 기능을 담은 클래스.
-        /// </summary>
-        internal ScreenImageDrawer ScreenImageDrawer { get; private set; }
+        public bool isDebug = false;
 
         /// <summary>
         /// 이미지 파일 저장 관련
@@ -33,11 +25,6 @@ namespace Image_Capture
         public Image resultImage;
 
         /// <summary>
-        /// point 0, 0
-        /// </summary>
-        Point ptZero = new Point(0, 0);
-
-        /// <summary>
         /// Quick 세이브 모드 여부
         /// </summary>
         bool isQuickSaveMode = false;
@@ -47,18 +34,69 @@ namespace Image_Capture
         /// </summary>
         private Point mousePoint;
 
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HTCAPTION = 0x2;
+
+        internal static class NativeMethods
+        {
+            [DllImport("User32.dll")]
+            public static extern bool ReleaseCapture();
+            [DllImport("User32.dll")]
+            public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        }
+
+        /// <summary>
+        /// Round 된 윈도우 구현
+        /// </summary>
+        /// <param name="nLeftRect"></param>
+        /// <param name="nTopRect"></param>
+        /// <param name="nRightRect"></param>
+        /// <param name="nBottomRect"></param>
+        /// <param name="nWidthEllipse"></param>
+        /// <param name="nHeightEllipse"></param>
+        /// <returns></returns>
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn
+        (
+            int nLeftRect,     // x-coordinate of upper-left corner
+            int nTopRect,      // y-coordinate of upper-left corner
+            int nRightRect,    // x-coordinate of lower-right corner
+            int nBottomRect,   // y-coordinate of lower-right corner
+            int nWidthEllipse, // width of ellipse
+            int nHeightEllipse // height of ellipse
+        );
+
         /// <summary>
         /// 생성자 메서드
         /// </summary>
         public FormMain()
         {
             InitializeComponent();//컴포넌트 초기화 메서드(기본적으로 들어감)
+            pnlSettings.Visible = false;
 
             // 스크린 이미지를 가져오는 클래스 생성. composition 으로.
-            ScreenImageDrawer = new ScreenImageDrawer(picboxPreview.Size);
+            //ScreenImageDrawer = new ScreenImageDrawer(picboxPreview.Size);
 
             ScreenImageFileHandler = new ScreenImageFileHandler();
             ChangeDirPath();
+
+            // Rounded 윈도우 구현
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
+        }
+
+        /// <summary>
+        /// 그림자 구현
+        /// </summary>
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                const int CS_DROPSHADOW = 0x20000;
+                CreateParams cp = base.CreateParams;
+                cp.ClassStyle |= CS_DROPSHADOW;
+                return cp;
+            }
         }
 
         /// <summary>
@@ -77,12 +115,20 @@ namespace Image_Capture
         }
 
         /// <summary>
-        /// 영역 캡쳐 기능
+        /// 영역 선택 캡쳐 기능.
+        /// 버튼 클릭시 영역 선택 창을 띄운다. (그것뿐...)
         /// </summary>
-        private void DoCaptureAreaFeature()
+        private void DoSelectionCaptureFeature()
         {
-            FormCaptureArea nForm = new FormCaptureArea(this);
-            nForm.Show();
+            //FormCaptureArea nForm = new FormCaptureArea(this);
+            //nForm.Show();
+
+            // modaless 에서 modal 로 변경하고, using 구문과 GC 구문을 추가.
+            using (FormSelectionCapture form = new FormSelectionCapture(this))
+            {
+                form.ShowDialog();
+            }
+            GC.Collect();
         }
 
         /// <summary>
@@ -119,45 +165,58 @@ namespace Image_Capture
 
         /// <summary>
         /// 결과 이미지와 미리보기 이미지를 같이 그리기
+        /// '스크린 캡쳐','전체 캡쳐', '영역 캡쳐 > 저장' 에서 호출
         /// </summary>
         /// <param name="location">시작 좌표</param>
         /// <param name="screenArea">영역 크기</param> 
-        private void DrawResultImageWithPreviewImage(Point location, Size screenArea)
+        public void DrawResultImageWithPreviewImage(Point location, Size screenArea)
         {
+            /*
             //ResultImage 만들기
             ScreenImageDrawer.DrawResultImageFromScreen(location, screenArea);
+            if (resultImage != null) resultImage.Dispose();
             resultImage = ScreenImageDrawer.ResultImage;
 
             //PrevieImage 만들기 (ResultImage 를 기준으로)
             ScreenImageDrawer.DrawPreviewImage();
+            //if (picboxPreview.Image != null) picboxPreview.Image.Dispose();
             picboxPreview.Image = ScreenImageDrawer.PreviewImage;
+            */
+
+            using (ScreenImageDrawer drawer = new ScreenImageDrawer(picboxPreview.Size))
+            {
+                drawer.DrawFromScreen(location, screenArea, true, true);
+                if (resultImage != null) resultImage.Dispose();
+                resultImage = new Bitmap(drawer.ResultImage);
+
+                if (picboxPreview.Image != null) picboxPreview.Image.Dispose();
+                picboxPreview.Image = new Bitmap(drawer.PreviewImage);
+            }
 
         }
 
         /// <summary>
         /// 미리보기 이미지 '만' 드로잉하는 메서드
         /// 외부 에서도 호출 가능한 메서드. 좌표만 넘겨주면 됨.
+        /// '영역 캡쳐'에서 이용됨.
         /// </summary>
         /// <param name="location">시작 좌표</param>
         /// <param name="screenArea">영역 크기</param>
         public void DrawPreviewImage(Point location, Size screenArea)
         {
+            /*
             ScreenImageDrawer.DrawPreviewImageFromScreen(location, screenArea);
 
-            // ScreenImageDrawer.PreviewImage 의 포인터는 변하지 않는 포인트이므로, 메모리 누수 우려 안해도 됨.
+            if (picboxPreview.Image != null) picboxPreview.Image.Dispose();
             picboxPreview.Image = ScreenImageDrawer.PreviewImage;
-        }
+            */
 
-        /// <summary>
-        /// 결과 이미지 '만' 드로잉하는 메서드
-        /// </summary>
-        /// <param name="location">좌표</param>
-        /// <param name="screenArea">크기</param>
-        public void DrawResultImage(Point location, Size screenArea)
-        {
-            // 결과 이미지를 생성하는 부분
-            ScreenImageDrawer.DrawResultImageFromScreen(location, screenArea);
-            resultImage = ScreenImageDrawer.ResultImage;
+            using (ScreenImageDrawer drawer = new ScreenImageDrawer(picboxPreview.Size))
+            {
+                drawer.DrawFromScreen(location, screenArea, false, true);
+                if (picboxPreview.Image != null) picboxPreview.Image.Dispose();
+                picboxPreview.Image = new Bitmap(drawer.PreviewImage);
+            }
         }
 
         /// <summary>
@@ -197,6 +256,7 @@ namespace Image_Capture
         /// <param name="e"></param>
         private void BtnFullCapture_Click(object sender, EventArgs e)
         {
+            pnlSettings.Visible = false;
             DoScreenCaptureFeature();
         }
 
@@ -205,9 +265,10 @@ namespace Image_Capture
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtnCaptureArea_Click(object sender, EventArgs e)
+        private void BtnSelectionCapture_Click(object sender, EventArgs e)
         {
-            DoCaptureAreaFeature();
+            pnlSettings.Visible = false;
+            DoSelectionCaptureFeature();
         }
 
         /// <summary>
@@ -295,7 +356,7 @@ namespace Image_Capture
         private void ShowForm()
         {
             this.Visible = true;//활성화
-            this.Opacity = 100;
+            this.Opacity = 1.0;
             this.WindowState = FormWindowState.Normal;//폼의 상태를 일반 상태로 되돌림.
         }
 
@@ -306,7 +367,7 @@ namespace Image_Capture
         {
             this.Opacity = 0;
             this.Visible = false;
-            //this.WindowState = FormWindowState.Minimized;
+            this.WindowState = FormWindowState.Minimized;
         }
 
         /// <summary>
@@ -315,20 +376,25 @@ namespace Image_Capture
         /// <param name="msg">Message</param>
         private void Debug(string msg)
         {
-            if (isDebug) System.Diagnostics.Debug.WriteLine(msg);
+            if (isDebug) System.Diagnostics.Debug.WriteLine($"[FormMain] {msg}");
         }
 
         /// <summary>
         /// debug 용 메서드
         /// </summary>
         /// <param name="msg">Message</param>
+#pragma warning disable IDE0051 // 사용되지 않는 private 멤버 제거
         private void Debug(string msg, string msg2)
+#pragma warning restore IDE0051 // 사용되지 않는 private 멤버 제거
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append(msg);
-            sb.Append(msg2);
-            Debug(sb.ToString());
-            sb.Clear();
+            if (isDebug)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(msg);
+                sb.Append(msg2);
+                Debug(sb.ToString());
+                sb.Clear();
+            }
         }
 
         private void SwitchQuickSaveMode_CheckedChanged(object sender, EventArgs e)
@@ -336,7 +402,7 @@ namespace Image_Capture
             if (((CheckBox)sender).Checked)
             {
                 isQuickSaveMode = true;
-                FolderBrowser();
+                //FolderBrowser();
                 //Debug("isQuickSaveMode true");
             } else
             {
@@ -376,11 +442,6 @@ namespace Image_Capture
                 // 스크린 캡쳐 기능
                 DoScreenCaptureFeature();
                 e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
-            } else if(e.Control && e.KeyCode == Keys.C)
-            {
-                //영역 캡쳐 기능
-                DoCaptureAreaFeature();
-                e.SuppressKeyPress = true;
             }
         }
 
@@ -391,7 +452,7 @@ namespace Image_Capture
         /// <param name="e"></param>
         private void BtnShortcutGuide_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("스크린 캡쳐: Ctrl + S\n영역 캡쳐 열기: Ctrl + C\n" +
+            MessageBox.Show("스크린 캡쳐: Ctrl + S\n" +
                 "영역 캡쳐에서 저장: Ctrl + S\n" +
                 "영역 캡쳐에서 닫기: Ctrl + W","단축키 일람");
         }
@@ -418,6 +479,35 @@ namespace Image_Capture
                 Location = new Point(this.Left - (mousePoint.X - e.X),
                     this.Top - (mousePoint.Y - e.Y));
             }
+        }
+
+        private void BtnFolderChange_Click(object sender, EventArgs e)
+        {
+            FolderBrowser();
+        }
+
+        private void BtnMin_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void pnlTopNav_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                NativeMethods.ReleaseCapture();
+                NativeMethods.SendMessage(Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
+            }
+        }
+
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            pnlSettings.Visible = true;
         }
     }
 }
