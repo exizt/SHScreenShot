@@ -1,6 +1,6 @@
 ﻿namespace Image_Capture
 {
-    partial class FormCaptureArea
+    partial class FormSelectionCapture
     {
         /// <summary>
         /// Required designer variable.
