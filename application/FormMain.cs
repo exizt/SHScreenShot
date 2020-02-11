@@ -271,6 +271,41 @@ namespace Image_Capture
             DoSelectionCaptureFeature();
         }
 
+
+        /// <summary>
+        /// 숨김처리했던 폼을 다시 visible 처리
+        /// </summary>
+        private void ShowForm()
+        {
+            this.Visible = true;//활성화
+            this.Opacity = 1.0;
+            this.WindowState = FormWindowState.Normal;//폼의 상태를 일반 상태로 되돌림.
+        }
+
+        /// <summary>
+        /// 폼을 숨김처리
+        /// </summary>
+        private void HideForm()
+        {
+            this.Opacity = 0;
+            this.Visible = false;
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void SwitchQuickSaveMode_CheckedChanged(object sender, EventArgs e)
+        {
+            if (((CheckBox)sender).Checked)
+            {
+                isQuickSaveMode = true;
+                //FolderBrowser();
+                //Debug("isQuickSaveMode true");
+            } else
+            {
+                isQuickSaveMode = false;
+                //Debug("isQuickSaveMode false");
+            }
+        }
+
         /// <summary>
         /// 이벤트 메서드.클릭. 폴더 열기 버튼 클릭시 동작.
         /// </summary>
@@ -289,25 +324,31 @@ namespace Image_Capture
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void NotifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void FolderBrowser()
         {
-            this.ShowForm();
+            FolderBrowserDialog folderDlg = new FolderBrowserDialog
+            {
+                ShowNewFolderButton = true
+            };
+            DialogResult result = folderDlg.ShowDialog();
+            if(result == DialogResult.OK)
+            {
+                ScreenImageFileHandler.FileDirPath = folderDlg.SelectedPath;
+                ChangeDirPath();
+            }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void NotifyIcon1_MouseClick(object sender, MouseEventArgs e)
+        private void ChangeDirPath()
         {
-            this.ShowForm();
+            saveDirectoryPath.Text = AppConfig.SaveRules.Path;
+            //saveDirectoryPath.Text = ScreenImageFileHandler.FileDirPath;
         }
+
+        private void BtnFolderChange_Click(object sender, EventArgs e)
+        {
+            FolderBrowser();
+        }
+ 
 
         /// <summary>
         /// 
@@ -318,6 +359,21 @@ namespace Image_Capture
         {
             e.Cancel = true;
             this.HideForm();
+        }
+        
+        /// <summary>
+        /// 단축키 지정
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormMain_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.S)
+            {
+                // 스크린 캡쳐 기능
+                DoScreenCaptureFeature();
+                e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
+            }
         }
 
         /// <summary>
@@ -351,98 +407,23 @@ namespace Image_Capture
         }
 
         /// <summary>
-        /// 숨김처리했던 폼을 다시 visible 처리
-        /// </summary>
-        private void ShowForm()
-        {
-            this.Visible = true;//활성화
-            this.Opacity = 1.0;
-            this.WindowState = FormWindowState.Normal;//폼의 상태를 일반 상태로 되돌림.
-        }
-
-        /// <summary>
-        /// 폼을 숨김처리
-        /// </summary>
-        private void HideForm()
-        {
-            this.Opacity = 0;
-            this.Visible = false;
-            this.WindowState = FormWindowState.Minimized;
-        }
-
-        /// <summary>
-        /// debug 용 메서드
-        /// </summary>
-        /// <param name="msg">Message</param>
-        private void Debug(string msg)
-        {
-            if (isDebug) System.Diagnostics.Debug.WriteLine($"[FormMain] {msg}");
-        }
-
-        /// <summary>
-        /// debug 용 메서드
-        /// </summary>
-        /// <param name="msg">Message</param>
-#pragma warning disable IDE0051 // 사용되지 않는 private 멤버 제거
-        private void Debug(string msg, string msg2)
-#pragma warning restore IDE0051 // 사용되지 않는 private 멤버 제거
-        {
-            if (isDebug)
-            {
-                StringBuilder sb = new StringBuilder();
-                sb.Append(msg);
-                sb.Append(msg2);
-                Debug(sb.ToString());
-                sb.Clear();
-            }
-        }
-
-        private void SwitchQuickSaveMode_CheckedChanged(object sender, EventArgs e)
-        {
-            if (((CheckBox)sender).Checked)
-            {
-                isQuickSaveMode = true;
-                //FolderBrowser();
-                //Debug("isQuickSaveMode true");
-            } else
-            {
-                isQuickSaveMode = false;
-                //Debug("isQuickSaveMode false");
-            }
-        }
-
-        private void FolderBrowser()
-        {
-            FolderBrowserDialog folderDlg = new FolderBrowserDialog
-            {
-                ShowNewFolderButton = true
-            };
-            DialogResult result = folderDlg.ShowDialog();
-            if(result == DialogResult.OK)
-            {
-                ScreenImageFileHandler.FileDirPath = folderDlg.SelectedPath;
-                ChangeDirPath();
-            }
-        }
-
-        private void ChangeDirPath()
-        {
-            saveDirectoryPath.Text = ScreenImageFileHandler.FileDirPath;
-        }
-
-        /// <summary>
-        /// 단축키 지정
+        /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void FormMain_KeyDown(object sender, KeyEventArgs e)
+        private void NotifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (e.Control && e.KeyCode == Keys.S)
-            {
-                // 스크린 캡쳐 기능
-                DoScreenCaptureFeature();
-                e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
-            }
+            this.ShowForm();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NotifyIcon1_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.ShowForm();
         }
 
         /// <summary>
@@ -481,10 +462,6 @@ namespace Image_Capture
             }
         }
 
-        private void BtnFolderChange_Click(object sender, EventArgs e)
-        {
-            FolderBrowser();
-        }
 
         private void BtnMin_Click(object sender, EventArgs e)
         {
@@ -505,9 +482,31 @@ namespace Image_Capture
             }
         }
 
-        private void btnSettings_Click(object sender, EventArgs e)
+        /// <summary>
+        /// debug 용 메서드
+        /// </summary>
+        /// <param name="msg">Message</param>
+        private void Debug(string msg)
         {
-            pnlSettings.Visible = true;
+            if (isDebug) System.Diagnostics.Debug.WriteLine($"[FormMain] {msg}");
+        }
+
+        /// <summary>
+        /// debug 용 메서드
+        /// </summary>
+        /// <param name="msg">Message</param>
+#pragma warning disable IDE0051 // 사용되지 않는 private 멤버 제거
+        private void Debug(string msg, string msg2)
+#pragma warning restore IDE0051 // 사용되지 않는 private 멤버 제거
+        {
+            if (isDebug)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(msg);
+                sb.Append(msg2);
+                Debug(sb.ToString());
+                sb.Clear();
+            }
         }
     }
 }
