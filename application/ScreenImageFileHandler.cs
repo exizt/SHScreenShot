@@ -172,7 +172,7 @@ namespace Image_Capture
         /// <returns></returns>
         public string GenerateBasePath()
         {
-            return Environment.GetFolderPath(Environment.SpecialFolder.Desktop); ;
+            return Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
             //Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location); //설치 경로
             //Environment.GetFolderPath(Environment.SpecialFolder.Desktop); //Desktop
@@ -187,16 +187,6 @@ namespace Image_Capture
         {
             //return DateTime.Now.ToString("yyyy.MM.dd-HH.mm.ss.fff");
             return DateTime.Now.ToString("yyyyMMdd-HH.mm.ss.fff");
-        }
-
-        /// <summary>
-        /// 자동적으로 파일경로를 생성하는 메서드이다.
-        /// 프로그램의 경로에서 시간형식의 이름을 붙인다.
-        /// </summary>
-        /// <returns></returns>
-        private string FileSave_Auto_FilePath()
-        {
-            return GenerateBasePath() + "\\" + GenerateBaseFilename() + ".jpg";
         }
 
         /// <summary>
