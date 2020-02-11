@@ -83,7 +83,7 @@ namespace Image_Capture
         }
 
         /// <summary>
-        /// 퀵 세이브 기능.
+        /// 자동 세이브 구현
         /// </summary>
         /// <param name="image"></param>
         public bool QuickSaveImageFile(Image image)

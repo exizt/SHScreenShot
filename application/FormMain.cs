@@ -326,11 +326,15 @@ namespace Image_Capture
             }
             else
             {
+                // 지정된 것이 없을 때 '바탕화면' 을 띄움
                 //System.Diagnostics.Process.Start("explorer.exe", ScreenImageFileHandler.GenerateBasePath());
                 System.Diagnostics.Process.Start("explorer.exe", Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
             }
         }
 
+        /// <summary>
+        /// '폴더 변경' 기능 구현부
+        /// </summary>
         private void FolderBrowser()
         {
             FolderBrowserDialog folderDlg = new FolderBrowserDialog
@@ -414,7 +418,7 @@ namespace Image_Capture
         }
 
         /// <summary>
-        /// 
+        /// 시스템 아이콘의 더블클릭
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -424,7 +428,7 @@ namespace Image_Capture
         }
 
         /// <summary>
-        /// 
+        /// 시스템 아이콘의 클릭
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -446,7 +450,7 @@ namespace Image_Capture
         }
 
         /// <summary>
-        /// 폼에서 드래그 기능
+        /// 폼의 활성부분에서 드래그 구현
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -456,7 +460,7 @@ namespace Image_Capture
         }
 
         /// <summary>
-        /// 창 의 드래그 기능
+        /// 폼의 활성부분 의 드래그 구현
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -469,17 +473,31 @@ namespace Image_Capture
             }
         }
 
-
+        /// <summary>
+        /// 최소화
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnMin_Click(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Minimized;
         }
 
+        /// <summary>
+        /// 종료
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// 상단의 드래그 구현
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void pnlTopNav_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
