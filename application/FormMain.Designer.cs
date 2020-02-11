@@ -50,36 +50,40 @@
             this.pnlTopNav = new System.Windows.Forms.Panel();
             this.pnlTopRight = new System.Windows.Forms.Panel();
             this.btnMin = new System.Windows.Forms.Button();
-            this.swcAutoSave = new Image_Capture.SwitchCheckBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.pnlSettings = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.lblStep1 = new System.Windows.Forms.Label();
+            this.tboxSaveDirSetting = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.btnSettingSave = new System.Windows.Forms.Button();
+            this.btnSettingCancel = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.pnlFNOptDatePos = new System.Windows.Forms.Panel();
-            this.radioButton8 = new System.Windows.Forms.RadioButton();
+            this.rbAddsetPosEnd = new System.Windows.Forms.RadioButton();
             this.label7 = new System.Windows.Forms.Label();
-            this.radioButton7 = new System.Windows.Forms.RadioButton();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.rbAddsetPosMiddle = new System.Windows.Forms.RadioButton();
+            this.rbAddsetPosFront = new System.Windows.Forms.RadioButton();
+            this.tboxPrefix = new System.Windows.Forms.TextBox();
             this.pnlFNOptDateType = new System.Windows.Forms.Panel();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
+            this.rbAddsetTypeA = new System.Windows.Forms.RadioButton();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.tboxSuffix = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.rbImageExtPng = new System.Windows.Forms.RadioButton();
+            this.rbImageExtJpg = new System.Windows.Forms.RadioButton();
+            this.rbImageExtBmp = new System.Windows.Forms.RadioButton();
+            this.rbImageExtGif = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.lblStep1 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.swcAutoSave = new Image_Capture.SwitchCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.picboxPreview)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.pnlSideNav.SuspendLayout();
@@ -87,6 +91,7 @@
             this.pnlTopRight.SuspendLayout();
             this.pnlMain.SuspendLayout();
             this.pnlSettings.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.pnlFNOptDatePos.SuspendLayout();
             this.pnlFNOptDateType.SuspendLayout();
@@ -283,18 +288,6 @@
             this.btnMin.UseVisualStyleBackColor = false;
             this.btnMin.Click += new System.EventHandler(this.BtnMin_Click);
             // 
-            // swcAutoSave
-            // 
-            this.swcAutoSave.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.swcAutoSave.Location = new System.Drawing.Point(66, 28);
-            this.swcAutoSave.Name = "swcAutoSave";
-            this.swcAutoSave.Padding = new System.Windows.Forms.Padding(1);
-            this.swcAutoSave.Size = new System.Drawing.Size(35, 21);
-            this.swcAutoSave.TabIndex = 26;
-            this.swcAutoSave.Text = "switchCheckBox1";
-            this.swcAutoSave.UseVisualStyleBackColor = true;
-            this.swcAutoSave.CheckedChanged += new System.EventHandler(this.SwitchQuickSaveMode_CheckedChanged);
-            // 
             // btnClose
             // 
             this.btnClose.BackColor = System.Drawing.Color.Transparent;
@@ -333,28 +326,104 @@
             // pnlSettings
             // 
             this.pnlSettings.AutoScroll = true;
+            this.pnlSettings.Controls.Add(this.panel3);
+            this.pnlSettings.Controls.Add(this.btnSettingSave);
+            this.pnlSettings.Controls.Add(this.btnSettingCancel);
             this.pnlSettings.Controls.Add(this.panel2);
             this.pnlSettings.Controls.Add(this.panel1);
-            this.pnlSettings.Controls.Add(this.textBox2);
-            this.pnlSettings.Controls.Add(this.button3);
-            this.pnlSettings.Controls.Add(this.button1);
-            this.pnlSettings.Controls.Add(this.textBox1);
-            this.pnlSettings.Controls.Add(this.lblStep1);
             this.pnlSettings.Location = new System.Drawing.Point(110, 50);
             this.pnlSettings.Name = "pnlSettings";
             this.pnlSettings.Size = new System.Drawing.Size(334, 585);
             this.pnlSettings.TabIndex = 30;
             // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.lblStep1);
+            this.panel3.Controls.Add(this.tboxSaveDirSetting);
+            this.panel3.Controls.Add(this.button1);
+            this.panel3.Controls.Add(this.button3);
+            this.panel3.Controls.Add(this.textBox2);
+            this.panel3.Location = new System.Drawing.Point(0, 100);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(334, 100);
+            this.panel3.TabIndex = 28;
+            // 
+            // lblStep1
+            // 
+            this.lblStep1.AutoSize = true;
+            this.lblStep1.Location = new System.Drawing.Point(6, 8);
+            this.lblStep1.Name = "lblStep1";
+            this.lblStep1.Size = new System.Drawing.Size(53, 12);
+            this.lblStep1.TabIndex = 0;
+            this.lblStep1.Text = "저장경로";
+            // 
+            // tboxSaveDirSetting
+            // 
+            this.tboxSaveDirSetting.Location = new System.Drawing.Point(8, 20);
+            this.tboxSaveDirSetting.Name = "tboxSaveDirSetting";
+            this.tboxSaveDirSetting.Size = new System.Drawing.Size(295, 21);
+            this.tboxSaveDirSetting.TabIndex = 1;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(8, 47);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "폴더변경";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(8, 74);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "미리지정 A";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(86, 74);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(217, 21);
+            this.textBox2.TabIndex = 5;
+            // 
+            // btnSettingSave
+            // 
+            this.btnSettingSave.FlatAppearance.BorderSize = 0;
+            this.btnSettingSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSettingSave.Location = new System.Drawing.Point(250, 9);
+            this.btnSettingSave.Name = "btnSettingSave";
+            this.btnSettingSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSettingSave.TabIndex = 27;
+            this.btnSettingSave.Text = "설정 저장";
+            this.btnSettingSave.UseVisualStyleBackColor = true;
+            this.btnSettingSave.Click += new System.EventHandler(this.btnSettingSave_Click);
+            // 
+            // btnSettingCancel
+            // 
+            this.btnSettingCancel.FlatAppearance.BorderSize = 0;
+            this.btnSettingCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSettingCancel.Location = new System.Drawing.Point(208, 8);
+            this.btnSettingCancel.Name = "btnSettingCancel";
+            this.btnSettingCancel.Size = new System.Drawing.Size(50, 23);
+            this.btnSettingCancel.TabIndex = 26;
+            this.btnSettingCancel.Text = "취소";
+            this.btnSettingCancel.UseVisualStyleBackColor = true;
+            this.btnSettingCancel.Click += new System.EventHandler(this.btnSettingCancel_Click);
+            // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.comboBox1);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.pnlFNOptDatePos);
-            this.panel2.Controls.Add(this.textBox3);
+            this.panel2.Controls.Add(this.tboxPrefix);
             this.panel2.Controls.Add(this.pnlFNOptDateType);
             this.panel2.Controls.Add(this.label5);
-            this.panel2.Controls.Add(this.textBox4);
-            this.panel2.Location = new System.Drawing.Point(0, 237);
+            this.panel2.Controls.Add(this.tboxSuffix);
+            this.panel2.Location = new System.Drawing.Point(0, 220);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(334, 178);
             this.panel2.TabIndex = 25;
@@ -379,26 +448,26 @@
             // 
             // pnlFNOptDatePos
             // 
-            this.pnlFNOptDatePos.Controls.Add(this.radioButton8);
+            this.pnlFNOptDatePos.Controls.Add(this.rbAddsetPosEnd);
             this.pnlFNOptDatePos.Controls.Add(this.label7);
-            this.pnlFNOptDatePos.Controls.Add(this.radioButton7);
-            this.pnlFNOptDatePos.Controls.Add(this.radioButton6);
+            this.pnlFNOptDatePos.Controls.Add(this.rbAddsetPosMiddle);
+            this.pnlFNOptDatePos.Controls.Add(this.rbAddsetPosFront);
             this.pnlFNOptDatePos.Location = new System.Drawing.Point(0, 116);
             this.pnlFNOptDatePos.Name = "pnlFNOptDatePos";
             this.pnlFNOptDatePos.Size = new System.Drawing.Size(269, 34);
             this.pnlFNOptDatePos.TabIndex = 23;
             // 
-            // radioButton8
+            // rbAddsetPosEnd
             // 
-            this.radioButton8.AutoSize = true;
-            this.radioButton8.Location = new System.Drawing.Point(194, 6);
-            this.radioButton8.Margin = new System.Windows.Forms.Padding(0);
-            this.radioButton8.Name = "radioButton8";
-            this.radioButton8.Size = new System.Drawing.Size(47, 16);
-            this.radioButton8.TabIndex = 2;
-            this.radioButton8.TabStop = true;
-            this.radioButton8.Text = "맨뒤";
-            this.radioButton8.UseVisualStyleBackColor = true;
+            this.rbAddsetPosEnd.AutoSize = true;
+            this.rbAddsetPosEnd.Location = new System.Drawing.Point(194, 6);
+            this.rbAddsetPosEnd.Margin = new System.Windows.Forms.Padding(0);
+            this.rbAddsetPosEnd.Name = "rbAddsetPosEnd";
+            this.rbAddsetPosEnd.Size = new System.Drawing.Size(47, 16);
+            this.rbAddsetPosEnd.TabIndex = 2;
+            this.rbAddsetPosEnd.TabStop = true;
+            this.rbAddsetPosEnd.Text = "맨뒤";
+            this.rbAddsetPosEnd.UseVisualStyleBackColor = true;
             // 
             // label7
             // 
@@ -409,56 +478,56 @@
             this.label7.TabIndex = 22;
             this.label7.Text = "추가셋 위치";
             // 
-            // radioButton7
+            // rbAddsetPosMiddle
             // 
-            this.radioButton7.AutoSize = true;
-            this.radioButton7.Location = new System.Drawing.Point(141, 6);
-            this.radioButton7.Margin = new System.Windows.Forms.Padding(0);
-            this.radioButton7.Name = "radioButton7";
-            this.radioButton7.Size = new System.Drawing.Size(47, 16);
-            this.radioButton7.TabIndex = 1;
-            this.radioButton7.TabStop = true;
-            this.radioButton7.Text = "중간";
-            this.radioButton7.UseVisualStyleBackColor = true;
+            this.rbAddsetPosMiddle.AutoSize = true;
+            this.rbAddsetPosMiddle.Location = new System.Drawing.Point(141, 6);
+            this.rbAddsetPosMiddle.Margin = new System.Windows.Forms.Padding(0);
+            this.rbAddsetPosMiddle.Name = "rbAddsetPosMiddle";
+            this.rbAddsetPosMiddle.Size = new System.Drawing.Size(47, 16);
+            this.rbAddsetPosMiddle.TabIndex = 1;
+            this.rbAddsetPosMiddle.TabStop = true;
+            this.rbAddsetPosMiddle.Text = "중간";
+            this.rbAddsetPosMiddle.UseVisualStyleBackColor = true;
             // 
-            // radioButton6
+            // rbAddsetPosFront
             // 
-            this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(87, 6);
-            this.radioButton6.Margin = new System.Windows.Forms.Padding(0);
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(47, 16);
-            this.radioButton6.TabIndex = 0;
-            this.radioButton6.TabStop = true;
-            this.radioButton6.Text = "맨앞";
-            this.radioButton6.UseVisualStyleBackColor = true;
+            this.rbAddsetPosFront.AutoSize = true;
+            this.rbAddsetPosFront.Location = new System.Drawing.Point(87, 6);
+            this.rbAddsetPosFront.Margin = new System.Windows.Forms.Padding(0);
+            this.rbAddsetPosFront.Name = "rbAddsetPosFront";
+            this.rbAddsetPosFront.Size = new System.Drawing.Size(47, 16);
+            this.rbAddsetPosFront.TabIndex = 0;
+            this.rbAddsetPosFront.TabStop = true;
+            this.rbAddsetPosFront.Text = "맨앞";
+            this.rbAddsetPosFront.UseVisualStyleBackColor = true;
             // 
-            // textBox3
+            // tboxPrefix
             // 
-            this.textBox3.Location = new System.Drawing.Point(44, 25);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(129, 21);
-            this.textBox3.TabIndex = 17;
+            this.tboxPrefix.Location = new System.Drawing.Point(44, 25);
+            this.tboxPrefix.Name = "tboxPrefix";
+            this.tboxPrefix.Size = new System.Drawing.Size(129, 21);
+            this.tboxPrefix.TabIndex = 17;
             // 
             // pnlFNOptDateType
             // 
-            this.pnlFNOptDateType.Controls.Add(this.radioButton5);
+            this.pnlFNOptDateType.Controls.Add(this.rbAddsetTypeA);
             this.pnlFNOptDateType.Controls.Add(this.label6);
             this.pnlFNOptDateType.Location = new System.Drawing.Point(0, 79);
             this.pnlFNOptDateType.Name = "pnlFNOptDateType";
             this.pnlFNOptDateType.Size = new System.Drawing.Size(269, 31);
             this.pnlFNOptDateType.TabIndex = 21;
             // 
-            // radioButton5
+            // rbAddsetTypeA
             // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(75, 4);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(166, 16);
-            this.radioButton5.TabIndex = 21;
-            this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "yyyymmdd.hhmmss.sss";
-            this.radioButton5.UseVisualStyleBackColor = true;
+            this.rbAddsetTypeA.AutoSize = true;
+            this.rbAddsetTypeA.Location = new System.Drawing.Point(75, 4);
+            this.rbAddsetTypeA.Name = "rbAddsetTypeA";
+            this.rbAddsetTypeA.Size = new System.Drawing.Size(166, 16);
+            this.rbAddsetTypeA.TabIndex = 21;
+            this.rbAddsetTypeA.TabStop = true;
+            this.rbAddsetTypeA.Text = "yyyymmdd.hhmmss.sss";
+            this.rbAddsetTypeA.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
@@ -478,68 +547,68 @@
             this.label5.TabIndex = 18;
             this.label5.Text = "뒤문자";
             // 
-            // textBox4
+            // tboxSuffix
             // 
-            this.textBox4.Location = new System.Drawing.Point(44, 50);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(129, 21);
-            this.textBox4.TabIndex = 19;
+            this.tboxSuffix.Location = new System.Drawing.Point(44, 50);
+            this.tboxSuffix.Name = "tboxSuffix";
+            this.tboxSuffix.Size = new System.Drawing.Size(129, 21);
+            this.tboxSuffix.TabIndex = 19;
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.radioButton1);
-            this.panel1.Controls.Add(this.radioButton3);
-            this.panel1.Controls.Add(this.radioButton2);
-            this.panel1.Controls.Add(this.radioButton4);
+            this.panel1.Controls.Add(this.rbImageExtPng);
+            this.panel1.Controls.Add(this.rbImageExtJpg);
+            this.panel1.Controls.Add(this.rbImageExtBmp);
+            this.panel1.Controls.Add(this.rbImageExtGif);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(0, 151);
+            this.panel1.Location = new System.Drawing.Point(0, 40);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(334, 67);
+            this.panel1.Size = new System.Drawing.Size(334, 49);
             this.panel1.TabIndex = 24;
             // 
-            // radioButton1
+            // rbImageExtPng
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(8, 21);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(44, 16);
-            this.radioButton1.TabIndex = 11;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "png";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.rbImageExtPng.AutoSize = true;
+            this.rbImageExtPng.Location = new System.Drawing.Point(8, 21);
+            this.rbImageExtPng.Name = "rbImageExtPng";
+            this.rbImageExtPng.Size = new System.Drawing.Size(44, 16);
+            this.rbImageExtPng.TabIndex = 11;
+            this.rbImageExtPng.TabStop = true;
+            this.rbImageExtPng.Text = "png";
+            this.rbImageExtPng.UseVisualStyleBackColor = true;
             // 
-            // radioButton3
+            // rbImageExtJpg
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(65, 21);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(40, 16);
-            this.radioButton3.TabIndex = 13;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "jpg";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.rbImageExtJpg.AutoSize = true;
+            this.rbImageExtJpg.Location = new System.Drawing.Point(65, 21);
+            this.rbImageExtJpg.Name = "rbImageExtJpg";
+            this.rbImageExtJpg.Size = new System.Drawing.Size(40, 16);
+            this.rbImageExtJpg.TabIndex = 13;
+            this.rbImageExtJpg.TabStop = true;
+            this.rbImageExtJpg.Text = "jpg";
+            this.rbImageExtJpg.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // rbImageExtBmp
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(125, 21);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(48, 16);
-            this.radioButton2.TabIndex = 12;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "bmp";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.rbImageExtBmp.AutoSize = true;
+            this.rbImageExtBmp.Location = new System.Drawing.Point(125, 21);
+            this.rbImageExtBmp.Name = "rbImageExtBmp";
+            this.rbImageExtBmp.Size = new System.Drawing.Size(48, 16);
+            this.rbImageExtBmp.TabIndex = 12;
+            this.rbImageExtBmp.TabStop = true;
+            this.rbImageExtBmp.Text = "bmp";
+            this.rbImageExtBmp.UseVisualStyleBackColor = true;
             // 
-            // radioButton4
+            // rbImageExtGif
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(188, 21);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(36, 16);
-            this.radioButton4.TabIndex = 14;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "gif";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.rbImageExtGif.AutoSize = true;
+            this.rbImageExtGif.Location = new System.Drawing.Point(188, 21);
+            this.rbImageExtGif.Name = "rbImageExtGif";
+            this.rbImageExtGif.Size = new System.Drawing.Size(36, 16);
+            this.rbImageExtGif.TabIndex = 14;
+            this.rbImageExtGif.TabStop = true;
+            this.rbImageExtGif.Text = "gif";
+            this.rbImageExtGif.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -550,46 +619,28 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "저장될 이미지 기본 타입";
             // 
-            // textBox2
+            // comboBox1
             // 
-            this.textBox2.Location = new System.Drawing.Point(85, 102);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(241, 21);
-            this.textBox2.TabIndex = 5;
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "yyyymmdd.hhmmss.sss"});
+            this.comboBox1.Location = new System.Drawing.Point(36, 155);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 20);
+            this.comboBox1.TabIndex = 24;
             // 
-            // button3
+            // swcAutoSave
             // 
-            this.button3.Location = new System.Drawing.Point(10, 101);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "미리지정 A";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(10, 72);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "폴더변경";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(10, 49);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(316, 21);
-            this.textBox1.TabIndex = 1;
-            // 
-            // lblStep1
-            // 
-            this.lblStep1.AutoSize = true;
-            this.lblStep1.Location = new System.Drawing.Point(10, 29);
-            this.lblStep1.Name = "lblStep1";
-            this.lblStep1.Size = new System.Drawing.Size(53, 12);
-            this.lblStep1.TabIndex = 0;
-            this.lblStep1.Text = "저장경로";
+            this.swcAutoSave.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.swcAutoSave.Location = new System.Drawing.Point(66, 28);
+            this.swcAutoSave.Name = "swcAutoSave";
+            this.swcAutoSave.Padding = new System.Windows.Forms.Padding(1);
+            this.swcAutoSave.Size = new System.Drawing.Size(35, 21);
+            this.swcAutoSave.TabIndex = 26;
+            this.swcAutoSave.Text = "switchCheckBox1";
+            this.swcAutoSave.UseVisualStyleBackColor = true;
+            this.swcAutoSave.CheckedChanged += new System.EventHandler(this.SwitchQuickSaveMode_CheckedChanged);
             // 
             // FormMain
             // 
@@ -622,7 +673,8 @@
             this.pnlMain.ResumeLayout(false);
             this.pnlMain.PerformLayout();
             this.pnlSettings.ResumeLayout(false);
-            this.pnlSettings.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.pnlFNOptDatePos.ResumeLayout(false);
@@ -657,31 +709,35 @@
         private System.Windows.Forms.Panel pnlTopRight;
         private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.Panel pnlSettings;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton rbImageExtGif;
+        private System.Windows.Forms.RadioButton rbImageExtJpg;
+        private System.Windows.Forms.RadioButton rbImageExtBmp;
+        private System.Windows.Forms.RadioButton rbImageExtPng;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tboxSaveDirSetting;
         private System.Windows.Forms.Label lblStep1;
         private System.Windows.Forms.Panel pnlFNOptDateType;
-        private System.Windows.Forms.RadioButton radioButton5;
+        private System.Windows.Forms.RadioButton rbAddsetTypeA;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox tboxSuffix;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox tboxPrefix;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel pnlFNOptDatePos;
-        private System.Windows.Forms.RadioButton radioButton8;
-        private System.Windows.Forms.RadioButton radioButton7;
-        private System.Windows.Forms.RadioButton radioButton6;
+        private System.Windows.Forms.RadioButton rbAddsetPosEnd;
+        private System.Windows.Forms.RadioButton rbAddsetPosMiddle;
+        private System.Windows.Forms.RadioButton rbAddsetPosFront;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btnSettingSave;
+        private System.Windows.Forms.Button btnSettingCancel;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 

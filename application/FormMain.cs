@@ -19,6 +19,8 @@ namespace Image_Capture
         /// </summary>
         internal ScreenImageFileHandler ScreenImageFileHandler { get; private set; }
 
+        internal AppConfig AppConfig { get; set; }
+
         /// <summary>
         /// 결과 이미지
         /// </summary>
@@ -73,6 +75,9 @@ namespace Image_Capture
         {
             InitializeComponent();//컴포넌트 초기화 메서드(기본적으로 들어감)
             pnlSettings.Visible = false;
+
+            // 설정 값을 갖고 있는 멤버
+            AppConfig = new AppConfig();
 
             // 스크린 이미지를 가져오는 클래스 생성. composition 으로.
             //ScreenImageDrawer = new ScreenImageDrawer(picboxPreview.Size);
@@ -318,9 +323,11 @@ namespace Image_Capture
             if (ScreenImageFileHandler.FileDirPath != "")
             {
                 System.Diagnostics.Process.Start("explorer.exe", ScreenImageFileHandler.FileDirPath);
-            } else
+            }
+            else
             {
-                System.Diagnostics.Process.Start("explorer.exe", ScreenImageFileHandler.GenerateBasePath());
+                //System.Diagnostics.Process.Start("explorer.exe", ScreenImageFileHandler.GenerateBasePath());
+                System.Diagnostics.Process.Start("explorer.exe", Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
             }
         }
 
