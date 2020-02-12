@@ -12,7 +12,7 @@ namespace Image_Capture
         /// <summary>
         /// 로그 디버깅 옵션.
         /// </summary>
-        private bool isDebug = true;
+        private readonly bool isDebug = false;
 
         /// <summary>
         /// 이미지 파일 저장 관련
