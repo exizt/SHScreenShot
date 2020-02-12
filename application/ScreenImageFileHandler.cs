@@ -183,21 +183,19 @@ namespace Image_Capture
             //string ext = _dir_path.Substring(_dir_path.LastIndexOf('.'));
             Debug("[GetImageFormat] path", path);
             string ext = Path.GetExtension(path).ToLower();
-            if (ext.Equals(".jpg") || ext.Equals(".jpeg"))
+            switch (ext)
             {
-                return ImageFormat.Jpeg;
-            }
-            else if (ext.Equals(".png"))
-            {
-                return ImageFormat.Png;
-            }
-            else if (ext.Equals(".bmp"))
-            {
-                return ImageFormat.Bmp;
-            }
-            else
-            {
-                return ImageFormat.Png;
+                case ".jpeg":
+                case ".jpg":
+                    return ImageFormat.Jpeg;
+                case ".png":
+                    return ImageFormat.Png;
+                case ".bmp":
+                    return ImageFormat.Bmp;
+                case ".gif":
+                    return ImageFormat.Gif;
+                default:
+                    return ImageFormat.Png;
             }
         }
 
