@@ -30,7 +30,7 @@ namespace Image_Capture
         {
             // 파일명 룰
             NameRules.prefix = "sample";
-            NameRules.suffix = "suff";
+            NameRules.suffix = "suffix";
             NameRules.AddsetType = FileNameRules.AddsetTypeCode.TypeA;
             NameRules.AddsetPosition = FileNameRules.AddsetPosCode.End;
 
@@ -39,6 +39,11 @@ namespace Image_Capture
 
             // 저장 경로
             SaveRules.Path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        }
+
+        public override string ToString()
+        {
+            return $"NameRules: {NameRules.ToString()}, SaveRules: {SaveRules.ToString()}";
         }
 
 
@@ -56,6 +61,10 @@ namespace Image_Capture
             {
                 Front, Middle, End
             }
+            public override string ToString()
+            {
+                return $"prefix: {prefix}, suffix: {suffix}";
+            }
         }
 
         public class FileSaveRules
@@ -66,6 +75,28 @@ namespace Image_Capture
             public enum ImageExt
             {
                 Png, Jpg, Bmp, Gif
+            }
+
+            public string ImageExtToString(ImageExt ext)
+            {
+                switch (ext)
+                {
+                    case ImageExt.Png:
+                        return "png";
+                    case ImageExt.Jpg:
+                        return "jpg";
+                    case ImageExt.Bmp:
+                        return "bmp";
+                    case ImageExt.Gif:
+                        return "gif";
+                    default:
+                        return "";
+                }
+            }
+
+            public override string ToString()
+            {
+                return $"Path: {Path}, DefaultImageExt: {defaultExt}";
             }
         }
     }

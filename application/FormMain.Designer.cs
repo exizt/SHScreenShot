@@ -246,7 +246,7 @@
             this.btnSettings.Text = "설정";
             this.btnSettings.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnSettings.UseVisualStyleBackColor = false;
-            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
+            this.btnSettings.Click += new System.EventHandler(this.BtnSettings_Click);
             // 
             // pnlTopNav
             // 
@@ -399,7 +399,7 @@
             this.btnSettingSave.TabIndex = 27;
             this.btnSettingSave.Text = "설정 저장";
             this.btnSettingSave.UseVisualStyleBackColor = true;
-            this.btnSettingSave.Click += new System.EventHandler(this.btnSettingSave_Click);
+            this.btnSettingSave.Click += new System.EventHandler(this.BtnSettingSave_Click);
             // 
             // btnSettingCancel
             // 

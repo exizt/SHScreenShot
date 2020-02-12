@@ -99,7 +99,7 @@ namespace Image_Capture
 
         }
 
-        private void btnSettings_Click(object sender, EventArgs e)
+        private void BtnSettings_Click(object sender, EventArgs e)
         {
             pnlSettings.Visible = true;
 
@@ -107,8 +107,10 @@ namespace Image_Capture
         }
 
 
-        private void btnSettingSave_Click(object sender, EventArgs e)
+        private void BtnSettingSave_Click(object sender, EventArgs e)
         {
+            Debug("btnSettingSave_Click");
+
             // 저장 이미지 형식
             if (rbImageExtPng.Checked)
             {
@@ -147,12 +149,13 @@ namespace Image_Capture
                 AppConfig.NameRules.AddsetPosition = AppConfig.FileNameRules.AddsetPosCode.End;
             }
 
-
+            Debug("[btnSettingSave_Click]", AppConfig);
         }
 
         private void btnSettingCancel_Click(object sender, EventArgs e)
         {
             pnlSettings.Visible = false;
+            MainPanelLoad();
         }
     }
 }

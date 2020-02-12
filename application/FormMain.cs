@@ -12,7 +12,7 @@ namespace Image_Capture
         /// <summary>
         /// 로그 디버깅 옵션.
         /// </summary>
-        public bool isDebug = false;
+        private bool isDebug = true;
 
         /// <summary>
         /// 이미지 파일 저장 관련
@@ -517,18 +517,19 @@ namespace Image_Capture
         }
 
         /// <summary>
-        /// debug 용 메서드
+        /// Debug 용 메서드
         /// </summary>
-        /// <param name="msg">Message</param>
+        /// <param name="msg"></param>
+        /// <param name="obj"></param>
 #pragma warning disable IDE0051 // 사용되지 않는 private 멤버 제거
-        private void Debug(string msg, string msg2)
+        private void Debug(string msg, Object obj)
 #pragma warning restore IDE0051 // 사용되지 않는 private 멤버 제거
         {
             if (isDebug)
             {
                 StringBuilder sb = new StringBuilder();
                 sb.Append(msg);
-                sb.Append(msg2);
+                sb.Append(obj.ToString());
                 Debug(sb.ToString());
                 sb.Clear();
             }

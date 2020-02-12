@@ -1,4 +1,5 @@
 # ToDo
+
 1. 
 
 
@@ -86,6 +87,29 @@
   * 스위치 형태의 체크박스 컨트롤 (직접 만든 거)
 
 
+
+
+
+## 스크린 캡쳐 흐름
+
+1. '전체 캡쳐' 또는 '영역 캡쳐' -> 
+2. 파일 저장시 FormMain.SaveResultImageFile() 을 호출. 내부적으로는 FormMain.resultImage 를 이용
+    1. 분기 1) 오토 세이빙 모드 일 때.
+        1. ImageFileHandler.DoAutoSaveImageFile(image) 을 호출 => ImageFileHandler.SaveImageFile(image,path) 을 호출
+    2. 분기 2) ''파일다이얼로그''로 폴더를 선택하며 저장할 때.
+        1. ImageFileHandler.DoSaveFileDialog(image) 을 호출 => ImageFileHandler.SaveImageFile(image,path) 을 호출
+
+
+
+## 폴더 변경 흐름
+
+1. 분기 1) 첫 화면에서 '폴더 변경'
+2. 분기 2) 설정 에서 '폴더 변경'을 누르고 '저장'
+3. 분기 3) 저장 (자동 모드가 아닐 때) 도중에 '폴더 변경'
+
+
+
+'지속적인 설정'에 저장할 경우에는 '설정' 에서 '저장' 을 누를 때에만 해당.
 
 
 
