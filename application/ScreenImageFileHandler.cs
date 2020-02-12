@@ -24,8 +24,6 @@ namespace Image_Capture
         /// </summary>
         public string RecentSavePath { get; set; }
 
-        public string SavePath { get; set; }
-
         public string DefaultExt { get; set; }
 
         public string ImageDefaultExtString { get; set; }
@@ -49,10 +47,7 @@ namespace Image_Capture
 
         private void ReloadAppConfig()
         {
-            SavePath = AppConfig.SaveRules.Path;
-
-            if(RecentSavePath==null)
-                RecentSavePath = AppConfig.SaveRules.Path;
+            RecentSavePath = AppConfig.SaveRules.Path;
             ImageDefaultExtString = AppConfig.SaveRules.ImageExtToString(AppConfig.SaveRules.defaultExt);
         }
 
