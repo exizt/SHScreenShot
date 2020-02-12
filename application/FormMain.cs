@@ -29,7 +29,7 @@ namespace Image_Capture
         /// <summary>
         /// Quick 세이브 모드 여부
         /// </summary>
-        bool isQuickSaveMode = false;
+        private bool isAutoSaveMode = false;
 
         /// <summary>
         /// 마우스 포인터 저장할 값
@@ -82,8 +82,13 @@ namespace Image_Capture
             // 스크린 이미지를 가져오는 클래스 생성. composition 으로.
             //ScreenImageDrawer = new ScreenImageDrawer(picboxPreview.Size);
 
-            ScreenImageFileHandler = new ScreenImageFileHandler();
-            ChangeDirPath();
+            //ScreenImageFileHandler = new ScreenImageFileHandler(AppConfig.SaveRules.Path);
+            ScreenImageFileHandler = new ScreenImageFileHandler(AppConfig);
+
+            //ChangeDirPath();
+            //saveDirectoryPath.Text = ScreenImageFileHandler.RecentSavePath;
+            //saveDirectoryPath.Text = AppConfig.SaveRules.Path;
+            MainPanelLoad();
 
             // Rounded 윈도우 구현
             this.FormBorderStyle = FormBorderStyle.None;
@@ -231,9 +236,9 @@ namespace Image_Capture
         public void SaveResultImageFile()
         {
             // 여기서 퀵 세이브 모드와 관련된 설정을 해주어야 할 듯 하다.
-            if (isQuickSaveMode)
+            if (isAutoSaveMode)
             {
-                ScreenImageFileHandler.QuickSaveImageFile(resultImage);
+                ScreenImageFileHandler.DoAutoSaveImageFile(resultImage);
             }
             else
             {
@@ -241,9 +246,10 @@ namespace Image_Capture
                     MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     //SaveFile_Dialog();
-                    if (ScreenImageFileHandler.CallSaveFileDialog(resultImage))
+                    if (ScreenImageFileHandler.DoSaveFileDialog(resultImage))
                     {
-                        ChangeDirPath();
+                        //ChangeDirPath();
+                        ChangeSavePath(ScreenImageFileHandler.RecentSavePath);
                     }
                 }
             }
@@ -261,7 +267,7 @@ namespace Image_Capture
         /// <param name="e"></param>
         private void BtnFullCapture_Click(object sender, EventArgs e)
         {
-            pnlSettings.Visible = false;
+            MainPanelLoad();
             DoScreenCaptureFeature();
         }
 
@@ -272,10 +278,15 @@ namespace Image_Capture
         /// <param name="e"></param>
         private void BtnSelectionCapture_Click(object sender, EventArgs e)
         {
-            pnlSettings.Visible = false;
+            MainPanelLoad();
             DoSelectionCaptureFeature();
         }
 
+        private void MainPanelLoad()
+        {
+            pnlSettings.Visible = false;
+            saveDirectoryPath.Text = AppConfig.SaveRules.Path;
+        }
 
         /// <summary>
         /// 숨김처리했던 폼을 다시 visible 처리
@@ -301,13 +312,13 @@ namespace Image_Capture
         {
             if (((CheckBox)sender).Checked)
             {
-                isQuickSaveMode = true;
+                isAutoSaveMode = true;
                 //FolderBrowser();
-                //Debug("isQuickSaveMode true");
+                //Debug("isAutoSaveMode true");
             } else
             {
-                isQuickSaveMode = false;
-                //Debug("isQuickSaveMode false");
+                isAutoSaveMode = false;
+                //Debug("isAutoSaveMode false");
             }
         }
 
@@ -319,10 +330,10 @@ namespace Image_Capture
         private void BtnFolderOpen_Click(object sender, EventArgs e)
         {
             //Debug("GenerateBasePath:" + ScreenImageFileHandler.GenerateBasePath());
-            //Debug("BtnFolderOpen_Click:" + ScreenImageFileHandler.FileDirPath);
-            if (ScreenImageFileHandler.FileDirPath != "")
+            //Debug("BtnFolderOpen_Click:" + ScreenImageFileHandler.RecentSavePath);
+            if (ScreenImageFileHandler.RecentSavePath != "")
             {
-                System.Diagnostics.Process.Start("explorer.exe", ScreenImageFileHandler.FileDirPath);
+                System.Diagnostics.Process.Start("explorer.exe", ScreenImageFileHandler.RecentSavePath);
             }
             else
             {
@@ -344,17 +355,51 @@ namespace Image_Capture
             DialogResult result = folderDlg.ShowDialog();
             if(result == DialogResult.OK)
             {
-                ScreenImageFileHandler.FileDirPath = folderDlg.SelectedPath;
-                ChangeDirPath();
+                //ScreenImageFileHandler.RecentSavePath = folderDlg.SelectedPath;
+                //ChangeDirPath();
+                ChangeSavePath(folderDlg.SelectedPath);
+
+                AppConfig.SaveRules.Path = folderDlg.SelectedPath;
+
             }
+        }
+
+        private string FolderBrowser2()
+        {
+            FolderBrowserDialog folderDlg = new FolderBrowserDialog
+            {
+                ShowNewFolderButton = true
+            };
+            DialogResult result = folderDlg.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                return folderDlg.SelectedPath;
+            } else
+            {
+                return "";
+            }
+
+
         }
 
         private void ChangeDirPath()
         {
             saveDirectoryPath.Text = AppConfig.SaveRules.Path;
-            //saveDirectoryPath.Text = ScreenImageFileHandler.FileDirPath;
+            //saveDirectoryPath.Text = ScreenImageFileHandler.RecentSavePath;
         }
 
+        private void ChangeSavePath(string path)
+        {
+            AppConfig.SaveRules.Path = path;
+            ScreenImageFileHandler.RecentSavePath = path;
+            saveDirectoryPath.Text = path;
+        }
+
+        /// <summary>
+        /// '메인 폼 > 폴더 변경' 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnFolderChange_Click(object sender, EventArgs e)
         {
             FolderBrowser();
