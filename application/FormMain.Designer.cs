@@ -43,7 +43,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblAutoSave = new System.Windows.Forms.Label();
-            this.saveDirectoryPath = new System.Windows.Forms.Label();
+            this.currentSavePath = new System.Windows.Forms.Label();
             this.btnFolderChange = new System.Windows.Forms.Button();
             this.pnlSideNav = new System.Windows.Forms.Panel();
             this.btnSettings = new System.Windows.Forms.Button();
@@ -57,22 +57,22 @@
             this.pnlSettings = new System.Windows.Forms.Panel();
             this.pnlDirOptions = new System.Windows.Forms.Panel();
             this.lblStep1 = new System.Windows.Forms.Label();
-            this.tboxSaveDirSetting = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.tboxDefaultPathOption = new System.Windows.Forms.TextBox();
+            this.btnChangeDefaultPath = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.btnSettingSave = new System.Windows.Forms.Button();
             this.btnSettingCancel = new System.Windows.Forms.Button();
             this.pnlFileNameOptions = new System.Windows.Forms.Panel();
-            this.cboxAddsetTypes = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.rbAddsetPosEnd = new System.Windows.Forms.RadioButton();
-            this.label7 = new System.Windows.Forms.Label();
-            this.rbAddsetPosMiddle = new System.Windows.Forms.RadioButton();
-            this.rbAddsetPosFront = new System.Windows.Forms.RadioButton();
             this.tboxPrefix = new System.Windows.Forms.TextBox();
             this.pnlFnAddsetOptions = new System.Windows.Forms.Panel();
+            this.rbAddsetPosEnd = new System.Windows.Forms.RadioButton();
+            this.rbAddsetPosMiddle = new System.Windows.Forms.RadioButton();
+            this.cboxAddsetTypes = new System.Windows.Forms.ComboBox();
+            this.rbAddsetPosFront = new System.Windows.Forms.RadioButton();
+            this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.tboxSuffix = new System.Windows.Forms.TextBox();
@@ -192,14 +192,14 @@
             this.lblAutoSave.TabIndex = 25;
             this.lblAutoSave.Text = "자동저장";
             // 
-            // saveDirectoryPath
+            // currentSavePath
             // 
-            this.saveDirectoryPath.AutoSize = true;
-            this.saveDirectoryPath.Location = new System.Drawing.Point(12, 293);
-            this.saveDirectoryPath.Name = "saveDirectoryPath";
-            this.saveDirectoryPath.Size = new System.Drawing.Size(145, 12);
-            this.saveDirectoryPath.TabIndex = 27;
-            this.saveDirectoryPath.Text = "[폴더경로가 들어갈 위치]";
+            this.currentSavePath.AutoSize = true;
+            this.currentSavePath.Location = new System.Drawing.Point(12, 293);
+            this.currentSavePath.Name = "currentSavePath";
+            this.currentSavePath.Size = new System.Drawing.Size(145, 12);
+            this.currentSavePath.TabIndex = 27;
+            this.currentSavePath.Text = "[폴더경로가 들어갈 위치]";
             // 
             // btnFolderChange
             // 
@@ -324,7 +324,7 @@
             // pnlMain
             // 
             this.pnlMain.Controls.Add(this.picboxPreview);
-            this.pnlMain.Controls.Add(this.saveDirectoryPath);
+            this.pnlMain.Controls.Add(this.currentSavePath);
             this.pnlMain.Controls.Add(this.btnFolderChange);
             this.pnlMain.Controls.Add(this.btnFolderOpen);
             this.pnlMain.Location = new System.Drawing.Point(110, 50);
@@ -348,8 +348,8 @@
             // pnlDirOptions
             // 
             this.pnlDirOptions.Controls.Add(this.lblStep1);
-            this.pnlDirOptions.Controls.Add(this.tboxSaveDirSetting);
-            this.pnlDirOptions.Controls.Add(this.button1);
+            this.pnlDirOptions.Controls.Add(this.tboxDefaultPathOption);
+            this.pnlDirOptions.Controls.Add(this.btnChangeDefaultPath);
             this.pnlDirOptions.Controls.Add(this.button3);
             this.pnlDirOptions.Controls.Add(this.textBox2);
             this.pnlDirOptions.Location = new System.Drawing.Point(10, 100);
@@ -362,25 +362,26 @@
             this.lblStep1.AutoSize = true;
             this.lblStep1.Location = new System.Drawing.Point(0, 0);
             this.lblStep1.Name = "lblStep1";
-            this.lblStep1.Size = new System.Drawing.Size(53, 12);
+            this.lblStep1.Size = new System.Drawing.Size(93, 12);
             this.lblStep1.TabIndex = 0;
-            this.lblStep1.Text = "저장경로";
+            this.lblStep1.Text = "디폴트 저장경로";
             // 
-            // tboxSaveDirSetting
+            // tboxDefaultPathOption
             // 
-            this.tboxSaveDirSetting.Location = new System.Drawing.Point(10, 22);
-            this.tboxSaveDirSetting.Name = "tboxSaveDirSetting";
-            this.tboxSaveDirSetting.Size = new System.Drawing.Size(295, 21);
-            this.tboxSaveDirSetting.TabIndex = 1;
+            this.tboxDefaultPathOption.Location = new System.Drawing.Point(10, 22);
+            this.tboxDefaultPathOption.Name = "tboxDefaultPathOption";
+            this.tboxDefaultPathOption.Size = new System.Drawing.Size(295, 21);
+            this.tboxDefaultPathOption.TabIndex = 1;
             // 
-            // button1
+            // btnChangeDefaultPath
             // 
-            this.button1.Location = new System.Drawing.Point(10, 47);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "폴더변경";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnChangeDefaultPath.Location = new System.Drawing.Point(10, 47);
+            this.btnChangeDefaultPath.Name = "btnChangeDefaultPath";
+            this.btnChangeDefaultPath.Size = new System.Drawing.Size(75, 23);
+            this.btnChangeDefaultPath.TabIndex = 2;
+            this.btnChangeDefaultPath.Text = "폴더변경";
+            this.btnChangeDefaultPath.UseVisualStyleBackColor = true;
+            this.btnChangeDefaultPath.Click += new System.EventHandler(this.btnChangeDefaultPath_Click);
             // 
             // button3
             // 
@@ -437,15 +438,6 @@
             this.pnlFileNameOptions.Size = new System.Drawing.Size(334, 178);
             this.pnlFileNameOptions.TabIndex = 25;
             // 
-            // cboxAddsetTypes
-            // 
-            this.cboxAddsetTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboxAddsetTypes.FormattingEnabled = true;
-            this.cboxAddsetTypes.Location = new System.Drawing.Point(75, 3);
-            this.cboxAddsetTypes.Name = "cboxAddsetTypes";
-            this.cboxAddsetTypes.Size = new System.Drawing.Size(222, 20);
-            this.cboxAddsetTypes.TabIndex = 24;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -463,51 +455,6 @@
             this.label4.Size = new System.Drawing.Size(41, 12);
             this.label4.TabIndex = 16;
             this.label4.Text = "앞문자";
-            // 
-            // rbAddsetPosEnd
-            // 
-            this.rbAddsetPosEnd.AutoSize = true;
-            this.rbAddsetPosEnd.Location = new System.Drawing.Point(188, 33);
-            this.rbAddsetPosEnd.Margin = new System.Windows.Forms.Padding(0);
-            this.rbAddsetPosEnd.Name = "rbAddsetPosEnd";
-            this.rbAddsetPosEnd.Size = new System.Drawing.Size(47, 16);
-            this.rbAddsetPosEnd.TabIndex = 2;
-            this.rbAddsetPosEnd.TabStop = true;
-            this.rbAddsetPosEnd.Text = "맨뒤";
-            this.rbAddsetPosEnd.UseVisualStyleBackColor = true;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(0, 35);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(69, 12);
-            this.label7.TabIndex = 22;
-            this.label7.Text = "추가셋 위치";
-            // 
-            // rbAddsetPosMiddle
-            // 
-            this.rbAddsetPosMiddle.AutoSize = true;
-            this.rbAddsetPosMiddle.Location = new System.Drawing.Point(135, 33);
-            this.rbAddsetPosMiddle.Margin = new System.Windows.Forms.Padding(0);
-            this.rbAddsetPosMiddle.Name = "rbAddsetPosMiddle";
-            this.rbAddsetPosMiddle.Size = new System.Drawing.Size(47, 16);
-            this.rbAddsetPosMiddle.TabIndex = 1;
-            this.rbAddsetPosMiddle.TabStop = true;
-            this.rbAddsetPosMiddle.Text = "중간";
-            this.rbAddsetPosMiddle.UseVisualStyleBackColor = true;
-            // 
-            // rbAddsetPosFront
-            // 
-            this.rbAddsetPosFront.AutoSize = true;
-            this.rbAddsetPosFront.Location = new System.Drawing.Point(81, 33);
-            this.rbAddsetPosFront.Margin = new System.Windows.Forms.Padding(0);
-            this.rbAddsetPosFront.Name = "rbAddsetPosFront";
-            this.rbAddsetPosFront.Size = new System.Drawing.Size(47, 16);
-            this.rbAddsetPosFront.TabIndex = 0;
-            this.rbAddsetPosFront.TabStop = true;
-            this.rbAddsetPosFront.Text = "맨앞";
-            this.rbAddsetPosFront.UseVisualStyleBackColor = true;
             // 
             // tboxPrefix
             // 
@@ -528,6 +475,60 @@
             this.pnlFnAddsetOptions.Name = "pnlFnAddsetOptions";
             this.pnlFnAddsetOptions.Size = new System.Drawing.Size(313, 66);
             this.pnlFnAddsetOptions.TabIndex = 21;
+            // 
+            // rbAddsetPosEnd
+            // 
+            this.rbAddsetPosEnd.AutoSize = true;
+            this.rbAddsetPosEnd.Location = new System.Drawing.Point(188, 33);
+            this.rbAddsetPosEnd.Margin = new System.Windows.Forms.Padding(0);
+            this.rbAddsetPosEnd.Name = "rbAddsetPosEnd";
+            this.rbAddsetPosEnd.Size = new System.Drawing.Size(47, 16);
+            this.rbAddsetPosEnd.TabIndex = 2;
+            this.rbAddsetPosEnd.TabStop = true;
+            this.rbAddsetPosEnd.Text = "맨뒤";
+            this.rbAddsetPosEnd.UseVisualStyleBackColor = true;
+            // 
+            // rbAddsetPosMiddle
+            // 
+            this.rbAddsetPosMiddle.AutoSize = true;
+            this.rbAddsetPosMiddle.Location = new System.Drawing.Point(135, 33);
+            this.rbAddsetPosMiddle.Margin = new System.Windows.Forms.Padding(0);
+            this.rbAddsetPosMiddle.Name = "rbAddsetPosMiddle";
+            this.rbAddsetPosMiddle.Size = new System.Drawing.Size(47, 16);
+            this.rbAddsetPosMiddle.TabIndex = 1;
+            this.rbAddsetPosMiddle.TabStop = true;
+            this.rbAddsetPosMiddle.Text = "중간";
+            this.rbAddsetPosMiddle.UseVisualStyleBackColor = true;
+            // 
+            // cboxAddsetTypes
+            // 
+            this.cboxAddsetTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxAddsetTypes.FormattingEnabled = true;
+            this.cboxAddsetTypes.Location = new System.Drawing.Point(75, 3);
+            this.cboxAddsetTypes.Name = "cboxAddsetTypes";
+            this.cboxAddsetTypes.Size = new System.Drawing.Size(222, 20);
+            this.cboxAddsetTypes.TabIndex = 24;
+            // 
+            // rbAddsetPosFront
+            // 
+            this.rbAddsetPosFront.AutoSize = true;
+            this.rbAddsetPosFront.Location = new System.Drawing.Point(81, 33);
+            this.rbAddsetPosFront.Margin = new System.Windows.Forms.Padding(0);
+            this.rbAddsetPosFront.Name = "rbAddsetPosFront";
+            this.rbAddsetPosFront.Size = new System.Drawing.Size(47, 16);
+            this.rbAddsetPosFront.TabIndex = 0;
+            this.rbAddsetPosFront.TabStop = true;
+            this.rbAddsetPosFront.Text = "맨앞";
+            this.rbAddsetPosFront.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(0, 35);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(69, 12);
+            this.label7.TabIndex = 22;
+            this.label7.Text = "추가셋 위치";
             // 
             // label6
             // 
@@ -615,9 +616,9 @@
             this.lblImageType.AutoSize = true;
             this.lblImageType.Location = new System.Drawing.Point(0, 0);
             this.lblImageType.Name = "lblImageType";
-            this.lblImageType.Size = new System.Drawing.Size(133, 12);
+            this.lblImageType.Size = new System.Drawing.Size(105, 12);
             this.lblImageType.TabIndex = 6;
-            this.lblImageType.Text = "저장될 이미지 기본유형";
+            this.lblImageType.Text = "이미지 디폴트유형";
             // 
             // FormMain
             // 
@@ -673,7 +674,7 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Label lblAutoSave;
         private SwitchCheckBox swcAutoSave;
-        private System.Windows.Forms.Label saveDirectoryPath;
+        private System.Windows.Forms.Label currentSavePath;
         private System.Windows.Forms.Button btnFolderChange;
         private System.Windows.Forms.Panel pnlSideNav;
         private System.Windows.Forms.Panel pnlTopNav;
@@ -691,8 +692,8 @@
         private System.Windows.Forms.Label lblImageType;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox tboxSaveDirSetting;
+        private System.Windows.Forms.Button btnChangeDefaultPath;
+        private System.Windows.Forms.TextBox tboxDefaultPathOption;
         private System.Windows.Forms.Label lblStep1;
         private System.Windows.Forms.Panel pnlFnAddsetOptions;
         private System.Windows.Forms.Label label6;

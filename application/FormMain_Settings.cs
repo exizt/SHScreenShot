@@ -75,7 +75,7 @@ namespace Image_Capture
             }
 
             // 파일 저장 경로
-            tboxSaveDirSetting.Text = AppConfig.SaveRules.Path;
+            tboxDefaultPathOption.Text = AppConfig.SaveRules.Path;
 
             // 파일명 앞문자열, 뒷문자열
             tboxPrefix.Text = AppConfig.NameRules.prefix;
@@ -138,7 +138,7 @@ namespace Image_Capture
             }
 
             // 파일 저장 경로
-            AppConfig.SaveRules.Path = tboxSaveDirSetting.Text;
+            AppConfig.SaveRules.Path = tboxDefaultPathOption.Text;
 
             // 파일명 앞문자열, 뒷문자열
             AppConfig.NameRules.prefix = tboxPrefix.Text;
@@ -169,6 +169,15 @@ namespace Image_Capture
         {
             pnlSettings.Visible = false;
             MainPanelLoad();
+        }
+        
+        private void btnChangeDefaultPath_Click(object sender, EventArgs e)
+        {
+            string path = FolderBrowser();
+            if (path.Length > 1)
+            {
+                tboxDefaultPathOption.Text = path;
+            }
         }
 
         public class CustomComboboxItem

@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace Image_Capture
@@ -22,23 +21,16 @@ namespace Image_Capture
         /// <summary>
         /// 최근 저장한 경로
         /// </summary>
-        public string RecentSavePath { get; set; }
-
-        public string DefaultExt { get; set; }
+        public string CurrentSavePath { get; set; }
 
         public string ImageDefaultExtString { get; set; }
 
         internal AppConfig AppConfig { get; set; }
 
-        public ScreenImageFileHandler()
-        {
-            RecentSavePath = GenerateBasePath();
-        }
-
-        public ScreenImageFileHandler(string path)
-        {
-            RecentSavePath = path;
-        }
+        /// <summary>
+        /// 생성자
+        /// </summary>
+        /// <param name="config"></param>
         public ScreenImageFileHandler(AppConfig config)
         {
             AppConfig = config;
@@ -47,7 +39,8 @@ namespace Image_Capture
 
         private void ReloadAppConfig()
         {
-            RecentSavePath = AppConfig.SaveRules.Path;
+            if(CurrentSavePath == null)
+                CurrentSavePath = AppConfig.SaveRules.Path;
             ImageDefaultExtString = AppConfig.SaveRules.ImageExtToString(AppConfig.SaveRules.defaultExt);
         }
 
@@ -111,8 +104,8 @@ namespace Image_Capture
         public bool DoAutoSaveImageFile(Image image)
         {
             ReloadAppConfig();
-            //string filePath = Path.Combine(RecentSavePath, GenerateBaseFilename() + "." + AppConfig.SaveRules.ImageExtToString(AppConfig.SaveRules.defaultExt));
-            string filePath = Path.Combine(RecentSavePath, GenerateBaseFilename() + "." + ImageDefaultExtString);
+            //string filePath = Path.Combine(CurrentSavePath, GenerateBaseFilename() + "." + AppConfig.SaveRules.ImageExtToString(AppConfig.SaveRules.defaultExt));
+            string filePath = Path.Combine(CurrentSavePath, GenerateBaseFilename() + "." + ImageDefaultExtString);
             try
             {
                 SaveImageFile(image, filePath);
@@ -144,7 +137,7 @@ namespace Image_Capture
                 {
                     Debug("[SaveImageFile]", filePath);
                     image.Save(filePath, GetImageFormat(filePath));
-                    RecentSavePath = Path.GetDirectoryName(filePath);
+                    CurrentSavePath = Path.GetDirectoryName(filePath);
                     MessageBox.Show("저장 되었습니다.");
                 }
                 catch (ArgumentNullException e)
@@ -222,17 +215,17 @@ namespace Image_Capture
             StringBuilder sb = new StringBuilder();
             if(AppConfig.NameRules.AddsetPosition == AppConfig.FileNameRules.AddsetPosCode.Front)
             {
-                sb.Append(DateFilename());
+                sb.Append(GetFilenameAddSet());
             }
             sb.Append(prefix);
             if (AppConfig.NameRules.AddsetPosition == AppConfig.FileNameRules.AddsetPosCode.Middle)
             {
-                sb.Append(DateFilename());
+                sb.Append(GetFilenameAddSet());
             }
             sb.Append(suffix);
             if (AppConfig.NameRules.AddsetPosition == AppConfig.FileNameRules.AddsetPosCode.End)
             {
-                sb.Append(DateFilename());
+                sb.Append(GetFilenameAddSet());
             }
             var result = sb.ToString();
             sb.Clear();
@@ -244,7 +237,7 @@ namespace Image_Capture
         /// 파일명에 붙이는 날짜+시간 명칭
         /// </summary>
         /// <returns></returns>
-        private string DateFilename()
+        private string GetFilenameAddSet()
         {
             return DateTime.Now.ToString(AppConfig.NameRules.addsetFormat);
             /*

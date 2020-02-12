@@ -86,7 +86,7 @@ namespace Image_Capture
             ScreenImageFileHandler = new ScreenImageFileHandler(AppConfig);
 
             //ChangeDirPath();
-            //saveDirectoryPath.Text = ScreenImageFileHandler.RecentSavePath;
+            //saveDirectoryPath.Text = ScreenImageFileHandler.CurrentSavePath;
             //saveDirectoryPath.Text = AppConfig.SaveRules.Path;
             MainPanelLoad();
 
@@ -249,7 +249,7 @@ namespace Image_Capture
                     if (ScreenImageFileHandler.DoSaveFileDialog(resultImage))
                     {
                         //ChangeDirPath();
-                        ChangeSavePath(ScreenImageFileHandler.RecentSavePath);
+                        ChangeSavePath(ScreenImageFileHandler.CurrentSavePath);
                     }
                 }
             }
@@ -285,7 +285,14 @@ namespace Image_Capture
         private void MainPanelLoad()
         {
             pnlSettings.Visible = false;
-            saveDirectoryPath.Text = AppConfig.SaveRules.Path;
+
+            if(ScreenImageFileHandler.CurrentSavePath.Length > 1)
+            {
+                currentSavePath.Text = ScreenImageFileHandler.CurrentSavePath;
+            } else
+            {
+                currentSavePath.Text = AppConfig.SaveRules.Path;
+            }
         }
 
         /// <summary>
@@ -330,10 +337,10 @@ namespace Image_Capture
         private void BtnFolderOpen_Click(object sender, EventArgs e)
         {
             //Debug("GenerateBasePath:" + ScreenImageFileHandler.GenerateBasePath());
-            //Debug("BtnFolderOpen_Click:" + ScreenImageFileHandler.RecentSavePath);
-            if (ScreenImageFileHandler.RecentSavePath != "")
+            //Debug("BtnFolderOpen_Click:" + ScreenImageFileHandler.CurrentSavePath);
+            if (ScreenImageFileHandler.CurrentSavePath.Length > 1)
             {
-                System.Diagnostics.Process.Start("explorer.exe", ScreenImageFileHandler.RecentSavePath);
+                System.Diagnostics.Process.Start("explorer.exe", ScreenImageFileHandler.CurrentSavePath);
             }
             else
             {
@@ -346,7 +353,7 @@ namespace Image_Capture
         /// <summary>
         /// '폴더 변경' 기능 구현부
         /// </summary>
-        private void FolderBrowser()
+        private string FolderBrowser()
         {
             FolderBrowserDialog folderDlg = new FolderBrowserDialog
             {
@@ -355,44 +362,24 @@ namespace Image_Capture
             DialogResult result = folderDlg.ShowDialog();
             if(result == DialogResult.OK)
             {
-                //ScreenImageFileHandler.RecentSavePath = folderDlg.SelectedPath;
-                //ChangeDirPath();
-                ChangeSavePath(folderDlg.SelectedPath);
-
-                AppConfig.SaveRules.Path = folderDlg.SelectedPath;
-
-            }
-        }
-
-        private string FolderBrowser2()
-        {
-            FolderBrowserDialog folderDlg = new FolderBrowserDialog
-            {
-                ShowNewFolderButton = true
-            };
-            DialogResult result = folderDlg.ShowDialog();
-            if (result == DialogResult.OK)
-            {
                 return folderDlg.SelectedPath;
+                //ScreenImageFileHandler.CurrentSavePath = folderDlg.SelectedPath;
+                //ChangeDirPath();
+                //ChangeSavePath(folderDlg.SelectedPath);
+
+                //AppConfig.SaveRules.Path = folderDlg.SelectedPath;
             } else
             {
                 return "";
             }
-
-
         }
 
-        private void ChangeDirPath()
-        {
-            saveDirectoryPath.Text = AppConfig.SaveRules.Path;
-            //saveDirectoryPath.Text = ScreenImageFileHandler.RecentSavePath;
-        }
 
         private void ChangeSavePath(string path)
         {
-            AppConfig.SaveRules.Path = path;
-            ScreenImageFileHandler.RecentSavePath = path;
-            saveDirectoryPath.Text = path;
+            //AppConfig.SaveRules.Path = path;
+            ScreenImageFileHandler.CurrentSavePath = path;
+            currentSavePath.Text = path;
         }
 
         /// <summary>
@@ -402,7 +389,9 @@ namespace Image_Capture
         /// <param name="e"></param>
         private void BtnFolderChange_Click(object sender, EventArgs e)
         {
-            FolderBrowser();
+            string path = FolderBrowser();
+            if(path.Length > 1)
+                ChangeSavePath(path);
         }
  
 
