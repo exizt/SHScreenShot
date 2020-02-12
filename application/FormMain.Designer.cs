@@ -50,6 +50,7 @@
             this.pnlTopNav = new System.Windows.Forms.Panel();
             this.pnlTopRight = new System.Windows.Forms.Panel();
             this.btnMin = new System.Windows.Forms.Button();
+            this.swcAutoSave = new Image_Capture.SwitchCheckBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlMain = new System.Windows.Forms.Panel();
@@ -63,6 +64,7 @@
             this.btnSettingSave = new System.Windows.Forms.Button();
             this.btnSettingCancel = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.pnlFNOptDatePos = new System.Windows.Forms.Panel();
@@ -82,8 +84,6 @@
             this.rbImageExtBmp = new System.Windows.Forms.RadioButton();
             this.rbImageExtGif = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.swcAutoSave = new Image_Capture.SwitchCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.picboxPreview)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.pnlSideNav.SuspendLayout();
@@ -288,6 +288,18 @@
             this.btnMin.UseVisualStyleBackColor = false;
             this.btnMin.Click += new System.EventHandler(this.BtnMin_Click);
             // 
+            // swcAutoSave
+            // 
+            this.swcAutoSave.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.swcAutoSave.Location = new System.Drawing.Point(66, 28);
+            this.swcAutoSave.Name = "swcAutoSave";
+            this.swcAutoSave.Padding = new System.Windows.Forms.Padding(1);
+            this.swcAutoSave.Size = new System.Drawing.Size(35, 21);
+            this.swcAutoSave.TabIndex = 26;
+            this.swcAutoSave.Text = "switchCheckBox1";
+            this.swcAutoSave.UseVisualStyleBackColor = true;
+            this.swcAutoSave.CheckedChanged += new System.EventHandler(this.SwitchQuickSaveMode_CheckedChanged);
+            // 
             // btnClose
             // 
             this.btnClose.BackColor = System.Drawing.Color.Transparent;
@@ -427,6 +439,17 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(334, 178);
             this.panel2.TabIndex = 25;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "yyyymmdd.hhmmss.sss"});
+            this.comboBox1.Location = new System.Drawing.Point(36, 155);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 20);
+            this.comboBox1.TabIndex = 24;
             // 
             // label3
             // 
@@ -618,29 +641,6 @@
             this.label2.Size = new System.Drawing.Size(137, 12);
             this.label2.TabIndex = 6;
             this.label2.Text = "저장될 이미지 기본 타입";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "yyyymmdd.hhmmss.sss"});
-            this.comboBox1.Location = new System.Drawing.Point(36, 155);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 20);
-            this.comboBox1.TabIndex = 24;
-            // 
-            // swcAutoSave
-            // 
-            this.swcAutoSave.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.swcAutoSave.Location = new System.Drawing.Point(66, 28);
-            this.swcAutoSave.Name = "swcAutoSave";
-            this.swcAutoSave.Padding = new System.Windows.Forms.Padding(1);
-            this.swcAutoSave.Size = new System.Drawing.Size(35, 21);
-            this.swcAutoSave.TabIndex = 26;
-            this.swcAutoSave.Text = "switchCheckBox1";
-            this.swcAutoSave.UseVisualStyleBackColor = true;
-            this.swcAutoSave.CheckedChanged += new System.EventHandler(this.SwitchQuickSaveMode_CheckedChanged);
             // 
             // FormMain
             // 
