@@ -28,17 +28,18 @@ namespace Image_Capture
 
         public void SetDefaultOption()
         {
-            // 파일명 룰
-            NameRules.prefix = "sample";
-            NameRules.suffix = "suffix";
-            NameRules.AddsetType = FileNameRules.AddsetTypeCode.TypeA;
-            NameRules.AddsetPosition = FileNameRules.AddsetPosCode.End;
-
             // 저장 확장자
             SaveRules.defaultExt = FileSaveRules.ImageExt.Png;
 
             // 저장 경로
             SaveRules.Path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+            // 파일명 룰
+            NameRules.prefix = "스크린샷.";
+            NameRules.suffix = "";
+            NameRules.AddsetPosition = FileNameRules.AddsetPosCode.End;
+            NameRules.addsetFormat = "yyyyMMddHHmmss.fff";
+
         }
 
         public override string ToString()
@@ -51,12 +52,8 @@ namespace Image_Capture
         {
             public string prefix;
             public string suffix;
-            public AddsetTypeCode AddsetType;
+            public string addsetFormat;
             public AddsetPosCode AddsetPosition;
-            public enum AddsetTypeCode
-            {
-                TypeA
-            }
             public enum AddsetPosCode
             {
                 Front, Middle, End

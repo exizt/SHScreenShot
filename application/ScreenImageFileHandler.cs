@@ -58,17 +58,19 @@ namespace Image_Capture
         {
             ReloadAppConfig();
             string filePath = "";
-            using (SaveFileDialog fileDialog = new SaveFileDialog())
+            using (SaveFileDialog dlg = new SaveFileDialog())
             {
-                fileDialog.Filter = "PNG 이미지 (*.png)|*.png|JPG 이미지 (*.jpg)|*.jpg|BMP 이미지 (*.bmp)|*.bmp|모든 파일 (*.*)|*.*";//확장자 선택
-                fileDialog.Title = "스크린샷 이미지 저장";//창위에 뜨는 타이틀
-                fileDialog.FileName = GenerateBaseFilename();
-                fileDialog.DefaultExt = ImageDefaultExtString;
+                dlg.Title = "스크린샷 이미지 저장";//창위에 뜨는 타이틀
+                dlg.FileName = GenerateBaseFilename();
+                dlg.Filter = "PNG 이미지 (*.png)|*.png|JPG 이미지 (*.jpg)|*.jpg|BMP 이미지 (*.bmp)|*.bmp|GIF 이미지 (*.gif)|*.gif|모든 파일 (*.*)|*.*";//확장자 선택
+                dlg.DefaultExt = ImageDefaultExtString;
+                UseDefaultExtAsFilterIndex(dlg);
+
                 //fileDialog.InitialDirectory = "";
                 //showDialog의 리턴값이 OK 일 때
-                if (fileDialog.ShowDialog() == DialogResult.OK)
+                if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    filePath = fileDialog.FileName;
+                    filePath = dlg.FileName;
                 } else
                 {
                     // 취소 한 경우
@@ -214,8 +216,54 @@ namespace Image_Capture
         /// <returns></returns>
         private string GenerateBaseFilename()
         {
-            //return DateTime.Now.ToString("yyyy.MM.dd-HH.mm.ss.fff");
-            return DateTime.Now.ToString("yyyyMMdd-HH.mm.ss.fff");
+            var prefix = AppConfig.NameRules.prefix;
+            var suffix = AppConfig.NameRules.suffix;
+
+            StringBuilder sb = new StringBuilder();
+            if(AppConfig.NameRules.AddsetPosition == AppConfig.FileNameRules.AddsetPosCode.Front)
+            {
+                sb.Append(DateFilename());
+            }
+            sb.Append(prefix);
+            if (AppConfig.NameRules.AddsetPosition == AppConfig.FileNameRules.AddsetPosCode.Middle)
+            {
+                sb.Append(DateFilename());
+            }
+            sb.Append(suffix);
+            if (AppConfig.NameRules.AddsetPosition == AppConfig.FileNameRules.AddsetPosCode.End)
+            {
+                sb.Append(DateFilename());
+            }
+            var result = sb.ToString();
+            sb.Clear();
+
+            return result;
+        }
+
+        /// <summary>
+        /// 파일명에 붙이는 날짜+시간 명칭
+        /// </summary>
+        /// <returns></returns>
+        private string DateFilename()
+        {
+            return DateTime.Now.ToString(AppConfig.NameRules.addsetFormat);
+            /*
+            switch (AppConfig.NameRules.AddsetType)
+            {
+                case AppConfig.FileNameRules.AddsetTypeCode.TypeA:
+                    return DateTime.Now.ToString("yyyyMMdd.HHmmssfff");
+                case AppConfig.FileNameRules.AddsetTypeCode.TypeB:
+                    return DateTime.Now.ToString("yyyyMMddHHmmssfff");
+                case AppConfig.FileNameRules.AddsetTypeCode.TypeC:
+                    return DateTime.Now.ToString("yyyyMMdd.HHmmss");
+                case AppConfig.FileNameRules.AddsetTypeCode.TypeD:
+                    return DateTime.Now.ToString("yyyyMMddHHmmss.fff");
+                case AppConfig.FileNameRules.AddsetTypeCode.TypeE:
+                    return DateTime.Now.ToString("yyyyMMdd.HHmmss.fff");
+                default:
+                    return DateTime.Now.ToString("yyyyMMdd.HHmmssfff");
+            }
+            */
         }
 
         /// <summary>
@@ -253,6 +301,33 @@ namespace Image_Capture
                 sb.Append(obj.ToString());
                 Debug(sb.ToString());
                 sb.Clear();
+            }
+        }
+
+        /// <summary>
+        /// SaveFileDialog 의 DefaultExt 옵션이 부실해서 그 기능을 보강해줌.
+        /// DefaultExt 는 원래 (*.*) 일 때에만 적용되는 옵션. 
+        /// 여기서는 DefaultExt 에서 설정한 것에 맞게 Filter 를 선택해주는 구현
+        /// (https://stackoverflow.com/questions/6104223/wpf-savefiledialog-defaultext-ignored)
+        /// </summary>
+        /// <param name="dialog"></param>
+        public static void UseDefaultExtAsFilterIndex(FileDialog dialog)
+        {
+            var ext = "*." + dialog.DefaultExt;
+            var filter = dialog.Filter;
+            var filters = filter.Split('|');
+
+            System.Diagnostics.Debug.WriteLine($"[ScreenImageFileHandler] ext [{ext}]");
+
+            for (int i = 1; i < filters.Length; i += 2)
+            {
+                if (filters[i] == ext)
+                {
+                    dialog.FilterIndex = 1 + (i - 1) / 2;
+
+                    System.Diagnostics.Debug.WriteLine($"[ScreenImageFileHandler] FilterIndex [{dialog.FilterIndex}]");
+                    return;
+                }
             }
         }
     }

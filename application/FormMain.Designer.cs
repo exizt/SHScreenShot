@@ -55,7 +55,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.pnlSettings = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.pnlDirOptions = new System.Windows.Forms.Panel();
             this.lblStep1 = new System.Windows.Forms.Label();
             this.tboxSaveDirSetting = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -63,27 +63,25 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.btnSettingSave = new System.Windows.Forms.Button();
             this.btnSettingCancel = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.pnlFileNameOptions = new System.Windows.Forms.Panel();
+            this.cboxAddsetTypes = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.pnlFNOptDatePos = new System.Windows.Forms.Panel();
             this.rbAddsetPosEnd = new System.Windows.Forms.RadioButton();
             this.label7 = new System.Windows.Forms.Label();
             this.rbAddsetPosMiddle = new System.Windows.Forms.RadioButton();
             this.rbAddsetPosFront = new System.Windows.Forms.RadioButton();
             this.tboxPrefix = new System.Windows.Forms.TextBox();
-            this.pnlFNOptDateType = new System.Windows.Forms.Panel();
-            this.rbAddsetTypeA = new System.Windows.Forms.RadioButton();
+            this.pnlFnAddsetOptions = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.tboxSuffix = new System.Windows.Forms.TextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlImageTypeOptions = new System.Windows.Forms.Panel();
             this.rbImageExtPng = new System.Windows.Forms.RadioButton();
             this.rbImageExtJpg = new System.Windows.Forms.RadioButton();
             this.rbImageExtBmp = new System.Windows.Forms.RadioButton();
             this.rbImageExtGif = new System.Windows.Forms.RadioButton();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblImageType = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picboxPreview)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.pnlSideNav.SuspendLayout();
@@ -91,11 +89,10 @@
             this.pnlTopRight.SuspendLayout();
             this.pnlMain.SuspendLayout();
             this.pnlSettings.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.pnlFNOptDatePos.SuspendLayout();
-            this.pnlFNOptDateType.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.pnlDirOptions.SuspendLayout();
+            this.pnlFileNameOptions.SuspendLayout();
+            this.pnlFnAddsetOptions.SuspendLayout();
+            this.pnlImageTypeOptions.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnScrCapture
@@ -318,7 +315,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(4, 13);
+            this.label1.Location = new System.Drawing.Point(10, 10);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 12);
             this.label1.TabIndex = 0;
@@ -338,32 +335,32 @@
             // pnlSettings
             // 
             this.pnlSettings.AutoScroll = true;
-            this.pnlSettings.Controls.Add(this.panel3);
+            this.pnlSettings.Controls.Add(this.pnlDirOptions);
             this.pnlSettings.Controls.Add(this.btnSettingSave);
             this.pnlSettings.Controls.Add(this.btnSettingCancel);
-            this.pnlSettings.Controls.Add(this.panel2);
-            this.pnlSettings.Controls.Add(this.panel1);
+            this.pnlSettings.Controls.Add(this.pnlFileNameOptions);
+            this.pnlSettings.Controls.Add(this.pnlImageTypeOptions);
             this.pnlSettings.Location = new System.Drawing.Point(110, 50);
             this.pnlSettings.Name = "pnlSettings";
             this.pnlSettings.Size = new System.Drawing.Size(334, 585);
             this.pnlSettings.TabIndex = 30;
             // 
-            // panel3
+            // pnlDirOptions
             // 
-            this.panel3.Controls.Add(this.lblStep1);
-            this.panel3.Controls.Add(this.tboxSaveDirSetting);
-            this.panel3.Controls.Add(this.button1);
-            this.panel3.Controls.Add(this.button3);
-            this.panel3.Controls.Add(this.textBox2);
-            this.panel3.Location = new System.Drawing.Point(0, 100);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(334, 100);
-            this.panel3.TabIndex = 28;
+            this.pnlDirOptions.Controls.Add(this.lblStep1);
+            this.pnlDirOptions.Controls.Add(this.tboxSaveDirSetting);
+            this.pnlDirOptions.Controls.Add(this.button1);
+            this.pnlDirOptions.Controls.Add(this.button3);
+            this.pnlDirOptions.Controls.Add(this.textBox2);
+            this.pnlDirOptions.Location = new System.Drawing.Point(10, 100);
+            this.pnlDirOptions.Name = "pnlDirOptions";
+            this.pnlDirOptions.Size = new System.Drawing.Size(334, 100);
+            this.pnlDirOptions.TabIndex = 28;
             // 
             // lblStep1
             // 
             this.lblStep1.AutoSize = true;
-            this.lblStep1.Location = new System.Drawing.Point(6, 8);
+            this.lblStep1.Location = new System.Drawing.Point(0, 0);
             this.lblStep1.Name = "lblStep1";
             this.lblStep1.Size = new System.Drawing.Size(53, 12);
             this.lblStep1.TabIndex = 0;
@@ -371,14 +368,14 @@
             // 
             // tboxSaveDirSetting
             // 
-            this.tboxSaveDirSetting.Location = new System.Drawing.Point(8, 20);
+            this.tboxSaveDirSetting.Location = new System.Drawing.Point(10, 22);
             this.tboxSaveDirSetting.Name = "tboxSaveDirSetting";
             this.tboxSaveDirSetting.Size = new System.Drawing.Size(295, 21);
             this.tboxSaveDirSetting.TabIndex = 1;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(8, 47);
+            this.button1.Location = new System.Drawing.Point(10, 47);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -387,7 +384,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(8, 74);
+            this.button3.Location = new System.Drawing.Point(10, 74);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 4;
@@ -396,7 +393,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(86, 74);
+            this.textBox2.Location = new System.Drawing.Point(87, 75);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(217, 21);
             this.textBox2.TabIndex = 5;
@@ -405,9 +402,10 @@
             // 
             this.btnSettingSave.FlatAppearance.BorderSize = 0;
             this.btnSettingSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSettingSave.Location = new System.Drawing.Point(250, 9);
+            this.btnSettingSave.Location = new System.Drawing.Point(257, 5);
+            this.btnSettingSave.Margin = new System.Windows.Forms.Padding(0);
             this.btnSettingSave.Name = "btnSettingSave";
-            this.btnSettingSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSettingSave.Size = new System.Drawing.Size(68, 23);
             this.btnSettingSave.TabIndex = 27;
             this.btnSettingSave.Text = "설정 저장";
             this.btnSettingSave.UseVisualStyleBackColor = true;
@@ -417,44 +415,41 @@
             // 
             this.btnSettingCancel.FlatAppearance.BorderSize = 0;
             this.btnSettingCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSettingCancel.Location = new System.Drawing.Point(208, 8);
+            this.btnSettingCancel.Location = new System.Drawing.Point(218, 5);
+            this.btnSettingCancel.Margin = new System.Windows.Forms.Padding(0);
             this.btnSettingCancel.Name = "btnSettingCancel";
-            this.btnSettingCancel.Size = new System.Drawing.Size(50, 23);
+            this.btnSettingCancel.Size = new System.Drawing.Size(39, 23);
             this.btnSettingCancel.TabIndex = 26;
             this.btnSettingCancel.Text = "취소";
             this.btnSettingCancel.UseVisualStyleBackColor = true;
             this.btnSettingCancel.Click += new System.EventHandler(this.btnSettingCancel_Click);
             // 
-            // panel2
+            // pnlFileNameOptions
             // 
-            this.panel2.Controls.Add(this.comboBox1);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.pnlFNOptDatePos);
-            this.panel2.Controls.Add(this.tboxPrefix);
-            this.panel2.Controls.Add(this.pnlFNOptDateType);
-            this.panel2.Controls.Add(this.label5);
-            this.panel2.Controls.Add(this.tboxSuffix);
-            this.panel2.Location = new System.Drawing.Point(0, 220);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(334, 178);
-            this.panel2.TabIndex = 25;
+            this.pnlFileNameOptions.Controls.Add(this.label3);
+            this.pnlFileNameOptions.Controls.Add(this.label4);
+            this.pnlFileNameOptions.Controls.Add(this.tboxPrefix);
+            this.pnlFileNameOptions.Controls.Add(this.pnlFnAddsetOptions);
+            this.pnlFileNameOptions.Controls.Add(this.label5);
+            this.pnlFileNameOptions.Controls.Add(this.tboxSuffix);
+            this.pnlFileNameOptions.Location = new System.Drawing.Point(10, 220);
+            this.pnlFileNameOptions.Name = "pnlFileNameOptions";
+            this.pnlFileNameOptions.Size = new System.Drawing.Size(334, 178);
+            this.pnlFileNameOptions.TabIndex = 25;
             // 
-            // comboBox1
+            // cboxAddsetTypes
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "yyyymmdd.hhmmss.sss"});
-            this.comboBox1.Location = new System.Drawing.Point(36, 155);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 20);
-            this.comboBox1.TabIndex = 24;
+            this.cboxAddsetTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxAddsetTypes.FormattingEnabled = true;
+            this.cboxAddsetTypes.Location = new System.Drawing.Point(75, 3);
+            this.cboxAddsetTypes.Name = "cboxAddsetTypes";
+            this.cboxAddsetTypes.Size = new System.Drawing.Size(222, 20);
+            this.cboxAddsetTypes.TabIndex = 24;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 10);
+            this.label3.Location = new System.Drawing.Point(0, 10);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(109, 12);
             this.label3.TabIndex = 15;
@@ -463,27 +458,16 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 31);
+            this.label4.Location = new System.Drawing.Point(7, 32);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(41, 12);
             this.label4.TabIndex = 16;
             this.label4.Text = "앞문자";
             // 
-            // pnlFNOptDatePos
-            // 
-            this.pnlFNOptDatePos.Controls.Add(this.rbAddsetPosEnd);
-            this.pnlFNOptDatePos.Controls.Add(this.label7);
-            this.pnlFNOptDatePos.Controls.Add(this.rbAddsetPosMiddle);
-            this.pnlFNOptDatePos.Controls.Add(this.rbAddsetPosFront);
-            this.pnlFNOptDatePos.Location = new System.Drawing.Point(0, 116);
-            this.pnlFNOptDatePos.Name = "pnlFNOptDatePos";
-            this.pnlFNOptDatePos.Size = new System.Drawing.Size(269, 34);
-            this.pnlFNOptDatePos.TabIndex = 23;
-            // 
             // rbAddsetPosEnd
             // 
             this.rbAddsetPosEnd.AutoSize = true;
-            this.rbAddsetPosEnd.Location = new System.Drawing.Point(194, 6);
+            this.rbAddsetPosEnd.Location = new System.Drawing.Point(188, 33);
             this.rbAddsetPosEnd.Margin = new System.Windows.Forms.Padding(0);
             this.rbAddsetPosEnd.Name = "rbAddsetPosEnd";
             this.rbAddsetPosEnd.Size = new System.Drawing.Size(47, 16);
@@ -495,7 +479,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(5, 5);
+            this.label7.Location = new System.Drawing.Point(0, 35);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(69, 12);
             this.label7.TabIndex = 22;
@@ -504,7 +488,7 @@
             // rbAddsetPosMiddle
             // 
             this.rbAddsetPosMiddle.AutoSize = true;
-            this.rbAddsetPosMiddle.Location = new System.Drawing.Point(141, 6);
+            this.rbAddsetPosMiddle.Location = new System.Drawing.Point(135, 33);
             this.rbAddsetPosMiddle.Margin = new System.Windows.Forms.Padding(0);
             this.rbAddsetPosMiddle.Name = "rbAddsetPosMiddle";
             this.rbAddsetPosMiddle.Size = new System.Drawing.Size(47, 16);
@@ -516,7 +500,7 @@
             // rbAddsetPosFront
             // 
             this.rbAddsetPosFront.AutoSize = true;
-            this.rbAddsetPosFront.Location = new System.Drawing.Point(87, 6);
+            this.rbAddsetPosFront.Location = new System.Drawing.Point(81, 33);
             this.rbAddsetPosFront.Margin = new System.Windows.Forms.Padding(0);
             this.rbAddsetPosFront.Name = "rbAddsetPosFront";
             this.rbAddsetPosFront.Size = new System.Drawing.Size(47, 16);
@@ -527,35 +511,28 @@
             // 
             // tboxPrefix
             // 
-            this.tboxPrefix.Location = new System.Drawing.Point(44, 25);
+            this.tboxPrefix.Location = new System.Drawing.Point(60, 28);
             this.tboxPrefix.Name = "tboxPrefix";
-            this.tboxPrefix.Size = new System.Drawing.Size(129, 21);
+            this.tboxPrefix.Size = new System.Drawing.Size(244, 21);
             this.tboxPrefix.TabIndex = 17;
             // 
-            // pnlFNOptDateType
+            // pnlFnAddsetOptions
             // 
-            this.pnlFNOptDateType.Controls.Add(this.rbAddsetTypeA);
-            this.pnlFNOptDateType.Controls.Add(this.label6);
-            this.pnlFNOptDateType.Location = new System.Drawing.Point(0, 79);
-            this.pnlFNOptDateType.Name = "pnlFNOptDateType";
-            this.pnlFNOptDateType.Size = new System.Drawing.Size(269, 31);
-            this.pnlFNOptDateType.TabIndex = 21;
-            // 
-            // rbAddsetTypeA
-            // 
-            this.rbAddsetTypeA.AutoSize = true;
-            this.rbAddsetTypeA.Location = new System.Drawing.Point(75, 4);
-            this.rbAddsetTypeA.Name = "rbAddsetTypeA";
-            this.rbAddsetTypeA.Size = new System.Drawing.Size(166, 16);
-            this.rbAddsetTypeA.TabIndex = 21;
-            this.rbAddsetTypeA.TabStop = true;
-            this.rbAddsetTypeA.Text = "yyyymmdd.hhmmss.sss";
-            this.rbAddsetTypeA.UseVisualStyleBackColor = true;
+            this.pnlFnAddsetOptions.Controls.Add(this.rbAddsetPosEnd);
+            this.pnlFnAddsetOptions.Controls.Add(this.rbAddsetPosMiddle);
+            this.pnlFnAddsetOptions.Controls.Add(this.cboxAddsetTypes);
+            this.pnlFnAddsetOptions.Controls.Add(this.rbAddsetPosFront);
+            this.pnlFnAddsetOptions.Controls.Add(this.label7);
+            this.pnlFnAddsetOptions.Controls.Add(this.label6);
+            this.pnlFnAddsetOptions.Location = new System.Drawing.Point(7, 81);
+            this.pnlFnAddsetOptions.Name = "pnlFnAddsetOptions";
+            this.pnlFnAddsetOptions.Size = new System.Drawing.Size(313, 66);
+            this.pnlFnAddsetOptions.TabIndex = 21;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 4);
+            this.label6.Location = new System.Drawing.Point(0, 7);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(69, 12);
             this.label6.TabIndex = 20;
@@ -564,7 +541,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 55);
+            this.label5.Location = new System.Drawing.Point(7, 59);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(41, 12);
             this.label5.TabIndex = 18;
@@ -572,27 +549,27 @@
             // 
             // tboxSuffix
             // 
-            this.tboxSuffix.Location = new System.Drawing.Point(44, 50);
+            this.tboxSuffix.Location = new System.Drawing.Point(60, 55);
             this.tboxSuffix.Name = "tboxSuffix";
-            this.tboxSuffix.Size = new System.Drawing.Size(129, 21);
+            this.tboxSuffix.Size = new System.Drawing.Size(244, 21);
             this.tboxSuffix.TabIndex = 19;
             // 
-            // panel1
+            // pnlImageTypeOptions
             // 
-            this.panel1.Controls.Add(this.rbImageExtPng);
-            this.panel1.Controls.Add(this.rbImageExtJpg);
-            this.panel1.Controls.Add(this.rbImageExtBmp);
-            this.panel1.Controls.Add(this.rbImageExtGif);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(0, 40);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(334, 49);
-            this.panel1.TabIndex = 24;
+            this.pnlImageTypeOptions.Controls.Add(this.rbImageExtPng);
+            this.pnlImageTypeOptions.Controls.Add(this.rbImageExtJpg);
+            this.pnlImageTypeOptions.Controls.Add(this.rbImageExtBmp);
+            this.pnlImageTypeOptions.Controls.Add(this.rbImageExtGif);
+            this.pnlImageTypeOptions.Controls.Add(this.lblImageType);
+            this.pnlImageTypeOptions.Location = new System.Drawing.Point(10, 40);
+            this.pnlImageTypeOptions.Name = "pnlImageTypeOptions";
+            this.pnlImageTypeOptions.Size = new System.Drawing.Size(334, 49);
+            this.pnlImageTypeOptions.TabIndex = 24;
             // 
             // rbImageExtPng
             // 
             this.rbImageExtPng.AutoSize = true;
-            this.rbImageExtPng.Location = new System.Drawing.Point(8, 21);
+            this.rbImageExtPng.Location = new System.Drawing.Point(10, 21);
             this.rbImageExtPng.Name = "rbImageExtPng";
             this.rbImageExtPng.Size = new System.Drawing.Size(44, 16);
             this.rbImageExtPng.TabIndex = 11;
@@ -603,7 +580,7 @@
             // rbImageExtJpg
             // 
             this.rbImageExtJpg.AutoSize = true;
-            this.rbImageExtJpg.Location = new System.Drawing.Point(65, 21);
+            this.rbImageExtJpg.Location = new System.Drawing.Point(72, 21);
             this.rbImageExtJpg.Name = "rbImageExtJpg";
             this.rbImageExtJpg.Size = new System.Drawing.Size(40, 16);
             this.rbImageExtJpg.TabIndex = 13;
@@ -614,7 +591,7 @@
             // rbImageExtBmp
             // 
             this.rbImageExtBmp.AutoSize = true;
-            this.rbImageExtBmp.Location = new System.Drawing.Point(125, 21);
+            this.rbImageExtBmp.Location = new System.Drawing.Point(132, 21);
             this.rbImageExtBmp.Name = "rbImageExtBmp";
             this.rbImageExtBmp.Size = new System.Drawing.Size(48, 16);
             this.rbImageExtBmp.TabIndex = 12;
@@ -625,7 +602,7 @@
             // rbImageExtGif
             // 
             this.rbImageExtGif.AutoSize = true;
-            this.rbImageExtGif.Location = new System.Drawing.Point(188, 21);
+            this.rbImageExtGif.Location = new System.Drawing.Point(195, 21);
             this.rbImageExtGif.Name = "rbImageExtGif";
             this.rbImageExtGif.Size = new System.Drawing.Size(36, 16);
             this.rbImageExtGif.TabIndex = 14;
@@ -633,14 +610,14 @@
             this.rbImageExtGif.Text = "gif";
             this.rbImageExtGif.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // lblImageType
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 6);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(137, 12);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "저장될 이미지 기본 타입";
+            this.lblImageType.AutoSize = true;
+            this.lblImageType.Location = new System.Drawing.Point(0, 0);
+            this.lblImageType.Name = "lblImageType";
+            this.lblImageType.Size = new System.Drawing.Size(133, 12);
+            this.lblImageType.TabIndex = 6;
+            this.lblImageType.Text = "저장될 이미지 기본유형";
             // 
             // FormMain
             // 
@@ -673,16 +650,14 @@
             this.pnlMain.ResumeLayout(false);
             this.pnlMain.PerformLayout();
             this.pnlSettings.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.pnlFNOptDatePos.ResumeLayout(false);
-            this.pnlFNOptDatePos.PerformLayout();
-            this.pnlFNOptDateType.ResumeLayout(false);
-            this.pnlFNOptDateType.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.pnlDirOptions.ResumeLayout(false);
+            this.pnlDirOptions.PerformLayout();
+            this.pnlFileNameOptions.ResumeLayout(false);
+            this.pnlFileNameOptions.PerformLayout();
+            this.pnlFnAddsetOptions.ResumeLayout(false);
+            this.pnlFnAddsetOptions.PerformLayout();
+            this.pnlImageTypeOptions.ResumeLayout(false);
+            this.pnlImageTypeOptions.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -713,31 +688,29 @@
         private System.Windows.Forms.RadioButton rbImageExtJpg;
         private System.Windows.Forms.RadioButton rbImageExtBmp;
         private System.Windows.Forms.RadioButton rbImageExtPng;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblImageType;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox tboxSaveDirSetting;
         private System.Windows.Forms.Label lblStep1;
-        private System.Windows.Forms.Panel pnlFNOptDateType;
-        private System.Windows.Forms.RadioButton rbAddsetTypeA;
+        private System.Windows.Forms.Panel pnlFnAddsetOptions;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox tboxSuffix;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox tboxPrefix;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Panel pnlFNOptDatePos;
         private System.Windows.Forms.RadioButton rbAddsetPosEnd;
         private System.Windows.Forms.RadioButton rbAddsetPosMiddle;
         private System.Windows.Forms.RadioButton rbAddsetPosFront;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel pnlImageTypeOptions;
+        private System.Windows.Forms.Panel pnlFileNameOptions;
         private System.Windows.Forms.Button btnSettingSave;
         private System.Windows.Forms.Button btnSettingCancel;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Panel pnlDirOptions;
+        private System.Windows.Forms.ComboBox cboxAddsetTypes;
     }
 }
 

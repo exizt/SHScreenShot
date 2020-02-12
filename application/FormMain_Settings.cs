@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Text;
+using System.Collections.Generic;
 
 namespace Image_Capture
 {
@@ -18,7 +19,22 @@ namespace Image_Capture
         {
             isSettingsPanelInit = true;
 
-            // 콤보박스 바인딩 등
+            // 콤보박스 바인딩 (text, value)
+            List<CustomComboboxItem> list = new List<CustomComboboxItem>();
+            list.Add(new CustomComboboxItem("연월일시분초밀리초", "yyyyMMddHHmmssfff"));
+            list.Add(new CustomComboboxItem("연월일.시분초밀리초", "yyyyMMdd.HHmmssfff"));
+            list.Add(new CustomComboboxItem("연월일시분초.밀리초", "yyyyMMddHHmmss.fff"));
+            list.Add(new CustomComboboxItem("연월일.시분초.밀리초", "yyyyMMdd.HHmmss.fff"));
+            list.Add(new CustomComboboxItem("연월일.시분초", "yyyyMMdd.HHmmss"));
+            list.Add(new CustomComboboxItem("연-월-일.시분초밀리초", "yyyy-MM-dd.HHmmssfff"));
+            list.Add(new CustomComboboxItem("연월일-시분초밀리초", "yyyyMMdd-HHmmssfff"));
+
+            //cboxAddsetTypes.
+            cboxAddsetTypes.DisplayMember = "Text";
+            cboxAddsetTypes.ValueMember = "Value";
+            cboxAddsetTypes.DataSource = list;
+
+            
         }
 
         private void SettingPanelLoad()
@@ -88,14 +104,7 @@ namespace Image_Capture
             }
 
             // 추가 문자셋 유형
-            switch (AppConfig.NameRules.AddsetType)
-            {
-                case AppConfig.FileNameRules.AddsetTypeCode.TypeA:
-                    rbAddsetTypeA.Checked = true;
-                    break;
-                default:
-                    break;
-            }
+            cboxAddsetTypes.SelectedValue = AppConfig.NameRules.addsetFormat;
 
         }
 
@@ -111,7 +120,7 @@ namespace Image_Capture
         {
             Debug("btnSettingSave_Click");
 
-            // 저장 이미지 형식
+            // 이미지 디폴트 확장자
             if (rbImageExtPng.Checked)
             {
                 AppConfig.SaveRules.defaultExt = AppConfig.FileSaveRules.ImageExt.Png;
@@ -149,13 +158,39 @@ namespace Image_Capture
                 AppConfig.NameRules.AddsetPosition = AppConfig.FileNameRules.AddsetPosCode.End;
             }
 
+            AppConfig.NameRules.addsetFormat = cboxAddsetTypes.SelectedValue as string;
+
             Debug("[btnSettingSave_Click]", AppConfig);
+
+            MessageBox.Show("설정을 저장하였습니다.");
         }
 
         private void btnSettingCancel_Click(object sender, EventArgs e)
         {
             pnlSettings.Visible = false;
             MainPanelLoad();
+        }
+
+        public class CustomComboboxItem
+        {
+            public string Text { get; set; }
+            public object Value { get; set; }
+
+            public CustomComboboxItem()
+            {
+
+            }
+
+            public CustomComboboxItem(string text, object value)
+            {
+                Text = text;
+                Value = value;
+            }
+
+            public override string ToString()
+            {
+                return Text;
+            }
         }
     }
 }
