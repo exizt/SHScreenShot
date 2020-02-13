@@ -50,7 +50,6 @@
             this.pnlTopNav = new System.Windows.Forms.Panel();
             this.pnlTopRight = new System.Windows.Forms.Panel();
             this.btnMin = new System.Windows.Forms.Button();
-            this.swcAutoSave = new Image_Capture.SwitchCheckBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlMain = new System.Windows.Forms.Panel();
@@ -59,8 +58,6 @@
             this.lblStep1 = new System.Windows.Forms.Label();
             this.tboxDefaultPathOption = new System.Windows.Forms.TextBox();
             this.btnChangeDefaultPath = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.btnSettingSave = new System.Windows.Forms.Button();
             this.btnSettingCancel = new System.Windows.Forms.Button();
             this.pnlFileNameOptions = new System.Windows.Forms.Panel();
@@ -82,6 +79,7 @@
             this.rbImageExtBmp = new System.Windows.Forms.RadioButton();
             this.rbImageExtGif = new System.Windows.Forms.RadioButton();
             this.lblImageType = new System.Windows.Forms.Label();
+            this.swcAutoSave = new Image_Capture.SwitchCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.picboxPreview)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.pnlSideNav.SuspendLayout();
@@ -286,18 +284,6 @@
             this.btnMin.UseVisualStyleBackColor = false;
             this.btnMin.Click += new System.EventHandler(this.BtnMin_Click);
             // 
-            // swcAutoSave
-            // 
-            this.swcAutoSave.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.swcAutoSave.Location = new System.Drawing.Point(66, 28);
-            this.swcAutoSave.Name = "swcAutoSave";
-            this.swcAutoSave.Padding = new System.Windows.Forms.Padding(1);
-            this.swcAutoSave.Size = new System.Drawing.Size(35, 21);
-            this.swcAutoSave.TabIndex = 26;
-            this.swcAutoSave.Text = "switchCheckBox1";
-            this.swcAutoSave.UseVisualStyleBackColor = true;
-            this.swcAutoSave.CheckedChanged += new System.EventHandler(this.SwitchQuickSaveMode_CheckedChanged);
-            // 
             // btnClose
             // 
             this.btnClose.BackColor = System.Drawing.Color.Transparent;
@@ -351,11 +337,9 @@
             this.pnlDirOptions.Controls.Add(this.lblStep1);
             this.pnlDirOptions.Controls.Add(this.tboxDefaultPathOption);
             this.pnlDirOptions.Controls.Add(this.btnChangeDefaultPath);
-            this.pnlDirOptions.Controls.Add(this.button3);
-            this.pnlDirOptions.Controls.Add(this.textBox2);
             this.pnlDirOptions.Location = new System.Drawing.Point(10, 100);
             this.pnlDirOptions.Name = "pnlDirOptions";
-            this.pnlDirOptions.Size = new System.Drawing.Size(334, 100);
+            this.pnlDirOptions.Size = new System.Drawing.Size(334, 81);
             this.pnlDirOptions.TabIndex = 28;
             // 
             // lblStep1
@@ -383,22 +367,6 @@
             this.btnChangeDefaultPath.Text = "폴더변경";
             this.btnChangeDefaultPath.UseVisualStyleBackColor = true;
             this.btnChangeDefaultPath.Click += new System.EventHandler(this.btnChangeDefaultPath_Click);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(10, 74);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "미리지정 A";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(87, 75);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(217, 21);
-            this.textBox2.TabIndex = 5;
             // 
             // btnSettingSave
             // 
@@ -434,7 +402,7 @@
             this.pnlFileNameOptions.Controls.Add(this.pnlFnAddsetOptions);
             this.pnlFileNameOptions.Controls.Add(this.label5);
             this.pnlFileNameOptions.Controls.Add(this.tboxSuffix);
-            this.pnlFileNameOptions.Location = new System.Drawing.Point(10, 220);
+            this.pnlFileNameOptions.Location = new System.Drawing.Point(10, 192);
             this.pnlFileNameOptions.Name = "pnlFileNameOptions";
             this.pnlFileNameOptions.Size = new System.Drawing.Size(334, 178);
             this.pnlFileNameOptions.TabIndex = 25;
@@ -442,7 +410,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(0, 10);
+            this.label3.Location = new System.Drawing.Point(0, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(109, 12);
             this.label3.TabIndex = 15;
@@ -451,17 +419,17 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 32);
+            this.label4.Location = new System.Drawing.Point(7, 25);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 12);
+            this.label4.Size = new System.Drawing.Size(53, 12);
             this.label4.TabIndex = 16;
-            this.label4.Text = "앞문자";
+            this.label4.Text = "앞문자열";
             // 
             // tboxPrefix
             // 
-            this.tboxPrefix.Location = new System.Drawing.Point(60, 28);
+            this.tboxPrefix.Location = new System.Drawing.Point(81, 21);
             this.tboxPrefix.Name = "tboxPrefix";
-            this.tboxPrefix.Size = new System.Drawing.Size(244, 21);
+            this.tboxPrefix.Size = new System.Drawing.Size(223, 21);
             this.tboxPrefix.TabIndex = 17;
             // 
             // pnlFnAddsetOptions
@@ -472,7 +440,7 @@
             this.pnlFnAddsetOptions.Controls.Add(this.rbAddsetPosFront);
             this.pnlFnAddsetOptions.Controls.Add(this.label7);
             this.pnlFnAddsetOptions.Controls.Add(this.label6);
-            this.pnlFnAddsetOptions.Location = new System.Drawing.Point(7, 81);
+            this.pnlFnAddsetOptions.Location = new System.Drawing.Point(7, 75);
             this.pnlFnAddsetOptions.Name = "pnlFnAddsetOptions";
             this.pnlFnAddsetOptions.Size = new System.Drawing.Size(313, 66);
             this.pnlFnAddsetOptions.TabIndex = 21;
@@ -543,17 +511,17 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 59);
+            this.label5.Location = new System.Drawing.Point(7, 53);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 12);
+            this.label5.Size = new System.Drawing.Size(53, 12);
             this.label5.TabIndex = 18;
-            this.label5.Text = "뒤문자";
+            this.label5.Text = "뒤문자열";
             // 
             // tboxSuffix
             // 
-            this.tboxSuffix.Location = new System.Drawing.Point(60, 55);
+            this.tboxSuffix.Location = new System.Drawing.Point(81, 49);
             this.tboxSuffix.Name = "tboxSuffix";
-            this.tboxSuffix.Size = new System.Drawing.Size(244, 21);
+            this.tboxSuffix.Size = new System.Drawing.Size(223, 21);
             this.tboxSuffix.TabIndex = 19;
             // 
             // pnlImageTypeOptions
@@ -620,6 +588,18 @@
             this.lblImageType.Size = new System.Drawing.Size(105, 12);
             this.lblImageType.TabIndex = 6;
             this.lblImageType.Text = "이미지 디폴트유형";
+            // 
+            // swcAutoSave
+            // 
+            this.swcAutoSave.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.swcAutoSave.Location = new System.Drawing.Point(66, 28);
+            this.swcAutoSave.Name = "swcAutoSave";
+            this.swcAutoSave.Padding = new System.Windows.Forms.Padding(1);
+            this.swcAutoSave.Size = new System.Drawing.Size(35, 21);
+            this.swcAutoSave.TabIndex = 26;
+            this.swcAutoSave.Text = "switchCheckBox1";
+            this.swcAutoSave.UseVisualStyleBackColor = true;
+            this.swcAutoSave.CheckedChanged += new System.EventHandler(this.SwitchQuickSaveMode_CheckedChanged);
             // 
             // FormMain
             // 
@@ -691,8 +671,6 @@
         private System.Windows.Forms.RadioButton rbImageExtBmp;
         private System.Windows.Forms.RadioButton rbImageExtPng;
         private System.Windows.Forms.Label lblImageType;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button btnChangeDefaultPath;
         private System.Windows.Forms.TextBox tboxDefaultPathOption;
         private System.Windows.Forms.Label lblStep1;
