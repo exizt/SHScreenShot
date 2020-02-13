@@ -20,7 +20,7 @@ namespace Image_Capture
             this.SaveRules = new FileSaveRules();
 
             SetDefaultOption();
-
+            Load();
         }
 
         /// <summary>
@@ -28,12 +28,46 @@ namespace Image_Capture
         /// </summary>
         public void Load()
         {
-            SaveRules.Path = AppConfiguration.GetAppConfig("defaultPath");
-            SaveRules.defaultExt = (FileSaveRules.ImageExt) Int32.Parse(AppConfiguration.GetAppConfig("defaultExtension"));
-            NameRules.prefix = AppConfiguration.GetAppConfig("NamePrefix");
-            NameRules.suffix = AppConfiguration.GetAppConfig("NameSuffix");
-            NameRules.addsetFormat = AppConfiguration.GetAppConfig("NameAddsetFormat");
-            NameRules.AddsetPosition = (FileNameRules.AddsetPosCode) Int32.Parse(AppConfiguration.GetAppConfig("NameAddsetPosition"));
+            if(AppConfiguration.GetAppConfig(OptionKeys.DefaultPath) != null 
+                && AppConfiguration.GetAppConfig(OptionKeys.DefaultPath).Length > 1)
+            {
+                SaveRules.Path = AppConfiguration.GetAppConfig(OptionKeys.DefaultPath);
+            }
+            if(AppConfiguration.GetAppConfig(OptionKeys.DefaultExt) != null)
+            {
+                string s = AppConfiguration.GetAppConfig(OptionKeys.DefaultExt);
+                if (Enum.TryParse(s, true, out FileSaveRules.ImageExt val))
+                {
+                    if (Enum.IsDefined(typeof(FileSaveRules.ImageExt), val))
+                    {
+                        SaveRules.defaultExt = val;
+                    }
+                }
+            }
+            if(AppConfiguration.GetAppConfig(OptionKeys.NamePrefix) != null)
+            {
+                NameRules.prefix = AppConfiguration.GetAppConfig(OptionKeys.NamePrefix);
+            }
+            if(AppConfiguration.GetAppConfig(OptionKeys.NameSuffix) != null)
+            {
+                NameRules.suffix = AppConfiguration.GetAppConfig(OptionKeys.NameSuffix);
+            }
+            if(AppConfiguration.GetAppConfig(OptionKeys.NameAddsetFormat) != null 
+                && AppConfiguration.GetAppConfig(OptionKeys.NameAddsetFormat).Length > 1)
+            {
+                NameRules.addsetFormat = AppConfiguration.GetAppConfig(OptionKeys.NameAddsetFormat);
+            }
+            if (AppConfiguration.GetAppConfig(OptionKeys.NameAddsetPosition) != null)
+            {
+                string s = AppConfiguration.GetAppConfig(OptionKeys.NameAddsetPosition);
+                if (Enum.TryParse(s, true, out FileNameRules.AddsetPosCode val))
+                {
+                    if (Enum.IsDefined(typeof(FileNameRules.AddsetPosCode), val))
+                    {
+                        NameRules.AddsetPosition = val;
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -41,12 +75,12 @@ namespace Image_Capture
         /// </summary>
         public void Save()
         {
-            AppConfiguration.SetAppConfig("defaultPath", SaveRules.Path);
-            AppConfiguration.SetAppConfig("defaultExtension", SaveRules.defaultExt.ToString());
-            AppConfiguration.SetAppConfig("NamePrefix", NameRules.prefix);
-            AppConfiguration.SetAppConfig("NameSuffix", NameRules.suffix);
-            AppConfiguration.SetAppConfig("NameAddsetFormat", NameRules.addsetFormat);
-            AppConfiguration.SetAppConfig("NameAddsetPosition", NameRules.AddsetPosition.ToString());
+            AppConfiguration.SetAppConfig(OptionKeys.DefaultPath, SaveRules.Path);
+            AppConfiguration.SetAppConfig(OptionKeys.DefaultExt, SaveRules.defaultExt.ToString());
+            AppConfiguration.SetAppConfig(OptionKeys.NamePrefix, NameRules.prefix);
+            AppConfiguration.SetAppConfig(OptionKeys.NameSuffix, NameRules.suffix);
+            AppConfiguration.SetAppConfig(OptionKeys.NameAddsetFormat, NameRules.addsetFormat);
+            AppConfiguration.SetAppConfig(OptionKeys.NameAddsetPosition, NameRules.AddsetPosition.ToString());
         }
 
         public void SetDefaultOption()
@@ -70,6 +104,15 @@ namespace Image_Capture
             return $"NameRules: {NameRules.ToString()}, SaveRules: {SaveRules.ToString()}";
         }
 
+        public class OptionKeys
+        {
+            public const string DefaultPath = "DefaultPath";
+            public const string DefaultExt = "DefaultExtension";
+            public const string NamePrefix = "NamePrefix";
+            public const string NameSuffix = "NameSuffix";
+            public const string NameAddsetFormat = "NameAddsetFormat";
+            public const string NameAddsetPosition = "NameAddsetPosition";
+        }
 
         public class FileNameRules
         {
