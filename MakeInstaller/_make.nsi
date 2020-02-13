@@ -5,12 +5,14 @@ Unicode true
 
 
 ;-------------------------------------------------
-; 버전 정보 (Minor 사소한 업데이트, Buid 계속 카운팅)
-; Build 번호에 alpha 인 경우는 [숫자a]
-; 어느 정도 stable 하다 싶을 때 Minor 카운팅
-!define S_APP_VER_MAJOR 1
-!define S_APP_VER_MINOR 5
-!define S_APP_VER_BUILD 1
+; 버전 정보
+; Major.Minor 사용자에게 알릴만한 변경점
+; Release 단순 릴리즈 카운팅 (여태 몇번의 큰 변경이 있었는지)
+; Build 테스팅 & 핫픽스 & 마이너 업데이트 & 코드 개선 등의 경우
+!define S_APP_VER_MAJOR 2
+!define S_APP_VER_MINOR 0
+!define S_APP_VER_RELEASE 9
+!define S_APP_VER_BUILD 2
 
 
 ;-------------------------------------------------
@@ -24,7 +26,7 @@ Unicode true
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "SH Screen Capture"
-!define PRODUCT_VERSION "${S_APP_VER_MAJOR}.${S_APP_VER_MINOR}.${S_APP_VER_BUILD}"
+!define PRODUCT_VERSION "${S_APP_VER_MAJOR}.${S_APP_VER_MINOR}.${S_APP_VER_RELEASE}.${S_APP_VER_BUILD}"
 !define PRODUCT_PUBLISHER "SH Software"
 !define PRODUCT_WEB_SITE "https://chosim.asv.kr"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\${S_MAIN_EXE}"

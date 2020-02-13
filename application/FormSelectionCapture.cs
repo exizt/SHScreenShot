@@ -14,6 +14,11 @@ namespace Image_Capture
     public partial class FormSelectionCapture : Form
     {
         /// <summary>
+        /// 로그 디버깅 옵션.
+        /// </summary>
+        private readonly bool isDebug = false;
+
+        /// <summary>
         /// 부모폼을 담아올 용도
         /// </summary>
         FormMain mParentForm;
@@ -32,11 +37,6 @@ namespace Image_Capture
         /// 로드가 완료되었는지 여부.
         /// </summary>
         bool isLoaded = false;
-
-        /// <summary>
-        /// 로그 디버깅 옵션.
-        /// </summary>
-        private readonly bool isDebug = false;
 
         /// <summary>
         /// 

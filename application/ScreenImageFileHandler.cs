@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace Image_Capture
@@ -17,32 +16,54 @@ namespace Image_Capture
         /// <summary>
         /// 로그 디버깅 옵션.
         /// </summary>
-        public bool isDebug = false;
+        private readonly bool isDebug = false;
 
-        public string FileDirPath { get; set; }
+        /// <summary>
+        /// 최근 저장한 경로
+        /// </summary>
+        public string CurrentSavePath { get; set; }
 
-        public ScreenImageFileHandler()
+        public string ImageDefaultExtString { get; set; }
+
+        internal AppConfig AppConfig { get; set; }
+
+        /// <summary>
+        /// 생성자
+        /// </summary>
+        /// <param name="config"></param>
+        public ScreenImageFileHandler(AppConfig config)
         {
-            FileDirPath = GenerateBasePath();
+            AppConfig = config;
+            ReloadAppConfig();
+        }
+
+        private void ReloadAppConfig()
+        {
+            if(CurrentSavePath == null)
+                CurrentSavePath = AppConfig.SaveRules.Path;
+            ImageDefaultExtString = AppConfig.SaveRules.ImageExtToString(AppConfig.SaveRules.defaultExt);
         }
 
         /// <summary>
         /// 결과 이미지 저장. 파일 다이얼로그.
         /// </summary>
-        public bool CallSaveFileDialog(Image image)
+        public bool DoSaveFileDialog(Image image)
         {
+            ReloadAppConfig();
             string filePath = "";
-            using (SaveFileDialog fileDialog = new SaveFileDialog())
+            using (SaveFileDialog dlg = new SaveFileDialog())
             {
-                fileDialog.Filter = "PNG 이미지 (*.png)|*.png|JPG 이미지 (*.jpg)|*.jpg|BMP 이미지 (*.bmp)|*.bmp|모든 파일 (*.*)|*.*";//확장자 선택
-                fileDialog.Title = "스크린샷 이미지 저장";//창위에 뜨는 타이틀
-                fileDialog.FileName = GenerateBaseFilename();
-                fileDialog.DefaultExt = "png";
+                dlg.Title = "스크린샷 이미지 저장";//창위에 뜨는 타이틀
+                dlg.FileName = GenerateBaseFilename();
+                dlg.Filter = "PNG 이미지 (*.png)|*.png|JPG 이미지 (*.jpg)|*.jpg|BMP 이미지 (*.bmp)|*.bmp|GIF 이미지 (*.gif)|*.gif|모든 파일 (*.*)|*.*";//확장자 선택
+                dlg.DefaultExt = ImageDefaultExtString;
+                UseDefaultExtAsFilterIndex(dlg);
+
                 //fileDialog.InitialDirectory = "";
                 //showDialog의 리턴값이 OK 일 때
-                if (fileDialog.ShowDialog() == DialogResult.OK)
+                if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    filePath = fileDialog.FileName;
+                    filePath = dlg.FileName;
                 } else
                 {
                     // 취소 한 경우
@@ -52,27 +73,21 @@ namespace Image_Capture
             
             if (filePath.Trim().Length > 1)
             {
-                if (image != null)
+                try
                 {
-                    try
-                    {
-                        //image.Save(filePath, GetImageFormat(filePath));
-                        SaveImageFile(image, filePath);
-                        MessageBox.Show("저장 되었습니다.");
-                        //저장이 완료된 경우에 속성값 FilePath 에 기록해둠.
-                        FileDirPath = Path.GetDirectoryName(filePath);
-                        return true;
-                    }
-                    catch (ArgumentNullException e)
-                    {
-                        MessageBox.Show("에러 발생 ArgNulls" + e);
-                    }
-                    catch (Exception e)
-                    {
-                        MessageBox.Show("에러 발생" + e);
-                    }
+                    //image.Save(filePath, GetImageFormat(filePath));
+                    SaveImageFile(image, filePath);
+                    //MessageBox.Show("저장 되었습니다.");
+                    return true;
                 }
-                else { MessageBox.Show("이미지 캡쳐해주세요."); }
+                catch (ArgumentNullException e)
+                {
+                    MessageBox.Show("에러 발생 ArgNulls" + e);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("에러 발생" + e);
+                }
             }
             else
             { 
@@ -83,17 +98,18 @@ namespace Image_Capture
         }
 
         /// <summary>
-        /// 퀵 세이브 기능.
+        /// 자동 세이브 구현
         /// </summary>
         /// <param name="image"></param>
-        public bool QuickSaveImageFile(Image image)
+        public bool DoAutoSaveImageFile(Image image)
         {
-            string filePath = Path.Combine(FileDirPath, GenerateBaseFilename() + ".png");
+            ReloadAppConfig();
+            //string filePath = Path.Combine(CurrentSavePath, GenerateBaseFilename() + "." + AppConfig.SaveRules.ImageExtToString(AppConfig.SaveRules.defaultExt));
+            string filePath = Path.Combine(CurrentSavePath, GenerateBaseFilename() + "." + ImageDefaultExtString);
             try
             {
                 SaveImageFile(image, filePath);
-                MessageBox.Show("저장 되었습니다.");
-                FileDirPath = Path.GetDirectoryName(filePath);
+                //MessageBox.Show("저장 되었습니다.");
                 return true;
             }
             catch (ArgumentNullException e)
@@ -104,13 +120,6 @@ namespace Image_Capture
             {
                 MessageBox.Show("에러 발생" + e);
             }
-            finally
-            {
-                if (image != null)
-                {
-                    image.Dispose();
-                }
-            }
             return false;
         }
 
@@ -120,24 +129,40 @@ namespace Image_Capture
         /// </summary>
         /// <param name="image">저장하려는 이미지 파일</param>
         /// <param name="path">저장하려는 경로. (경로+파일명)</param>
-        private void SaveImageFile(Image image, string path)
+        private void SaveImageFile(Image image, string filePath)
         {
-            try
+            if (image != null)
             {
-                image.Save(path, GetImageFormat(path));
-                Debug(path);
+                try
+                {
+                    Debug("[SaveImageFile]", filePath);
+                    image.Save(filePath, GetImageFormat(filePath));
+                    CurrentSavePath = Path.GetDirectoryName(filePath);
+                    MessageBox.Show("저장 되었습니다.");
+                }
+                catch (ArgumentNullException e)
+                {
+                    Debug("[SaveImageFile][ArgumentNullException]", e);
+                    //MessageBox.Show("에러 발생 ArgNulls" + e);
+                    //throw e;
+                }
+                catch (Exception e)
+                {
+                    Debug("[SaveImageFile][Exception]", e);
+                    //MessageBox.Show("에러 발생" + e);
+                    //throw e;
+                }
+                finally
+                {
+                    if (image != null)
+                    {
+                        image.Dispose();
+                    }
+                }
             }
-            catch (ArgumentNullException)
-            {
-                throw;
-            }
-            catch (Exception e)
-            {
-                //System.Diagnostics.Debug.WriteLine(e);
-                Debug("SaveImageFile Exception", e);
-                throw;
-            }
+            else { MessageBox.Show("이미지 캡쳐해주세요."); }
         }
+
         /// <summary>
         /// 이미지 확장자
         /// </summary>
@@ -146,22 +171,21 @@ namespace Image_Capture
         private ImageFormat GetImageFormat(string path)
         {
             //string ext = _dir_path.Substring(_dir_path.LastIndexOf('.'));
+            Debug("[GetImageFormat] path", path);
             string ext = Path.GetExtension(path).ToLower();
-            if (ext.Equals(".jpg") || ext.Equals(".jpeg"))
+            switch (ext)
             {
-                return ImageFormat.Jpeg;
-            }
-            else if (ext.Equals(".png"))
-            {
-                return ImageFormat.Png;
-            }
-            else if (ext.Equals(".bmp"))
-            {
-                return ImageFormat.Bmp;
-            }
-            else
-            {
-                return ImageFormat.Png;
+                case ".jpeg":
+                case ".jpg":
+                    return ImageFormat.Jpeg;
+                case ".png":
+                    return ImageFormat.Png;
+                case ".bmp":
+                    return ImageFormat.Bmp;
+                case ".gif":
+                    return ImageFormat.Gif;
+                default:
+                    return ImageFormat.Png;
             }
         }
 
@@ -172,7 +196,7 @@ namespace Image_Capture
         /// <returns></returns>
         public string GenerateBasePath()
         {
-            return Environment.GetFolderPath(Environment.SpecialFolder.Desktop); ;
+            return Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
             //Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location); //설치 경로
             //Environment.GetFolderPath(Environment.SpecialFolder.Desktop); //Desktop
@@ -185,18 +209,54 @@ namespace Image_Capture
         /// <returns></returns>
         private string GenerateBaseFilename()
         {
-            //return DateTime.Now.ToString("yyyy.MM.dd-HH.mm.ss.fff");
-            return DateTime.Now.ToString("yyyyMMdd-HH.mm.ss.fff");
+            var prefix = AppConfig.NameRules.prefix;
+            var suffix = AppConfig.NameRules.suffix;
+
+            StringBuilder sb = new StringBuilder();
+            if(AppConfig.NameRules.AddsetPosition == AppConfig.FileNameRules.AddsetPosCode.Front)
+            {
+                sb.Append(GetFilenameAddSet());
+            }
+            sb.Append(prefix);
+            if (AppConfig.NameRules.AddsetPosition == AppConfig.FileNameRules.AddsetPosCode.Middle)
+            {
+                sb.Append(GetFilenameAddSet());
+            }
+            sb.Append(suffix);
+            if (AppConfig.NameRules.AddsetPosition == AppConfig.FileNameRules.AddsetPosCode.End)
+            {
+                sb.Append(GetFilenameAddSet());
+            }
+            var result = sb.ToString();
+            sb.Clear();
+
+            return result;
         }
 
         /// <summary>
-        /// 자동적으로 파일경로를 생성하는 메서드이다.
-        /// 프로그램의 경로에서 시간형식의 이름을 붙인다.
+        /// 파일명에 붙이는 날짜+시간 명칭
         /// </summary>
         /// <returns></returns>
-        private string FileSave_Auto_FilePath()
+        private string GetFilenameAddSet()
         {
-            return GenerateBasePath() + "\\" + GenerateBaseFilename() + ".jpg";
+            return DateTime.Now.ToString(AppConfig.NameRules.addsetFormat);
+            /*
+            switch (AppConfig.NameRules.AddsetType)
+            {
+                case AppConfig.FileNameRules.AddsetTypeCode.TypeA:
+                    return DateTime.Now.ToString("yyyyMMdd.HHmmssfff");
+                case AppConfig.FileNameRules.AddsetTypeCode.TypeB:
+                    return DateTime.Now.ToString("yyyyMMddHHmmssfff");
+                case AppConfig.FileNameRules.AddsetTypeCode.TypeC:
+                    return DateTime.Now.ToString("yyyyMMdd.HHmmss");
+                case AppConfig.FileNameRules.AddsetTypeCode.TypeD:
+                    return DateTime.Now.ToString("yyyyMMddHHmmss.fff");
+                case AppConfig.FileNameRules.AddsetTypeCode.TypeE:
+                    return DateTime.Now.ToString("yyyyMMdd.HHmmss.fff");
+                default:
+                    return DateTime.Now.ToString("yyyyMMdd.HHmmssfff");
+            }
+            */
         }
 
         /// <summary>
@@ -234,6 +294,33 @@ namespace Image_Capture
                 sb.Append(obj.ToString());
                 Debug(sb.ToString());
                 sb.Clear();
+            }
+        }
+
+        /// <summary>
+        /// SaveFileDialog 의 DefaultExt 옵션이 부실해서 그 기능을 보강해줌.
+        /// DefaultExt 는 원래 (*.*) 일 때에만 적용되는 옵션. 
+        /// 여기서는 DefaultExt 에서 설정한 것에 맞게 Filter 를 선택해주는 구현
+        /// (https://stackoverflow.com/questions/6104223/wpf-savefiledialog-defaultext-ignored)
+        /// </summary>
+        /// <param name="dialog"></param>
+        public static void UseDefaultExtAsFilterIndex(FileDialog dialog)
+        {
+            var ext = "*." + dialog.DefaultExt;
+            var filter = dialog.Filter;
+            var filters = filter.Split('|');
+
+            System.Diagnostics.Debug.WriteLine($"[ScreenImageFileHandler] ext [{ext}]");
+
+            for (int i = 1; i < filters.Length; i += 2)
+            {
+                if (filters[i] == ext)
+                {
+                    dialog.FilterIndex = 1 + (i - 1) / 2;
+
+                    System.Diagnostics.Debug.WriteLine($"[ScreenImageFileHandler] FilterIndex [{dialog.FilterIndex}]");
+                    return;
+                }
             }
         }
     }
