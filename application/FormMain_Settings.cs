@@ -37,8 +37,22 @@ namespace Image_Capture
             
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private void SettingPanelCancel()
+        {
+            pnlSettings.Visible = false;
+            MainPanelLoad();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         private void SettingPanelLoad()
         {
+            pnlSettings.Visible = true;
+
             if (!isSettingsPanelInit)
             {
                 SettingPanelInit();
@@ -108,14 +122,37 @@ namespace Image_Capture
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnSettings_Click(object sender, EventArgs e)
         {
-            pnlSettings.Visible = true;
-
-            SettingPanelLoad();
+            if (pnlSettings.Visible)
+            {
+                SettingPanelCancel();
+            } else
+            {
+                SettingPanelLoad();
+            }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnSettingCancel_Click(object sender, EventArgs e)
+        {
+            SettingPanelCancel();
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnSettingSave_Click(object sender, EventArgs e)
         {
             Debug("btnSettingSave_Click");
@@ -166,12 +203,11 @@ namespace Image_Capture
             MessageBox.Show("설정을 저장하였습니다.");
         }
 
-        private void btnSettingCancel_Click(object sender, EventArgs e)
-        {
-            pnlSettings.Visible = false;
-            MainPanelLoad();
-        }
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnChangeDefaultPath_Click(object sender, EventArgs e)
         {
             string path = FolderBrowser();
@@ -181,15 +217,13 @@ namespace Image_Capture
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public class CustomComboboxItem
         {
             public string Text { get; set; }
             public object Value { get; set; }
-
-            public CustomComboboxItem()
-            {
-
-            }
 
             public CustomComboboxItem(string text, object value)
             {

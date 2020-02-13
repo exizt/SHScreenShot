@@ -256,7 +256,7 @@
             this.pnlTopNav.Name = "pnlTopNav";
             this.pnlTopNav.Size = new System.Drawing.Size(443, 50);
             this.pnlTopNav.TabIndex = 31;
-            this.pnlTopNav.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlTopNav_MouseDown);
+            this.pnlTopNav.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PnlTopNav_MouseDown);
             // 
             // pnlTopRight
             // 
@@ -269,6 +269,7 @@
             this.pnlTopRight.Name = "pnlTopRight";
             this.pnlTopRight.Size = new System.Drawing.Size(114, 50);
             this.pnlTopRight.TabIndex = 27;
+            this.pnlTopRight.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PnlTopRight_MouseDown);
             // 
             // btnMin
             // 
@@ -309,7 +310,7 @@
             this.btnClose.TabIndex = 1;
             this.btnClose.Text = "✖";
             this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
             // label1
             // 
@@ -423,7 +424,7 @@
             this.btnSettingCancel.TabIndex = 26;
             this.btnSettingCancel.Text = "취소";
             this.btnSettingCancel.UseVisualStyleBackColor = true;
-            this.btnSettingCancel.Click += new System.EventHandler(this.btnSettingCancel_Click);
+            this.btnSettingCancel.Click += new System.EventHandler(this.BtnSettingCancel_Click);
             // 
             // pnlFileNameOptions
             // 

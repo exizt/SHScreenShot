@@ -9,7 +9,7 @@ namespace Image_Capture
     /// <summary>
     /// 앱 환경설정을 다루기 위한 클래스 (내가 만듦)
     /// </summary>
-    class AppConfig
+    internal class AppConfig
     {
         internal FileNameRules NameRules { get; set; }
         internal FileSaveRules SaveRules { get; set; }

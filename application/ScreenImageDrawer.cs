@@ -8,7 +8,7 @@ namespace Image_Capture
     /// <summary>
     /// 이미지 캡쳐 등의 기능을 담은 클래스
     /// </summary>
-    class ScreenImageDrawer : IDisposable
+    internal class ScreenImageDrawer : IDisposable
     {
         private readonly Point ptZero = new Point(0, 0);
 
