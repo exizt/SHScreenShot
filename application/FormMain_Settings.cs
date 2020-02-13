@@ -160,6 +160,7 @@ namespace Image_Capture
 
             AppConfig.NameRules.addsetFormat = cboxAddsetTypes.SelectedValue as string;
 
+            AppConfig.Save();
             Debug("[btnSettingSave_Click]", AppConfig);
 
             MessageBox.Show("설정을 저장하였습니다.");

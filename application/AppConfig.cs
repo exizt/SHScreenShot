@@ -20,10 +20,33 @@ namespace Image_Capture
             this.SaveRules = new FileSaveRules();
 
             SetDefaultOption();
+
         }
 
+        /// <summary>
+        /// 저장된 설정에서 불러옴
+        /// </summary>
         public void Load()
         {
+            SaveRules.Path = AppConfiguration.GetAppConfig("defaultPath");
+            SaveRules.defaultExt = (FileSaveRules.ImageExt) Int32.Parse(AppConfiguration.GetAppConfig("defaultExtension"));
+            NameRules.prefix = AppConfiguration.GetAppConfig("NamePrefix");
+            NameRules.suffix = AppConfiguration.GetAppConfig("NameSuffix");
+            NameRules.addsetFormat = AppConfiguration.GetAppConfig("NameAddsetFormat");
+            NameRules.AddsetPosition = (FileNameRules.AddsetPosCode) Int32.Parse(AppConfiguration.GetAppConfig("NameAddsetPosition"));
+        }
+
+        /// <summary>
+        /// 현재 설정을 저장
+        /// </summary>
+        public void Save()
+        {
+            AppConfiguration.SetAppConfig("defaultPath", SaveRules.Path);
+            AppConfiguration.SetAppConfig("defaultExtension", SaveRules.defaultExt.ToString());
+            AppConfiguration.SetAppConfig("NamePrefix", NameRules.prefix);
+            AppConfiguration.SetAppConfig("NameSuffix", NameRules.suffix);
+            AppConfiguration.SetAppConfig("NameAddsetFormat", NameRules.addsetFormat);
+            AppConfiguration.SetAppConfig("NameAddsetPosition", NameRules.AddsetPosition.ToString());
         }
 
         public void SetDefaultOption()
