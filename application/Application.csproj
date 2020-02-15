@@ -24,16 +24,15 @@
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <SupportUrl>http://imagecapture.asv.kr/</SupportUrl>
-    <ErrorReportUrl>http://imagecapture.asv.kr/</ErrorReportUrl>
+    <MapFileExtensions>false</MapFileExtensions>
+    <SupportUrl>https://chosim.asv.kr</SupportUrl>
+    <ErrorReportUrl>https://chosim.asv.kr</ErrorReportUrl>
     <ProductName>이미지캡처</ProductName>
-    <PublisherName>E2X Software</PublisherName>
+    <PublisherName>SH Software</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.22.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
-    <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
