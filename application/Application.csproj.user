@@ -3,10 +3,10 @@
   <PropertyGroup>
     <PublishUrlHistory>게시\|..\..\ImageCapture_Publish\</PublishUrlHistory>
     <InstallUrlHistory>http://imagecapture.asv.kr/</InstallUrlHistory>
-    <SupportUrlHistory />
+    <SupportUrlHistory>https://chosim.asv.kr</SupportUrlHistory>
     <UpdateUrlHistory />
     <BootstrapperUrlHistory />
-    <ErrorReportUrlHistory />
+    <ErrorReportUrlHistory>https://chosim.asv.kr</ErrorReportUrlHistory>
     <FallbackCulture>ko-KR</FallbackCulture>
     <VerifyUploadedFiles>false</VerifyUploadedFiles>
   </PropertyGroup>
