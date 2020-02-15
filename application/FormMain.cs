@@ -45,28 +45,28 @@ namespace Image_Capture
             public static extern bool ReleaseCapture();
             [DllImport("User32.dll")]
             public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+            /// <summary>
+            /// Round 된 윈도우 구현
+            /// </summary>
+            /// <param name="nLeftRect"></param>
+            /// <param name="nTopRect"></param>
+            /// <param name="nRightRect"></param>
+            /// <param name="nBottomRect"></param>
+            /// <param name="nWidthEllipse"></param>
+            /// <param name="nHeightEllipse"></param>
+            /// <returns></returns>
+            [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+            public static extern IntPtr CreateRoundRectRgn
+            (
+                int nLeftRect,     // x-coordinate of upper-left corner
+                int nTopRect,      // y-coordinate of upper-left corner
+                int nRightRect,    // x-coordinate of lower-right corner
+                int nBottomRect,   // y-coordinate of lower-right corner
+                int nWidthEllipse, // width of ellipse
+                int nHeightEllipse // height of ellipse
+            );
         }
 
-        /// <summary>
-        /// Round 된 윈도우 구현
-        /// </summary>
-        /// <param name="nLeftRect"></param>
-        /// <param name="nTopRect"></param>
-        /// <param name="nRightRect"></param>
-        /// <param name="nBottomRect"></param>
-        /// <param name="nWidthEllipse"></param>
-        /// <param name="nHeightEllipse"></param>
-        /// <returns></returns>
-        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
-        private static extern IntPtr CreateRoundRectRgn
-        (
-            int nLeftRect,     // x-coordinate of upper-left corner
-            int nTopRect,      // y-coordinate of upper-left corner
-            int nRightRect,    // x-coordinate of lower-right corner
-            int nBottomRect,   // y-coordinate of lower-right corner
-            int nWidthEllipse, // width of ellipse
-            int nHeightEllipse // height of ellipse
-        );
 
         /// <summary>
         /// 생성자 메서드
@@ -92,7 +92,7 @@ namespace Image_Capture
 
             // Rounded 윈도우 구현
             this.FormBorderStyle = FormBorderStyle.None;
-            this.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
+            this.Region = System.Drawing.Region.FromHrgn(NativeMethods.CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
         }
 
         /// <summary>
@@ -522,7 +522,7 @@ namespace Image_Capture
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnClose_Click(object sender, EventArgs e)
+        private void BtnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -532,7 +532,16 @@ namespace Image_Capture
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void pnlTopNav_MouseDown(object sender, MouseEventArgs e)
+        private void PnlTopNav_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                NativeMethods.ReleaseCapture();
+                NativeMethods.SendMessage(Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
+            }
+        }
+
+        private void PnlTopRight_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {

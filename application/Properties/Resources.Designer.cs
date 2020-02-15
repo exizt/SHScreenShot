@@ -63,9 +63,39 @@ namespace Image_Capture.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap fullscreen_30px_wh {
+            get {
+                object obj = ResourceManager.GetObject("fullscreen-30px-wh", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap fullscreen_30px_wh1 {
+            get {
+                object obj = ResourceManager.GetObject("fullscreen-30px-wh1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap fullscreen_43_wh {
             get {
                 object obj = ResourceManager.GetObject("fullscreen-43-wh", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap fullscreen_sect_30px_wh {
+            get {
+                object obj = ResourceManager.GetObject("fullscreen-sect-30px-wh", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

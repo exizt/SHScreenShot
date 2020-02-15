@@ -24,18 +24,17 @@
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <SupportUrl>http://imagecapture.asv.kr/</SupportUrl>
-    <ErrorReportUrl>http://imagecapture.asv.kr/</ErrorReportUrl>
+    <MapFileExtensions>false</MapFileExtensions>
+    <SupportUrl>https://chosim.asv.kr</SupportUrl>
+    <ErrorReportUrl>https://chosim.asv.kr</ErrorReportUrl>
     <ProductName>이미지캡처</ProductName>
-    <PublisherName>E2X Software</PublisherName>
+    <PublisherName>SH Software</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.22.%2a</ApplicationVersion>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
-    <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <BootstrapperEnabled>false</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Resources\MainIcon.ico</ApplicationIcon>
@@ -176,6 +175,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\sh-settings-30px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fullscreen-30px-wh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fullscreen-30px-wh1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fullscreen-sect-30px-wh.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

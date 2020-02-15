@@ -1,1 +1,8 @@
-'SScShot'('Simple Screen Shot') is a freeware that captures screen image on Windows
+SH Screen Capture
+* Freeware
+* screen capture software
+
+Compile Environment
+* .Net Framework 4.6
+* Windows 10
+* C#

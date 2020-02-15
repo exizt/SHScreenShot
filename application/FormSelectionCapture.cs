@@ -266,7 +266,7 @@ namespace Image_Capture
             //const int HT_TOP = 12;
             //const int HT_TOPLEFT = 13;
             //const int HT_TOPRIGHT = 14;
-            //const int HT_BOTTOM = 15;
+            const int HT_BOTTOM = 15;
             const int HT_BOTTOMLEFT = 16;
             const int HT_BOTTOMRIGHT = 17;
 
@@ -307,11 +307,17 @@ namespace Image_Capture
                 // 하단
                 if (pos.Y > this.ClientSize.Height - this.Padding.Bottom)
                 {
-                    m.Result = (IntPtr)HT_CAPTION;
+                    //m.Result = (IntPtr)HT_CAPTION;
+                    m.Result = (IntPtr)HT_BOTTOM;
                     return;
                 }
             }
             base.WndProc(ref m);
+        }
+
+        private void btnCapture_Click(object sender, EventArgs e)
+        {
+            Save();//이미지 저장 호출
         }
     }
 }

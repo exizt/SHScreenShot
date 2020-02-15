@@ -11,7 +11,7 @@ namespace Image_Capture
     /// 이미지 파일 저장을 담당하는 클래스
     /// FormMain 의 구성 클래스
     /// </summary>
-    class ScreenImageFileHandler
+    internal class ScreenImageFileHandler
     {
         /// <summary>
         /// 로그 디버깅 옵션.

@@ -8,7 +8,7 @@ using System.Configuration;
 
 namespace Image_Capture
 {
-    public class AppConfiguration
+    public static class AppConfiguration
     {
         public static string GetAppConfig(string key)
         {

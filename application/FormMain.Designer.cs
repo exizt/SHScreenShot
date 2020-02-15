@@ -59,8 +59,6 @@
             this.lblStep1 = new System.Windows.Forms.Label();
             this.tboxDefaultPathOption = new System.Windows.Forms.TextBox();
             this.btnChangeDefaultPath = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.btnSettingSave = new System.Windows.Forms.Button();
             this.btnSettingCancel = new System.Windows.Forms.Button();
             this.pnlFileNameOptions = new System.Windows.Forms.Panel();
@@ -101,13 +99,13 @@
             this.btnScrCapture.FlatAppearance.BorderColor = System.Drawing.Color.LightSkyBlue;
             this.btnScrCapture.FlatAppearance.BorderSize = 0;
             this.btnScrCapture.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnScrCapture.Font = new System.Drawing.Font("맑은 고딕", 9F);
+            this.btnScrCapture.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnScrCapture.ForeColor = System.Drawing.Color.White;
-            this.btnScrCapture.Image = global::Image_Capture.Properties.Resources.fullscreen_43_wh;
+            this.btnScrCapture.Image = global::Image_Capture.Properties.Resources.fullscreen_30px_wh;
             this.btnScrCapture.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnScrCapture.Location = new System.Drawing.Point(0, 0);
             this.btnScrCapture.Name = "btnScrCapture";
-            this.btnScrCapture.Size = new System.Drawing.Size(110, 71);
+            this.btnScrCapture.Size = new System.Drawing.Size(110, 62);
             this.btnScrCapture.TabIndex = 1;
             this.btnScrCapture.Text = "화면캡쳐";
             this.btnScrCapture.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -137,13 +135,13 @@
             this.btnSelectionCapture.FlatAppearance.BorderColor = System.Drawing.Color.MediumTurquoise;
             this.btnSelectionCapture.FlatAppearance.BorderSize = 0;
             this.btnSelectionCapture.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelectionCapture.Font = new System.Drawing.Font("맑은 고딕", 9F);
+            this.btnSelectionCapture.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnSelectionCapture.ForeColor = System.Drawing.Color.White;
-            this.btnSelectionCapture.Image = global::Image_Capture.Properties.Resources.fullscreen_43_wh;
+            this.btnSelectionCapture.Image = global::Image_Capture.Properties.Resources.fullscreen_sect_30px_wh;
             this.btnSelectionCapture.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnSelectionCapture.Location = new System.Drawing.Point(0, 77);
             this.btnSelectionCapture.Name = "btnSelectionCapture";
-            this.btnSelectionCapture.Size = new System.Drawing.Size(110, 74);
+            this.btnSelectionCapture.Size = new System.Drawing.Size(110, 66);
             this.btnSelectionCapture.TabIndex = 17;
             this.btnSelectionCapture.Text = "영역캡처";
             this.btnSelectionCapture.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -185,10 +183,11 @@
             // lblAutoSave
             // 
             this.lblAutoSave.AutoSize = true;
+            this.lblAutoSave.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblAutoSave.ForeColor = System.Drawing.Color.White;
             this.lblAutoSave.Location = new System.Drawing.Point(9, 33);
             this.lblAutoSave.Name = "lblAutoSave";
-            this.lblAutoSave.Size = new System.Drawing.Size(53, 12);
+            this.lblAutoSave.Size = new System.Drawing.Size(55, 15);
             this.lblAutoSave.TabIndex = 25;
             this.lblAutoSave.Text = "자동저장";
             // 
@@ -232,7 +231,7 @@
             this.btnSettings.BackColor = System.Drawing.Color.Transparent;
             this.btnSettings.FlatAppearance.BorderSize = 0;
             this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSettings.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btnSettings.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnSettings.ForeColor = System.Drawing.Color.White;
             this.btnSettings.Image = global::Image_Capture.Properties.Resources.sh_settings_30px;
             this.btnSettings.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -256,7 +255,7 @@
             this.pnlTopNav.Name = "pnlTopNav";
             this.pnlTopNav.Size = new System.Drawing.Size(443, 50);
             this.pnlTopNav.TabIndex = 31;
-            this.pnlTopNav.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlTopNav_MouseDown);
+            this.pnlTopNav.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PnlTopNav_MouseDown);
             // 
             // pnlTopRight
             // 
@@ -269,6 +268,7 @@
             this.pnlTopRight.Name = "pnlTopRight";
             this.pnlTopRight.Size = new System.Drawing.Size(114, 50);
             this.pnlTopRight.TabIndex = 27;
+            this.pnlTopRight.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PnlTopRight_MouseDown);
             // 
             // btnMin
             // 
@@ -309,7 +309,7 @@
             this.btnClose.TabIndex = 1;
             this.btnClose.Text = "✖";
             this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
             // label1
             // 
@@ -350,11 +350,9 @@
             this.pnlDirOptions.Controls.Add(this.lblStep1);
             this.pnlDirOptions.Controls.Add(this.tboxDefaultPathOption);
             this.pnlDirOptions.Controls.Add(this.btnChangeDefaultPath);
-            this.pnlDirOptions.Controls.Add(this.button3);
-            this.pnlDirOptions.Controls.Add(this.textBox2);
             this.pnlDirOptions.Location = new System.Drawing.Point(10, 100);
             this.pnlDirOptions.Name = "pnlDirOptions";
-            this.pnlDirOptions.Size = new System.Drawing.Size(334, 100);
+            this.pnlDirOptions.Size = new System.Drawing.Size(334, 81);
             this.pnlDirOptions.TabIndex = 28;
             // 
             // lblStep1
@@ -383,25 +381,12 @@
             this.btnChangeDefaultPath.UseVisualStyleBackColor = true;
             this.btnChangeDefaultPath.Click += new System.EventHandler(this.btnChangeDefaultPath_Click);
             // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(10, 74);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "미리지정 A";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(87, 75);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(217, 21);
-            this.textBox2.TabIndex = 5;
-            // 
             // btnSettingSave
             // 
+            this.btnSettingSave.BackColor = System.Drawing.Color.Transparent;
+            this.btnSettingSave.FlatAppearance.BorderColor = System.Drawing.Color.MediumTurquoise;
             this.btnSettingSave.FlatAppearance.BorderSize = 0;
+            this.btnSettingSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumTurquoise;
             this.btnSettingSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSettingSave.Location = new System.Drawing.Point(257, 5);
             this.btnSettingSave.Margin = new System.Windows.Forms.Padding(0);
@@ -409,21 +394,21 @@
             this.btnSettingSave.Size = new System.Drawing.Size(68, 23);
             this.btnSettingSave.TabIndex = 27;
             this.btnSettingSave.Text = "설정 저장";
-            this.btnSettingSave.UseVisualStyleBackColor = true;
+            this.btnSettingSave.UseVisualStyleBackColor = false;
             this.btnSettingSave.Click += new System.EventHandler(this.BtnSettingSave_Click);
             // 
             // btnSettingCancel
             // 
             this.btnSettingCancel.FlatAppearance.BorderSize = 0;
             this.btnSettingCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSettingCancel.Location = new System.Drawing.Point(218, 5);
+            this.btnSettingCancel.Location = new System.Drawing.Point(9, 5);
             this.btnSettingCancel.Margin = new System.Windows.Forms.Padding(0);
             this.btnSettingCancel.Name = "btnSettingCancel";
             this.btnSettingCancel.Size = new System.Drawing.Size(39, 23);
             this.btnSettingCancel.TabIndex = 26;
             this.btnSettingCancel.Text = "취소";
             this.btnSettingCancel.UseVisualStyleBackColor = true;
-            this.btnSettingCancel.Click += new System.EventHandler(this.btnSettingCancel_Click);
+            this.btnSettingCancel.Click += new System.EventHandler(this.BtnSettingCancel_Click);
             // 
             // pnlFileNameOptions
             // 
@@ -433,7 +418,7 @@
             this.pnlFileNameOptions.Controls.Add(this.pnlFnAddsetOptions);
             this.pnlFileNameOptions.Controls.Add(this.label5);
             this.pnlFileNameOptions.Controls.Add(this.tboxSuffix);
-            this.pnlFileNameOptions.Location = new System.Drawing.Point(10, 220);
+            this.pnlFileNameOptions.Location = new System.Drawing.Point(10, 192);
             this.pnlFileNameOptions.Name = "pnlFileNameOptions";
             this.pnlFileNameOptions.Size = new System.Drawing.Size(334, 178);
             this.pnlFileNameOptions.TabIndex = 25;
@@ -441,7 +426,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(0, 10);
+            this.label3.Location = new System.Drawing.Point(0, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(109, 12);
             this.label3.TabIndex = 15;
@@ -450,17 +435,17 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 32);
+            this.label4.Location = new System.Drawing.Point(7, 25);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 12);
+            this.label4.Size = new System.Drawing.Size(53, 12);
             this.label4.TabIndex = 16;
-            this.label4.Text = "앞문자";
+            this.label4.Text = "앞문자열";
             // 
             // tboxPrefix
             // 
-            this.tboxPrefix.Location = new System.Drawing.Point(60, 28);
+            this.tboxPrefix.Location = new System.Drawing.Point(81, 21);
             this.tboxPrefix.Name = "tboxPrefix";
-            this.tboxPrefix.Size = new System.Drawing.Size(244, 21);
+            this.tboxPrefix.Size = new System.Drawing.Size(223, 21);
             this.tboxPrefix.TabIndex = 17;
             // 
             // pnlFnAddsetOptions
@@ -471,7 +456,7 @@
             this.pnlFnAddsetOptions.Controls.Add(this.rbAddsetPosFront);
             this.pnlFnAddsetOptions.Controls.Add(this.label7);
             this.pnlFnAddsetOptions.Controls.Add(this.label6);
-            this.pnlFnAddsetOptions.Location = new System.Drawing.Point(7, 81);
+            this.pnlFnAddsetOptions.Location = new System.Drawing.Point(7, 75);
             this.pnlFnAddsetOptions.Name = "pnlFnAddsetOptions";
             this.pnlFnAddsetOptions.Size = new System.Drawing.Size(313, 66);
             this.pnlFnAddsetOptions.TabIndex = 21;
@@ -542,17 +527,17 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 59);
+            this.label5.Location = new System.Drawing.Point(7, 53);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 12);
+            this.label5.Size = new System.Drawing.Size(53, 12);
             this.label5.TabIndex = 18;
-            this.label5.Text = "뒤문자";
+            this.label5.Text = "뒤문자열";
             // 
             // tboxSuffix
             // 
-            this.tboxSuffix.Location = new System.Drawing.Point(60, 55);
+            this.tboxSuffix.Location = new System.Drawing.Point(81, 49);
             this.tboxSuffix.Name = "tboxSuffix";
-            this.tboxSuffix.Size = new System.Drawing.Size(244, 21);
+            this.tboxSuffix.Size = new System.Drawing.Size(223, 21);
             this.tboxSuffix.TabIndex = 19;
             // 
             // pnlImageTypeOptions
@@ -635,7 +620,7 @@
             this.MaximizeBox = false;
             this.Name = "FormMain";
             this.ShowIcon = false;
-            this.Text = "SH Screen Capture";
+            this.Text = "SH스크린캡쳐";
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyDown);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FormMain_MouseDown);
@@ -690,8 +675,6 @@
         private System.Windows.Forms.RadioButton rbImageExtBmp;
         private System.Windows.Forms.RadioButton rbImageExtPng;
         private System.Windows.Forms.Label lblImageType;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button btnChangeDefaultPath;
         private System.Windows.Forms.TextBox tboxDefaultPathOption;
         private System.Windows.Forms.Label lblStep1;
