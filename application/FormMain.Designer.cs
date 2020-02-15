@@ -620,7 +620,7 @@
             this.MaximizeBox = false;
             this.Name = "FormMain";
             this.ShowIcon = false;
-            this.Text = "SH Screen Capture";
+            this.Text = "SH스크린캡쳐";
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyDown);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FormMain_MouseDown);

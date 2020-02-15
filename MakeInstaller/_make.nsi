@@ -10,9 +10,9 @@ Unicode true
 ; Release 단순 릴리즈 카운팅 (여태 몇번의 큰 변경이 있었는지)
 ; Build 테스팅 & 핫픽스 & 마이너 업데이트 & 코드 개선 등의 경우
 !define S_APP_VER_MAJOR 2
-!define S_APP_VER_MINOR 0
-!define S_APP_VER_RELEASE 9
-!define S_APP_VER_BUILD 6
+!define S_APP_VER_MINOR 1
+!define S_APP_VER_RELEASE 10
+!define S_APP_VER_BUILD 0
 
 
 ;-------------------------------------------------
