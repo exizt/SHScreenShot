@@ -12,7 +12,7 @@ Unicode true
 !define S_APP_VER_MAJOR 2
 !define S_APP_VER_MINOR 0
 !define S_APP_VER_RELEASE 9
-!define S_APP_VER_BUILD 3
+!define S_APP_VER_BUILD 6
 
 
 ;-------------------------------------------------

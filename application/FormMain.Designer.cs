@@ -50,6 +50,7 @@
             this.pnlTopNav = new System.Windows.Forms.Panel();
             this.pnlTopRight = new System.Windows.Forms.Panel();
             this.btnMin = new System.Windows.Forms.Button();
+            this.swcAutoSave = new Image_Capture.SwitchCheckBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlMain = new System.Windows.Forms.Panel();
@@ -79,7 +80,6 @@
             this.rbImageExtBmp = new System.Windows.Forms.RadioButton();
             this.rbImageExtGif = new System.Windows.Forms.RadioButton();
             this.lblImageType = new System.Windows.Forms.Label();
-            this.swcAutoSave = new Image_Capture.SwitchCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.picboxPreview)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.pnlSideNav.SuspendLayout();
@@ -99,13 +99,13 @@
             this.btnScrCapture.FlatAppearance.BorderColor = System.Drawing.Color.LightSkyBlue;
             this.btnScrCapture.FlatAppearance.BorderSize = 0;
             this.btnScrCapture.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnScrCapture.Font = new System.Drawing.Font("맑은 고딕", 9F);
+            this.btnScrCapture.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnScrCapture.ForeColor = System.Drawing.Color.White;
-            this.btnScrCapture.Image = global::Image_Capture.Properties.Resources.fullscreen_43_wh;
+            this.btnScrCapture.Image = global::Image_Capture.Properties.Resources.fullscreen_30px_wh;
             this.btnScrCapture.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnScrCapture.Location = new System.Drawing.Point(0, 0);
             this.btnScrCapture.Name = "btnScrCapture";
-            this.btnScrCapture.Size = new System.Drawing.Size(110, 71);
+            this.btnScrCapture.Size = new System.Drawing.Size(110, 62);
             this.btnScrCapture.TabIndex = 1;
             this.btnScrCapture.Text = "화면캡쳐";
             this.btnScrCapture.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -135,13 +135,13 @@
             this.btnSelectionCapture.FlatAppearance.BorderColor = System.Drawing.Color.MediumTurquoise;
             this.btnSelectionCapture.FlatAppearance.BorderSize = 0;
             this.btnSelectionCapture.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelectionCapture.Font = new System.Drawing.Font("맑은 고딕", 9F);
+            this.btnSelectionCapture.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnSelectionCapture.ForeColor = System.Drawing.Color.White;
-            this.btnSelectionCapture.Image = global::Image_Capture.Properties.Resources.fullscreen_43_wh;
+            this.btnSelectionCapture.Image = global::Image_Capture.Properties.Resources.fullscreen_sect_30px_wh;
             this.btnSelectionCapture.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnSelectionCapture.Location = new System.Drawing.Point(0, 77);
             this.btnSelectionCapture.Name = "btnSelectionCapture";
-            this.btnSelectionCapture.Size = new System.Drawing.Size(110, 74);
+            this.btnSelectionCapture.Size = new System.Drawing.Size(110, 66);
             this.btnSelectionCapture.TabIndex = 17;
             this.btnSelectionCapture.Text = "영역캡처";
             this.btnSelectionCapture.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -183,10 +183,11 @@
             // lblAutoSave
             // 
             this.lblAutoSave.AutoSize = true;
+            this.lblAutoSave.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblAutoSave.ForeColor = System.Drawing.Color.White;
             this.lblAutoSave.Location = new System.Drawing.Point(9, 33);
             this.lblAutoSave.Name = "lblAutoSave";
-            this.lblAutoSave.Size = new System.Drawing.Size(53, 12);
+            this.lblAutoSave.Size = new System.Drawing.Size(55, 15);
             this.lblAutoSave.TabIndex = 25;
             this.lblAutoSave.Text = "자동저장";
             // 
@@ -230,7 +231,7 @@
             this.btnSettings.BackColor = System.Drawing.Color.Transparent;
             this.btnSettings.FlatAppearance.BorderSize = 0;
             this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSettings.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btnSettings.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnSettings.ForeColor = System.Drawing.Color.White;
             this.btnSettings.Image = global::Image_Capture.Properties.Resources.sh_settings_30px;
             this.btnSettings.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -283,6 +284,18 @@
             this.btnMin.Text = "_";
             this.btnMin.UseVisualStyleBackColor = false;
             this.btnMin.Click += new System.EventHandler(this.BtnMin_Click);
+            // 
+            // swcAutoSave
+            // 
+            this.swcAutoSave.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.swcAutoSave.Location = new System.Drawing.Point(66, 28);
+            this.swcAutoSave.Name = "swcAutoSave";
+            this.swcAutoSave.Padding = new System.Windows.Forms.Padding(1);
+            this.swcAutoSave.Size = new System.Drawing.Size(35, 21);
+            this.swcAutoSave.TabIndex = 26;
+            this.swcAutoSave.Text = "switchCheckBox1";
+            this.swcAutoSave.UseVisualStyleBackColor = true;
+            this.swcAutoSave.CheckedChanged += new System.EventHandler(this.SwitchQuickSaveMode_CheckedChanged);
             // 
             // btnClose
             // 
@@ -370,7 +383,10 @@
             // 
             // btnSettingSave
             // 
+            this.btnSettingSave.BackColor = System.Drawing.Color.Transparent;
+            this.btnSettingSave.FlatAppearance.BorderColor = System.Drawing.Color.MediumTurquoise;
             this.btnSettingSave.FlatAppearance.BorderSize = 0;
+            this.btnSettingSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumTurquoise;
             this.btnSettingSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSettingSave.Location = new System.Drawing.Point(257, 5);
             this.btnSettingSave.Margin = new System.Windows.Forms.Padding(0);
@@ -378,14 +394,14 @@
             this.btnSettingSave.Size = new System.Drawing.Size(68, 23);
             this.btnSettingSave.TabIndex = 27;
             this.btnSettingSave.Text = "설정 저장";
-            this.btnSettingSave.UseVisualStyleBackColor = true;
+            this.btnSettingSave.UseVisualStyleBackColor = false;
             this.btnSettingSave.Click += new System.EventHandler(this.BtnSettingSave_Click);
             // 
             // btnSettingCancel
             // 
             this.btnSettingCancel.FlatAppearance.BorderSize = 0;
             this.btnSettingCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSettingCancel.Location = new System.Drawing.Point(218, 5);
+            this.btnSettingCancel.Location = new System.Drawing.Point(9, 5);
             this.btnSettingCancel.Margin = new System.Windows.Forms.Padding(0);
             this.btnSettingCancel.Name = "btnSettingCancel";
             this.btnSettingCancel.Size = new System.Drawing.Size(39, 23);
@@ -588,18 +604,6 @@
             this.lblImageType.Size = new System.Drawing.Size(105, 12);
             this.lblImageType.TabIndex = 6;
             this.lblImageType.Text = "이미지 디폴트유형";
-            // 
-            // swcAutoSave
-            // 
-            this.swcAutoSave.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.swcAutoSave.Location = new System.Drawing.Point(66, 28);
-            this.swcAutoSave.Name = "swcAutoSave";
-            this.swcAutoSave.Padding = new System.Windows.Forms.Padding(1);
-            this.swcAutoSave.Size = new System.Drawing.Size(35, 21);
-            this.swcAutoSave.TabIndex = 26;
-            this.swcAutoSave.Text = "switchCheckBox1";
-            this.swcAutoSave.UseVisualStyleBackColor = true;
-            this.swcAutoSave.CheckedChanged += new System.EventHandler(this.SwitchQuickSaveMode_CheckedChanged);
             // 
             // FormMain
             // 
