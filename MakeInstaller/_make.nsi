@@ -12,7 +12,7 @@ Unicode true
 !define S_APP_VER_MAJOR 2
 !define S_APP_VER_MINOR 1
 !define S_APP_VER_RELEASE 10
-!define S_APP_VER_BUILD 0
+!define S_APP_VER_BUILD 3
 
 
 ;-------------------------------------------------
@@ -109,8 +109,10 @@ BrandingText " "
 Section "MainSection" SEC01
   SetOutPath "$INSTDIR"
   SetOverwrite ifnewer
-  File "${S_MAIN_EXE}"
+  File ".\source\${S_MAIN_EXE}"
   File "${S_FILE_LOGO}"
+  File ".\source\Microsoft.WindowsAPICodePack.dll"
+  File ".\source\Microsoft.WindowsAPICodePack.Shell.dll"
   CreateDirectory "${CUSTOM_SM_DIR}"
   CreateShortCut "${CUSTOM_SM_DIR}\${PRODUCT_NAME}.lnk" "$INSTDIR\${S_MAIN_EXE}"
   CreateShortCut "$DESKTOP\${PRODUCT_NAME}.lnk" "$INSTDIR\${S_MAIN_EXE}"
@@ -142,6 +144,8 @@ Section Uninstall
   Delete "$INSTDIR\uninst.exe"
   Delete "$INSTDIR\${S_MAIN_EXE}"
   Delete "$INSTDIR\${S_FILE_LOGO}"
+  Delete "$INSTDIR\Microsoft.WindowsAPICodePack.dll"
+  Delete "$INSTDIR\Microsoft.WindowsAPICodePack.Shell.dll"
 
   Delete "${CUSTOM_SM_DIR}\Uninstall.lnk"
   Delete "${CUSTOM_SM_DIR}\Website.lnk"

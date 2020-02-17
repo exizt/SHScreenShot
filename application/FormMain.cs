@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Text;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace Image_Capture
 {
@@ -355,25 +356,50 @@ namespace Image_Capture
         /// </summary>
         private string FolderBrowser()
         {
-            FolderBrowserDialog folderDlg = new FolderBrowserDialog
-            {
-                ShowNewFolderButton = true
-            };
-            DialogResult result = folderDlg.ShowDialog();
-            if(result == DialogResult.OK)
-            {
-                return folderDlg.SelectedPath;
-                //ScreenImageFileHandler.CurrentSavePath = folderDlg.SelectedPath;
-                //ChangeDirPath();
-                //ChangeSavePath(folderDlg.SelectedPath);
-
-                //AppConfig.SaveRules.Path = folderDlg.SelectedPath;
-            } else
-            {
-                return "";
-            }
+            return FolderBrowser_CommonOpenFileDialog2();
         }
 
+        private string FolderBrowser_FolderBrowserDialog()
+        {
+            using (FolderBrowserDialog dlg = new FolderBrowserDialog())
+            {
+                //dlg.ShowNewFolderButton = true;
+                dlg.RootFolder = Environment.SpecialFolder.MyComputer;
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    //string path = dlg.SelectedPath;
+                    return dlg.SelectedPath;
+                }
+            }
+            return "";
+        }
+
+        private string FolderBrowser_CommonOpenFileDialog()
+        {
+            string path = "";
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.IsFolderPicker = true;
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                path = dialog.FileName;
+            }
+            dialog.Dispose();            
+            return path;
+        }
+
+        private string FolderBrowser_CommonOpenFileDialog2()
+        {
+            string path = "";
+            using (CommonOpenFileDialog dialog = new CommonOpenFileDialog())
+            {
+                dialog.IsFolderPicker = true;
+                if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+                {
+                    path =  dialog.FileName;
+                }
+            }
+            return path;
+        }
 
         private void ChangeSavePath(string path)
         {
