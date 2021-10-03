@@ -65,7 +65,7 @@
             this.btnCapture.Text = "영역 캡쳐 (저장)";
             this.btnCapture.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCapture.UseVisualStyleBackColor = true;
-            this.btnCapture.Click += new System.EventHandler(this.btnCapture_Click);
+            this.btnCapture.Click += new System.EventHandler(this.BtnCapture_Click);
             // 
             // lblHeader
             // 

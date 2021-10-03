@@ -315,7 +315,7 @@ namespace Image_Capture
             base.WndProc(ref m);
         }
 
-        private void btnCapture_Click(object sender, EventArgs e)
+        private void BtnCapture_Click(object sender, EventArgs e)
         {
             Save();//이미지 저장 호출
         }
