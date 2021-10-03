@@ -590,9 +590,7 @@ namespace Image_Capture
         /// </summary>
         /// <param name="msg"></param>
         /// <param name="obj"></param>
-#pragma warning disable IDE0051 // 사용되지 않는 private 멤버 제거
         private void Debug(string msg, Object obj)
-#pragma warning restore IDE0051 // 사용되지 않는 private 멤버 제거
         {
             if (isDebug)
             {
