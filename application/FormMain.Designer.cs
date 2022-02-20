@@ -80,6 +80,7 @@
             this.rbImageExtBmp = new System.Windows.Forms.RadioButton();
             this.rbImageExtGif = new System.Windows.Forms.RadioButton();
             this.lblImageType = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.picboxPreview)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.pnlSideNav.SuspendLayout();
@@ -91,6 +92,7 @@
             this.pnlFileNameOptions.SuspendLayout();
             this.pnlFnAddsetOptions.SuspendLayout();
             this.pnlImageTypeOptions.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnScrCapture
@@ -335,9 +337,8 @@
             // pnlSettings
             // 
             this.pnlSettings.AutoScroll = true;
+            this.pnlSettings.Controls.Add(this.panel1);
             this.pnlSettings.Controls.Add(this.pnlDirOptions);
-            this.pnlSettings.Controls.Add(this.btnSettingSave);
-            this.pnlSettings.Controls.Add(this.btnSettingCancel);
             this.pnlSettings.Controls.Add(this.pnlFileNameOptions);
             this.pnlSettings.Controls.Add(this.pnlImageTypeOptions);
             this.pnlSettings.Location = new System.Drawing.Point(110, 50);
@@ -350,7 +351,7 @@
             this.pnlDirOptions.Controls.Add(this.lblStep1);
             this.pnlDirOptions.Controls.Add(this.tboxDefaultPathOption);
             this.pnlDirOptions.Controls.Add(this.btnChangeDefaultPath);
-            this.pnlDirOptions.Location = new System.Drawing.Point(10, 100);
+            this.pnlDirOptions.Location = new System.Drawing.Point(10, 77);
             this.pnlDirOptions.Name = "pnlDirOptions";
             this.pnlDirOptions.Size = new System.Drawing.Size(334, 81);
             this.pnlDirOptions.TabIndex = 28;
@@ -383,12 +384,13 @@
             // 
             // btnSettingSave
             // 
+            this.btnSettingSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSettingSave.BackColor = System.Drawing.Color.Transparent;
             this.btnSettingSave.FlatAppearance.BorderColor = System.Drawing.Color.MediumTurquoise;
             this.btnSettingSave.FlatAppearance.BorderSize = 0;
             this.btnSettingSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumTurquoise;
             this.btnSettingSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSettingSave.Location = new System.Drawing.Point(257, 5);
+            this.btnSettingSave.Location = new System.Drawing.Point(62, 14);
             this.btnSettingSave.Margin = new System.Windows.Forms.Padding(0);
             this.btnSettingSave.Name = "btnSettingSave";
             this.btnSettingSave.Size = new System.Drawing.Size(68, 23);
@@ -401,7 +403,7 @@
             // 
             this.btnSettingCancel.FlatAppearance.BorderSize = 0;
             this.btnSettingCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSettingCancel.Location = new System.Drawing.Point(9, 5);
+            this.btnSettingCancel.Location = new System.Drawing.Point(175, 14);
             this.btnSettingCancel.Margin = new System.Windows.Forms.Padding(0);
             this.btnSettingCancel.Name = "btnSettingCancel";
             this.btnSettingCancel.Size = new System.Drawing.Size(39, 23);
@@ -418,7 +420,7 @@
             this.pnlFileNameOptions.Controls.Add(this.pnlFnAddsetOptions);
             this.pnlFileNameOptions.Controls.Add(this.label5);
             this.pnlFileNameOptions.Controls.Add(this.tboxSuffix);
-            this.pnlFileNameOptions.Location = new System.Drawing.Point(10, 192);
+            this.pnlFileNameOptions.Location = new System.Drawing.Point(10, 169);
             this.pnlFileNameOptions.Name = "pnlFileNameOptions";
             this.pnlFileNameOptions.Size = new System.Drawing.Size(334, 178);
             this.pnlFileNameOptions.TabIndex = 25;
@@ -547,7 +549,7 @@
             this.pnlImageTypeOptions.Controls.Add(this.rbImageExtBmp);
             this.pnlImageTypeOptions.Controls.Add(this.rbImageExtGif);
             this.pnlImageTypeOptions.Controls.Add(this.lblImageType);
-            this.pnlImageTypeOptions.Location = new System.Drawing.Point(10, 40);
+            this.pnlImageTypeOptions.Location = new System.Drawing.Point(10, 17);
             this.pnlImageTypeOptions.Name = "pnlImageTypeOptions";
             this.pnlImageTypeOptions.Size = new System.Drawing.Size(334, 49);
             this.pnlImageTypeOptions.TabIndex = 24;
@@ -605,6 +607,15 @@
             this.lblImageType.TabIndex = 6;
             this.lblImageType.Text = "이미지 디폴트유형";
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnSettingCancel);
+            this.panel1.Controls.Add(this.btnSettingSave);
+            this.panel1.Location = new System.Drawing.Point(10, 353);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(323, 47);
+            this.panel1.TabIndex = 29;
+            // 
             // FormMain
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(6, 14);
@@ -644,6 +655,7 @@
             this.pnlFnAddsetOptions.PerformLayout();
             this.pnlImageTypeOptions.ResumeLayout(false);
             this.pnlImageTypeOptions.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -695,6 +707,7 @@
         private System.Windows.Forms.Button btnSettingCancel;
         private System.Windows.Forms.Panel pnlDirOptions;
         private System.Windows.Forms.ComboBox cboxAddsetTypes;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 
