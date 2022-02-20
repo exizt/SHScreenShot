@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 어셈블리의 일반 정보는 다음 특성 집합을 통해 제어됩니다.
 // 어셈블리와 관련된 정보를 수정하려면
 // 이 특성 값을 변경하십시오.
-[assembly: AssemblyTitle("SH스크린샷")]
-[assembly: AssemblyDescription("스크린샷")]
+[assembly: AssemblyTitle("SHScreenshot")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SH Soft")]
-[assembly: AssemblyProduct("Screen Capture")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
+[assembly: AssemblyProduct("SHScreenshot")]
+[assembly: AssemblyCopyright("Copyright (C) 2015-2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // 모든 값을 지정하거나 아래와 같이 '*'를 사용하여 빌드 번호 및 수정 버전이 자동으로
 // 지정되도록 할 수 있습니다.
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2.1.0.0")]
-[assembly: AssemblyFileVersion("2.1.0.0")]
+[assembly: AssemblyVersion("2.2.0.52")]
+[assembly: AssemblyFileVersion("2.2.0.52")]

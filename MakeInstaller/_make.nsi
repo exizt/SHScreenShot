@@ -10,8 +10,9 @@ Unicode true
 ; Minor 사소한 변경점
 ; Build 테스팅 & 핫픽스 & 마이너 업데이트 & 코드 개선 등의 경우. 계속 카운팅
 !define S_APP_VER_MAJOR 2
-!define S_APP_VER_MINOR 1
-!define S_APP_VER_BUILD 50
+!define S_APP_VER_MINOR 2
+!define S_APP_VER_PATCH 0
+!define S_APP_VER_BUILD 52
 
 
 ;-------------------------------------------------
@@ -19,13 +20,14 @@ Unicode true
 !define S_PROG_GROUP "SHSoft"
 
 ; 실행될 프로그램 exe 명
-!define S_MAIN_EXE "SHScreenCapture.exe"
+!define S_MAIN_EXE "SHScreenshot.exe"
 !define S_FILE_LOGO "_logo.ico"
 !define S_PRODUCT_SIZE 4238 ;설치 크기 입니다. 언인스톨시에 참고 정보로 나옵니다.
 
 ; HM NIS Edit Wizard helper defines
-!define PRODUCT_NAME "SH Screen Capture"
-!define PRODUCT_VERSION "${S_APP_VER_MAJOR}.${S_APP_VER_MINOR}.${S_APP_VER_BUILD}"
+!define INSTALLER_FILENAME "SHScreenshot"
+!define PRODUCT_NAME "SH Screenshot"
+!define PRODUCT_VERSION "${S_APP_VER_MAJOR}.${S_APP_VER_MINOR}.${S_APP_VER_PATCH}.${S_APP_VER_BUILD}"
 !define PRODUCT_PUBLISHER "SH Software"
 !define PRODUCT_WEB_SITE "https://chosim.asv.kr"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\${S_MAIN_EXE}"
@@ -39,7 +41,7 @@ Unicode true
 ; 시작메뉴. 생성될 폴더 경로
 !define CUSTOM_SM_DIR "$SMPROGRAMS\${PRODUCT_NAME}"
 ; 인스톨러 파일명
-!define CUSTOM_INSTALLER "${PRODUCT_NAME}_${PRODUCT_VERSION}.exe"
+!define CUSTOM_INSTALLER "${INSTALLER_FILENAME}_${PRODUCT_VERSION}.exe"
 !define CUSTOM_OUTFILE "installer/${CUSTOM_INSTALLER}"
 
 
