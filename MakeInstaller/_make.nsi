@@ -10,9 +10,9 @@ Unicode true
 ; Minor 사소한 변경점
 ; Build 테스팅 & 핫픽스 & 마이너 업데이트 & 코드 개선 등의 경우. 계속 카운팅
 !define S_APP_VER_MAJOR 2
-!define S_APP_VER_MINOR 2
+!define S_APP_VER_MINOR 3
 !define S_APP_VER_PATCH 0
-!define S_APP_VER_BUILD 52
+!define S_APP_VER_BUILD 53
 
 
 ;-------------------------------------------------
