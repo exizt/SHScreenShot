@@ -1,7 +1,7 @@
 SH Screen Capture
   - 무료 이용이 가능한 프리웨어입니다.
   - 스크린샷 소프트웨어 입니다.
-  - 'Window 10'에서 테스트되었으며, Windows 10 이상을 권장합니다.
+  - Windows 10에서 테스트되었으며, Windows 10 이상을 권장합니다.
 
 
 소프트웨어의 목적
@@ -11,7 +11,7 @@ SH Screen Capture
 
 
 컴파일 환경
-  - .Net Framework 4.6
+  - .Net Framework 4.0
   - Windows 10
   - C#
 
