@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <PublishUrlHistory>게시\|..\..\ImageCapture_Publish\</PublishUrlHistory>
-    <InstallUrlHistory>http://imagecapture.asv.kr/</InstallUrlHistory>
-    <SupportUrlHistory>https://chosim.asv.kr</SupportUrlHistory>
+    <PublishUrlHistory>게시\</PublishUrlHistory>
+    <InstallUrlHistory></InstallUrlHistory>
+    <SupportUrlHistory></SupportUrlHistory>
     <UpdateUrlHistory />
     <BootstrapperUrlHistory />
-    <ErrorReportUrlHistory>https://chosim.asv.kr</ErrorReportUrlHistory>
+    <ErrorReportUrlHistory></ErrorReportUrlHistory>
     <FallbackCulture>ko-KR</FallbackCulture>
     <VerifyUploadedFiles>false</VerifyUploadedFiles>
   </PropertyGroup>

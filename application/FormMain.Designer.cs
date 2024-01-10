@@ -55,12 +55,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.pnlSettings = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnSettingCancel = new System.Windows.Forms.Button();
+            this.btnSettingSave = new System.Windows.Forms.Button();
             this.pnlDirOptions = new System.Windows.Forms.Panel();
             this.lblStep1 = new System.Windows.Forms.Label();
             this.tboxDefaultPathOption = new System.Windows.Forms.TextBox();
             this.btnChangeDefaultPath = new System.Windows.Forms.Button();
-            this.btnSettingSave = new System.Windows.Forms.Button();
-            this.btnSettingCancel = new System.Windows.Forms.Button();
             this.pnlFileNameOptions = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -80,7 +81,6 @@
             this.rbImageExtBmp = new System.Windows.Forms.RadioButton();
             this.rbImageExtGif = new System.Windows.Forms.RadioButton();
             this.lblImageType = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.picboxPreview)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.pnlSideNav.SuspendLayout();
@@ -88,11 +88,11 @@
             this.pnlTopRight.SuspendLayout();
             this.pnlMain.SuspendLayout();
             this.pnlSettings.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.pnlDirOptions.SuspendLayout();
             this.pnlFileNameOptions.SuspendLayout();
             this.pnlFnAddsetOptions.SuspendLayout();
             this.pnlImageTypeOptions.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnScrCapture
@@ -319,9 +319,9 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(10, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 12);
+            this.label1.Size = new System.Drawing.Size(73, 12);
             this.label1.TabIndex = 0;
-            this.label1.Text = "화면 캡쳐";
+            this.label1.Text = "SH 스크린샷";
             // 
             // pnlMain
             // 
@@ -345,6 +345,45 @@
             this.pnlSettings.Name = "pnlSettings";
             this.pnlSettings.Size = new System.Drawing.Size(334, 585);
             this.pnlSettings.TabIndex = 30;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnSettingCancel);
+            this.panel1.Controls.Add(this.btnSettingSave);
+            this.panel1.Location = new System.Drawing.Point(10, 353);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(323, 47);
+            this.panel1.TabIndex = 29;
+            // 
+            // btnSettingCancel
+            // 
+            this.btnSettingCancel.FlatAppearance.BorderSize = 0;
+            this.btnSettingCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSettingCancel.Location = new System.Drawing.Point(175, 14);
+            this.btnSettingCancel.Margin = new System.Windows.Forms.Padding(0);
+            this.btnSettingCancel.Name = "btnSettingCancel";
+            this.btnSettingCancel.Size = new System.Drawing.Size(39, 23);
+            this.btnSettingCancel.TabIndex = 26;
+            this.btnSettingCancel.Text = "취소";
+            this.btnSettingCancel.UseVisualStyleBackColor = true;
+            this.btnSettingCancel.Click += new System.EventHandler(this.BtnSettingCancel_Click);
+            // 
+            // btnSettingSave
+            // 
+            this.btnSettingSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSettingSave.BackColor = System.Drawing.Color.Transparent;
+            this.btnSettingSave.FlatAppearance.BorderColor = System.Drawing.Color.MediumTurquoise;
+            this.btnSettingSave.FlatAppearance.BorderSize = 0;
+            this.btnSettingSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumTurquoise;
+            this.btnSettingSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSettingSave.Location = new System.Drawing.Point(62, 14);
+            this.btnSettingSave.Margin = new System.Windows.Forms.Padding(0);
+            this.btnSettingSave.Name = "btnSettingSave";
+            this.btnSettingSave.Size = new System.Drawing.Size(68, 23);
+            this.btnSettingSave.TabIndex = 27;
+            this.btnSettingSave.Text = "설정 저장";
+            this.btnSettingSave.UseVisualStyleBackColor = false;
+            this.btnSettingSave.Click += new System.EventHandler(this.BtnSettingSave_Click);
             // 
             // pnlDirOptions
             // 
@@ -381,36 +420,6 @@
             this.btnChangeDefaultPath.Text = "폴더변경";
             this.btnChangeDefaultPath.UseVisualStyleBackColor = true;
             this.btnChangeDefaultPath.Click += new System.EventHandler(this.btnChangeDefaultPath_Click);
-            // 
-            // btnSettingSave
-            // 
-            this.btnSettingSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSettingSave.BackColor = System.Drawing.Color.Transparent;
-            this.btnSettingSave.FlatAppearance.BorderColor = System.Drawing.Color.MediumTurquoise;
-            this.btnSettingSave.FlatAppearance.BorderSize = 0;
-            this.btnSettingSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumTurquoise;
-            this.btnSettingSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSettingSave.Location = new System.Drawing.Point(62, 14);
-            this.btnSettingSave.Margin = new System.Windows.Forms.Padding(0);
-            this.btnSettingSave.Name = "btnSettingSave";
-            this.btnSettingSave.Size = new System.Drawing.Size(68, 23);
-            this.btnSettingSave.TabIndex = 27;
-            this.btnSettingSave.Text = "설정 저장";
-            this.btnSettingSave.UseVisualStyleBackColor = false;
-            this.btnSettingSave.Click += new System.EventHandler(this.BtnSettingSave_Click);
-            // 
-            // btnSettingCancel
-            // 
-            this.btnSettingCancel.FlatAppearance.BorderSize = 0;
-            this.btnSettingCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSettingCancel.Location = new System.Drawing.Point(175, 14);
-            this.btnSettingCancel.Margin = new System.Windows.Forms.Padding(0);
-            this.btnSettingCancel.Name = "btnSettingCancel";
-            this.btnSettingCancel.Size = new System.Drawing.Size(39, 23);
-            this.btnSettingCancel.TabIndex = 26;
-            this.btnSettingCancel.Text = "취소";
-            this.btnSettingCancel.UseVisualStyleBackColor = true;
-            this.btnSettingCancel.Click += new System.EventHandler(this.BtnSettingCancel_Click);
             // 
             // pnlFileNameOptions
             // 
@@ -607,15 +616,6 @@
             this.lblImageType.TabIndex = 6;
             this.lblImageType.Text = "이미지 디폴트유형";
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.btnSettingCancel);
-            this.panel1.Controls.Add(this.btnSettingSave);
-            this.panel1.Location = new System.Drawing.Point(10, 353);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(323, 47);
-            this.panel1.TabIndex = 29;
-            // 
             // FormMain
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(6, 14);
@@ -647,6 +647,7 @@
             this.pnlMain.ResumeLayout(false);
             this.pnlMain.PerformLayout();
             this.pnlSettings.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.pnlDirOptions.ResumeLayout(false);
             this.pnlDirOptions.PerformLayout();
             this.pnlFileNameOptions.ResumeLayout(false);
@@ -655,7 +656,6 @@
             this.pnlFnAddsetOptions.PerformLayout();
             this.pnlImageTypeOptions.ResumeLayout(false);
             this.pnlImageTypeOptions.PerformLayout();
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

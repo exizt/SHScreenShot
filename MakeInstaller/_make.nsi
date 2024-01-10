@@ -10,9 +10,9 @@ Unicode true
 ; Minor 사소한 변경점
 ; Build 테스팅 & 핫픽스 & 마이너 업데이트 & 코드 개선 등의 경우. 계속 카운팅
 !define S_APP_VER_MAJOR 2
-!define S_APP_VER_MINOR 2
+!define S_APP_VER_MINOR 3
 !define S_APP_VER_PATCH 0
-!define S_APP_VER_BUILD 52
+!define S_APP_VER_BUILD 53
 
 
 ;-------------------------------------------------
@@ -22,7 +22,7 @@ Unicode true
 ; 실행될 프로그램 exe 명
 !define S_MAIN_EXE "SHScreenshot.exe"
 !define S_FILE_LOGO "_logo.ico"
-!define S_PRODUCT_SIZE 4238 ;설치 크기 입니다. 언인스톨시에 참고 정보로 나옵니다.
+!define S_PRODUCT_SIZE 4238 ; 설치 크기. 언인스톨시 참고 정보로 나옴.
 
 ; HM NIS Edit Wizard helper defines
 !define INSTALLER_FILENAME "SHScreenshot"
